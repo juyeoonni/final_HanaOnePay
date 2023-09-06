@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="com.kopo.finalhanaonepayproject.card.model.DAO.CardDAO">
+    <!-- 전체카드조회 -->
+    <select id="selectCardList" resultType="com.kopo.finalhanaonepayproject.card.model.DTO.CardDTO">
+        SELECT *
+        FROM card
+    </select>
+
+    <select id="selectCardByBankCode" resultType="com.kopo.finalhanaonepayproject.card.model.DTO.CardDTO">
+        SELECT *
+        FROM card
+        WHERE 1=0
+        <foreach item="modifiedBankCodes" collection="list">
+            OR bankCode LIKE #{modifiedBankCodes} || '%'
+        </foreach>
+    </select>
+
+
+
+    <select id="selectCardByBankCode2" resultType="com.kopo.finalhanaonepayproject.card.model.DTO.CardDTO">
+        SELECT *
+        FROM card
+        WHERE bankCode = #{bankCode}
+    </select>
+
+</mapper>
