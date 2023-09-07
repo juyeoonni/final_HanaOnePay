@@ -92,7 +92,6 @@ public class CustomerController {
     }
 
 
-
 //    @RequestMapping(value = "/logout")
 //    public ModelAndView deleteGuest(HttpSession session) {
 //        String id = (String) session.getAttribute("id");

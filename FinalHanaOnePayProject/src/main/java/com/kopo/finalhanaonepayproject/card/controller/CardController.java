@@ -59,6 +59,7 @@ public class CardController {
     public String joinHanaOnePay() {
         return "card/joinHanaOnePay";
     }
+
     @PostMapping("/card/joinHanaOnePay")
     public String joinHanaOnePay(@RequestParam List<String> selectedBankCodes, HttpServletRequest request) {
         System.out.println("controller 시작");
@@ -98,6 +99,13 @@ public class CardController {
     public String mydataCard() {
         return  "card/mydataCard";
     }
+
+    @GetMapping("/card/connectMyData")
+    public String mydataConnect() {
+        return  "/card/connectMyData";
+    }
+
+
 }
 
 
