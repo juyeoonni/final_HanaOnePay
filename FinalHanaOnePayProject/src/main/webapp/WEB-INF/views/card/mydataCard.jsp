@@ -147,6 +147,55 @@
             font-weight: bold;
         }
 
+        .custom-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .custom-form-group {
+            margin-bottom: 20px;
+        }
+
+        .custom-label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .custom-text-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .custom-phone-input {
+            display: flex;
+            align-items: center;
+        }
+
+        .custom-phone-input input[type="tel"] {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .custom-phone-input button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            margin-left: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
 
     </style>
 </head>
@@ -353,7 +402,7 @@
                 });
 
                 // 모달 표시
-                var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {});
+                var myModal = new bootstrap.Modal(document.getElementById('exampleModal1'), {});
                 myModal.show();
 
             })
@@ -378,6 +427,53 @@
         });
     });
 
+    // 전화번호 입력란을 키패드 형식으로 만들기 위한 JavaScript 코드
+    window.addEventListener('DOMContentLoaded', function () {
+        const phoneNumberInput = document.getElementById('phoneNumber');
+
+        phoneNumberInput.addEventListener('input', function () {
+            let value = this.value.replace(/\D/g, ''); // 숫자 이외의 문자 제거
+
+            if (value.length >= 4 && value.length <= 7) {
+                value = `${value.slice(0, 3)}-${value.slice(3)}`;
+            } else if (value.length >= 8) {
+                value = `${value.slice(0, 3)}-${value.slice(3, 7)}-${value.slice(7, 11)}`;
+            }
+
+            this.value = value;
+        });
+    });
+
+    // SMS 전송 버튼 클릭 시의 동작 (실제로 SMS를 전송하는 코드를 여기에 추가)
+    const sendSmsButton = document.getElementById('sendSmsButton');
+    sendSmsButton.addEventListener('click', function () {
+        const phoneNumberInput = document.getElementById('phoneNumber');
+        const phoneNumber = phoneNumberInput.value.replace(/\D/g, ''); // 숫자 이외의 문자 제거
+
+        // 실제로 SMS를 전송하는 코드를 여기에 추가
+        // 이 예제에서는 단순히 전화번호를 콘솔에 출력하는 것으로 대체합니다.
+        console.log(`SMS를 전송합니다. 전화번호: ${phoneNumber}`);
+    });
+
+    // 5행 2열의 키패드 버튼을 클릭할 때마다 해당 숫자가 전화번호 입력란에 추가되도록 함
+    document.addEventListener('DOMContentLoaded', function () {
+        const keypadButtons = document.querySelectorAll('.keypad-button');
+        const phoneNumberInput = document.getElementById('phoneNumber');
+
+        keypadButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const buttonValue = this.textContent;
+
+                if (buttonValue === 'Clear') {
+                    // Clear 버튼을 클릭하면 입력 내용을 초기화합니다.
+                    phoneNumberInput.value = '';
+                } else {
+                    // 다른 버튼을 클릭하면 해당 숫자를 입력란에 추가합니다.
+                    phoneNumberInput.value += buttonValue;
+                }
+            });
+        });
+    });
 
 
 </script>
@@ -386,9 +482,47 @@
 <%--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">--%>
 <%--    Launch demo modal--%>
 <%--</button>--%>
-
+<!--Modal 1 -->
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">SMS 금융 본인인증</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h5 id="authentification">
+
+                </h5>
+                <hr>
+
+                <div class="container">
+                    <h2>SMS 문자 인증</h2>
+                    <form id="smsForm">
+                        <div class="form-group">
+                            <label for="name">이름</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumber">전화번호</label>
+                            <div class="phone-input">
+                                <input type="tel" id="phoneNumber" name="phoneNumber" required>
+                            </div>
+                        </div>
+                        <button type="submit">인증 확인</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="모달2 띄우는 javascript함수">연동</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<<!-- Modal2 -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -415,6 +549,7 @@
         </div>
     </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
 

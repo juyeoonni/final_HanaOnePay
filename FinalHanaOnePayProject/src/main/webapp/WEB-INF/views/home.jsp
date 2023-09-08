@@ -43,9 +43,9 @@
         }
 
         .hanaCharacter{
-            width: 180px;
-            height: 220px;
-            margin-left: 30%;
+            width: 250px;
+            height: 250px;
+            margin-left: 25%;
 
         }
 
@@ -134,7 +134,7 @@
                         <h3>◼ 마이 하나원페이</h3>
                         <hr>
 
-                        <img class="hanaCharacter" src="/img/myCharacter.png">
+                        <img class="hanaCharacter" src="/img/myWallet.png">
                         <br>
                         <h6>마이하나원페이는 통합 결제수단 관리에 특화된 마이데이터 서비스 입니다.</h6>
                         <h6>지갑 연결 진행을 위해 약관에 동의해 주세요.</h6> <br>
