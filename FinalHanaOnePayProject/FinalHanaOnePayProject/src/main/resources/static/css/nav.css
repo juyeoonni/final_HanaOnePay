@@ -1,0 +1,43 @@
+@font-face {
+    font-family: 'Hana2CM';
+    src: url('/fonts/Hana2-CM.ttf') format('truetype');
+}
+
+
+body {
+    font-family: 'Hana2CM', sans-serif !important; /* sans-serif는 폰트가 로드되지 않을 때 사용될 대체 폰트입니다. */
+}
+
+.hanaLogo{
+    width: 48px;
+    height: 48px;
+}
+
+.hana-logo-text {
+    font-weight: bold!important;
+    font-size: 25px !important;
+}
+
+.custom_login_btn {
+    color: white;
+    background-color: #00857E !important;
+}
+
+.custom_join_btn {
+    color: black;
+    background-color: #D9D9D9;
+}
+
+.nav {
+    margin-left: 400px;
+}
+
+.nav .nav-link {
+    font-size: 20px!important;
+    margin-right: 20px;
+    color: black!important;
+    transition: transform 0.3s ease;
+}
+.nav .nav-link:hover {
+    transform: scale(1.1);
+}
