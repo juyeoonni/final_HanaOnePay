@@ -5,8 +5,20 @@
 
 
 <mapper namespace="com.kopo.finalhanaonepayproject.hanaOnePay.model.DAO.HanaOnePayDAO">
+    <select id="getRegisteredCards" parameterType="string" resultType="com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayCardDTO">
+        SELECT * FROM payCard WHERE identityNumber = #{identityNumber}
+    </select>
+
+    <!-- 페이카드 insert -->
     <insert id="insertCard" parameterType="com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayCardDTO">
         INSERT INTO payCard (cardNumber, identityNumber, accNumber, cardName, validityPeriod, cardStatus, cvc, joinDate, cardCode, cardTypeCode, limit)
         VALUES (#{cardNumber}, #{identityNumber}, #{accNumber}, #{cardName}, #{validityPeriod}, #{cardStatus}, #{cvc}, SYSDATE, #{cardCode}, #{cardTypeCode}, #{limit})
     </insert>
+
+    <!-- 페이카드 모두 select -->
+    <select id="getAllCards" resultType="com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayCardDTO">
+        SELECT * FROM payCard
+    </select>
+
+
 </mapper>

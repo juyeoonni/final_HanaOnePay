@@ -3,6 +3,8 @@ package com.kopo.finalhanaonepayproject.card.controller;
 
 import com.kopo.finalhanaonepayproject.card.model.DTO.CardDTO;
 import com.kopo.finalhanaonepayproject.card.service.CardService;
+import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayCardDTO;
+import com.kopo.finalhanaonepayproject.hanaOnePay.service.HanaOnePayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,11 +20,14 @@ import java.util.stream.Collectors;
 public class CardController {
 
     private final CardService cardService;
+    private final HanaOnePayService hanaOnePayService;
 
     @Autowired
-    public CardController(CardService cardService) {
+    public CardController(CardService cardService, HanaOnePayService hanaOnePayService) {
         this.cardService = cardService;
+        this.hanaOnePayService = hanaOnePayService;
     }
+
 
     // 네브바에서 마이카드 선택 요청시 오는 컨트롤러
     @GetMapping("/card/selectCardList")
@@ -101,8 +107,15 @@ public class CardController {
     }
 
     @GetMapping("/card/connectMyData")
-    public String mydataConnect() {
-        return  "/card/connectMyData";
+    public String mydataConnect(HttpSession session) {
+        String identityNumber = (String) session.getAttribute("identityNumber");
+
+        if (identityNumber != null) { // 세션에서 주민번호가 null이 아닌 경우만 조회
+            List<HanaOnePayCardDTO> registeredCards = hanaOnePayService.getRegisteredCards(identityNumber);
+            session.setAttribute("registeredCards", registeredCards);
+        }
+
+        return "/card/connectMyData";
     }
 
 

@@ -1,3 +1,6 @@
+<%@ page import="com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayCardDTO" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.fasterxml.jackson.databind.ObjectMapper" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -10,6 +13,24 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="/css/card.css">
+
+    <style>
+        .add-button {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007BFF;
+            color: #FFFFFF;
+            text-align: center;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .add-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -20,10 +41,13 @@
     <h2>하나원페이 지갑관리</h2>
     <%
         String selectedCards = (String) session.getAttribute("selectedCards");
+        List<HanaOnePayCardDTO> allCards = (List<HanaOnePayCardDTO>) request.getAttribute("allCards");
+        String allCardsJson = new ObjectMapper().writeValueAsString(allCards); // Convert List to JSON String
     %>
 
     <div id="cardDataContainer"></div>
 
+    <a href="/hanaOnePay/addPayCard" class="add-button">페이카드 추가</a>
 
 </main>
 
@@ -34,7 +58,11 @@
 
 
 <script>
-    let cards = <%= selectedCards %>;
+    <%--let cards = <%= selectedCards %>;--%>
+    let cards = <%= allCardsJson %>;
+
+    // cards 변수에 할당된 카드 정보 출력
+    console.log(cards);
 
     function maskCardNumber(cardNumber) {
         // Same masking function as in connectMyData.jsp

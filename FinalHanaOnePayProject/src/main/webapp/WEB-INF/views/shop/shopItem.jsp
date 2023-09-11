@@ -51,11 +51,56 @@
                      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
                  }
 
-             .buyBtn{
-                margin-left: 15px;
+             .buyBtn {
+                 margin-left: 15px;
+             }
 
+         table {
+             width: 80%;
+             border-collapse: collapse;
+             margin: 50px 0;
+             font-size: 18px;
+             text-align: left;
+             border: 0;
+         }
 
-             ]
+        tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        td {
+            padding: 8px 15px;
+            border: none;
+            width: 30px;
+        }
+
+        button {
+            padding: 5px 10px;
+            font-size: 16px;
+            background-color: #00857E;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        input[type=number] {
+            padding: 5px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 50px;
+            text-align: center;
+        }
+     </style>
 
          </style>
 
@@ -102,23 +147,74 @@
                 <div class="row gx-4 gx-lg-5 align-items-center">
                     <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="/img/shop/shopItem2.jpg" alt="..."></div>
                     <div class="col-md-6">
-                        <div class="small mb-1">MD PICK</div>
-                        <h1 class="display-5 fw-bolder">[기획] 르바인 차렵이불 3종세트</h1>
+                        <div class="small mb-1">하나원페이로 결제 시 9월 5% 할인</div>
+                        <h1 class="display-5 fw-bolder">[기획] 르바인 차렷이불 3종세트</h1>
                         <div class="fs-5 mb-5">
                             <span class="text-decoration-line-through">134,000원</span>
                             <span>99,000원</span>
                         </div>
-                        <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?</p>
+                        <p class="lead">
+                        <table border="1">
+                        <tr>
+                            <td>제조사/원산지</td>
+                            <td>한국 (기타 세부사항 상품설명 참조)</td>
+                        </tr>
+                        <tr>
+                            <td>상품코드</td>
+                            <td>224639</td>
+                        </tr>
+                        <tr>
+                            <td>배송</td>
+                            <td>CJ대한통운 택배</td>
+                        </tr>
+                        <tr>
+                            <td>평균배송기간</td>
+                            <td>0일 이내 배송가능 (토,일 공휴일 제외) <br> 전국(일부지역제외) 배송가능</td>
+                        </tr>
+                        <tr>
+                            <td>수량</td>
+                            <td>
+                                <button onclick="decreaseQuantity()">-</button>
+                                <input type="number" id="quantity" name="quantity" value="1">
+                                <button onclick="increaseQuantity()">+</button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>총 상품 금액</td>
+                            <td>99,000원</td>
+                        </tr>
+                    </table>
+                        </table>
+
+                        <br>
+                        </p>
                         <div class="d-flex">
-                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem">
+<%--                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem">--%>
                             <button class="btn btn-outline-dark flex-shrink-0" type="button">
                                 <i class="bi-cart-fill me-1"></i>
                                 카트담기
                             </button>
-                            <button class="btn btn-outline-dark flex-shrink-0 buyBtn" type="button">
-                                                            <i class="bi-cart-fill me-1"></i>
-                                                            구매하기
-                                                        </button>
+
+
+    <!-- 로딩 모달 (초기에는 숨겨져 있음) -->
+    <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body text-center">  <!-- text-center를 사용하여 내용을 중앙 정렬합니다. -->
+                    <span style="font-size: 20px;">주문서로 이동중입니다...</span><br>
+                    <img src="/img/loadingCheck.gif" alt="Loading" style="width: 350px; height: 250px;">  <!-- 로딩 .gif 이미지 추가 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- "바로 구매" 버튼 -->
+    <button class="btn btn-outline-dark flex-shrink-0 buyBtn" type="button" onclick="purchaseItem()">
+        <i class="bi-cart-fill me-1"></i>
+        바로구매
+    </button>
+
                         </div>
                     </div>
                 </div>
@@ -230,6 +326,12 @@
                 </div>
             </div>
         </section>
+
+
+
+
+
+
         <!-- Footer-->
         <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright © Your Website 2023</p></div>
@@ -249,10 +351,46 @@
 <%@ include file="/WEB-INF/views/comm/footer.jsp"%>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<script>
+    function decreaseQuantity() {
+        var quantityInput = document.getElementById('quantity');
+        var currentValue = parseInt(quantityInput.value, 10);
+        if (currentValue > 1) {
+            quantityInput.value = currentValue - 1;
+        }
+    }
+
+    function increaseQuantity() {
+        var quantityInput = document.getElementById('quantity');
+        var currentValue = parseInt(quantityInput.value, 10);
+        quantityInput.value = currentValue + 1;
+    }
+
+    function purchaseItem() {
+        // 로딩 모달을 표시
+        $('#loadingModal').modal('show');
+
+        // 4초 후에 페이지 이동
+        setTimeout(function() {
+            window.location.href = "/shop/buyItem";  // 컨트롤러의 경로로 이동
+        }, 1800);
+    }
 
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    // 캐러셀 자동 재생 비활성화
+    $('#carouselExample').carousel({
+        interval: false
+    });
+</script>
+
+
+
+
 </body>
 </html>

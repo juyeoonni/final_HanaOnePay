@@ -15,6 +15,12 @@ public class HanaOnePayService {
     @Autowired
     private HanaOnePayDAO hanaOnePayDAO;
 
+    // 페이카드 등록전 이미 등록된 카드를 확인하기 위해 페이카드 select
+    public List<HanaOnePayCardDTO> getRegisteredCards(String identityNumber) {
+        return hanaOnePayDAO.getRegisteredCards(identityNumber);
+    }
+
+    // 선택한 페이카드 insert
     public void insertSelectedCards(String selectedCardsJson, String identityNumber) throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         List<HanaOnePayCardDTO> paycardList = objectMapper.readValue(selectedCardsJson, new TypeReference<List<HanaOnePayCardDTO>>(){});
@@ -24,4 +30,10 @@ public class HanaOnePayService {
             hanaOnePayDAO.insertCard(paycard);
         }
     }
+
+    // 페이카드 모두 select
+    public List<HanaOnePayCardDTO> getAllCards() {
+        return hanaOnePayDAO.getAllCards();
+    }
+
 }
