@@ -6,6 +6,7 @@ import com.kopo.finalhanaonepayproject.shop.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,15 +34,32 @@ public class ShopController {
         return "shop/shopItem";
     }
 
-//    세션에서 고객 주민번호 받아서 고객 주민번호를 기반으로 고객이 갖고 있는 페이카드 조회
+    //    세션에서 고객 주민번호 받아서 고객 주민번호를 기반으로 고객이 갖고 있는 페이카드 조회
     @GetMapping("/shop/buyItem")
-    public ModelAndView buyItem(HttpServletRequest request) {
+    public ModelAndView buyItem(HttpServletRequest request,
+                                @RequestParam("productName") String productName,
+                                @RequestParam("productPrice") int productPrice,
+                                @RequestParam("productDataJSON") String productDataJSON) {
+
+        // 콘솔에 JSON 문자열 출력
+        System.out.println("Received JSON: " + productDataJSON);
+
         HttpSession session = request.getSession();
         String identityNumber = (String) session.getAttribute("identityNumber");
         List<HanaOnePayCardDTO> hanaOnePayCardList = shopService.selectINOfPayCard(identityNumber);
+
+        session.setAttribute("productDataJSON", productDataJSON);
+        System.out.println("Setting productDataJSON in session: " + productDataJSON);
+
         ModelAndView mav = new ModelAndView();
         mav.addObject("hanaOnePayCardList", hanaOnePayCardList);
+        mav.addObject("productName", productName);
+        mav.addObject("productPrice", productPrice);
         mav.setViewName("shop/buyItem");
+
         return mav;
     }
+
+
+
 }

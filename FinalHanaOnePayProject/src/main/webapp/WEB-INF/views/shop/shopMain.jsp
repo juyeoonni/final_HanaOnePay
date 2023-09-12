@@ -49,6 +49,9 @@
                 background-position: center;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             }
+    body {
+        font-family: 'Hana2CM', sans-serif !important; /* sans-serif는 폰트가 로드되지 않을 때 사용될 대체 폰트입니다. */
+    }
 
     </style>
 </head>

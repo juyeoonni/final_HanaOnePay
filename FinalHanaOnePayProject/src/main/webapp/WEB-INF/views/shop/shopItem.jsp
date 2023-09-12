@@ -148,10 +148,10 @@
                     <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="/img/shop/shopItem2.jpg" alt="..."></div>
                     <div class="col-md-6">
                         <div class="small mb-1">하나원페이로 결제 시 9월 5% 할인</div>
-                        <h1 class="display-5 fw-bolder">[기획] 르바인 차렷이불 3종세트</h1>
+                        <h1 class="display-5 fw-bolder product-name">[기획] 르바인 차렷이불 3종세트</h1>
                         <div class="fs-5 mb-5">
                             <span class="text-decoration-line-through">134,000원</span>
-                            <span>99,000원</span>
+                            <span>99000</span>
                         </div>
                         <p class="lead">
                         <table border="1">
@@ -181,8 +181,8 @@
                         </tr>
 
                         <tr>
-                            <td>총 상품 금액</td>
-                            <td>99,000원</td>
+                            <td class="product-price-label">총 상품 금액</td>
+                            <td class="product-price-value">99000</td>
                         </tr>
                     </table>
                         </table>
@@ -350,9 +350,10 @@
 <!-- 푸터위치 -->
 <%@ include file="/WEB-INF/views/comm/footer.jsp"%>
 
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> <!-- 여기에서 slim.min.js를 min.js로 변경하였습니다. -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 
 
 <script>
@@ -370,15 +371,58 @@
         quantityInput.value = currentValue + 1;
     }
 
-    function purchaseItem() {
-        // 로딩 모달을 표시
-        $('#loadingModal').modal('show');
+    // function purchaseItem() {
+    //     // 로딩 모달을 표시
+    //     $('#loadingModal').modal('show');
+    //
+    //     // 4초 후에 페이지 이동
+    //     setTimeout(function() {
+    //         window.location.href = "/shop/buyItem";  // 컨트롤러의 경로로 이동
+    //     }, 1800);
+    // }
 
-        // 4초 후에 페이지 이동
-        setTimeout(function() {
-            window.location.href = "/shop/buyItem";  // 컨트롤러의 경로로 이동
-        }, 1800);
+    function purchaseItem() {
+        // 상품명과 가격 정보를 가져옴
+        let productName = document.querySelector(".product-name").innerText;
+        let productPrice = document.querySelector(".product-price-value").innerText;
+        console.log(productPrice);
+        console.log(productName);
+
+        // 상품 정보를 JSON 형태로 직렬화
+        let productData = {
+            'productName': productName,
+            'productPrice': productPrice
+        };
+        let productDataJSON = JSON.stringify(productData);
+        console.log(productDataJSON);  // 직렬화된 JSON 문자열을 출력
+
+        var form = document.createElement("form");
+        form.setAttribute("method", "get");
+        form.setAttribute("action", "/shop/buyItem");
+
+        var productNameInput = document.createElement("input");
+        productNameInput.setAttribute("type", "hidden");
+        productNameInput.setAttribute("name", "productName");
+        productNameInput.setAttribute("value", productName);
+
+        var priceInput = document.createElement("input");
+        priceInput.setAttribute("type", "hidden");
+        priceInput.setAttribute("name", "productPrice");
+        priceInput.setAttribute("value", productPrice);
+
+        let productDataJSONInput = document.createElement("input");
+        productDataJSONInput.setAttribute("type", "hidden");
+        productDataJSONInput.setAttribute("name", "productDataJSON");
+        productDataJSONInput.setAttribute("value", productDataJSON);
+
+        form.appendChild(productNameInput);
+        form.appendChild(priceInput);
+        form.appendChild(productDataJSONInput);
+        document.body.appendChild(form);
+        form.submit();
+
     }
+
 
 
 
