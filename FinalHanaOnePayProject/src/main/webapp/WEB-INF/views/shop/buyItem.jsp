@@ -655,14 +655,20 @@
                                     결제</font></font></label>
                             </div>
                             <div class="form-check">
-                                <input id="cash" name="paymentMethod" type="radio" class="form-check-input" required="">
+                                <input id="kakaoPay" name="paymentMethod" type="radio" class="form-check-input" required="">
                                 <label class="form-check-label" for="cash"><font style="vertical-align: inherit;"><font
                                         style="vertical-align: inherit;">계좌 간편결제</font></font></label>
                             </div>
 
                             <div class="form-check">
+                                <input id="kakaoPay" name="paymentMethod" type="radio" class="form-check-input" required="">
+                                <label class="form-check-label" for="kakaoPay"><font style="vertical-align: inherit;"><font
+                                        style="vertical-align: inherit;">카카오페이</font></font></label>
+                            </div>
+
+                            <div class="form-check">
                                 <input id="hanaOnePay" name="paymentMethod" type="radio" class="form-check-input">
-                                <label class="form-check-label" for="hanaOnePay">하나원페이 간편결제</label>
+                                <label class="form-check-label" for="hanaOnePay">하나원페이</label>
                             </div>
 
 
@@ -716,8 +722,8 @@
                                         <div class="modal-body d-flex justify-content-center align-items-center flex-column">
                                             휴대폰으로 스캔하면
                                             결제 화면으로 이동합니다. <br>
-                                            <span style="color: #999;">스마트폰 카메라 및 모든 QR 스캐너로 가능</span>
-                                            <div class="createQR">
+                                            <span style="color: #999;">스마트폰 카메라 및 모든 QR 스캐너로 가능</span><br>
+                                            <div class="createQR" style="border: 5px solid #00857E; border-radius:25px;">
 <%--                                                <img src="/api/generateQRCode" alt="QR Code" />--%>
                                             </div>
                                         </div>

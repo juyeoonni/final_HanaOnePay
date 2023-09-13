@@ -10,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -46,9 +49,48 @@ public class HanaOnePayController {
         return "hanaOnePay/payCardList";
     }
 
+    @GetMapping("/hanaOnePay/payManage")
+    public String payManage(HttpServletRequest request) {
+        try {
+            List<HanaOnePayCardDTO> allCards = hanaOnePayService.getAllCards();
+            request.setAttribute("hanaOnePayCardList", allCards); // 모든 카드 정보를 request에 추가
+            System.out.println("페이카드 조회 성공!");
+        } catch (Exception e) {
+            // 예외 처리 로직
+            e.printStackTrace();
+        }
+        return "/hanaOnePay/payManage";
+    }
+
+
     @GetMapping("/hanaOnePay/addPayCard")
     public String addPayCard() {
         // 로직 추가 (예: 카드 추가 페이지에 필요한 데이터를 Model을 통해 전달)
         return "hanaOnePay/addPayCard";
     }
+
+
+    @RequestMapping("/hanaOnePay/payRequest")
+    public ModelAndView processQR(@RequestParam("qrData") String qrData, HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView();
+
+        // QR 코드 데이터 처리 로직
+        // 예: QR 데이터를 사용하여 결제 요청을 처리하고 결과 페이지로 이동
+        modelAndView.setViewName("hanaOnePay/payRequest"); // 예를 들어 paymentResult.jsp로 결과 페이지를 보여준다고 가정
+        modelAndView.addObject("qrData", qrData); // jsp에서 qrData 사용 가능
+
+        try {
+            List<HanaOnePayCardDTO> allCards = hanaOnePayService.getAllCards();
+            modelAndView.addObject("allCards", allCards);
+            //request.setAttribute("hanaOnePayCardList", allCards); // 모든 카드 정보를 request에 추가
+            System.out.println("페이카드 조회 성공!");
+        } catch (Exception e) {
+            // 예외 처리 로직
+            e.printStackTrace();
+        }
+
+        return modelAndView;
+    }
+
+
 }

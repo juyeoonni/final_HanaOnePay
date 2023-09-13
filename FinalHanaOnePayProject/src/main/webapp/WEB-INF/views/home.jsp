@@ -119,7 +119,7 @@
         <a data-href="/card/mydataCard" class="menu-item">
             <div class="menu-content">
                 <img src="/img/menu1.png" alt="하나원페이">
-                하나원페이
+                마이페이연동
             </div>
         </a>
 
@@ -315,10 +315,10 @@
                 하나머니조회
             </div>
         </a>
-        <a href="#" class="menu-item">
+        <a href="/hanaOnePay/payManage" class="menu-item">
             <div class="menu-content">
                 <img src="/img/menu3.png" alt="카드조회">
-                카드조회
+                빠른결제
             </div>
         </a>
         <a href="#" class="menu-item">

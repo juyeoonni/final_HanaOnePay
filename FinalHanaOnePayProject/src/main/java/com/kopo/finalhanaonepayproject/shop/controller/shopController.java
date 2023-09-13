@@ -11,6 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 @Controller
@@ -41,6 +43,14 @@ public class ShopController {
                                 @RequestParam("productPrice") int productPrice,
                                 @RequestParam("productDataJSON") String productDataJSON) {
 
+        // productName 디코딩
+        try {
+            productName = URLDecoder.decode(productName, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            // 적절한 오류 처리를 여기에 추가할 수 있습니다.
+        }
+
         // 콘솔에 JSON 문자열 출력
         System.out.println("Received JSON: " + productDataJSON);
 
@@ -55,6 +65,7 @@ public class ShopController {
         mav.addObject("hanaOnePayCardList", hanaOnePayCardList);
         mav.addObject("productName", productName);
         mav.addObject("productPrice", productPrice);
+        mav.addObject("productDataJSON", productDataJSON);
         mav.setViewName("shop/buyItem");
 
         return mav;
