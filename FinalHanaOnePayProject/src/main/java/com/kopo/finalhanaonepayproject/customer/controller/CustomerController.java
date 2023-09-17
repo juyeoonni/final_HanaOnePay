@@ -68,11 +68,14 @@ public class CustomerController {
     @PostMapping("/login-logic")
     public ResponseEntity<String> loginLogic(@RequestBody HashMap<String, String> loginData, HttpServletRequest request) {
         CustomerDTO loginMember = customerService.login(loginData);
+        System.out.println("payPW from Service: " + loginMember.getPayPw());
         HttpSession session = request.getSession();
         if (loginMember != null) {
             session.setAttribute("name", loginMember.getName());
             session.setAttribute("id", loginMember.getCustomerId());
             session.setAttribute("identityNumber", loginMember.getIdentityNumber());
+            session.setAttribute("payPw", loginMember.getPayPw());
+
 
             // Set data in application scope
            // context.setAttribute("identityNumber", loginMember.getIdentityNumber());
@@ -84,6 +87,7 @@ public class CustomerController {
             System.out.println("세션에 저장된 이름: " + session.getAttribute("name"));
             System.out.println("세션에 저장된 ID: " + session.getAttribute("id"));
             System.out.println("세션에 저장된 주민등록번호: " + session.getAttribute("identityNumber"));
+            System.out.println("세션에 저장된 간편결제비밀번호: " + session.getAttribute("payPw"));
 
             return ResponseEntity.ok("로그인 성공");
         } else {

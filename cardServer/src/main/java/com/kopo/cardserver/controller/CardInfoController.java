@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +29,29 @@ public class CardInfoController {
 
         List<CardDTO> cards = cardService.getCustomerCards(identityNumber, selectedCards);
         return ResponseEntity.ok(cards);
+    }
+
+//    @PostMapping("/payRequest")
+//    public ResponseEntity<String> processPayment(@RequestBody Map<String, Object> requestData) {
+//        String activeCard = (String) requestData.get("activeCard");
+//        String activeCardCode = (String) requestData.get("activeCardCode");
+//        String productName = (String) requestData.get("productName");
+//        String productPrice = (String) requestData.get("productPrice");
+//        String identityNumber = (String) requestData.get("identityNumber");
+//
+//
+//    }
+
+    @PostMapping("/payRequest")
+    public ResponseEntity<String> processPayment(@RequestBody Map<String, Object> requestData) {
+        String activeCard = (String) requestData.get("activeCard");
+        String activeCardCode = (String) requestData.get("activeCardCode");
+        BigDecimal productPrice = new BigDecimal((String) requestData.get("productPrice"));
+        String identityNumber = (String) requestData.get("identityNumber");
+
+        String result = cardService.processPayment(activeCard, activeCardCode, identityNumber, productPrice);
+
+        return ResponseEntity.ok(result);
     }
 }
 

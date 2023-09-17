@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>내 카드 조회</title>
+    <title>하나원페이 QR결제</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="/css/card.css">
@@ -251,6 +251,11 @@
                     // window.location.href = "/hanaOnePay/payRequest" + encodeURIComponent(code.data);
                     // QR 코드의 결과값을 사용하여 URL로 리다이렉트
                     //window.location.href = "/hanaOnePay/payRequest?qrData=" + encodeURIComponent(code.data);
+
+                    // AJAX 요청을 사용하여 서버에 스캔된 결과 전송
+                    $.post("/saveQrToSession", { qrData: code.data }, function(response) {
+                        console.log("QR값 서버에 전송");
+                    });
 
                     // 모달을 보여줌
                     $('#confirmModal').modal('show');

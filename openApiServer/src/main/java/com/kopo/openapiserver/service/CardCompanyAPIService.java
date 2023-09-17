@@ -23,7 +23,8 @@ public class CardCompanyAPIService {
 
     public String fetchCardData(String identityNumber, List<String> selectedCards) {
         // 카드사 API에 요청을 보내고 응답을 처리하는 로직
-        URI uri = URI.create("http://3.36.156.150:8080/api/card-data"); // 실제 카드사 API URL
+        //URI uri = URI.create("http://3.36.156.150:8080/api/card-data"); // 실제 카드사 API URL
+        URI uri = URI.create("http://52.79.68.69:8081/api/card-data"); // 실제 카드사 API URL
 
         // POST 방식으로 보낼 요청 데이터 구성
         Map<String, Object> payload = new HashMap<>();
@@ -40,4 +41,28 @@ public class CardCompanyAPIService {
             return null;
         }
     }
+
+    // OpenAPIService에 추가
+    public String sendPaymentRequestToCardCompany(String activeCard, String activeCardCode, String productName, String productPrice, String identityNumber) {
+        URI uri = URI.create("http://localhost:8081/api/payRequest"); // 카드사의 실제 결제 API URL을 설정해야 합니다.
+
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("activeCard", activeCard);
+        payload.put("activeCardCode", activeCardCode);
+        payload.put("productName", productName);
+        payload.put("productPrice", productPrice);
+        payload.put("identityNumber", identityNumber);
+
+        ResponseEntity<String> response = restTemplate.postForEntity(uri, payload, String.class);
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            logger.info("Payment processed: {}", response.getBody());
+            return response.getBody();
+        } else {
+            logger.error("Failed to process payment. Status code: {}", response.getStatusCode());
+            return null;
+        }
+    }
+
 }
+//저장테스트

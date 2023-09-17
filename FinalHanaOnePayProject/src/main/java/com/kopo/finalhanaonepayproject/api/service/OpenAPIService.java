@@ -46,7 +46,8 @@ public class OpenAPIService {
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, headers);
 
         // POST 요청 보내기
-        ResponseEntity<String> response = restTemplate.postForEntity("http://43.201.67.24:8080/api/card-data", entity, String.class);
+        //ResponseEntity<String> response = restTemplate.postForEntity("http://43.201.67.24:8080/api/card-data", entity, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity("http://3.34.185.18:8080/api/card-data", entity, String.class);
 
         // 응답 처리
         if (response.getStatusCode().is2xxSuccessful()) {
@@ -54,6 +55,35 @@ public class OpenAPIService {
             return response.getBody();
         } else {
             logger.error("Failed to fetch card data. Status code: {}", response.getStatusCode());
+            return null;
+        }
+    }
+
+    public String executePayment(String identityNumber, String activeCard, String activeCardCode, String productName, String productPrice) {
+        // 위의 값을 사용하여 외부 서버로 결제 요청을 보낼 수 있습니다.
+        // 예제 코드는 이전에 작성한 fetchCardDataFromAPI를 기반으로 작성되었습니다.
+
+        Map<String, Object> body = new HashMap<>();
+        body.put("identityNumber", identityNumber);
+        body.put("activeCard", activeCard);
+        body.put("activeCardCode", activeCardCode);
+        body.put("productName", productName);
+        body.put("productPrice", productPrice);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, headers);
+
+        System.out.println("결제 서비스까지 들어오는거 확인");
+
+        ResponseEntity<String> response = restTemplate.postForEntity("http://localhost:8082/api/payRequest", entity, String.class);
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            logger.info("Payment Successful: {}", response.getBody());
+            return response.getBody();
+        } else {
+            logger.error("Failed to execute payment. Status code: {}", response.getStatusCode());
             return null;
         }
     }

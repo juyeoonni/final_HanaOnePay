@@ -232,6 +232,13 @@
             height: 300px;
         }
 
+        .transparentButton {
+            opacity: 0;
+            background-color: transparent;
+            border: none;
+        }
+
+
 
     </style>
 
@@ -727,7 +734,10 @@
 <%--                                                <img src="/api/generateQRCode" alt="QR Code" />--%>
                                             </div>
                                         </div>
+
                                         <div class="modal-footer">
+                                            <button type="button" class="transparentButton" onclick="redirectToSuccessPage()">Go to Success Page</button>
+
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
                                         </div>
                                     </div>
@@ -768,6 +778,9 @@
         crossorigin="anonymous"></script>
 
 <script>
+    function redirectToSuccessPage() {
+        window.location.href = "/hanaOnePay/payRequestSuccess";
+    }
 
 
     $(document).ready(function () {
@@ -837,3 +850,5 @@
 
 </body>
 </html>
+
+<%--saveTest--%>

@@ -49,4 +49,28 @@ public class CardInfoController {
             return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    // OpenAPIController에 추가
+    @PostMapping("/api/payRequest")
+    public ResponseEntity<String> executePayment(@RequestBody Map<String, Object> paymentData) {
+        try {
+            String activeCard = (String) paymentData.get("activeCard");
+            String activeCardCode = (String) paymentData.get("activeCardCode");
+            String productName = (String) paymentData.get("productName");
+            String productPrice = (String) paymentData.get("productPrice");
+            String identityNumber = (String) paymentData.get("identityNumber");
+
+            String response = cardCompanyAPIService.sendPaymentRequestToCardCompany(activeCard, activeCardCode, productName, productPrice, identityNumber);
+
+            if (response != null) {
+                return new ResponseEntity<>(response, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("Payment Failed", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        } catch (Exception e) {
+            logger.error("Failed to execute payment", e);
+            return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

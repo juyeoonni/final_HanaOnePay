@@ -11,5 +11,35 @@
                  JOIN ${tableCode}_customer cu ON a.identityNumber = cu.identityNumber
         WHERE cu.identityNumber = #{identityNumber}
     </select>
+
+    <!-- 카드가 신용인지 체크인지 검사위해 조회 -->
+    <select id="getCardTypeByCardNumberAndIdentityNumber" resultType="string">
+        SELECT i.cardTypeCode
+        FROM ${tableCode}_card c
+                 JOIN ${tableCode}_card_item i ON c.cardItemId = i.cardItemId
+                 JOIN ${tableCode}_account a ON c.accNumber = a.accNumber
+                 JOIN ${tableCode}_customer cu ON a.identityNumber = cu.identityNumber
+        WHERE c.cardNumber = #{cardNumber} AND cu.identityNumber = #{identityNumber}
+    </select>
+
+    <!-- 카드가 활성상태인지 확인하기 위해 조회 -->
+    <select id="getCardStatusByCardNumberAndIdentityNumber" resultType="String">
+        SELECT c.cardStatus
+        FROM ${tableCode}_card c
+                 JOIN ${tableCode}_card_item p ON c.cardItemId = p.cardItemId
+                 JOIN ${tableCode}_account a ON c.accNumber = a.accNumber
+                 JOIN ${tableCode}_customer cu ON a.identityNumber = cu.identityNumber
+        WHERE c.cardNumber = #{cardNumber} AND cu.identityNumber = #{identityNumber}
+    </select>
+
+    <!-- 결제카드의 잔액을 조회 -->
+    <select id="getAccountBalanceByCardNumber" resultType="BigDecimal">
+        SELECT a.accBalance
+        FROM ${tableCode}_card c
+                 JOIN ${tableCode}_account a ON c.accNumber = a.accNumber
+        WHERE c.cardNumber = #{cardNumber}
+    </select>
+
+
 </mapper>
 

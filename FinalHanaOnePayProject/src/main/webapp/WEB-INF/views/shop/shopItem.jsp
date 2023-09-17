@@ -157,10 +157,10 @@
                 </div>
                 <div class="col-md-6">
                     <div class="small mb-1">하나원페이로 결제 시 9월 5% 할인</div>
-                    <h1 class="display-5 fw-bolder product-name">[기획] 르바인 차렷이불 3종세트</h1>
+                    <h1 class="display-5 fw-bolder product-name">Apple 애플워치 SE 2세대</h1>
                     <div class="fs-5 mb-5">
-                        <span class="text-decoration-line-through">134,000원</span>
-                        <span>99000</span>
+                        <span class="text-decoration-line-through">329,000</span>
+                        <span>319,000원</span>
                     </div>
                     <p class="lead">
                     <table border="1">
@@ -191,9 +191,11 @@
 
                         <tr>
                             <td class="product-price-label">총 상품 금액</td>
-                            <td class="product-price-value">99000</td>
+                            <td class="product-price-value">319000</td>
                         </tr>
-                    </table>
+
+                    <input type="hidden" id="businessCode" name="businessCode" value="5500">
+                </table>
                     </table>
 
                     <br>

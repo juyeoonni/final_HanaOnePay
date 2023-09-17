@@ -52,7 +52,14 @@
     body {
         font-family: 'Hana2CM', sans-serif !important; /* sans-serif는 폰트가 로드되지 않을 때 사용될 대체 폰트입니다. */
     }
-
+    #apple-watch{
+        padding-top: 5%;
+        padding-left: 10%;
+        width: 230px;
+        height: 190px;
+        margin-top: 15%;
+        margin-bottom: 26%;
+    }
     </style>
 </head>
 
@@ -95,6 +102,8 @@
 
 
         <!-- Header-->
+
+
         <header class="bg-dark py-5 header-with-background">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
@@ -132,12 +141,12 @@
                             <!-- Sale badge-->
                             <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
                             <!-- Product image-->
-                            <img class="card-img-top" src="/img/shop/shopItem2.jpg" alt="...">
+                            <img class="card-img-top" id="apple-watch" src="/img/shop/shopItem2.jpg" alt="...">
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">차렵이불 Q 3종세트</h5>
+                                    <h5 class="fw-bolder">Apple 애플워치 SE 2세대</h5>
                                     <!-- Product reviews-->
                                     <div class="d-flex justify-content-center small text-warning mb-2">
                                         <div class="bi-star-fill"></div>
@@ -147,8 +156,8 @@
                                         <div class="bi-star-fill"></div>
                                     </div>
                                     <!-- Product price-->
-                                    <span class="text-muted text-decoration-line-through">$20.00</span>
-                                    $18.00
+                                    <span class="text-muted text-decoration-line-through">329,000원</span>
+                                    319,000
                                 </div>
                             </div>
                             <!-- Product actions-->
