@@ -45,7 +45,7 @@
         }
 
         .headername {
-            font-size: 2em;
+            font-size: 25px;
             margin-left: 4px;
         }
 

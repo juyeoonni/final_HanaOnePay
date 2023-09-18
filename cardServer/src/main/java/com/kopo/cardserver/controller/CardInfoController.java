@@ -31,17 +31,6 @@ public class CardInfoController {
         return ResponseEntity.ok(cards);
     }
 
-//    @PostMapping("/payRequest")
-//    public ResponseEntity<String> processPayment(@RequestBody Map<String, Object> requestData) {
-//        String activeCard = (String) requestData.get("activeCard");
-//        String activeCardCode = (String) requestData.get("activeCardCode");
-//        String productName = (String) requestData.get("productName");
-//        String productPrice = (String) requestData.get("productPrice");
-//        String identityNumber = (String) requestData.get("identityNumber");
-//
-//
-//    }
-
     @PostMapping("/payRequest")
     public ResponseEntity<String> processPayment(@RequestBody Map<String, Object> requestData) {
         String activeCard = (String) requestData.get("activeCard");

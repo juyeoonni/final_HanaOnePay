@@ -405,7 +405,8 @@
                             if(response === "Payment Approved") {  // 서버에서 success 필드를 true로 반환한다고 가정합니다.
                                 window.location.href = "/hanaOnePay/payRequestSuccess"; // 결제 성공 페이지로 리디렉션
                             } else {
-                                alert('결제 실패: ' + response.message); // 서버에서 오류 메시지를 반환한다고 가정합니다.
+                                alert('결제 실패: ' + response.message); // 서버에서 오류 메시지를 반환
+                                window.location.href = "/hanaOnePay/payRequestFail"; // 결제 성공 페이지로 리디렉션
                             }
                         },
                         error: function(jqXHR, textStatus, errorThrown) {

@@ -32,13 +32,64 @@
         WHERE c.cardNumber = #{cardNumber} AND cu.identityNumber = #{identityNumber}
     </select>
 
-    <!-- 결제카드의 잔액을 조회 -->
+    <!-- 결제카드의 잔액을 조회 for 체크카드 -->
     <select id="getAccountBalanceByCardNumber" resultType="BigDecimal">
         SELECT a.accBalance
         FROM ${tableCode}_card c
                  JOIN ${tableCode}_account a ON c.accNumber = a.accNumber
         WHERE c.cardNumber = #{cardNumber}
     </select>
+
+    <!-- 결제 시 계좌 잔액 마이너스 업데이트 for 체크카드 -->
+    <update id="updateAccountBalanceByCardNumber">
+        UPDATE ${tableCode}_account a
+        SET a.accbalance = a.accbalance - #{amount}
+        WHERE a.accNumber = (
+            SELECT c.accNumber
+            FROM ${tableCode}_card c
+            WHERE c.cardNumber = #{cardNumber}
+        )
+    </update>
+
+    <!--    신용카드 한도 조회-->
+    <select id="getCreditCardLimitByCardNumberAndIdentityNumber" resultType="BigDecimal">
+        SELECT c.limit
+        FROM ${tableCode}_card c
+                 JOIN ${tableCode}_account a ON c.accNumber = a.accNumber
+                 JOIN ${tableCode}_customer cu ON a.identityNumber = cu.identityNumber
+        WHERE c.cardNumber = #{cardNumber} AND cu.identityNumber = #{identityNumber}
+    </select>
+
+    <!--   결제 시 신용카드 한도 update-->
+    <update id="updateCreditCardLimitByCardNumberAndIdentityNumber">
+        UPDATE ${tableCode}_card c
+        SET c.limit = c.limit - #{amount}
+        WHERE c.cardNumber = #{cardNumber}
+          AND EXISTS (
+            SELECT 1
+            FROM ${tableCode}_account a
+                     JOIN ${tableCode}_customer cu ON a.identityNumber = cu.identityNumber
+            WHERE a.accNumber = c.accNumber
+              AND cu.identityNumber = #{identityNumber}
+        )
+    </update>
+
+    <!-- 결제 시 미결제 금액 관리(결제 보류) 테이블에 해당 정보 기록 -->
+    <insert id="insertPendingPayment">
+        INSERT INTO ${tableCode}_card_pending_pay (pendingId, cardNumber, payAmount, withdrawalDate, payStatus)
+        VALUES (${tableCode}_card_pending_pay_seq.NEXTVAL, #{cardNumber}, #{payAmount}, #{withdrawalDate}, #{payStatus})
+    </insert>
+
+    <select id="getPendingPaymentsByDate" resultType="com.kopo.cardserver.model.DTO.PendingPaymentDTO">
+        SELECT * FROM ${tableCode}_card_pending_pay
+        WHERE withdrawalDate = #{withdrawalDate} AND payStatus = 'Pending'
+    </select>
+
+    <update id="updatePayStatusToApproval">
+        UPDATE ${tableCode}_card_pending_pay
+        SET payStatus = 'Approval'
+        WHERE pendingId = #{pendingId}
+    </update>
 
 
 </mapper>

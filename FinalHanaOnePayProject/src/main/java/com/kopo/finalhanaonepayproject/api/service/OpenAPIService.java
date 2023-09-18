@@ -80,7 +80,7 @@ public class OpenAPIService {
         ResponseEntity<String> response = restTemplate.postForEntity("http://localhost:8082/api/payRequest", entity, String.class);
 
         if (response.getStatusCode().is2xxSuccessful()) {
-            logger.info("Payment Successful: {}", response.getBody());
+            logger.info("Payment Result: {}", response.getBody());
             return response.getBody();
         } else {
             logger.error("Failed to execute payment. Status code: {}", response.getStatusCode());
