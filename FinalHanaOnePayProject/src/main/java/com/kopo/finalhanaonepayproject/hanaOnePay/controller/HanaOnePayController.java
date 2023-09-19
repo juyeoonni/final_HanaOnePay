@@ -136,4 +136,43 @@ public class HanaOnePayController {
     }
 
 
+    @GetMapping("/hanaOnePay/selectPayCard")
+    public ModelAndView selectPayCard() {
+        ModelAndView modelAndView = new ModelAndView();
+
+        // QR 코드 데이터 처리 로직
+        // 예: QR 데이터를 사용하여 결제 요청을 처리하고 결과 페이지로 이동
+        modelAndView.setViewName("hanaOnePay/selectPayCard"); // 예를 들어 paymentResult.jsp로 결과 페이지를 보여준다고 가정
+
+        try {
+            List<HanaOnePayCardDTO> allCards = hanaOnePayService.getAllCards();
+            modelAndView.addObject("allCards", allCards);
+
+            System.out.println("페이카드 조회 성공!");
+        } catch (Exception e) {
+            // 예외 처리 로직
+            e.printStackTrace();
+        }
+
+        return modelAndView;
+    }
+
+    @GetMapping("/hanaOnePay/selectPayAccount")
+    public ModelAndView selectPayAccount() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("hanaOnePay/selectPayAccount");
+
+        try {
+            List<HanaOnePayCardDTO> allCards = hanaOnePayService.getAllCards();
+            modelAndView.addObject("allCards", allCards);
+
+            System.out.println("페이카드 조회 성공!");
+        } catch (Exception e) {
+            // 예외 처리 로직
+            e.printStackTrace();
+        }
+
+        return modelAndView;
+    }
+
 }

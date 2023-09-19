@@ -13,5 +13,5 @@ public class Request {
     private String recipientPhoneNumber;
     private String title;
     private String content;
-
+    private int randomNumber;
 }

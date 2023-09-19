@@ -106,8 +106,72 @@
             /* 필요에 따라 여기에 추가 스타일을 설정하세요 */
         }
 
+        .mypageMain {
+            display: flex;
+            flex-direction: column;
+            margin-left: 30px;
+            /*align-items: center;*/
+            /*justify-content: center;*/
+            /*height: 100vh;  !* 높이를 화면 높이와 동일하게 설정. 필요에 따라 조정할 수 있습니다. *!*/
+        }
 
+        .mypageName {
+            margin-right: 130px;
+            text-align: center;  /* 텍스트 중앙 정렬 */
+            width: 100%;         /* 너비를 100%로 설정하여 왼쪽 및 오른쪽 여백 없음 */
+        }
 
+        .mypageMain > .mypageName {
+            align-self: center;
+        }
+
+        .myCardInfo{
+            font-size: 20px;
+            width: 450px;
+            height: 300px;
+            background-color: whitesmoke;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            text-align: center;  /* 텍스트 중앙 정렬 */
+        }
+
+        .monthlyCardInfo{
+            font-size: 20px;
+            margin-left: 80px;
+            width: 450px;
+            height: 300px;
+            background-color: whitesmoke;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            margin-right: 130px;
+            text-align: center;  /* 텍스트 중앙 정렬 */
+        }
+
+        table {
+            width: 88%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        .plusBtn{
+            color: white;
+            background-color:#00857E ;
+            border-radius: 10px;
+            border: none;
+        }
     </style>
 
 </head>
@@ -127,9 +191,9 @@
             </button>
             <div class="collapse show" id="home-collapse">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">연동계좌</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">연동카드</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">하나머니</a></li>
+<%--                    <li><a href="/api/linkedAccount" class="link-body-emphasis d-inline-flex text-decoration-none rounded">연동카드조회</a></li>--%>
+                    <li><a href="/hanaOnePay/selectPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>
+                    <li><a href="/hanaOnePay/selectPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 계좌</a></li>
                 </ul>
             </div>
         </li>
@@ -139,8 +203,8 @@
             </button>
             <div class="collapse" id="dashboard-collapse">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Overview</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Weekly</a></li>
+                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">월사용금액 조회</a></li>
+                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">명세서 조회</a></li>
                     <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>
                     <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>
                 </ul>
@@ -176,17 +240,89 @@
     </ul>
 </div>
 
-<div class="mypageMain">
+    <div class="mypageMain">
+        <div class="mypageName">
+            <div style="font-size: 30px">마이하나페이지</div>
+            <div style="color: #959595">나만의 카드 생활</div>
+        </div>
+        <br>
 
-    <div class="mypageName">
-        마이하나페이지<br>
-        나만의 카드 생활
+
+        <div>
+            ${sessionScope.name}님은 일반고객이십니다.
+        </div>
+
+        <br>
+
+        <div class="flex-container">
+        <div class="myCardInfo">
+            카드 <br><br>
+            <div style="text-align: left; margin-left: 20px">
+                이번달 사용금액 <br>
+                52,8000원  <br><br>
+
+                한국폴리텍 광명융합기술교육원 학생증 체크카드
+            </div>
+
+            <br><br>
+            <div class="btn-group" role="group" aria-label="Basic outlined example" style="border: none">
+                <button type="button" class="btn btn-outline-primary" style="background-color: #00857E; color: white;">카드관리</button>
+                <button type="button" class="btn btn-outline-primary" style="background-color: #00857E; color: white;">받은혜택</button>
+                <button type="button" class="btn btn-outline-primary" style="background-color: #00857E; color: white;">한도조회</button>
+            </div>
+
+
+        </div>
+
+        <div class="monthlyCardInfo">
+            다가오는 지출 일정<br>
+            <div class="withdralDate" style="text-align: left; font-size: 13px">
+                [하나] 다가오는 카드값 <br>
+                [우리] 다가오는 카드값
+
+            </div>
+        </div>
+        </div>
+
+        <br><br>
+
+        <div class="recentCardUse">
+            <div class="using" style="font-size: 20px">최근 카드이용내역 <button class="plusBtn">더보기 +</button></div>
+
+            <br>
+            <div>
+            <table>
+                <tr>
+                    <th>일시</th>
+                    <th>가맹점</th>
+                    <th>카드 번호</th>
+                    <th>거래금액</th>
+                </tr>
+                <tr>
+                    <td>2023-09-19 10:30:00</td>
+                    <td>GS25S사가정역점</td>
+                    <td>1234-****-****-1234</td>
+                    <td>100,000원</td>
+                </tr>
+                <tr>
+                    <td>2023-09-20 11:20:00</td>
+                    <td>할리스커피강남</td>
+                    <td>1234-****-****-1234</td>
+                    <td>1,000원</td>
+                </tr>
+                <tr>
+                    <td>2023-09-21 09:01:10</td>
+                    <td>이디야커피(총신</td>
+                    <td>1234-****-****-1234</td>
+                    <td>34,000원</td>
+                </tr>
+                <!-- 여기에 필요한 만큼 레코드를 추가하세요. -->
+            </table>
+        </div>
+
+        </div>
     </div>
 
-    <div>
-        정주연님은 일반고객이십니다.
-    </div>
-</div>
 </div>
 
 <%@ include file="/WEB-INF/views/comm/footer.jsp"%>

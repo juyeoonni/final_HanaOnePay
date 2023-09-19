@@ -16,6 +16,7 @@
     <title>joinHanaOnePay</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/card.css">
 
     <style>
@@ -208,6 +209,12 @@
             background-color: #00664e; /* 마우스 오버 시 배경색 */
         }
 
+        /* 전체를 감싸고 있는 div의 너비 조절 */
+        .card.text-center {
+            max-width: 90%; /* 원하는 최대 너비 값으로 설정하세요. */
+            margin: 0 auto; /* 가운데 정렬을 위해 추가 */
+        }
+
     </style>
 </head>
 <body>
@@ -217,96 +224,211 @@
     <div class="intro" style="padding-top: 20px;">
         <h1 style="text-align: center; font-size: 2em;">마이하나원페이</h1>
         <img class="mycardConnect" src="/img/mycardConnect.gif">
-        <p style="text-align: center;">흩어진 내 카드를 모아 간편하게 결제하세요!</p>
+        <p style="text-align: center;">흩어진 내 자산을 모아 간편하게 결제하세요!</p>
         <%--        <p style="text-align: center; font-weight: bold;">연결할 카드기관 선택</p>--%>
     </div>
 </div>
 
-<div class="selectCard">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4"> <!-- 첫 번째 열 -->
-                <label for="hana">
-                    <img src="/img/bank/bankName=hana.png">
-                    하나카드
-                    <input type="checkbox" id="hana" name="card">
-                    <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
-                </label>
-                <label for="woori">
-                    <img src="/img/bank/bankName=woori.png">
-                    우리카드
-                    <input type="checkbox" id="woori" name="card">
-                    <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
-                </label>
-                <label for="IBK">
-                    <img src="/img/bank/bankName=IBK.png">
-                    IBK기업은행(카드)
-                    <input type="checkbox" id="IBK" name="card">
-                    <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
-                </label>
-                <label for="KDB">
-                    <img src="/img/bank/bankName=KDB.png">
-                    KDB산업은행(카드)
-                    <input type="checkbox" id="KDB" name="card">
-                    <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
-                </label>
+<div class="card text-center">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="true" data-toggle="tab" href="#bankContent">은행</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#cardContent">카드</a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <div class="tab-content">
+            <div id="cardContent" class="tab-pane fade">
+                <!-- 카드 탭 내용 -->
+                <div class="selectCard">
+                    <div class="selectCard">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4"> <!-- 첫 번째 열 -->
+                                    <label for="hana">
+                                        <img src="/img/bank/bankName=hana.png">
+                                        하나카드
+                                        <input type="checkbox" id="hana" name="card">
+                                        <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
+                                    </label>
+                                    <label for="woori">
+                                        <img src="/img/bank/bankName=woori.png">
+                                        우리카드
+                                        <input type="checkbox" id="woori" name="card">
+                                        <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
+                                    </label>
+                                    <label for="IBK">
+                                        <img src="/img/bank/bankName=IBK.png">
+                                        IBK기업은행(카드)
+                                        <input type="checkbox" id="IBK" name="card">
+                                        <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
+                                    </label>
+                                    <label for="KDB">
+                                        <img src="/img/bank/bankName=KDB.png">
+                                        KDB산업은행(카드)
+                                        <input type="checkbox" id="KDB" name="card">
+                                        <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
+                                    </label>
+                                </div>
+                                <div class="col-md-4"> <!-- 두 번째 열 -->
+                                    <label for="shinhan">
+                                        <img src="/img/bank/bankName=shinhan.png">
+                                        신한카드
+                                        <input type="checkbox" id="shinhan" name="card">
+                                        <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
+                                    </label>
+                                    <label for="SC">
+                                        <img src="/img/bank/bankName=SC.png">
+                                        SC제일은행(카드)
+                                        <input type="checkbox" id="SC" name="card">
+                                        <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
+                                    </label>
+                                    <label for="kakao">
+                                        <img src="/img/bank/bankName=kakao.png">
+                                        카카오뱅크(카드)
+                                        <input type="checkbox" id="kakao" name="card">
+                                        <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
+                                    </label>
+                                    <label for="K">
+                                        <img src="/img/bank/bankName=K.png">
+                                        케이뱅크(카드)
+                                        <input type="checkbox" id="K" name="card">
+                                        <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
+                                    </label>
+                                </div>
+                                <div class="col-md-4"> <!-- 세 번째 열 -->
+                                    <label for="KB">
+                                        <img src="/img/bank/bankName=KB.png">
+                                        국민카드
+                                        <input type="checkbox" id="KB" name="card">
+                                        <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
+                                    </label>
+                                    <label for="NH">
+                                        <img src="/img/bank/bankName=NH.png">
+                                        NH농협카드
+                                        <input type="checkbox" id="NH" name="card">
+                                        <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
+                                    </label>
+                                    <label for="toss">
+                                        <img src="/img/bank/bankName=toss.png">
+                                        토스뱅크(카드)
+                                        <input type="checkbox" id="toss" name="card">
+                                        <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
+                                    </label>
+                                    <label for="smy">
+                                        <img src="/img/bank/bankName=smy.png">
+                                        새마을금고(카드)
+                                        <input type="checkbox" id="smy" name="card">
+                                        <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-4"> <!-- 두 번째 열 -->
-                <label for="shinhan">
-                    <img src="/img/bank/bankName=shinhan.png">
-                    신한카드
-                    <input type="checkbox" id="shinhan" name="card">
-                    <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
-                </label>
-                <label for="SC">
-                    <img src="/img/bank/bankName=SC.png">
-                    SC제일은행(카드)
-                    <input type="checkbox" id="SC" name="card">
-                    <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
-                </label>
-                <label for="kakao">
-                    <img src="/img/bank/bankName=kakao.png">
-                    카카오뱅크(카드)
-                    <input type="checkbox" id="kakao" name="card">
-                    <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
-                </label>
-                <label for="K">
-                    <img src="/img/bank/bankName=K.png">
-                    케이뱅크(카드)
-                    <input type="checkbox" id="K" name="card">
-                    <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
-                </label>
+            <div id="bankContent" class="tab-pane fade show active">
+                <!-- 은행 탭 내용 -->
+                <div class="selectCard">
+                    <div class="selectCard">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4"> <!-- 첫 번째 열 -->
+                                    <label for="hana">
+                                        <img src="/img/bank/bankName=hana.png">
+                                        하나은행
+                                        <input type="checkbox" id="hana" name="card">
+                                        <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
+                                    </label>
+                                    <label for="woori">
+                                        <img src="/img/bank/bankName=woori.png">
+                                        우리은행
+                                        <input type="checkbox" id="woori" name="card">
+                                        <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
+                                    </label>
+                                    <label for="IBK">
+                                        <img src="/img/bank/bankName=IBK.png">
+                                        IBK기업은행
+                                        <input type="checkbox" id="IBK" name="card">
+                                        <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
+                                    </label>
+                                    <label for="KDB">
+                                        <img src="/img/bank/bankName=KDB.png">
+                                        KDB산업은행
+                                        <input type="checkbox" id="KDB" name="card">
+                                        <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
+                                    </label>
+                                </div>
+                                <div class="col-md-4"> <!-- 두 번째 열 -->
+                                    <label for="shinhan">
+                                        <img src="/img/bank/bankName=shinhan.png">
+                                        신한은행
+                                        <input type="checkbox" id="shinhan" name="card">
+                                        <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
+                                    </label>
+                                    <label for="SC">
+                                        <img src="/img/bank/bankName=SC.png">
+                                        SC제일은행
+                                        <input type="checkbox" id="SC" name="card">
+                                        <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
+                                    </label>
+                                    <label for="kakao">
+                                        <img src="/img/bank/bankName=kakao.png">
+                                        카카오뱅크
+                                        <input type="checkbox" id="kakao" name="card">
+                                        <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
+                                    </label>
+                                    <label for="K">
+                                        <img src="/img/bank/bankName=K.png">
+                                        케이뱅크
+                                        <input type="checkbox" id="K" name="card">
+                                        <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
+                                    </label>
+                                </div>
+                                <div class="col-md-4"> <!-- 세 번째 열 -->
+                                    <label for="KB">
+                                        <img src="/img/bank/bankName=KB.png">
+                                        국민은행
+                                        <input type="checkbox" id="KB" name="card">
+                                        <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
+                                    </label>
+                                    <label for="NH">
+                                        <img src="/img/bank/bankName=NH.png">
+                                        NH농협은행
+                                        <input type="checkbox" id="NH" name="card">
+                                        <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
+                                    </label>
+                                    <label for="toss">
+                                        <img src="/img/bank/bankName=toss.png">
+                                        토스뱅크
+                                        <input type="checkbox" id="toss" name="card">
+                                        <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
+                                    </label>
+                                    <label for="smy">
+                                        <img src="/img/bank/bankName=smy.png">
+                                        새마을금고
+                                        <input type="checkbox" id="smy" name="card">
+                                        <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-4"> <!-- 세 번째 열 -->
-                <label for="KB">
-                    <img src="/img/bank/bankName=KB.png">
-                    국민카드
-                    <input type="checkbox" id="KB" name="card">
-                    <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
-                </label>
-                <label for="NH">
-                    <img src="/img/bank/bankName=NH.png">
-                    NH농협카드
-                    <input type="checkbox" id="NH" name="card">
-                    <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
-                </label>
-                <label for="toss">
-                    <img src="/img/bank/bankName=toss.png">
-                    토스뱅크(카드)
-                    <input type="checkbox" id="toss" name="card">
-                    <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
-                </label>
-                <label for="smy">
-                    <img src="/img/bank/bankName=smy.png">
-                    새마을금고(카드)
-                    <input type="checkbox" id="smy" name="card">
-                    <span class="fake-checkbox"></span> <!-- 가짜 체크박스 -->
-                </label>
-            </div>
+
         </div>
     </div>
 </div>
-<br>
+
+
+
+
+
 
 <br>
 <button onclick="loadCardData()" class="center-button">
@@ -316,6 +438,24 @@
 
 
 <script>
+    $(document).ready(function(){
+        // 초기에 '은행' 탭이 활성화되도록 설정
+        $('.nav-link.active').tab('show');
+
+        // 탭이 변경될 때마다 해당 내용을 보여주도록 이벤트 핸들러 추가
+        $('.nav-link').on('click', function() {
+            var tabId = $(this).attr('href');
+            $(tabId).addClass('show active').siblings().removeClass('show active');
+        });
+    });
+
+        $(document).ready(function(){
+        // 탭을 활성화합니다.
+        $('.nav-tabs a').click(function(){
+            $(this).tab('show');
+        });
+    });
+
     let selectedCardIds = [];
 
     function loadCardData() {
@@ -337,8 +477,6 @@
             alert('하나 이상의 카드를 선택해 주세요.');
             return;
         }
-
-
 
 
         fetch(`/api/card-data`, {
@@ -516,11 +654,6 @@
         var modal2 = new bootstrap.Modal(document.getElementById('exampleModal2'), {});
         modal2.show();
     }
-
-
-
-
-
 </script>
 
 <%--<!-- Button trigger modal -->--%>
@@ -623,7 +756,6 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-
 
 
 

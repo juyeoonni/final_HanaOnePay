@@ -21,6 +21,28 @@ public class CardInfoController {
     @Autowired
     private CardCompanyAPIService cardCompanyAPIService;
 
+    // 계좌 조회
+    @PostMapping("/api/linkedAccount")
+    public ResponseEntity<List<String>> fetchLinkedAccounts(@RequestBody Map<String, String> payload) {
+        try {
+            String identityNumber = payload.get("identityNumber");
+
+            // 실제 카드사 API에서 연동된 계좌 정보를 가져옵니다.
+            List<String> linkedAccounts = cardCompanyAPIService.fetchLinkedAccounts(identityNumber);
+
+            if (linkedAccounts != null && !linkedAccounts.isEmpty()) {
+                return new ResponseEntity<>(linkedAccounts, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            logger.error("Failed to fetch linked accounts", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+    // 카드 데이터 조회
     @PostMapping("/api/card-data")  // POST 방식으로 변경
     public ResponseEntity<String> fetchCardData(
             @RequestBody Map<String, Object> payload) {  // RequestBody를 사용

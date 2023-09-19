@@ -2,12 +2,16 @@ package com.kopo.openapiserver.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +24,33 @@ public class CardCompanyAPIService {
     public CardCompanyAPIService() {
         this.restTemplate = new RestTemplate();
     }
+
+    // 계좌조회 서비스
+    public List<String> fetchLinkedAccounts(String identityNumber) {
+        // 실제 카드사 API URL (아래의 주소는 예시입니다. 실제 주소로 교체해야 합니다.)
+        URI uri = URI.create("http://localhost:8081/api/linkedAccount");
+
+        Map<String, String> payload = new HashMap<>();
+        payload.put("identityNumber", identityNumber);
+
+        HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(payload);
+
+        ResponseEntity<List<String>> response = restTemplate.exchange(
+                uri,
+                HttpMethod.POST,
+                requestEntity,
+                new ParameterizedTypeReference<List<String>>() {}
+        );
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            logger.info("Received Linked Account Data: {}", response.getBody());
+            return response.getBody();
+        } else {
+            logger.error("Failed to fetch linked accounts. Status code: {}", response.getStatusCode());
+            return Collections.emptyList();
+        }
+    }
+
 
     public String fetchCardData(String identityNumber, List<String> selectedCards) {
         // 카드사 API에 요청을 보내고 응답을 처리하는 로직

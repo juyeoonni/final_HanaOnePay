@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -20,6 +21,33 @@ public class OpenAPIController {
     public OpenAPIController(OpenAPIService openAPIService) {
         this.openAPIService = openAPIService;
     }
+
+    // 계좌 조회 요청
+    @PostMapping("/api/account-data")
+    public String accountData(HttpSession session, HttpServletRequest request, @RequestBody Map<String, List<String>> accountData) {
+        List<String> selectedAccounts = accountData.get("accounts");
+
+        System.out.println("계좌조회 컨트롤러 들어옴");
+        System.out.println("Session ID in OpenAPIController: " + request.getSession().getId());
+
+        String identityNumber = (String) session.getAttribute("identityNumber");
+
+        if (identityNumber == null) {
+            System.out.println("세션에 주민등록번호 정보가 없습니다.");
+            return "error1";
+        }
+
+        System.out.println("identityNumber: " + identityNumber);
+        System.out.println("Selected Cards: " + selectedAccounts.toString());
+
+        if (selectedAccounts == null || selectedAccounts.isEmpty()) {
+            System.out.println("카드 정보가 전달되지 않았습니다.");
+            return "errorCardInfoMissing";
+        }
+
+        return openAPIService.fetchAccountDataFromAPI(identityNumber, selectedAccounts);
+    }
+
 
     // 카드 조회 요청
     @PostMapping("/api/card-data")

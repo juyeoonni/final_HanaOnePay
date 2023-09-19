@@ -2,15 +2,14 @@ package com.kopo.finalhanaonepayproject.api.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +29,25 @@ public class OpenAPIService {
     public OpenAPIService() {
         this.restTemplate = new RestTemplate(); // 생성자에서 초기화합니다.
     }
+
+    // 계좌조회 서비스
+    public String fetchAccountDataFromAPI(String identityNumber, List<String> selectedAccounts) {
+        Map<String, Object> body = new HashMap<>();
+        body.put("identityNumber", identityNumber);
+        body.put("selectedAccounts", selectedAccounts);
+
+        // ... [기타 코드는 동일]
+
+        ResponseEntity<String> response = restTemplate.postForEntity("http://[OPENAPI_SERVER_URL]/api/account-data", entity, String.class);
+
+        // ... [응답 처리 코드]
+    }
+
+
+
+
+
+
     public String fetchCardDataFromAPI(String identityNumber, List<String> selectedCards) {
         System.out.println("서비스까지 들어오는거 확인");
 
