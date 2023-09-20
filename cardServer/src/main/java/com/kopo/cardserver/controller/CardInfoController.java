@@ -1,5 +1,6 @@
 package com.kopo.cardserver.controller;
 
+import com.kopo.cardserver.model.DTO.AccountDTO;
 import com.kopo.cardserver.model.DTO.CardDTO;
 import com.kopo.cardserver.model.DTO.CustomerDTO;
 import com.kopo.cardserver.service.CardService;
@@ -20,6 +21,16 @@ public class CardInfoController {
 
     @Autowired
     private CardService cardService;
+
+    @PostMapping("/account-data")
+    public ResponseEntity<List<AccountDTO>> getAccounts(@RequestBody Map<String, Object> requestData) {
+        String identityNumber = (String) requestData.get("identityNumber");
+
+        List<AccountDTO> accounts = cardService.getAllCustomerAccounts(identityNumber);
+
+        return ResponseEntity.ok(accounts);
+    }
+
 
     @PostMapping("/card-data")
     public ResponseEntity<List<CardDTO>> getCards(@RequestBody Map<String, Object> requestData) {
@@ -42,6 +53,9 @@ public class CardInfoController {
 
         return ResponseEntity.ok(result);
     }
+
+
+
 }
 
 

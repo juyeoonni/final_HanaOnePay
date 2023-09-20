@@ -216,6 +216,11 @@
         let formattedPrice = numberWithCommas(rawPrice);
         priceElement.textContent = formattedPrice + "원";
     }
+
+    document.getElementById('payStart').addEventListener('click', function() {
+        window.location.href = "/shop/shopMain";
+    });
+
 </script>
 </body>
 </html>

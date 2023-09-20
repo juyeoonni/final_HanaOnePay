@@ -26,30 +26,24 @@ public class CardCompanyAPIService {
     }
 
     // 계좌조회 서비스
-    public List<String> fetchLinkedAccounts(String identityNumber) {
-        // 실제 카드사 API URL (아래의 주소는 예시입니다. 실제 주소로 교체해야 합니다.)
-        URI uri = URI.create("http://localhost:8081/api/linkedAccount");
+    public String fetchAccountData(String identityNumber) {
+        URI uri = URI.create("http://localhost:8081/api/account-data");
 
-        Map<String, String> payload = new HashMap<>();
+        Map<String, Object> payload = new HashMap<>();
         payload.put("identityNumber", identityNumber);
 
-        HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(payload);
-
-        ResponseEntity<List<String>> response = restTemplate.exchange(
-                uri,
-                HttpMethod.POST,
-                requestEntity,
-                new ParameterizedTypeReference<List<String>>() {}
-        );
+        ResponseEntity<String> response = restTemplate.postForEntity(uri, payload, String.class);
 
         if (response.getStatusCode().is2xxSuccessful()) {
-            logger.info("Received Linked Account Data: {}", response.getBody());
+            logger.info("Received Account Data: {}", response.getBody());
             return response.getBody();
         } else {
-            logger.error("Failed to fetch linked accounts. Status code: {}", response.getStatusCode());
-            return Collections.emptyList();
+            logger.error("Failed to fetch account data. Status code: {}", response.getStatusCode());
+            return null;
         }
     }
+
+
 
 
     public String fetchCardData(String identityNumber, List<String> selectedCards) {

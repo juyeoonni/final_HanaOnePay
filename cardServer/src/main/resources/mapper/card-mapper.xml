@@ -4,6 +4,16 @@
 
 
 <mapper namespace="com.kopo.cardserver.model.DAO.CardDAO">
+
+<!--    고객 계좌 조회-->
+    <select id="getCustomerAccounts" resultType="com.kopo.cardserver.model.DTO.AccountDTO">
+        SELECT c.*
+        FROM ${tableCode}_account c
+                 JOIN ${tableCode}_customer cu ON c.identityNumber = cu.identityNumber
+        WHERE cu.identityNumber = #{identityNumber}
+    </select>
+
+<!--    고객 카드 조회-->
     <select id="getCustomerCards" resultType="com.kopo.cardserver.model.DTO.CardDTO">
         SELECT c.*
         FROM ${tableCode}_card c

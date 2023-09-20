@@ -28,8 +28,6 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
-    <link href="/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
     <style>
         body {
@@ -320,6 +318,13 @@
             text-decoration: none; /* 링크 텍스트의 밑줄 제거 */
         }
 
+        .account {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
 
 
     </style>
@@ -413,238 +418,102 @@
     <%--간편결제 등록 카드 화면 조회--%>
     <div id="Accordion_wrap" class="AccAccordion">
         <h2>간편결제 등록 계좌 조회</h2>
-
-        <c:forEach items="${allCards}" var="card">
-            <div class="que">
-                 <span class="cardCode">
-            <c:choose>
-                <c:when test="${card.cardCode == 'shinhan'}">신한</c:when>
-                <c:when test="${card.cardCode == 'KB'}">KB국민</c:when>
-                <c:when test="${card.cardCode == 'woori'}">우리</c:when>
-                <c:otherwise>${card.cardCode}</c:otherwise>
-            </c:choose>
-        </span>
-                <div class="arrow-wrap">
-                    <span class="arrow-top">↑</span>
-                    <span class="arrow-bottom">↓</span>
-                </div>
-            </div>
-
-            <div class="anw">
-
-
-
-
-            </div>
-        </c:forEach>
+        <hr>
 
 
     </div>
-
-
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="card-header">
-                    <img class="headerImg" src="/img/hanaLogo.png">
-                    <div class="headername">하나원페이</div>
-                </div>
-                <hr>
-                <form id="auth-form">
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col">
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>통신사</option>
-                                    <option value="1">SKT</option>
-                                    <option value="2">KT</option>
-                                    <option value="3">LG U+</option>
-                                </select>
-                            </div>
-                            <div class="col">
-                                <select class="form-select" aria-label="Default select example" id="phone-prefix">
-                                    <option selected>010</option>
-                                    <option value="1">010</option>
-                                    <option value="2">011</option>
-                                    <option value="3">016</option>
-                                </select>
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="'-'제외하고 입력" aria-label="phone-number"
-                                       id="phone-input">
-                            </div>
-                        </div>
-
-                        <div class="outer-box">
-                            <label class="agree-all-label" for="agree_all">
-                                <input type="checkbox" name="agree_all" id="agree_all">
-                                <span><strong>전체 동의</strong></span>
-                            </label>
-                            <div class="inner-box">
-                                <label for="agree">
-                                    <input type="checkbox" name="agree" value="1">
-                                    <span>개인정보 제공 및 이용</span>
-                                </label>
-                                <br>
-                                <label for="agree">
-                                    <input type="checkbox" name="agree" value="2">
-                                    <span>고유식별 정보처리</span>
-                                </label>
-                                <br>
-                                <label for="agree">
-                                    <input type="checkbox" name="agree" value="3">
-                                    <span>통신사 이용약관</span>
-                                </label>
-
-                            </div>
-                        </div>
-
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="인증번호 6자리 입력" aria-label="auth-number">
-                            <br>
-                            <input class="cancleButton" onclick="sendSmsRequest()" type="button" value="인증번호 발송">
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="Btn" class="cancleButton" data-bs-dismiss="modal">취소</button>
-                        <button class="plusBtn" type="button" class="btn" onclick="sendAuthNumber()">인증 확인</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 <%--<%@ include file="/WEB-INF/views/comm/footer.jsp"%>--%>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-        crossorigin="anonymous"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    $(".que").click(function () {
-        $(this).next(".anw").stop().slideToggle(300);
-        $(this).toggleClass('on').siblings().removeClass('on');
-        $(this).next(".anw").siblings(".anw").slideUp(300); // 1개씩 펼치기
-    });
 
-    // 카드번호/유효기간 보기 버튼누르면 모달 쇼
-    $('.show-card-number-btn').click(function () {
-        $('#myModal').modal('show');
-    });
 
-    // 모달 내 인증요청 보내는 함수
-    function sendSmsRequest() {
-        // select 요소의 선택된 옵션 값을 가져옵니다.
-        var selectedPrefix = document.getElementById("phone-prefix").value;
-
-        // input 요소의 값을 가져옵니다.
-        var enteredNumber = document.getElementById("phone-input").value;
-
-        // 선택한 값과 입력한 값을 합칩니다.
-        var recipientPhoneNumber = selectedPrefix + enteredNumber;
-
-        const randomSixDigitNumber = generateRandomSixDigitNumber();
-
-        console.log(recipientPhoneNumber)
-        const requestData = {
-            recipientPhoneNumber: recipientPhoneNumber,
-            content: `[sms테스트] 인증번호 :` + randomSixDigitNumber, // 메시지 내용을 형식에 맞게 수정
-            randomNumber: randomSixDigitNumber
-        };
-
-        // 서버로 POST 요청을 보냅니다.
-        fetch('/user/sms', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(requestData)
-        })
-            .then(response => response.json())
-            .then(data => {
-                // 서버에서 받은 응답을 처리합니다.
-                console.log(data);
-                // 여기에서 원하는 동작을 수행할 수 있습니다.
-            })
-            .catch(error => {
-                // 오류가 발생한 경우 처리합니다.
-                console.error('Error sending SMS request:', error);
-                alert('인증번호 전송 중 오류가 발생했습니다.');
-            });
-    }
-
-    function sendAuthNumber() {
-        // 선택한 인증번호 값을 가져오기
-        var authNumber = $('input[aria-label="auth-number"]').val();
-        console.log(authNumber);
-
-        // AJAX 요청 설정
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/user/auth", true);
-        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-
-        // 요청 본문 데이터 설정
-        var data = JSON.stringify({ authNumber: authNumber });
-
-        // AJAX 요청 보내기
-        xhr.send(data);
-
-        // AJAX 요청이 완료되면 처리할 코드
-        xhr.onload = function () {
-            if (xhr.status === 200 && xhr.responseText === 'Success') {
-                // 모달을 닫습니다.
-                $('#myModal').modal('hide');
-
-                // 현재 클릭한 버튼을 포함하는 카드 아이템을 찾습니다.
-                var cardItem = $('.anw');
-
-                // 카드 번호와 유효기간을 나타내는 div 요소 및 숨겨진 div 요소를 찾습니다.
-                var cardNumberField = cardItem.find('.card-number-field');
-                var hiddenCardNumber = cardItem.find('.hidden-card-number');
-                var cardValidationField = cardItem.find('.card-validation-field');
-                var hiddenCardValidation = cardItem.find('.hidden-card-validation');
-
-                if (cardNumberField.is(':visible')) {
-                    // 카드 번호와 유효기간을 가려줍니다.
-                    cardNumberField.hide();
-                    hiddenCardNumber.show();
-                    cardValidationField.hide();
-                    hiddenCardValidation.show();
-                } else {
-                    // 카드 번호와 유효기간을 보여줍니다.
-                    cardNumberField.show();
-                    hiddenCardNumber.hide();
-                    cardValidationField.show();
-                    hiddenCardValidation.hide();
-                }
-
-                // 요청이 성공적으로 처리되었을 때 수행할 작업
-                alert("인증이 성공적으로 완료되었습니다.");
-            } else {
-                // 요청이 실패했을 때 수행할 작업
-                alert("인증에 실패했습니다. 다시 시도해주세요.");
-            }
-        };
-    }
-
-    function generateRandomSixDigitNumber() {
-        // 100000에서 999999 사이의 랜덤한 정수를 생성합니다.
-        const randomNumber = Math.floor(100000 + Math.random() * 900000);
-
-        // 생성된 숫자를 문자열로 변환하고 앞에 0을 추가합니다.
-        const sixDigitNumber = randomNumber.toString().padStart(6, '0');
-
-        return sixDigitNumber;
-    }
-    // 동의 모두선택 / 해제
-    const agreeChkAll = document.querySelector('input[name=agree_all]');
-    agreeChkAll.addEventListener('change', (e) => {
-        let agreeChk = document.querySelectorAll('input[name=agree]');
-        for(let i = 0; i < agreeChk.length; i++){
-            agreeChk[i].checked = e.target.checked;
+    function getBankNameByAccount(accNumber) {
+        if (accNumber.includes('1002')) {
+            return '우리은행';
+        } else if (accNumber.includes('110')) {
+            return '신한은행';
+        } else if (accNumber.includes('04')) {
+            return '국민은행';
+        } else {
+            return '기타';
         }
-    });
+    }
+
+    const accountData = JSON.parse(sessionStorage.getItem('accountData'));
+
+    function groupAccountsByBank() {
+        const grouped = {};
+        accountData.forEach(account => {
+            const bankName = getBankNameByAccount(account.accNumber);
+            if (!grouped[bankName]) {
+                grouped[bankName] = [];
+            }
+            grouped[bankName].push(account);
+        });
+        return grouped;
+    }
+
+    function displayAccounts() {
+        const accountContainer = document.getElementById('Accordion_wrap');
+        const groupedAccounts = groupAccountsByBank();
+
+        for (const bankName in groupedAccounts) {
+
+
+            // 은행 이름 표시
+            const bankDiv = document.createElement('div');
+            bankDiv.className = 'bank';
+            bankDiv.innerHTML = '<h3>' +'<img src="/img/bank/'+ bankName +'.png">' +' '+ bankName + '</h3>' ;
+            accountContainer.appendChild(bankDiv);
+
+            // 각 은행의 계좌 정보 표시
+            groupedAccounts[bankName].forEach(account => {
+                const accountDiv = document.createElement('div');
+                accountDiv.className = 'account';
+                accountDiv.style.display = "flex"; // flex 설정
+                accountDiv.style.justifyContent = "space-between"; // 왼쪽과 오른쪽으로 내용을 분리
+
+                const accountInfoDiv = document.createElement('div'); // 계좌 정보를 담는 컨테이너
+                accountInfoDiv.innerHTML =
+                    '<h5>' + account.accName + ' (' + account.accNickName + ')</h5>' +
+                    '<p>계좌 번호: ' + account.accNumber + '</p>';
+                    //'<p>계좌 상태: ' + account.accStatus + '</p>';
+
+                const balanceDiv = document.createElement('div'); // 잔액 정보를 담는 컨테이너
+                balanceDiv.innerHTML = '<p>잔액: ' + account.accBalance + '</p>';
+                balanceDiv.style.textAlign = "right"; // 잔액을 오른쪽으로 정렬
+                balanceDiv.style.marginRight = "150px";
+
+                // "조회" 버튼 추가
+                const checkButton = document.createElement('button');
+                checkButton.textContent = "조회";
+                checkButton.style.marginTop = "10px"; // 버튼 위치 조절을 위한 마진 추가
+
+                // 스타일 적용
+                checkButton.style.color = "white";
+                checkButton.style.backgroundColor = "#666666";
+                checkButton.style.borderRadius = "5px";
+                checkButton.style.border = "none";
+                checkButton.style.fontSize = "20px";
+                checkButton.style.width = "100px";
+
+
+                balanceDiv.appendChild(checkButton); // balanceDiv 내에 버튼 추가
+
+                accountDiv.appendChild(accountInfoDiv);
+                accountDiv.appendChild(balanceDiv);
+
+                accountContainer.appendChild(accountDiv);
+            });
+        }
+    }
+
+
+
+
+    // 페이지 로드 시 함수 실행
+    window.onload = displayAccounts;
+
 
 </script>
 

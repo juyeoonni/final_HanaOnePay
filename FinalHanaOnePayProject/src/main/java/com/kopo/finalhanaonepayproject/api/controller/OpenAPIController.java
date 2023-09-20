@@ -24,8 +24,7 @@ public class OpenAPIController {
 
     // 계좌 조회 요청
     @PostMapping("/api/account-data")
-    public String accountData(HttpSession session, HttpServletRequest request, @RequestBody Map<String, List<String>> accountData) {
-        List<String> selectedAccounts = accountData.get("accounts");
+    public String accountData(HttpSession session, HttpServletRequest request) {
 
         System.out.println("계좌조회 컨트롤러 들어옴");
         System.out.println("Session ID in OpenAPIController: " + request.getSession().getId());
@@ -38,15 +37,12 @@ public class OpenAPIController {
         }
 
         System.out.println("identityNumber: " + identityNumber);
-        System.out.println("Selected Cards: " + selectedAccounts.toString());
 
-        if (selectedAccounts == null || selectedAccounts.isEmpty()) {
-            System.out.println("카드 정보가 전달되지 않았습니다.");
-            return "errorCardInfoMissing";
-        }
-
-        return openAPIService.fetchAccountDataFromAPI(identityNumber, selectedAccounts);
+        // 계좌 조회에서 특정 기관을 선택하지 않기 때문에, 계좌 정보는 필요하지 않습니다.
+        // 따라서, `selectedAccounts` 변수와 관련된 처리를 제거하면 됩니다.
+        return openAPIService.fetchAccountDataFromAPI(identityNumber);
     }
+
 
 
     // 카드 조회 요청

@@ -1,17 +1,18 @@
 package com.kopo.cardserver.service;
 
 import com.kopo.cardserver.model.DAO.CardDAO;
+import com.kopo.cardserver.model.DTO.AccountDTO;
 import com.kopo.cardserver.model.DTO.CardDTO;
 import com.kopo.cardserver.model.DTO.PendingPaymentDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -21,6 +22,26 @@ public class CardService {
     @Autowired
     private CardDAO cardDAO;
 
+    // 고객 계좌 조회
+    // 고객의 모든 계좌 조회
+    public List<AccountDTO> getAllCustomerAccounts(String identityNumber) {
+        System.out.println("2");
+
+        List<String> allBanks = Arrays.asList("woori", "shinhan", "KB");
+        List<AccountDTO> resultList = new ArrayList<>();
+
+        for (String bank : allBanks) {
+            List<AccountDTO> accountList = cardDAO.getCustomerAccounts(identityNumber, bank);
+            resultList.addAll(accountList);
+            System.out.println("4");
+        }
+
+        return resultList;
+    }
+
+
+
+    // 고객 카드 조회
     public List<CardDTO> getCustomerCards(String identityNumber, List<String> selectedCards) {
         System.out.println("2");
         List<CardDTO> resultList = new ArrayList<>();

@@ -193,7 +193,7 @@
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
 <%--                    <li><a href="/api/linkedAccount" class="link-body-emphasis d-inline-flex text-decoration-none rounded">연동카드조회</a></li>--%>
                     <li><a href="/hanaOnePay/selectPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>
-                    <li><a href="/hanaOnePay/selectPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 계좌</a></li>
+                    <li><a onclick="fetchAccountData()" class="link-body-emphasis d-inline-flex text-decoration-none rounded" style="cursor: pointer;">간편결제 계좌</a></li>
                 </ul>
             </div>
         </li>
@@ -327,6 +327,31 @@
 
 <%@ include file="/WEB-INF/views/comm/footer.jsp"%>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+<script>
+    function fetchAccountData() {
+        fetch(`/api/account-data`, {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({"banks": ["woori", "shinhan", "KB"]})  //모든 은행의 계좌를 조회
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // 계좌 정보를 화면에 출력하는 코드
+                // 예: 계좌 정보를 테이블에 추가
+                sessionStorage.setItem('accountData', JSON.stringify(data));
+
+                // 계좌 조회가 성공적으로 완료되었으므로 해당 경로로 리디렉션
+                window.location.href = "/hanaOnePay/selectPayAccount";
+            })
+            .catch(error => {
+                console.error("계좌 정보 조회 중 오류 발생:", error);
+            });
+    }
+</script>
 
 </body>
 </html>

@@ -228,8 +228,8 @@
         }
 
         .accordion-item {
-            width: 400px;
-            height: 300px;
+            /*width: 400px;*/
+            /*height: 300px;*/
         }
 
         .transparentButton {
@@ -238,6 +238,133 @@
             border: none;
         }
 
+        .scrolled-down {
+            /* 여기에 요소가 스크롤될 때 적용할 스타일을 추가합니다. */
+            position: fixed;
+            top: 0;
+            left: 0;
+            /* 추가 스타일을 여기에 추가하세요. */
+        }
+
+        .scrolled-right {
+            /* 여기에 요소가 스크롤될 때 오른쪽으로 내려가는 스타일을 추가합니다. */
+            position: fixed;
+            top: 0;
+            right: 0;
+            /* 추가 스타일을 여기에 추가하세요. */
+        }
+
+
+
+        .payAgree {
+            font-size: 13px;
+            color: #959595;
+            margin-top: 3px;
+        }
+
+        .itemDesc {
+            font-size: 22px;
+            margin-left: 22px;
+            margin-top: 25px;
+        }
+
+        .selectPayCard {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0.1, 0, 0, 0.1);
+            padding: 20px;
+            margin-left: 20px;
+            margin-right: 20px;
+            border-radius: 8px;
+            background-color: #FFFFFF;
+        }
+
+        .payMsg {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .headerImg {
+            width: 40px;
+            height: 40px;
+        }
+
+        .headername {
+            font-size: 25px;
+            margin-left: 4px;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center; /* 수직 중앙 정렬을 위해 추가 */
+            justify-content: center; /* 수평 중앙 정렬 */
+            padding: 10px; /* 필요에 따라 패딩을 조절 */
+        }
+
+        .password-panel {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 25px 15px;
+            margin: 15px 0;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .password-dots {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .dot {
+            width: 20px;
+            height: 20px;
+            background-color: #e6e6e6;
+            border-radius: 50%;
+        }
+
+        .dot-filled {
+            background-color: #00857E;
+        }
+
+        .keypad {
+            display: grid;
+            gap: 10px;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .keypad-btn {
+            padding: 10px 0;
+            border: 2px solid #e6e6e6;
+            background-color: #ffffff;
+            font-size: 20px;
+            border-radius: 5px;
+            transition: background-color 0.2s;
+        }
+
+        .keypad-btn:active {
+            background-color: #f2f2f2;
+        }
+
+        .keypad-btn:disabled {
+            visibility: hidden;
+        }
+
+        .keypad-btn-delete {
+            background-color: #BCD9D3;
+            color: #FFFFFF;
+            border: none;
+        }
+
+        #confirmPayment {
+            background-color: #00857E;
+            border-color: #00857E;
+        }
+
+        #confirmPayment:hover {
+            background-color: #BCD9D3;
+            border-color: #BCD9D3;
+        }
 
 
     </style>
@@ -456,7 +583,7 @@
             </div>
 
             <div class="row g-3">
-                <div class="col-md-5 col-lg-4 order-md-last">
+                <div id="scrolling-element" class="col-md-5 col-lg-4 order-md-last">
                     <h4 class="d-flex justify-content-between align-items-center mb-3">
                         <span class="text-body-secondary"><font style="vertical-align: inherit;"><font
                                 style="vertical-align: inherit;">쇼핑 카트</font></font></span>
@@ -650,95 +777,48 @@
 
                         <hr class="my-4">
 
+                        <div class="hanaMoney">
+                            <h4 class="mb-3"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">하나머니</font></font>
+                            </h4>
+                        </div>
+
+                        <div>
+                            보유: 3000 머니
+                        </div>
+
+                        <div>
+                            사용: <input type="text" placeholder="0머니">
+                        </div>
+
+                        <hr class="my-4">
+
                         <h4 class="mb-3"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">결제수단</font></font>
                         </h4>
 
                         <div class="my-3">
+                            <!-- 계좌 간편결제 체크박스 -->
                             <div class="form-check">
-                                <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked=""
+                                <input id="accountPay" name="paymentMethod" type="radio" class="form-check-input"
                                        required="">
-                                <label class="form-check-label" for="credit"><font
-                                        style="vertical-align: inherit;"><font style="vertical-align: inherit;">하나머니
-                                    결제</font></font></label>
-                            </div>
-                            <div class="form-check">
-                                <input id="kakaoPay" name="paymentMethod" type="radio" class="form-check-input" required="">
-                                <label class="form-check-label" for="cash"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">계좌 간편결제</font></font></label>
+                                <label class="form-check-label" for="accountPay">계좌 간편결제</label>
                             </div>
 
-                            <div class="form-check">
-                                <input id="kakaoPay" name="paymentMethod" type="radio" class="form-check-input" required="">
-                                <label class="form-check-label" for="kakaoPay"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">카카오페이</font></font></label>
-                            </div>
-
-                            <div class="form-check">
-                                <input id="hanaOnePay" name="paymentMethod" type="radio" class="form-check-input">
-                                <label class="form-check-label" for="hanaOnePay">하나원페이</label>
-                            </div>
-
-
-                            <!-- 원페이를 위한 Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <img src="/img/hanaLogo.png" alt="하나원페이 로고" style="margin-right: 10px; width: 45px; height: 45px;">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel"  style="font-weight: bold;">하나원페이</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-<%--                                            모달 바디입니다--%>
-    <div class="card text-center">
-        <div class="card-header">
-            <ul class="nav nav-pills card-header-pills">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#" style="background-color: #00857E; color: white !important;">하나원페이</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">더휴결제</a>
-                </li>
-            </ul>
-        </div>
-        <div class="card-body">
-            <img src="/img/hanapayAppIcon.png"  style="margin-right: 10px; width: 250px; height: 130px;">
-            <p class="card-text">하나원페이 앱카드로 <br>쉽고 빠르게 결제하세요</p>
-            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#secondModal" style="border:none; width: 300px; background-color: #00857E; color: white !important;">결제하기</a>
-
-        </div>
-    </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-<%--                            두번째 모달입니다--%>
-                            <!-- Second Modal -->
-                            <div class="modal fade" id="secondModal" tabindex="-1" aria-labelledby="secondModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <img src="/img/hanaLogo.png" alt="하나원페이 로고" style="margin-right: 10px; width: 45px; height: 45px;">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel2"  style="font-weight: bold;">하나원페이</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body d-flex justify-content-center align-items-center flex-column">
-                                            휴대폰으로 스캔하면
-                                            결제 화면으로 이동합니다. <br>
-                                            <span style="color: #999;">스마트폰 카메라 및 모든 QR 스캐너로 가능</span><br>
-                                            <div class="createQR" style="border: 5px solid #00857E; border-radius:25px;">
-<%--                                                <img src="/api/generateQRCode" alt="QR Code" />--%>
-                                            </div>
-                                        </div>
-
-                                        <div class="modal-footer">
-                                            <button type="button" class="transparentButton" onclick="redirectToSuccessPage()">Go to Success Page</button>
-
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                            <!-- 아코디언 아이템 -->
+                            <div class="accordion" id="accountAccordion">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="accountHeader">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#accountCollapse" aria-expanded="false"
+                                                aria-controls="accountCollapse" disabled>
+                                            계좌 선택
+                                        </button>
+                                    </h2>
+                                    <div id="accountCollapse" class="accordion-collapse collapse"
+                                         aria-labelledby="accountHeader" data-bs-parent="#accountAccordion">
+                                        <div class="accordion-body">
+                                            <!-- 여기에 계좌 목록 및 선택 옵션을 추가하세요 -->
+                                            <!-- 스크립트 파일에서 처리합니다. -->
                                         </div>
                                     </div>
                                 </div>
@@ -746,26 +826,164 @@
                         </div>
 
 
-                            <br><br>
-                            <div>주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.</div>
-                            <hr class="my-4">
+                        <div class="form-check">
+                            <input id="kakaoPay" name="paymentMethod" type="radio" class="form-check-input" required="">
+                            <label class="form-check-label" for="kakaoPay"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">카카오페이</font></font></label>
+                        </div>
 
-                            <button class="w-100 btn btn-pay btn-lg" type="submit"><font
-                                    style="vertical-align: inherit;"><font style="vertical-align: inherit;">결제하기</font></font>
-                            </button>
-                    </form>
+                        <div class="form-check">
+                            <input id="hanaOnePay" name="paymentMethod" type="radio" class="form-check-input">
+                            <label class="form-check-label" for="hanaOnePay">하나원페이</label>
+                        </div>
+
+
+                        <!-- 원페이를 위한 Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <img src="/img/hanaLogo.png" alt="하나원페이 로고"
+                                             style="margin-right: 10px; width: 45px; height: 45px;">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-weight: bold;">
+                                            하나원페이</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <%--                                            모달 바디입니다--%>
+                                        <div class="card text-center">
+                                            <div class="card-header">
+                                                <ul class="nav nav-pills card-header-pills">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active" href="#"
+                                                           style="background-color: #00857E; color: white !important;">하나원페이</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="#">제휴결제</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="card-body">
+                                                <img src="/img/hanapayAppIcon.png"
+                                                     style="margin-right: 10px; width: 250px; height: 130px;">
+                                                <p class="card-text">하나원페이 앱카드로 <br>쉽고 빠르게 결제하세요</p>
+                                                <a href="#" class="btn btn-primary" data-bs-toggle="modal"
+                                                   data-bs-target="#secondModal"
+                                                   style="border:none; width: 300px; background-color: #00857E; color: white !important;">결제하기</a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <%--                            두번째 모달입니다--%>
+                        <!-- Second Modal -->
+                        <div class="modal fade" id="secondModal" tabindex="-1" aria-labelledby="secondModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <img src="/img/hanaLogo.png" alt="하나원페이 로고"
+                                             style="margin-right: 10px; width: 45px; height: 45px;">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel2" style="font-weight: bold;">
+                                            하나원페이</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body d-flex justify-content-center align-items-center flex-column">
+                                        휴대폰으로 스캔하면
+                                        결제 화면으로 이동합니다. <br>
+                                        <span style="color: #999;">스마트폰 카메라 및 모든 QR 스캐너로 가능</span><br>
+                                        <div class="createQR" style="border: 5px solid #00857E; border-radius:25px;">
+                                            <%--                                                <img src="/api/generateQRCode" alt="QR Code" />--%>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="transparentButton"
+                                                onclick="redirectToSuccessPage()">Go to Success Page
+                                        </button>
+
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+
+
+                <hr class="my-4">
+
+                <button class="w-100 btn btn-pay btn-lg" type="submit"><font
+                        style="vertical-align: inherit;"><font style="vertical-align: inherit;">결제하기</font></font>
+                </button>
+                <br>
+                <div style="margin-left: 270px;">주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.</div>
+                </form>
+            </div>
+
+            <!-- 결제비밀번호 모달시작 -->
+            <div class="modal modal-fullscreen" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="paymentModalLabel">결제 비밀번호 입력</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="password-panel text-center mb-3">
+                                <div class="password-dots">
+                                    <div class="dot"></div>
+                                    <div class="dot"></div>
+                                    <div class="dot"></div>
+                                    <div class="dot"></div>
+                                    <div class="dot"></div>
+                                    <div class="dot"></div>
+                                </div>
+                                <input type="password" class="form-control" id="paymentPassword" hidden="hidden" readonly>
+                            </div>
+                            <div class="keypad">
+                                <button class="btn btn-light keypad-btn" data-value="1">1</button>
+                                <button class="btn btn-light keypad-btn" data-value="2">2</button>
+                                <button class="btn btn-light keypad-btn" data-value="3">3</button>
+                                <button class="btn btn-light keypad-btn" data-value="4">4</button>
+                                <button class="btn btn-light keypad-btn" data-value="5">5</button>
+                                <button class="btn btn-light keypad-btn" data-value="6">6</button>
+                                <button class="btn btn-light keypad-btn" data-value="7">7</button>
+                                <button class="btn btn-light keypad-btn" data-value="8">8</button>
+                                <button class="btn btn-light keypad-btn" data-value="9">9</button>
+                                <button class="btn btn-danger keypad-btn-delete">C</button>
+                                <button class="btn btn-light keypad-btn" data-value="0">0</button>
+                                <button class="btn btn-light keypad-btn-delete">⬅</button>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                            <button type="button" class="btn btn-primary" id="confirmPayment">결제</button>
+
+                        </div>
+                    </div>
                 </div>
             </div>
+            <!-- 결제비밀번호 모달 끝 -->
         </main>
 
 
-    </div>
-    <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-            crossorigin="anonymous"></script>
 
+</div>
 
-    </body>
+</body>
 
 
 </main>
@@ -798,11 +1016,11 @@
         });
     });
 
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const hanaOnePayRadio = document.getElementById('hanaOnePay');
         const payButton = document.querySelector('.btn-pay');
 
-        payButton.addEventListener('click', function(event) {
+        payButton.addEventListener('click', function (event) {
             if (hanaOnePayRadio.checked) {
                 event.preventDefault(); // 폼의 기본 제출을 방지합니다.
                 const modal = new bootstrap.Modal(document.getElementById('exampleModal'));
@@ -826,14 +1044,14 @@
     //     });
     // });
 
-    $(document).ready(function(){
+    $(document).ready(function () {
         // 결제하기 버튼을 누르면 실행될 이벤트
-        $('[data-bs-target="#secondModal"]').on('click', function(){
+        $('[data-bs-target="#secondModal"]').on('click', function () {
             let productName = $(this).data('product-name'); // 버튼의 data-product-name 값 가져오기
             let encodedProductName = encodeURIComponent(productName); // productName 인코딩
 
             // QR 코드 생성 API 요청
-            $.get("/QR/api/generateQRCode", {productName: encodedProductName}, function(data, status){ // 인코딩된 productName을 매개변수로 추가
+            $.get("/QR/api/generateQRCode", {productName: encodedProductName}, function (data, status) { // 인코딩된 productName을 매개변수로 추가
                 if (status === "success") {
                     // base64로 인코딩된 응답 데이터를 이미지로 변환하여 .createQR div에 삽입
                     $('.createQR').html('<img src="data:image/png;base64,' + data + '" alt="QR Code"/>');
@@ -841,6 +1059,215 @@
                     console.error("Error generating QR code");
                 }
             });
+        });
+    });
+
+
+    // 페이지 스크롤 자스
+    // 페이지가 로드되면 스크롤 이벤트를 추가
+    document.addEventListener("DOMContentLoaded", function () {
+        // 요소와 해당 클래스를 가져옴
+        var element = document.getElementById("scrolling-element");
+
+        // 스크롤 이벤트 핸들러를 추가
+        window.addEventListener("scroll", function () {
+            // 스크롤 위치를 가져오기
+            var scrollPosition = window.scrollY;
+
+            // 원하는 스크롤 위치를 조절하고 해당 클래스를 추가 또는 제거
+            if (scrollPosition > 200) { // 원하는 스크롤 위치를 지정하세요.
+                element.classList.add("scrolled-right");
+            } else {
+                element.classList.remove("scrolled-right");
+            }
+        });
+    });
+
+    // // 페이지가 로드될 때 아코디언을 비활성화 상태로 설정합니다.
+    // document.addEventListener("DOMContentLoaded", function() {
+    //     var accountAccordion = new bootstrap.Collapse(document.getElementById("accountCollapse"), {
+    //         toggle: false
+    //     });
+    // });
+    //
+    // // "계좌 간편결제" 라디오 버튼 클릭 시 아코디언을 활성화합니다.
+    // document.getElementById("accountPay").addEventListener("click", function() {
+    //     var accountAccordion = new bootstrap.Collapse(document.getElementById("accountCollapse"), {
+    //         toggle: true
+    //     });
+    // });
+
+    var accountData = JSON.parse(sessionStorage.getItem("accountData"));
+
+    document.addEventListener("DOMContentLoaded", function () {
+        if (accountData) {
+            var accountList = document.querySelector("#accountCollapse .accordion-body");
+
+            accountData.forEach(function (account, index) {
+                var label = document.createElement("label");
+                var input = document.createElement("input");
+                var br = document.createElement("br");
+                var labelText = document.createTextNode(" " + account.accName + " : " + account.accNumber);
+
+                input.type = "radio";
+                input.name = "account";
+                input.value = "account" + (index + 1);
+
+                label.appendChild(input);
+                label.appendChild(labelText);
+
+                // 줄 바꿈 추가
+                accountList.appendChild(label);
+                accountList.appendChild(document.createElement("br"));
+            });
+        }
+        // "결제하기" 버튼 클릭 이벤트
+        document.querySelector(".btn-pay").addEventListener("click", function (event) {
+            event.preventDefault(); // 기본 동작 중지
+
+            // 체크된 계좌번호를 가져오는 함수 호출
+            var selectedAccountNumber = getCheckedAccountNumber();
+
+            if (selectedAccountNumber) {
+                // 모달 보이기
+                var paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
+                paymentModal.show();
+            } else {
+                alert("계좌를 선택해주세요.");
+            }
+        });
+
+
+    });
+
+    // "계좌 간편결제" 라디오 버튼 클릭 시 아코디언을 활성화합니다.
+    document.getElementById("accountPay").addEventListener("click", function () {
+        var accountAccordion = new bootstrap.Collapse(document.getElementById("accountCollapse"), {
+            toggle: true
+        });
+    });
+
+    // 체크된 계좌번호를 가져오는 함수
+    function getCheckedAccountNumber() {
+        var radios = document.getElementsByName("account");
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                // 체크된 계좌의 index를 사용하여 accountData에서 계좌번호를 가져옴
+                return accountData[i].accNumber;
+            }
+        }
+        return null; // 선택된 계좌 없음
+    }
+
+    //시작
+    $(document).ready(function() {
+
+        var passwordInput = $('#paymentPassword');
+        var dots = $('.dot');
+
+        function updateDots() {
+            var length = passwordInput.val().length;
+            dots.removeClass('dot-filled');
+            for (var i = 0; i < length; i++) {
+                $(dots[i]).addClass('dot-filled');
+            }
+        }
+
+        $('.keypad-btn').click(function() {
+            var value = $(this).data('value');
+            if (passwordInput.val().length < 6) {
+                passwordInput.val(passwordInput.val() + value);
+                updateDots();
+            }
+        });
+
+        $('.keypad-btn-clear').click(function() {
+            passwordInput.val('');
+            updateDots();
+        });
+
+        $('.keypad-btn-delete').click(function() {
+            passwordInput.val(passwordInput.val().slice(0, -1));
+            updateDots();
+        });
+
+        $("#payStart").click(function() {
+            var selectedAccount = getCheckedAccountNumber();
+            console.log(selectedAccount);
+
+            if (!selectedAccount) {
+                alert("계좌를 선택해주세요.");
+                return;
+            }
+
+            sessionStorage.setItem('selectedAccountNumber', selectedAccount);
+
+            // 상품 이름 및 가격 저장 (실제 구현 시, 페이지에서 해당 정보를 가져와야 합니다.)
+            sessionStorage.setItem('productName', 'SampleProductName');
+            sessionStorage.setItem('productPrice', '10000');
+
+            var paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
+            passwordInput.val('');
+            dots.removeClass('dot-filled');
+            paymentModal.show();
+        });
+
+        function getCheckedAccountNumber() {
+            var radios = document.querySelectorAll('input[name="account"]');
+            for (var i = 0; i < radios.length; i++) {
+                if (radios[i].checked) {
+                    return radios[i].value.split("account")[1]; // 'account1' -> '1' 반환
+                }
+            }
+            return null;
+        }
+
+        $("#confirmPayment").click(function() {
+            var enteredPassword = passwordInput.val();
+            var sessionPassword = '<%= session.getAttribute("payPw") %>';
+
+            var selectedAccountNumber = sessionStorage.getItem('selectedAccountNumber');
+            var productName = sessionStorage.getItem('productName');
+            var productPrice = sessionStorage.getItem('productPrice');
+            var identityNumber = "${sessionScope.identityNumber}";
+
+            // 콘솔에 정보 출력
+            console.log("선택한 계좌번호:", selectedAccountNumber);
+            console.log("상품명:", productName);
+            console.log("상품금액:", productPrice);
+            console.log("주민번호:", identityNumber);
+
+            if (enteredPassword === sessionPassword) {
+                var requestData = {
+                    accountNumber: selectedAccountNumber,
+                    productName: productName,
+                    productPrice: productPrice,
+                    identityNumber: identityNumber
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/api/payRequest/account",
+                    data: JSON.stringify(requestData),
+                    contentType: "application/json; charset=utf-8",
+                    success: function(response) {
+                        if (response === "Payment Approved") {
+                            window.location.href = "/hanaOnePay/payRequestSuccess";
+                        } else {
+                            alert('결제 실패: ' + response.message);
+                            window.location.href = "/hanaOnePay/payRequestFail";
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log("AJAX Error Status:", jqXHR.status);
+                        console.log("Text Status:", textStatus);
+                        console.log("Error Thrown:", errorThrown);
+                    }
+                });
+
+            } else {
+                alert("[하나원페이]\n비밀번호가 일치하지 않습니다. \n다시 입력해주세요.");
+            }
         });
     });
 

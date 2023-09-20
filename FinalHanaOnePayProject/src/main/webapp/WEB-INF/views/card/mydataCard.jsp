@@ -519,8 +519,8 @@
                     // "정보요청 성공" 텍스트 생성
                     const successText = document.createElement('p');
                     successText.textContent = '정보요청 성공';
-                    successText.style.color = '#00857E'; // 초록색으로 설정
-                    successText.style.fontWeight = 'bold'; // 볼드체로 설정
+                    successText.style.color = '#00857E';
+                    successText.style.fontWeight = 'bold';
 
 // 이미지 엘리먼트 생성
                     const successImage = document.createElement('img');
@@ -528,18 +528,18 @@
                     successImage.alt = 'Success Image'; // 이미지 대체 텍스트 설정
 
 // 이미지 크기 조절
-                    successImage.style.width = '30px'; // 가로 크기 조절
-                    successImage.style.height = '30px'; // 세로 크기 조절
+                    successImage.style.width = '30px';
+                    successImage.style.height = '30px';
 
 // Flexbox를 사용하여 요소를 가로로 정렬
                     div.style.display = 'flex';
-                    div.style.alignItems = 'center'; // 요소를 수직 중앙으로 정렬
-                    div.style.justifyContent = 'space-between'; // 요소 사이에 공간을 두고 정렬
+                    div.style.alignItems = 'center';
+                    div.style.justifyContent = 'space-between';
 
-// "정보요청 성공" 텍스트와 이미지가 div의 가장 오른쪽에 배치되도록 스타일을 설정합니다.
-                    successText.style.margin = '0'; // 텍스트의 여백을 초기화합니다.
-                    successImage.style.margin = '0'; // 이미지의 여백을 초기화합니다.
-                    successImage.style.marginLeft = 'auto'; // 이미지를 가장 오른쪽으로 이동합니다.
+// "정보요청 성공" 텍스트와 이미지가 div의 가장 오른쪽에 배치되도록 스타일을 설정
+                    successText.style.margin = '0';
+                    successImage.style.margin = '0';
+                    successImage.style.marginLeft = 'auto';
 
 // div 엘리먼트에 텍스트와 이미지 추가
                     div.appendChild(successImage);
@@ -585,7 +585,6 @@
         const phoneNumber = phoneNumberInput.value.replace(/\D/g, ''); // 숫자 이외의 문자 제거
 
         // 실제로 SMS를 전송하는 코드를 여기에 추가
-        // 이 예제에서는 단순히 전화번호를 콘솔에 출력하는 것으로 대체합니다.
         console.log(`SMS를 전송합니다. 전화번호: ${phoneNumber}`);
     });
 
@@ -611,7 +610,7 @@
 
         const requestData = {
             recipientPhoneNumber: '01032649073',
-            content: `[하나원페이] 하나원페이 사용을 위해 인증번호 5235를 입력하세요.` // 메시지 내용을 형식에 맞게 수정
+            content: `[하나원페이] 하나원페이 사용을 위해 인증번호 5235를 입력하세요.`
         };
 
         // 서버로 POST 요청을 보냅니다.

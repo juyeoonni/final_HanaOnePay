@@ -158,21 +158,9 @@ public class HanaOnePayController {
     }
 
     @GetMapping("/hanaOnePay/selectPayAccount")
-    public ModelAndView selectPayAccount() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("hanaOnePay/selectPayAccount");
-
-        try {
-            List<HanaOnePayCardDTO> allCards = hanaOnePayService.getAllCards();
-            modelAndView.addObject("allCards", allCards);
-
-            System.out.println("페이카드 조회 성공!");
-        } catch (Exception e) {
-            // 예외 처리 로직
-            e.printStackTrace();
-        }
-
-        return modelAndView;
+    public String selectPayAccount() {
+       return "hanaOnePay/selectPayAccount";
     }
+
 
 }

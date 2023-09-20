@@ -157,12 +157,12 @@
                                     </div>
                                     <!-- Product price-->
                                     <span class="text-muted text-decoration-line-through">329,000원</span>
-                                    319,000
+                                    319,000원
                                 </div>
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="./shopItem">카트담기</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="./shopItem1">카트담기</a></div>
                             </div>
                         </div>
                     </div>
@@ -266,7 +266,7 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">에듀플레이어 블루투스 헤드셋 ECH22 PRO</h5>
+                                    <h5 class="fw-bolder">Cocod'or Signature Diffuser 200ml</h5>
                                     <!-- Product reviews-->
                                     <div class="d-flex justify-content-center small text-warning mb-2">
                                         <div class="bi-star-fill"></div>
@@ -276,13 +276,13 @@
                                         <div class="bi-star-fill"></div>
                                     </div>
                                     <!-- Product price-->
-                                    <span class="text-muted text-decoration-line-through">$20.00</span>
-                                    $18.00
+                                    <span class="text-muted text-decoration-line-through">29,900</span>
+                                    19,500원
                                 </div>
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">카트담기</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="./shopItem2">카트담기</a></div>
                             </div>
                         </div>
                     </div>

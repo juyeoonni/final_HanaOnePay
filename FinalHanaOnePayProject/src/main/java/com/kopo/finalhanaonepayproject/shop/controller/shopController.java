@@ -31,9 +31,14 @@ public class ShopController {
         return "shop/shopMain";
     }
 
-    @GetMapping("/shop/shopItem")
-    public String shopItem() {
-        return "shop/shopItem";
+    @GetMapping("/shop/shopItem1")
+    public String shopItem1() {
+        return "shop/shopItem1";
+    }
+
+    @GetMapping("/shop/shopItem2")
+    public String shopItem2() {
+        return "shop/shopItem2";
     }
 
     //    세션에서 고객 주민번호 받아서 고객 주민번호를 기반으로 고객이 갖고 있는 페이카드 조회

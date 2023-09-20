@@ -31,17 +31,29 @@ public class OpenAPIService {
     }
 
     // 계좌조회 서비스
-    public String fetchAccountDataFromAPI(String identityNumber, List<String> selectedAccounts) {
+    public String fetchAccountDataFromAPI(String identityNumber) {
+        System.out.println("서비스까지 들어오는거 확인");
+
         Map<String, Object> body = new HashMap<>();
         body.put("identityNumber", identityNumber);
-        body.put("selectedAccounts", selectedAccounts);
 
-        // ... [기타 코드는 동일]
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
 
-        ResponseEntity<String> response = restTemplate.postForEntity("http://[OPENAPI_SERVER_URL]/api/account-data", entity, String.class);
+        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, headers);
 
-        // ... [응답 처리 코드]
+        ResponseEntity<String> response = restTemplate.postForEntity("http://localhost:8082/api/account-data", entity, String.class);
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            logger.info("Received Response: {}", response.getBody());
+            return response.getBody();
+        } else {
+            logger.error("Failed to fetch account data. Status code: {}", response.getStatusCode());
+            return null;
+        }
     }
+
+
 
 
 

@@ -1,6 +1,7 @@
 package com.kopo.cardserver.model.DAO;
 
 
+import com.kopo.cardserver.model.DTO.AccountDTO;
 import com.kopo.cardserver.model.DTO.CardDTO;
 import com.kopo.cardserver.model.DTO.PendingPaymentDTO;
 import org.apache.ibatis.annotations.Mapper;
@@ -12,6 +13,8 @@ import java.util.List;
 
 @Mapper
 public interface CardDAO {
+
+    List<AccountDTO> getCustomerAccounts(String identityNumber, String tableCode);
     List<CardDTO> getCustomerCards(String identityNumber, String tableCode);
 
     // 결제를 위한 카드 유효성 검사 메서드

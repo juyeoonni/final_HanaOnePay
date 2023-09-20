@@ -291,6 +291,19 @@
             font-size: 17px;
         }
 
+        .show-card-benefit {
+            margin-left: 50px;
+            color: white;
+            background-color:#666666 ;
+            border-radius: 5px;
+            border: none;
+            font-size: 17px;
+            padding: 2.5px;
+            text-decoration: none; /* 기본 링크 밑줄 제거 */
+        }
+
+
+
         .addPayCard{
             margin: 0 auto;
             margin-top: 30px;
@@ -446,9 +459,8 @@
                 <button class="show-card-number-btn">
                     카드번호/유효기간 보기
                 </button>
-                <button class="show-card-number-btn">
-                    혜택보기
-                </button>
+                <a href="https://www.shinhancard.com/pconts/html/card/apply/check/1188313_2206.html" class="show-card-benefit">혜택보기</a>
+
             </div>
         </c:forEach>
 
