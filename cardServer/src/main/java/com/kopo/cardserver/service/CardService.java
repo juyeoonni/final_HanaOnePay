@@ -1,6 +1,7 @@
 package com.kopo.cardserver.service;
 
 import com.kopo.cardserver.model.DAO.CardDAO;
+import com.kopo.cardserver.model.DTO.AccPaymentLogDTO;
 import com.kopo.cardserver.model.DTO.AccountDTO;
 import com.kopo.cardserver.model.DTO.CardDTO;
 import com.kopo.cardserver.model.DTO.PendingPaymentDTO;
@@ -69,6 +70,44 @@ public class CardService {
         return resultList;
     }
 
+    // 간편 결제 계좌
+    public String processAccountPayment(String accountNumber, String identityNumber, BigDecimal productPrice) {
+        // table 변수 값 설정
+        String table = determineTableByAccountNumber(accountNumber);
+
+        // 잔액 조회
+        BigDecimal balance = cardDAO.getAccountBalanceByAccountNumber(accountNumber, table);
+
+        if (balance.compareTo(productPrice) >= 0) {
+            // 결제 금액만큼 잔액에서 차감
+            cardDAO.updateAccountBalanceByAccountNumber(accountNumber, productPrice.negate(), table);
+
+            // 거래 내역 생성 및 저장
+            AccPaymentLogDTO paymentLog = new AccPaymentLogDTO();
+            paymentLog.setAccNumber(accountNumber);
+            paymentLog.setPayAmount(productPrice);
+
+            cardDAO.insertAccPaymentLog(paymentLog, table);
+
+            return "Payment Approved";
+        } else {
+            return "Insufficient Balance";
+        }
+    }
+
+    public String determineTableByAccountNumber(String accNumber) {
+        if (accNumber.startsWith("1002")) {
+            return "woori";
+        } else if (accNumber.startsWith("110")) {
+            return "shinhan";
+        } else if (accNumber.startsWith("04")) {
+            return "kb";
+        } else {
+            throw new IllegalArgumentException("Invalid account number");
+        }
+    }
+
+    // 간편 결제 카드
     public String processPayment(String cardNumber, String cardCode, String identityNumber, BigDecimal productPrice) {
         String tableCode = determineTableCode(cardCode);
         String cardType = cardDAO.getCardTypeByCardNumberAndIdentityNumber(cardNumber, identityNumber, tableCode);
@@ -81,6 +120,11 @@ public class CardService {
                 BigDecimal balance = cardDAO.getAccountBalanceByCardNumber(cardNumber, tableCode);
 
                 if (balance.compareTo(productPrice) >= 0) {
+                    // 계좌에서 금액 차감
+                    cardDAO.updateAccountBalanceByCardNumber(cardNumber, tableCode, productPrice);
+
+                    // 체크카드 거래 내역 생성 및 저장
+                    insertCardPaymentLog(cardNumber, productPrice, tableCode);
                     return "Payment Approved";
                 } else {
                     return "Insufficient Balance";
@@ -97,11 +141,15 @@ public class CardService {
                 BigDecimal limit = cardDAO.getCreditCardLimitByCardNumberAndIdentityNumber(cardNumber, identityNumber, tableCode);
 
                 if (limit.compareTo(productPrice) >= 0) {
+
                     cardDAO.updateCreditCardLimitByCardNumberAndIdentityNumber(cardNumber, identityNumber, tableCode, productPrice);
 
                     // 결제 승인 후 미결제 금액 관리 테이블에 해당 금액을 기록하는 로직
                     String withdrawalDate = LocalDate.now().plusMonths(1).withDayOfMonth(13).toString(); // 다음 달 13일로 설정.
                     cardDAO.insertPendingPayment(cardNumber, productPrice, withdrawalDate, "Pending", tableCode);
+
+                    // 신용카드 거래 내역 생성 및 저장
+                    insertCardPaymentLog(cardNumber, productPrice, tableCode);
 
                     return "Payment Approved";
                 } else {
@@ -114,6 +162,11 @@ public class CardService {
         else {
             return "Invalid Card Type";
         }
+    }
+
+
+    private void insertCardPaymentLog(String cardNumber, BigDecimal payAmount, String tableCode) {
+        cardDAO.insertCardPaymentLog(cardNumber, payAmount, tableCode);
     }
 
     private String determineTableCode(String cardCode) {
@@ -148,4 +201,5 @@ public class CardService {
             }
         }
     }
+
 }

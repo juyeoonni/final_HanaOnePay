@@ -88,7 +88,7 @@ public class OpenAPIController {
 //        return openAPIService.executePayment(identityNumber, activeCard, productName, productPrice);
 //    }
 
-    // 결제 승인 요청
+    // 카드 결제 승인 요청
     @PostMapping("/api/payRequest")
     public ResponseEntity<String> executePayment(HttpSession session, HttpServletRequest request, @RequestBody Map<String, String> paymentData) {
         String activeCard = paymentData.get("activeCard");
@@ -101,6 +101,25 @@ public class OpenAPIController {
         System.out.println("결제카드정보: " + paymentData.get("activeCard"));
 
         String response = openAPIService.executePayment(identityNumber, activeCard, activeCardCode, productName, productPrice);
+
+        if (response != null) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Payment Failed", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    // 계좌 결제 승인 요청"/api/payRequest/account"
+    @PostMapping("/api/payRequest/account")
+    public ResponseEntity<String> executeAccountPayment(HttpSession session, HttpServletRequest request, @RequestBody Map<String, String> paymentData) {
+        String accountNumber = paymentData.get("accountNumber");
+        String productName = paymentData.get("productName");
+        String productPrice = paymentData.get("productPrice");
+        String identityNumber = paymentData.get("identityNumber");
+
+        System.out.println("계좌 결제 컨트롤러 들어옴");
+
+        String response = openAPIService.executeAccountPayment(identityNumber, accountNumber, productName, productPrice);
 
         if (response != null) {
             return new ResponseEntity<>(response, HttpStatus.OK);

@@ -1,6 +1,7 @@
 package com.kopo.cardserver.model.DAO;
 
 
+import com.kopo.cardserver.model.DTO.AccPaymentLogDTO;
 import com.kopo.cardserver.model.DTO.AccountDTO;
 import com.kopo.cardserver.model.DTO.CardDTO;
 import com.kopo.cardserver.model.DTO.PendingPaymentDTO;
@@ -39,6 +40,24 @@ public interface CardDAO {
 
     //  payStatus를 업데이트하는 메서드
     void updatePayStatusToApproval(@Param("tableCode") String tableCode, @Param("pendingId") String pendingId);
+
+    // 계좌 결제 (계좌번호에 대한 잔액 조회)
+    BigDecimal getAccountBalanceByAccountNumber(@Param("accountNumber") String accountNumber, @Param("table") String table);
+
+    // 계좌 결제 (계좌 결제 후 잔액 차감)
+    void updateAccountBalanceByAccountNumber(@Param("accountNumber") String accountNumber, @Param("amount") BigDecimal amount, @Param("table") String table);
+
+    // 계좌 결제 인서트 (결제 후 거래내역 인서트)
+    //void insertAccPaymentLog(AccPaymentLogDTO accPaymentLog, String table);
+    void insertAccPaymentLog(@Param("accountNumber") AccPaymentLogDTO accPaymentLog, @Param("table") String table);
+
+    // 카드 결제 인서트
+    void insertCardPaymentLog(@Param("cardNumber") String cardNumber,
+                              @Param("payAmount") BigDecimal payAmount,
+                              @Param("tableCode") String tableCode);
+
+
+
 
 }
 

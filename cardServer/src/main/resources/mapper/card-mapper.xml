@@ -101,6 +101,40 @@
         WHERE pendingId = #{pendingId}
     </update>
 
+    <!-- 계좌의 잔액을 조회 -->
+    <select id="getAccountBalanceByAccountNumber" resultType="BigDecimal">
+        SELECT accBalance
+        FROM ${table}_account
+        WHERE accNumber = #{accountNumber}
+    </select>
+
+    <!-- 결제 시 계좌 잔액 마이너스 업데이트 -->
+    <update id="updateAccountBalanceByAccountNumber">
+        UPDATE ${table}_account
+        SET accbalance = accbalance - #{amount}
+        WHERE accNumber = #{accountNumber}
+    </update>
+
+    <!-- 계좌 거래내역에 인서트 -->
+    <insert id="insertAccPaymentLog" parameterType="com.kopo.cardserver.model.DTO.AccPaymentLogDTO">
+        INSERT INTO ${table}_acc_payment_log
+            (payId, accNumber, payAmount)
+        VALUES
+            (payment_log_seq.NEXTVAL, #{accountNumber.accNumber}, #{accountNumber.payAmount})
+    </insert>
+
+    <!-- 카드 거래내역에 인서트 -->
+    <insert id="insertCardPaymentLog">
+        INSERT INTO ${tableCode}_card_payment_log
+            (payId, cardNumber, payAmount)
+        VALUES
+            (payment_log_seq.NEXTVAL, #{cardNumber}, #{payAmount})
+    </insert>
+
+
+
+
+
 
 </mapper>
 

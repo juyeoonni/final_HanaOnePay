@@ -53,13 +53,7 @@ public class OpenAPIService {
         }
     }
 
-
-
-
-
-
-
-
+    // 카드 조회 서비스
     public String fetchCardDataFromAPI(String identityNumber, List<String> selectedCards) {
         System.out.println("서비스까지 들어오는거 확인");
 
@@ -89,9 +83,8 @@ public class OpenAPIService {
         }
     }
 
+    // 간편 카드 결제 서비스
     public String executePayment(String identityNumber, String activeCard, String activeCardCode, String productName, String productPrice) {
-        // 위의 값을 사용하여 외부 서버로 결제 요청을 보낼 수 있습니다.
-        // 예제 코드는 이전에 작성한 fetchCardDataFromAPI를 기반으로 작성되었습니다.
 
         Map<String, Object> body = new HashMap<>();
         body.put("identityNumber", identityNumber);
@@ -117,4 +110,33 @@ public class OpenAPIService {
             return null;
         }
     }
+
+    // 간편 계좌 결제 서비스
+    public String executeAccountPayment(String identityNumber,  String accountNumber, String productName, String productPrice) {
+
+        Map<String, Object> body = new HashMap<>();
+        body.put("identityNumber", identityNumber);
+        body.put("accountNumber", accountNumber);
+        body.put("productName", productName);
+        body.put("productPrice", productPrice);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, headers);
+
+        System.out.println("계좌 결제 서비스까지 들어오는거 확인");
+
+        ResponseEntity<String> response = restTemplate.postForEntity("http://localhost:8082/api/payRequest/account", entity, String.class);
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            logger.info("Account Payment Result: {}", response.getBody());
+            return response.getBody();
+        } else {
+            logger.error("Failed to execute payment. Status code: {}", response.getStatusCode());
+            return null;
+        }
+    }
+
+
 }

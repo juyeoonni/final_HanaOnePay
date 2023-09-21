@@ -89,5 +89,23 @@ public class CardCompanyAPIService {
         }
     }
 
+    public String sendAccountPaymentRequestToCardCompany(String accountNumber, String productName, String productPrice, String identityNumber) {
+        URI uri = URI.create("http://localhost:8081/api/payRequest/account");
+
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("accountNumber", accountNumber);
+        payload.put("productName", productName);
+        payload.put("productPrice", productPrice);
+        payload.put("identityNumber", identityNumber);
+
+        ResponseEntity<String> response = restTemplate.postForEntity(uri, payload, String.class);
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            logger.info("Account Payment processed: {}", response.getBody());
+            return response.getBody();
+        } else {
+            logger.error("Failed to process  Account payment. Status code: {}", response.getStatusCode());
+            return null;
+        }
+    }
 }
-//저장테스트

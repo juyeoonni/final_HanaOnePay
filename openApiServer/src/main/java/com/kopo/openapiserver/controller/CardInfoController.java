@@ -97,4 +97,26 @@ public class CardInfoController {
         }
     }
 
+    // 계좌 결제 요청
+    @PostMapping("/api/payRequest/account")
+    public ResponseEntity<String> executeAccountPayment(@RequestBody Map<String, Object> paymentData) {
+        try {
+            String accountNumber = (String) paymentData.get("accountNumber");
+            String productName = (String) paymentData.get("productName");
+            String productPrice = (String) paymentData.get("productPrice");
+            String identityNumber = (String) paymentData.get("identityNumber");
+
+            String response = cardCompanyAPIService.sendAccountPaymentRequestToCardCompany(accountNumber, productName, productPrice, identityNumber);
+
+            if (response != null) {
+                return new ResponseEntity<>(response, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("Payment Failed (account)", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        } catch (Exception e) {
+            logger.error("Failed to execute payment (account)", e);
+            return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

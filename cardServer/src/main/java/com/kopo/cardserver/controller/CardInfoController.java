@@ -54,6 +54,17 @@ public class CardInfoController {
         return ResponseEntity.ok(result);
     }
 
+    @PostMapping("/payRequest/account")
+    public ResponseEntity<String> processAccountPayment(@RequestBody Map<String, Object> requestData) {
+        String accountNumber = (String) requestData.get("accountNumber");
+        BigDecimal productPrice = new BigDecimal((String) requestData.get("productPrice"));
+        String identityNumber = (String) requestData.get("identityNumber");
+
+        String result = cardService.processAccountPayment(accountNumber, identityNumber, productPrice);
+
+        return ResponseEntity.ok(result);
+    }
+
 
 
 }

@@ -991,11 +991,9 @@
 <!-- 푸터위치 -->
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-        crossorigin="anonymous"></script>
 
 <script>
+
     function redirectToSuccessPage() {
         window.location.href = "/hanaOnePay/payRequestSuccess";
     }
@@ -1090,12 +1088,12 @@
     //     });
     // });
     //
-    // // "계좌 간편결제" 라디오 버튼 클릭 시 아코디언을 활성화합니다.
-    // document.getElementById("accountPay").addEventListener("click", function() {
-    //     var accountAccordion = new bootstrap.Collapse(document.getElementById("accountCollapse"), {
-    //         toggle: true
-    //     });
-    // });
+    // "계좌 간편결제" 라디오 버튼 클릭 시 아코디언을 활성화합니다.
+    document.getElementById("accountPay").addEventListener("click", function() {
+        var accountAccordion = new bootstrap.Collapse(document.getElementById("accountCollapse"), {
+            toggle: true
+        });
+    });
 
     var accountData = JSON.parse(sessionStorage.getItem("accountData"));
 
@@ -1133,31 +1131,37 @@
                 var paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
                 paymentModal.show();
             } else {
-                alert("계좌를 선택해주세요.");
+                // alert("계좌를 선택해주세요.");
             }
         });
 
 
     });
 
-    // "계좌 간편결제" 라디오 버튼 클릭 시 아코디언을 활성화합니다.
-    document.getElementById("accountPay").addEventListener("click", function () {
-        var accountAccordion = new bootstrap.Collapse(document.getElementById("accountCollapse"), {
-            toggle: true
-        });
-    });
+    // "계좌 간편결제" 라디오 버튼 클릭 시 아코디언 활성화
+    // document.getElementById("accountPay").addEventListener("click", function () {
+    //     var accountAccordion = new bootstrap.Collapse(document.getElementById("accountCollapse"), {
+    //         toggle: true
+    //     });
+    // });
 
     // 체크된 계좌번호를 가져오는 함수
     function getCheckedAccountNumber() {
         var radios = document.getElementsByName("account");
         for (var i = 0; i < radios.length; i++) {
             if (radios[i].checked) {
-                // 체크된 계좌의 index를 사용하여 accountData에서 계좌번호를 가져옴
-                return accountData[i].accNumber;
+                var selectedAccountNumber = accountData[i].accNumber;
+                sessionStorage.setItem('selectedAccountNumber', selectedAccountNumber);
+                return selectedAccountNumber;
             }
         }
         return null; // 선택된 계좌 없음
     }
+
+    // 계좌 선택시 저장
+    document.querySelectorAll('input[name="account"]').forEach(function(radio) {
+        radio.addEventListener('change', getCheckedAccountNumber);
+    });
 
     //시작
     $(document).ready(function() {
@@ -1191,6 +1195,8 @@
             updateDots();
         });
 
+
+
         $("#payStart").click(function() {
             var selectedAccount = getCheckedAccountNumber();
             console.log(selectedAccount);
@@ -1201,10 +1207,8 @@
             }
 
             sessionStorage.setItem('selectedAccountNumber', selectedAccount);
-
-            // 상품 이름 및 가격 저장 (실제 구현 시, 페이지에서 해당 정보를 가져와야 합니다.)
-            sessionStorage.setItem('productName', 'SampleProductName');
-            sessionStorage.setItem('productPrice', '10000');
+            sessionStorage.setItem('productName', productName);
+            sessionStorage.setItem('productPrice', productPrice);
 
             var paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
             passwordInput.val('');
@@ -1227,8 +1231,8 @@
             var sessionPassword = '<%= session.getAttribute("payPw") %>';
 
             var selectedAccountNumber = sessionStorage.getItem('selectedAccountNumber');
-            var productName = sessionStorage.getItem('productName');
-            var productPrice = sessionStorage.getItem('productPrice');
+            var productName = "<%= session.getAttribute("productName") %>";
+            var productPrice = '<%= session.getAttribute("productPrice") %>';
             var identityNumber = "${sessionScope.identityNumber}";
 
             // 콘솔에 정보 출력
@@ -1236,6 +1240,7 @@
             console.log("상품명:", productName);
             console.log("상품금액:", productPrice);
             console.log("주민번호:", identityNumber);
+            //console.log("세션패스워드:", sessionPassword);
 
             if (enteredPassword === sessionPassword) {
                 var requestData = {
@@ -1274,6 +1279,8 @@
 
 
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
 
 </body>
 </html>

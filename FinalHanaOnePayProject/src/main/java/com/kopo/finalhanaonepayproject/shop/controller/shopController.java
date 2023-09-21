@@ -64,6 +64,12 @@ public class ShopController {
         List<HanaOnePayCardDTO> hanaOnePayCardList = shopService.selectINOfPayCard(identityNumber);
 
         session.setAttribute("productDataJSON", productDataJSON);
+        session.setAttribute("productName", productName);
+        session.setAttribute("productPrice", productPrice);
+
+        System.out.println("productName: " + productName);
+        System.out.println("productPrice: " + productPrice);
+
         System.out.println("Setting productDataJSON in session: " + productDataJSON);
 
         ModelAndView mav = new ModelAndView();
