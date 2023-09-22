@@ -598,8 +598,8 @@
                                 <small class="text-body-secondary"><font style="vertical-align: inherit;"><font
                                         style="vertical-align: inherit;">간단한 설명</font></font></small>
                             </div>
-                            <span class="text-body-secondary"><font style="vertical-align: inherit;"><font
-                                    style="vertical-align: inherit;">${productPrice}</font></font></span>
+                            <span id="productPriceDisplay" class="text-body-secondary"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">${productPrice}</font></font></span>원
                         </li>
                         <li class="list-group-item d-flex justify-content-between lh-sm">
                             <div>
@@ -784,12 +784,15 @@
                         </div>
 
                         <div>
-                            보유: 3000 머니
+                            보유: <span id="hanaMoneyDisplay">${hanaMoney}</span> 원
                         </div>
 
                         <div>
-                            사용: <input type="text" placeholder="0머니">
+                            사용:
+                            <input type="text" id="usePointInput" placeholder="0원" oninput="calculateNewAmounts()">
+                            <button type="button" onclick="useAllPoints()">전액 사용</button>
                         </div>
+
 
                         <hr class="my-4">
 
@@ -825,18 +828,16 @@
                             </div>
                         </div>
 
+                        <div class="form-check">
+                            <input id="hanaOnePay" name="paymentMethod" type="radio" class="form-check-input">
+                            <label class="form-check-label" for="hanaOnePay">카드 간편결제</label>
+                        </div>
 
                         <div class="form-check">
                             <input id="kakaoPay" name="paymentMethod" type="radio" class="form-check-input" required="">
                             <label class="form-check-label" for="kakaoPay"><font style="vertical-align: inherit;"><font
                                     style="vertical-align: inherit;">카카오페이</font></font></label>
                         </div>
-
-                        <div class="form-check">
-                            <input id="hanaOnePay" name="paymentMethod" type="radio" class="form-check-input">
-                            <label class="form-check-label" for="hanaOnePay">하나원페이</label>
-                        </div>
-
 
                         <!-- 원페이를 위한 Modal -->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -994,6 +995,31 @@
 
 <script>
 
+    function useAllPoints() {
+        const initialHanaMoney = parseInt("${hanaMoney}");
+        document.getElementById('usePointInput').value = initialHanaMoney;
+        calculateNewAmounts();
+    }
+
+    function calculateNewAmounts() {
+        const initialHanaMoney = parseInt("${hanaMoney}");
+        const initialProductPrice = parseInt("${productPrice}");
+
+        let usePoint = parseInt(document.getElementById('usePointInput').value) || 0;
+
+        if (usePoint > initialHanaMoney) {
+            usePoint = initialHanaMoney;
+            document.getElementById('usePointInput').value = usePoint;
+        }
+
+        const newHanaMoney = initialHanaMoney - usePoint;
+        const newProductPrice = initialProductPrice - usePoint;
+
+        document.getElementById('hanaMoneyDisplay').innerText = newHanaMoney;
+        document.getElementById('productPriceDisplay').innerText = newProductPrice;
+    }
+
+
     function redirectToSuccessPage() {
         window.location.href = "/hanaOnePay/payRequestSuccess";
     }
@@ -1042,9 +1068,11 @@
     //     });
     // });
 
+    // 0922
     $(document).ready(function () {
         // 결제하기 버튼을 누르면 실행될 이벤트
         $('[data-bs-target="#secondModal"]').on('click', function () {
+
             let productName = $(this).data('product-name'); // 버튼의 data-product-name 값 가져오기
             let encodedProductName = encodeURIComponent(productName); // productName 인코딩
 
@@ -1060,6 +1088,27 @@
         });
     });
 
+    // $(document).ready(function () {
+    //     $('[data-bs-target="#secondModal"]').on('click', function () {
+    //         let productName = $(this).data('product-name');
+    //
+    //         // data attribute에서 상품의 원래 가격 가져오기
+    //         let originalProductPrice = parseInt($('#productInfo').data('product-price'));
+    //
+    //         let usedPoint = parseInt($('#usePointInput').val()) || 0;
+    //         let finalProductPrice = originalProductPrice - usedPoint;
+    //
+    //         let encodedProductName = encodeURIComponent(productName);
+    //
+    //         $.get("/QR/api/generateQRCode", {productName: encodedProductName, price: finalProductPrice}, function (data, status) {
+    //             if (status === "success") {
+    //                 $('.createQR').html('<img src="data:image/png;base64,' + data + '" alt="QR Code"/>');
+    //             } else {
+    //                 console.error("Error generating QR code");
+    //             }
+    //         });
+    //     });
+    // });
 
     // 페이지 스크롤 자스
     // 페이지가 로드되면 스크롤 이벤트를 추가
@@ -1208,7 +1257,7 @@
 
             sessionStorage.setItem('selectedAccountNumber', selectedAccount);
             sessionStorage.setItem('productName', productName);
-            sessionStorage.setItem('productPrice', productPrice);
+            // sessionStorage.setItem('productPrice', productPrice);
 
             var paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
             passwordInput.val('');
@@ -1232,7 +1281,8 @@
 
             var selectedAccountNumber = sessionStorage.getItem('selectedAccountNumber');
             var productName = "<%= session.getAttribute("productName") %>";
-            var productPrice = '<%= session.getAttribute("productPrice") %>';
+            var productPrice = document.getElementById("productPriceDisplay").textContent;
+            sessionStorage.setItem('productPrice', document.getElementById("productPriceDisplay").textContent);
             var identityNumber = "${sessionScope.identityNumber}";
 
             // 콘솔에 정보 출력
@@ -1240,7 +1290,6 @@
             console.log("상품명:", productName);
             console.log("상품금액:", productPrice);
             console.log("주민번호:", identityNumber);
-            //console.log("세션패스워드:", sessionPassword);
 
             if (enteredPassword === sessionPassword) {
                 var requestData = {
@@ -1260,6 +1309,7 @@
                             window.location.href = "/hanaOnePay/payRequestSuccess";
                         } else {
                             alert('결제 실패: ' + response.message);
+                            // sessionStorage.setItem('productPrice', document.getElementById("productPriceDisplay").textContent);
                             window.location.href = "/hanaOnePay/payRequestFail";
                         }
                     },

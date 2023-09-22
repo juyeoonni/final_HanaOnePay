@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayCardDTO;
 import com.kopo.finalhanaonepayproject.hanaOnePay.service.HanaOnePayService;
+import com.kopo.finalhanaonepayproject.shop.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,7 @@ public class HanaOnePayController {
 
     @Autowired
     private HanaOnePayService hanaOnePayService;
+    private ShopService shopService;
 
     @PostMapping ("/hanaOnePay/payCardList")
     public String payCardList(HttpServletRequest request) {
@@ -128,6 +130,10 @@ public class HanaOnePayController {
     public String payRequestFail(Model model) {
         // 현재 시간을 가져옵니다.
         String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+
+        String identityNumber = ...; // 적절한 방법으로 값을 가져옵니다.
+        int usedPoint = ...; // 적절한 방법으로 값을 가져옵니다.
+        shopService.deductHanaMoney(identityNumber, usedPoint);
 
         // 현재 시간을 모델에 추가하여 JSP 페이지로 전달합니다.
         model.addAttribute("time", currentTime);

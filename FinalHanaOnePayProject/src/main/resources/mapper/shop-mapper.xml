@@ -13,4 +13,18 @@
         where identityNumber = #{identityNumber}
     </select>
 
+    <!--    하나머니 조회-->
+    <select id="selectHanaMoney" resultType="int">
+        SELECT hanaMoney
+        FROM hanaMoney
+        WHERE identityNumber = #{identityNumber}
+    </select>
+
+    <!--    하나머니 차감 후 업데이트  -->
+    <update id="updateHanaMoney">
+        UPDATE hanaMoney
+        SET hanaMoney = hanaMoney - #{usedPoint}
+        WHERE identityNumber = #{identityNumber}
+    </update>
+
 </mapper>

@@ -111,7 +111,7 @@
     <!-- 결제 시 계좌 잔액 마이너스 업데이트 -->
     <update id="updateAccountBalanceByAccountNumber">
         UPDATE ${table}_account
-        SET accbalance = accbalance - #{amount}
+        SET accbalance = accbalance + #{amount}
         WHERE accNumber = #{accountNumber}
     </update>
 

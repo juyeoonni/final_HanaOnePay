@@ -17,4 +17,13 @@ public class ShopService {
         return shopDAO.selectINOfPayCard(identityNumber);
     }
 
+    public int selectHanaMoney(String identityNumber) {
+        return shopDAO.selectHanaMoney(identityNumber);
+    }
+
+    public void deductHanaMoney(String identityNumber, int usedPoint) {
+        shopDAO.updateHanaMoney(identityNumber, usedPoint);
+    }
+
+
 }

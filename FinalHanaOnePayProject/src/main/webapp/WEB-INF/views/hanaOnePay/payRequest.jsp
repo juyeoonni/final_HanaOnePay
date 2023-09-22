@@ -361,8 +361,6 @@
             // 사용자가 입력한 비밀번호
             var enteredPassword = passwordInput.val();
 
-            // 세션에 저장된 비밀번호. 예제로 세션에서 가져왔다고 가정합니다.
-            // 실제로는 서버에서 보안 처리된 방식으로 가져와야 합니다.
             var sessionPassword = '<%= session.getAttribute("payPw") %>';
 
             // 세션 스토리지에서 activeCardNumber 가져오기
@@ -370,6 +368,9 @@
             var storedActiveCardCode = sessionStorage.getItem('activeCardCode');  // 세션 스토리지에서 activeCardCode 가져오기
             var productName = "${sessionScope.productName}";
             var productPrice = "${sessionScope.productPrice}";
+            var hanaMoney = "${sessionScope.hanaMoney}";
+            sessionStorage.setItem("productPrice", productPrice);
+            sessionStorage.setItem("hanaMoney", hanaMoney);
             var identityNumber = "${sessionScope.identityNumber}";
 
             // 세션 스토리지의 값을 콘솔에 출력

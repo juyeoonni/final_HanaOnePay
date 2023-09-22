@@ -4,8 +4,10 @@ import com.kopo.finalhanaonepayproject.customer.service.CustomerService;
 import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayCardDTO;
 import com.kopo.finalhanaonepayproject.shop.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -72,15 +74,34 @@ public class ShopController {
 
         System.out.println("Setting productDataJSON in session: " + productDataJSON);
 
+        int hanaMoney = shopService.selectHanaMoney(identityNumber);
+        System.out.println("User's Hana Money: " + hanaMoney);
+
         ModelAndView mav = new ModelAndView();
         mav.addObject("hanaOnePayCardList", hanaOnePayCardList);
         mav.addObject("productName", productName);
         mav.addObject("productPrice", productPrice);
+        mav.addObject("hanaMoney", hanaMoney);
         mav.addObject("productDataJSON", productDataJSON);
         mav.setViewName("shop/buyItem");
 
         return mav;
     }
+
+    @PostMapping("/shop/deductPoint")
+    public ResponseEntity<String> deductPoint(@RequestParam("identityNumber") String identityNumber,
+                                              @RequestParam("usedPoint") int usedPoint) {
+        shopService.deductHanaMoney(identityNumber, usedPoint);
+        return ResponseEntity.ok("HanaMoney deducted successfully!");
+    }
+
+    @PostMapping("/shop/calculateFinalPrice")
+    public ResponseEntity<Integer> calculateFinalPrice(@RequestParam("productPrice") int productPrice,
+                                                       @RequestParam("usedPoint") int usedPoint) {
+        int finalPrice = productPrice - usedPoint;
+        return ResponseEntity.ok(finalPrice);
+    }
+
 
 
 
