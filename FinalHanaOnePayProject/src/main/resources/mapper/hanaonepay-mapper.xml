@@ -5,6 +5,15 @@
 
 
 <mapper namespace="com.kopo.finalhanaonepayproject.hanaOnePay.model.DAO.HanaOnePayDAO">
+
+    <select id="getHanaCardDetailsByIdentity" resultType="com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayhanaCardDTO">
+        SELECT c.*
+        FROM hana_card c
+                 JOIN hana_account a ON c.accNumber = a.accNumber
+                 JOIN customer_hana cu ON a.identityNumber = cu.identityNumber
+        WHERE cu.identityNumber = #{identityNumber}
+    </select>
+
     <select id="getRegisteredCards" parameterType="string" resultType="com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayCardDTO">
         SELECT * FROM payCard WHERE identityNumber = #{identityNumber}
     </select>

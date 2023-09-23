@@ -192,7 +192,8 @@
             <div class="collapse show" id="home-collapse">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
 <%--                    <li><a href="/api/linkedAccount" class="link-body-emphasis d-inline-flex text-decoration-none rounded">연동카드조회</a></li>--%>
-                    <li><a href="/hanaOnePay/selectPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>
+<%--                    <li><a href="/hanaOnePay/selectPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>--%>
+                    <li><a href="/hanaOnePay/selectHanaPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>
                     <li><a onclick="fetchAccountData()" class="link-body-emphasis d-inline-flex text-decoration-none rounded" style="cursor: pointer;">간편결제 계좌</a></li>
                 </ul>
             </div>
@@ -345,7 +346,7 @@
                 sessionStorage.setItem('accountData', JSON.stringify(data));
 
                 // 계좌 조회가 성공적으로 완료되었으므로 해당 경로로 리디렉션
-                window.location.href = "/hanaOnePay/selectPayAccount";
+                window.location.href = "/hanaOnePay/selectHanaPayAccount";
             })
             .catch(error => {
                 console.error("계좌 정보 조회 중 오류 발생:", error);

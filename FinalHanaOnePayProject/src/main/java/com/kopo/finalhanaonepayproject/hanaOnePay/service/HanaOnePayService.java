@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kopo.finalhanaonepayproject.hanaOnePay.model.DAO.HanaOnePayDAO;
 import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayCardDTO;
+import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayhanaCardDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,11 @@ public class HanaOnePayService {
 
     @Autowired
     private HanaOnePayDAO hanaOnePayDAO;
+
+    // 하나카드 조회
+    public List<HanaOnePayCardDTO> getHanaCardDetailsByIdentity(String identityNumber) {
+        return hanaOnePayDAO.getHanaCardDetailsByIdentity(identityNumber);
+    }
 
     // 페이카드 등록전 이미 등록된 카드를 확인하기 위해 페이카드 select
     public List<HanaOnePayCardDTO> getRegisteredCards(String identityNumber) {

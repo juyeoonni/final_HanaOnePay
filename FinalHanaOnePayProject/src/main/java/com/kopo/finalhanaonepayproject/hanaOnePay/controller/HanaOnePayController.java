@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayCardDTO;
+import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayhanaCardDTO;
 import com.kopo.finalhanaonepayproject.hanaOnePay.service.HanaOnePayService;
 import com.kopo.finalhanaonepayproject.shop.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -131,9 +132,9 @@ public class HanaOnePayController {
         // 현재 시간을 가져옵니다.
         String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
-        String identityNumber = ...; // 적절한 방법으로 값을 가져옵니다.
-        int usedPoint = ...; // 적절한 방법으로 값을 가져옵니다.
-        shopService.deductHanaMoney(identityNumber, usedPoint);
+//        String identityNumber = ...; // 적절한 방법으로 값을 가져옵니다.
+//        int usedPoint = ...; // 적절한 방법으로 값을 가져옵니다.
+//        shopService.deductHanaMoney(identityNumber, usedPoint);
 
         // 현재 시간을 모델에 추가하여 JSP 페이지로 전달합니다.
         model.addAttribute("time", currentTime);
@@ -163,9 +164,27 @@ public class HanaOnePayController {
         return modelAndView;
     }
 
+    @GetMapping("/hanaOnePay/selectHanaPayCard")
+    public ModelAndView selectHanaPayCard(HttpSession session) {
+        ModelAndView mav = new ModelAndView("hanaOnePay/selectHanaPayCard");
+
+        String identityNumber = (String) session.getAttribute("identityNumber");
+
+        List<HanaOnePayCardDTO> cardInfos = hanaOnePayService.getHanaCardDetailsByIdentity(identityNumber);
+        System.out.println("하나카드 조회 성공!");
+        mav.addObject("cardInfos", cardInfos);
+
+        return mav;
+    }
+
     @GetMapping("/hanaOnePay/selectPayAccount")
     public String selectPayAccount() {
-       return "hanaOnePay/selectPayAccount";
+        return "hanaOnePay/selectPayAccount";
+    }
+
+    @GetMapping("/hanaOnePay/selectHanaPayAccount")
+    public String selectPayselectHanaPayAccountAccount() {
+        return "hanaOnePay/selectHanaPayAccount";
     }
 
 

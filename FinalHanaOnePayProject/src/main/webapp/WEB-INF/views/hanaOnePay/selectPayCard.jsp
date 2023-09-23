@@ -197,7 +197,7 @@
         }
 
 
-        .payCatdImg {
+        .payCardImg {
             margin-left: 20px;
             margin-right: 20px;
             order: -1;
@@ -333,6 +333,30 @@
             text-decoration: none; /* 링크 텍스트의 밑줄 제거 */
         }
 
+        .select-org {
+            display: inline-block;
+            padding: 10px 20px;
+            color: white;
+            background-color: #404B57;
+            border: none;
+            border-radius: 5px 5px 0 0;
+            text-decoration: none;
+            font-size: 16px;
+            margin-right: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .select-org:hover {
+            background-color: #e1e2e6;
+            color: #77727e;
+        }
+
+        .custom-line {
+            border: none;
+            height: 2px; /* 선의 높이 */
+            background-color: #404B57; /* 선의 색상 */
+            margin-top: 0px; /* 원하는 대로 상단 여백 조정 */
+        }
 
 
     </style>
@@ -427,7 +451,13 @@
     <div id="Accordion_wrap" class="AccAccordion">
         <h2>간편결제 등록 카드 조회</h2>
 
+        <br>
+        <a href="/hanaOnePay/selectHanaPayCard" class="select-org">하나카드</a>
+        <a href="/hanaOnePay/selectPayCard" class="select-org">다른기관</a>
+        <hr class="custom-line">
+
         <c:forEach items="${allCards}" var="card">
+
             <div class="que">
                  <span class="cardCode">
             <c:choose>
@@ -444,7 +474,7 @@
             </div>
 
             <div class="anw">
-                <img src="/img/${card.cardName}.png" class="d-block payCatdImg" alt="${card.cardName}">
+                <img src="/img/${card.cardName}.png" class="d-block payCardImg" alt="${card.cardName}">
                 <div class="cardInfo">
                     <span>${card.cardName}</span>
 
