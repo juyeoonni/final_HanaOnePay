@@ -1,10 +1,7 @@
 package com.kopo.cardserver.service;
 
 import com.kopo.cardserver.model.DAO.CardDAO;
-import com.kopo.cardserver.model.DTO.AccPaymentLogDTO;
-import com.kopo.cardserver.model.DTO.AccountDTO;
-import com.kopo.cardserver.model.DTO.CardDTO;
-import com.kopo.cardserver.model.DTO.PendingPaymentDTO;
+import com.kopo.cardserver.model.DTO.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +36,7 @@ public class CardService {
 
         return resultList;
     }
+
 
 
 
@@ -200,6 +198,116 @@ public class CardService {
                 // 잔액이 부족한 경우에 대한 처리 (예: 알림 전송 등)
             }
         }
+    }
+
+    public List<ChartDTO> getCardListforChart(int month) {
+        // 전체 리스트에 일단 우리카드 리스트 넣음 (업종 비교)
+        List<ChartDTO> allResults = cardDAO.getWooriCardPaymentsByMonth(month);
+
+        logger.info("Woori Card Results: {}", allResults);
+
+        List<ChartDTO> wooriAccountResults = cardDAO.getWooriAccountPaymentsByMonth(month);
+        logger.info("Woori Account Results: {}", wooriAccountResults);
+
+        List<ChartDTO> toBeAdded = new ArrayList<>();
+
+        for(ChartDTO wooriAcc : wooriAccountResults ){
+            boolean matched = false;
+            for(ChartDTO allResult : allResults){
+                if(wooriAcc.getBusinessCode().equals(allResult.getBusinessCode())){
+                    allResult.setPayAmount(allResult.getPayAmount() + wooriAcc.getPayAmount());
+                    matched = true;
+                    break;
+                }
+            }
+            if (!matched) {
+                toBeAdded.add(wooriAcc);
+            }
+        }
+        allResults.addAll(toBeAdded);
+        //tobeAdded를 초기화
+        toBeAdded.clear();
+        
+        logger.info("Allresult Account Results 우리카드, 우리계좌까지: {}", allResults);
+
+        List<ChartDTO> shinhanCardResults = cardDAO.getShinhanCardPaymentsByMonth(month);
+
+        for(ChartDTO shinhanCard : shinhanCardResults ){
+            boolean matched = false;
+            for(ChartDTO allResult : allResults){
+                if(shinhanCard.getBusinessCode().equals(allResult.getBusinessCode())){
+                    allResult.setPayAmount(allResult.getPayAmount() + shinhanCard.getPayAmount());
+                    matched = true;
+                    break;
+                }
+            }
+            if (!matched) {
+                toBeAdded.add(shinhanCard);
+            }
+        }
+
+
+        allResults.addAll(toBeAdded);
+
+        logger.info("Allresult Account Results 우리카드, 우리계좌, 신한카드까지: {}", allResults);
+
+        // 신한계좌로의 결제 정보를 월별로 가져옴.
+        List<ChartDTO> shinhanAccountResults = cardDAO.getShinhanAccountPaymentsByMonth(month);
+        for(ChartDTO shinhanAcc : shinhanAccountResults ){
+            boolean matched = false;
+            for(ChartDTO allResult : allResults){
+                if(shinhanAcc.getBusinessCode().equals(allResult.getBusinessCode())){
+                    allResult.setPayAmount(allResult.getPayAmount() + shinhanAcc.getPayAmount());
+                    matched = true;
+                    break;
+                }
+            }
+            if (!matched) {
+                toBeAdded.add(shinhanAcc);
+            }
+        }
+        allResults.addAll(toBeAdded);
+        toBeAdded.clear();
+        logger.info("Allresult Account Results 우리카드, 우리계좌, 신한카드, 신한계좌까지: {}", allResults);
+
+        // 국민카드로의 결제 정보를 월별로 가져옴.
+        List<ChartDTO> kbCardResults = cardDAO.getKBCardPaymentsByMonth(month);
+        for(ChartDTO kbCard : kbCardResults ){
+            boolean matched = false;
+            for(ChartDTO allResult : allResults){
+                if(kbCard.getBusinessCode().equals(allResult.getBusinessCode())){
+                    allResult.setPayAmount(allResult.getPayAmount() + kbCard.getPayAmount());
+                    matched = true;
+                    break;
+                }
+            }
+            if (!matched) {
+                toBeAdded.add(kbCard);
+            }
+        }
+        allResults.addAll(toBeAdded);
+        toBeAdded.clear();
+        logger.info("Allresult Account Results 우리카드, 우리계좌, 신한카드, 신한계좌, 국민카드까지: {}", allResults);
+
+        // 국민계좌로의 결제 정보를 월별로 가져옴.
+        List<ChartDTO> kbAccountResults = cardDAO.getKBAccountPaymentsByMonth(month);
+        for(ChartDTO kbAcc : kbAccountResults ){
+            boolean matched = false;
+            for(ChartDTO allResult : allResults){
+                if(kbAcc.getBusinessCode().equals(allResult.getBusinessCode())){
+                    allResult.setPayAmount(allResult.getPayAmount() + kbAcc.getPayAmount());
+                    matched = true;
+                    break;
+                }
+            }
+            if (!matched) {
+                toBeAdded.add(kbAcc);
+            }
+        }
+        allResults.addAll(toBeAdded);
+        logger.info("Allresult Account Results 우리카드, 우리계좌, 신한카드, 신한계좌, 국민카드, 국민계좌까지: {}", allResults);
+
+        return allResults;
     }
 
 }

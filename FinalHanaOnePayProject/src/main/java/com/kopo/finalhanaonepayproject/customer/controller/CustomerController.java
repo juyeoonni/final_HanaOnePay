@@ -3,6 +3,10 @@ package com.kopo.finalhanaonepayproject.customer.controller;
 
 import com.kopo.finalhanaonepayproject.customer.model.DTO.CustomerDTO;
 import com.kopo.finalhanaonepayproject.customer.service.CustomerService;
+import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayCardDTO;
+import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayTransDTO;
+import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayhanaCardDTO;
+import com.kopo.finalhanaonepayproject.hanaOnePay.service.HanaOnePayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,11 +19,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/customer")
 public class CustomerController {
     private final CustomerService customerService;
+
+    @Autowired
+    private HanaOnePayService hanaOnePayService;
 
     @Autowired
     public CustomerController(CustomerService customerService) {
@@ -65,10 +73,57 @@ public class CustomerController {
         return "customer/customer_myHana";
     }
 
+    // 대표 하나카드 설정
     @GetMapping("/customer_myHanaPage")
-    public String customer_myHanaPage() {
-        return "customer/customer_myHanaPage";
+    public ModelAndView customer_myHanaPage(HttpSession session) {
+        ModelAndView mav = new ModelAndView("customer/customer_myHanaPage");
+
+        String identityNumber = (String) session.getAttribute("identityNumber");
+
+        List<HanaOnePayhanaCardDTO> cardInfos = hanaOnePayService.getMainHanaCardByIdentity(identityNumber);
+        //주민번호로 고객의 카드정보를 가져온다.
+        System.out.println("하나 대표 카드 조회 성공!");
+
+        Map<String, List<HanaOnePayTransDTO>> thisMonthTransData = hanaOnePayService.getThisMonthTransData(identityNumber);
+        System.out.println("이번달 하나카드 거래내역 조회 성공!");
+
+        // Map을 생성하여 카드 번호별 이번달 사용 금액을 저장합니다.
+        Map<String, Integer> thisMonthTotalAmounts = new HashMap<>();
+
+        for (String cardNumber : thisMonthTransData.keySet()) {
+            int thisMonthTotalAmount = hanaOnePayService.getThisMonthTotalAmount(cardNumber);
+            thisMonthTotalAmounts.put(cardNumber, thisMonthTotalAmount);
+        }
+
+
+        mav.addObject("cardInfos", cardInfos);
+        mav.addObject("thisMonthTransData", thisMonthTransData);
+        mav.addObject("thisMonthTotalAmounts", thisMonthTotalAmounts);
+
+        return mav;
     }
+
+    @GetMapping("/getCardTransData")
+    @ResponseBody
+    public List<HanaOnePayTransDTO> getCardTransData(@RequestParam("cardNumber") String cardNumber) {
+        return hanaOnePayService.getThisMonthTransDataByCard(cardNumber);
+    }
+
+
+    @GetMapping("/getTransactionsByCardNumber")
+    public ResponseEntity<List<HanaOnePayTransDTO>> getTransactionsByCardNumber(@RequestParam String cardNumber) {
+        List<HanaOnePayTransDTO> transactions = hanaOnePayService.getTransactionsByCardNumber(cardNumber);
+        return ResponseEntity.ok(transactions);
+    }
+
+
+
+    @GetMapping("/api/card-transactions/{cardNumber}")
+    public ResponseEntity<List<HanaOnePayTransDTO>> getCardTransactions(@PathVariable String cardNumber) {
+        List<HanaOnePayTransDTO> transactions = hanaOnePayService.getTransactionsByCardNumber(cardNumber);
+        return ResponseEntity.ok(transactions);
+    }
+
 
 
     @PostMapping("/login-logic")

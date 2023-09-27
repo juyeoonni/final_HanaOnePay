@@ -119,4 +119,22 @@ public class CardInfoController {
         }
     }
 
+    @GetMapping("/api/monthly-payment-data")
+    public ResponseEntity<String> fetchMonthlyPaymentData(@RequestParam("month") int month) {
+        try {
+            String monthlyPaymentData = cardCompanyAPIService.fetchMonthlyPaymentData(month);
+
+            if (monthlyPaymentData != null) {
+                return new ResponseEntity<>(monthlyPaymentData, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("No Data Found", HttpStatus.NOT_FOUND);
+            }
+
+        } catch (Exception e) {
+            logger.error("Failed to fetch monthly payment data", e);
+            return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 }

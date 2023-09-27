@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.kopo.cardserver.model.DAO.CardDAO">
+
+    <resultMap id="chartDTOResultMap" type="com.kopo.cardserver.model.DTO.ChartDTO">
+        <result column="businessCode" property="businessCode" />
+        <result column="payAmount" property="payAmount" />
+    </resultMap>
+
+    <!--    우리카드리스트-->
+    <select id="getWooriCardPaymentsByMonth" resultType="com.kopo.cardserver.model.DTO.ChartDTO">
+        SELECT businessCode, SUM(payAmount) as payAmount
+        FROM woori_card_payment_log
+        WHERE TO_NUMBER(TO_CHAR(TO_DATE(payDate, 'YYYY-MM-DD HH24:MI:SS'), 'MM')) = #{month}
+        GROUP BY businessCode
+    </select>
+
+    <!--    우리계좌리스트-->
+    <select id="getWooriAccountPaymentsByMonth" resultType="com.kopo.cardserver.model.DTO.ChartDTO">
+        SELECT businessCode, SUM(payAmount) as payAmount
+        FROM woori_acc_payment_log
+        WHERE TO_NUMBER(TO_CHAR(TO_DATE(payDate, 'YYYY-MM-DD HH24:MI:SS'), 'MM')) = #{month}
+        GROUP BY businessCode
+    </select>
+
+    <!--    신한카드리스트-->
+    <select id="getShinhanCardPaymentsByMonth" resultType="com.kopo.cardserver.model.DTO.ChartDTO">
+        SELECT businessCode, SUM(payAmount) as payAmount
+        FROM shinhan_card_payment_log
+        WHERE TO_NUMBER(TO_CHAR(TO_DATE(payDate, 'YYYY-MM-DD HH24:MI:SS'), 'MM')) = #{month}
+        GROUP BY businessCode
+    </select>
+
+    <!--    신한계좌리스트-->
+    <select id="getShinhanAccountPaymentsByMonth" resultType="com.kopo.cardserver.model.DTO.ChartDTO">
+        SELECT businessCode, SUM(payAmount) as payAmount
+        FROM shinhan_acc_payment_log
+        WHERE TO_NUMBER(TO_CHAR(TO_DATE(payDate, 'YYYY-MM-DD HH24:MI:SS'), 'MM')) = #{month}
+        GROUP BY businessCode
+    </select>
+
+
+    <!--    국민카드리스트-->
+    <select id="getKBCardPaymentsByMonth" resultType="com.kopo.cardserver.model.DTO.ChartDTO">
+        SELECT businessCode, SUM(payAmount) as payAmount
+        FROM kb_card_payment_log
+        WHERE TO_NUMBER(TO_CHAR(TO_DATE(payDate, 'YYYY-MM-DD HH24:MI:SS'), 'MM')) = #{month}
+        GROUP BY businessCode
+    </select>
+
+    <!--    국민계좌리스트-->
+    <select id="getKBAccountPaymentsByMonth" resultType="com.kopo.cardserver.model.DTO.ChartDTO">
+        SELECT businessCode, SUM(payAmount) as payAmount
+        FROM kb_acc_payment_log
+        WHERE TO_NUMBER(TO_CHAR(TO_DATE(payDate, 'YYYY-MM-DD HH24:MI:SS'), 'MM')) = #{month}
+        GROUP BY businessCode
+    </select>
+
+</mapper>
+
+

@@ -138,5 +138,26 @@ public class OpenAPIService {
         }
     }
 
+    public String fetchPaymentsByMonthFromAPI(String month) {
+        System.out.println("월별 결제 내역 조회 서비스까지 들어오는거 확인");
+
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8082/api/monthly-payment-data")
+//                .queryParam("identityNumber", identityNumber)
+                .queryParam("month", month);
+
+        URI uri = builder.build().encode().toUri();
+
+        ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            logger.info("Received Response for Monthly Payments: {}", response.getBody());
+            return response.getBody();
+        } else {
+            logger.error("Failed to fetch monthly payments. Status code: {}", response.getStatusCode());
+            return null;
+        }
+    }
+
+
 
 }

@@ -13,7 +13,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>joinHanaOnePay</title>
+    <title>마이하나페이지</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="/css/card.css">
@@ -172,10 +172,43 @@
             border-radius: 10px;
             border: none;
         }
+
+        .mainCard{
+            display: flex; /* flex를 사용하여 아이템들을 가로로 나열합니다 */
+            align-items: center; /* 아이템들을 수직 중앙에 배치합니다 */
+            text-align: left;
+        }
+
+        .payCardImg{
+            margin-left: 20px;
+            margin-right: 20px;
+            order: -1;
+            width: 200px;
+            height: 150px;
+        }
+
+        .custom-flex-container {
+            flex-direction: column;
+        }
+
+        .payTag{
+            margin-top: 10px;
+            align-items: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 15px;  /* 둥근 모서리 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* 그림자 효과 */
+            width: 60%;
+
+        }
+
+
+
     </style>
 
 </head>
 <body>
+
 <%@ include file="/WEB-INF/views/comm/header.jsp"%>
 
 <div class="flex-container">
@@ -204,10 +237,10 @@
             </button>
             <div class="collapse" id="dashboard-collapse">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">월사용금액 조회</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">명세서 조회</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>
+                    <li><a href="/api/payments-by-month?month=09"  class="link-body-emphasis d-inline-flex text-decoration-none rounded">내 지출 조회</a></li>
+<%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">명세서 조회</a></li>--%>
+<%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>--%>
+<%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>--%>
                 </ul>
             </div>
         </li>
@@ -217,10 +250,10 @@
             </button>
             <div class="collapse" id="orders-collapse">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Processed</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Shipped</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Returned</a></li>
+                    <li><a href="/api/payments-by-month?month=09" class="link-body-emphasis d-inline-flex text-decoration-none rounded">소비레포트</a></li>
+<%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Processed</a></li>--%>
+<%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Shipped</a></li>--%>
+<%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Returned</a></li>--%>
                 </ul>
             </div>
         </li>
@@ -255,32 +288,62 @@
 
         <br>
 
+        <c:set var="card1" value="${cardInfos[0]}" />
+        <c:set var="card2" value="${cardInfos[1]}" />
+
+        <c:set var="cardPayLog1" value="${thisMonthTransData[card1.cardNumber]}" />
+        <c:set var="cardPayLog2" value="${thisMonthTransData[card2.cardNumber]}" />
         <div class="flex-container">
         <div class="myCardInfo">
-            카드 <br><br>
-            <div style="text-align: left; margin-left: 20px">
-                이번달 사용금액 <br>
-                52,8000원  <br><br>
-
-                한국폴리텍 광명융합기술교육원 학생증 체크카드
+            <div class=" fs-3 mx-auto mt-2">대표카드</div>
+            <div class="dropdown" style="margin-left: 300px;">
+                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    카드 선택
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item"  onclick="showCardInfo(0)">${card1.cardName}</a></li>
+                    <li><a class="dropdown-item" onclick="showCardInfo(1)">${card2.cardName}</a></li>
+                </ul>
             </div>
+            <div class="mainCard mt-4" style="font-size: 20px" id="cardInfoDiv">
+                <img src="/img/${cardInfos[0].cardName}.png" class="d-block payCardImg" id="cardImage" alt="${cardInfos[0].cardName}">
+
+                <br>
+
+                <div class="flex-container custom-flex-container">
+                    <div id="cardName" style="color: #666666; font-size: 18px;">${card1.cardName}</div>
+                    <span id="monthlyUsageTitle" style="color: #666666; font-size: 18px;">이번달 사용금액</span> <br>
+                    <span id="monthlyUsage" style="font-size: 25px">${thisMonthTotalAmounts[card1.cardNumber]}원 ></span>
+
+                </div>
+
+            </div>
+
+
 
             <br><br>
-            <div class="btn-group" role="group" aria-label="Basic outlined example" style="border: none">
-                <button type="button" class="btn btn-outline-primary" style="background-color: #00857E; color: white;">카드관리</button>
-                <button type="button" class="btn btn-outline-primary" style="background-color: #00857E; color: white;">받은혜택</button>
-                <button type="button" class="btn btn-outline-primary" style="background-color: #00857E; color: white;">한도조회</button>
-            </div>
+<%--            <div class="btn-group" role="group" aria-label="Basic outlined example" style="border: none">--%>
+<%--                <button type="button" class="btn btn-outline-primary" style="background-color: #00857E; color: white;">카드관리</button>--%>
+<%--                <button type="button" class="btn btn-outline-primary" style="background-color: #00857E; color: white;">받은혜택</button>--%>
+<%--                <button type="button" class="btn btn-outline-primary" style="background-color: #00857E; color: white;">한도조회</button>--%>
+<%--            </div>--%>
 
 
         </div>
 
-        <div class="monthlyCardInfo">
-            다가오는 지출 일정<br>
-            <div class="withdralDate" style="text-align: left; font-size: 13px">
-                [하나] 다가오는 카드값 <br>
-                [우리] 다가오는 카드값
+        <div class="monthlyCardInfo fs-3 mx-auto">
+            <p class="mt-2">마이 소비 태그</p>
+            <div class="withdralDate" style="text-align: left; margin-left: 5%; margin-top: 3%; margin-bottom: 3%; font-size: 18px">
+                ${sessionScope.name}님, <br>
+                    소비 태그 2개를 획득했어요!
 
+                    <div class="payTag mx-auto w-75" style="font-size: 15px">
+                        # 인터넷 쇼핑 홀릭
+                    </div>
+
+                    <div class="payTag mx-auto w-75" style="font-size: 15px">
+                    # 카페인 뱀파이어
+                </div>
             </div>
         </div>
         </div>
@@ -288,40 +351,28 @@
         <br><br>
 
         <div class="recentCardUse">
-            <div class="using" style="font-size: 20px">최근 카드이용내역 <button class="plusBtn">더보기 +</button></div>
-
+            <div class="using" style="font-size: 20px">최근 거래내역 <button class="plusBtn">더보기 +</button></div>
             <br>
             <div>
-            <table>
-                <tr>
-                    <th>일시</th>
-                    <th>가맹점</th>
-                    <th>카드 번호</th>
-                    <th>거래금액</th>
-                </tr>
-                <tr>
-                    <td>2023-09-19 10:30:00</td>
-                    <td>GS25S사가정역점</td>
-                    <td>1234-****-****-1234</td>
-                    <td>100,000원</td>
-                </tr>
-                <tr>
-                    <td>2023-09-20 11:20:00</td>
-                    <td>할리스커피강남</td>
-                    <td>1234-****-****-1234</td>
-                    <td>1,000원</td>
-                </tr>
-                <tr>
-                    <td>2023-09-21 09:01:10</td>
-                    <td>이디야커피(총신</td>
-                    <td>1234-****-****-1234</td>
-                    <td>34,000원</td>
-                </tr>
-                <!-- 여기에 필요한 만큼 레코드를 추가하세요. -->
-            </table>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>결제일시</th>
+                        <th>거래처</th>
+                        <th>카드 번호</th>
+                        <th>상태</th>
+                        <th>거래금액</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- 이 부분은 JavaScript에서 동적으로 채워집니다. -->
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-        </div>
+
+    </div>
     </div>
 
 </div>
@@ -330,6 +381,140 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
 <script>
+
+    window.onload = function() {
+        const targetAmount = parseInt('${thisMonthTotalAmounts[card1.cardNumber]}'.replace(/[^0-9]/g, ''));
+        const displayElement = document.getElementById("monthlyUsage");
+        const duration = 500; // 애니메이션 시간 (2초)
+        const stepTime = 10;
+        let currentAmount = 0;
+        const increment = targetAmount / (duration / stepTime);
+
+        const intervalId = setInterval(function() {
+            currentAmount += increment;
+            if (currentAmount >= targetAmount) {
+                clearInterval(intervalId);
+                currentAmount = targetAmount;
+            }
+            displayElement.textContent = numberWithCommas(Math.round(currentAmount)) + "원";
+        }, stepTime);
+    }
+
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+
+    var cardNames = ['${card1.cardName}', '${card2.cardName}'];
+    var cardImages = ['/img/${card1.cardName}.png', '/img/${card2.cardName}.png'];
+    var cardAmounts = ['${thisMonthTotalAmounts[card1.cardNumber]}원', '${thisMonthTotalAmounts[card2.cardNumber]}원'];
+    var thisMonthTransData = {
+        '${card1.cardNumber}': '${thisMonthTransData[card1.cardNumber]}',
+        '${card2.cardNumber}': '${thisMonthTransData[card2.cardNumber]}'
+    };
+    console.log(thisMonthTransData);
+
+
+
+
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    function formatCardAmount(amountStr) {
+        var numberPart = amountStr.replace(/[^0-9]/g, '');
+        return numberWithCommas(numberPart) + '원';
+    }
+
+    function parseTransList(transListString) {
+        var regex = /\(payId=(\d+), cardNumber=([\d\-]+), payDate=([\d\- :]+), payAmount=(\d+), businessCode=(\d+), businessMall=([^,]+), payStatus=([^,]+), payType=([^\)]+)\)/g;
+        var result = [];
+        var match;
+
+        while (match = regex.exec(transListString)) {
+            result.push({
+                payId: parseInt(match[1]),
+                cardNumber: match[2],
+                payDate: match[3],
+                payAmount: parseInt(match[4]),
+                businessCode: parseInt(match[5]),
+                businessMall: match[6].trim(),
+                payStatus: match[7].trim(),
+                payType: match[8].trim()
+            });
+        }
+
+        return result;
+    }
+
+    function showTransData(cardNumber) {
+        // tbody 참조
+        var tbody = document.querySelector('.recentCardUse tbody');
+
+        // tbody 내용 초기화
+        tbody.innerHTML = '';
+
+        // cardTransData에서 해당 카드번호의 거래내역 문자열을 가져옵니다.
+        var transListString = thisMonthTransData[cardNumber];
+
+        // 문자열을 파싱하여 JSON 형식의 객체 배열로 변환
+        var transList = parseTransList(transListString);
+
+        console.log("transList:", transList);
+
+        // 거래내역 리스트를 순회하면서 테이블 row를 추가합니다.
+        for (var i = 0; i < transList.length; i++) {
+            var trans = transList[i];
+            console.log("중8ㅑㄴ", trans);
+
+            // 새로운 row와 cells 생성
+            var newRow = tbody.insertRow();
+
+            var cell1 = newRow.insertCell(0); // 결제일시
+            var cell2 = newRow.insertCell(1); // 거래처
+            var cell3 = newRow.insertCell(2); // 카드 번호
+            var cell4 = newRow.insertCell(3); // 상태
+            var cell5 = newRow.insertCell(4); // 거래금액
+
+            // 각 cell에 데이터 할당
+            cell1.textContent = trans.payDate;
+            cell2.textContent = trans.businessMall;
+            cell3.textContent = trans.cardNumber;
+            cell4.textContent = trans.payStatus;
+            cell5.textContent = numberWithCommas(trans.payAmount) + "원";
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+    function showCardInfo(index) {
+        // 카드 이미지와 이름 업데이트
+        document.querySelector('#cardImage').src = cardImages[index];
+        document.querySelector('#cardImage').alt = cardNames[index];
+        document.querySelector('#cardName').textContent = cardNames[index];
+
+        // 카드 사용금액 업데이트
+        var formattedAmount = formatCardAmount(cardAmounts[index]);
+        document.querySelector('#monthlyUsage').textContent = formattedAmount;
+
+        // 추가된 거래내역 표시 로직
+        var cardNumber = (index === 0) ? '${card1.cardNumber}' : '${card2.cardNumber}';
+        showTransData(cardNumber);
+    }
+
+
+
+
+
+
+
     function fetchAccountData() {
         fetch(`/api/account-data`, {
             method: 'post',

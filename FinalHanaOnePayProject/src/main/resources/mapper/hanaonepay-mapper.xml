@@ -6,7 +6,23 @@
 
 <mapper namespace="com.kopo.finalhanaonepayproject.hanaOnePay.model.DAO.HanaOnePayDAO">
 
+    <select id="getHanaAccountDetailsByIdentity" resultType="com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayAccountDTO">
+        SELECT a.*
+        FROM hana_account a
+                 JOIN customer_hana cu ON a.identityNumber = cu.identityNumber
+        WHERE cu.identityNumber = #{identityNumber}
+    </select>
+
     <select id="getHanaCardDetailsByIdentity" resultType="com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayhanaCardDTO">
+        SELECT c.*
+        FROM hana_card c
+                 JOIN hana_account a ON c.accNumber = a.accNumber
+                 JOIN customer_hana cu ON a.identityNumber = cu.identityNumber
+        WHERE cu.identityNumber = #{identityNumber}
+    </select>
+
+<!--    하나대표카드-->
+    <select id="getMainHanaCardByIdentity" resultType="com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayhanaCardDTO">
         SELECT c.*
         FROM hana_card c
                  JOIN hana_account a ON c.accNumber = a.accNumber
@@ -29,5 +45,46 @@
         SELECT * FROM payCard
     </select>
 
+<!--    &lt;!&ndash;    하나카드 이번달 사용금액 조회 &ndash;&gt;-->
+<!--    <select id="" resultType="com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayCardDTO">-->
+<!--        SELECT SUM(payAmount) AS 이번달_총_사용금액-->
+<!--        FROM hana_card_payment_log-->
+<!--        WHERE SUBSTR(payDate, 1, 7) = TO_CHAR(SYSDATE, 'YYYY-MM')-->
+<!--    </select>-->
 
+    <!--   한 회원이 갖고 있는 하나카드 정보 조회 -->
+    <select id="getOnlyHanaCardDetailsByIdentity" resultType="com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayhanaCardDTO">
+        select c.cardNumber
+        from hana_card c
+                 JOIN hana_account a ON c.accNumber = a.accNumber
+                 JOIN customer_hana cu ON a.identityNumber = cu.identityNumber
+        where cu.identityNumber = #{identityNumber}
+
+    </select>
+    <!--    하나카드 이번달 거래내역 조회 -->
+    <select id="getThisMonthTransData" resultType="com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayTransDTO">
+        SELECT *
+        FROM hana_card_payment_log
+        WHERE SUBSTR(payDate, 1, 7) = TO_CHAR(SYSDATE, 'YYYY-MM')
+        AND cardNumber = #{cardNumber}
+    </select>
+
+<!--    하나카드 이번달 총 사용 금액-->
+    <select id="getThisMonthTotalAmount" resultType="int">
+        SELECT SUM(payAmount) AS 이번달_총_사용금액
+        FROM hana_card_payment_log
+        WHERE SUBSTR(payDate, 1, 7) = TO_CHAR(SYSDATE, 'YYYY-MM')
+        AND cardNumber = #{cardNumber}
+    </select>
+
+
+
+    <select id="">
+        select distinct l.cardNumber
+        from hana_card_payment_log l
+                 JOIN hana_card c ON l.cardNumber = c.cardNumber
+                 JOIN hana_account a ON c.accNumber = a.accNumber
+                 JOIN customer_hana cu ON a.identityNumber = cu.identityNumber
+        where cu.identityNumber = #{identityNumber};
+    </select>
 </mapper>

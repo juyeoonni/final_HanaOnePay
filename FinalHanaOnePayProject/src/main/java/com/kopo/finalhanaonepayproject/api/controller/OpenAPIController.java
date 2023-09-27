@@ -4,6 +4,7 @@ import com.kopo.finalhanaonepayproject.api.service.OpenAPIService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -127,5 +128,24 @@ public class OpenAPIController {
             return new ResponseEntity<>("Payment Failed", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/api/payments-by-month")
+    public ModelAndView getPaymentsByMonth(@RequestParam("month") String month) {
+        ModelAndView modelAndView = new ModelAndView();
+
+        String response = openAPIService.fetchPaymentsByMonthFromAPI(month);
+
+        if (response != null) {
+            modelAndView.addObject("response", response);
+            modelAndView.setViewName("hanaOnePay/payReport");
+        } else {
+            modelAndView.addObject("message", "Failed to fetch payments by month");
+            modelAndView.setViewName("errorPage"); // 에러 페이지를 보여주기 위한 JSP 파일 이름
+        }
+
+        return modelAndView;
+    }
+
+
 
 }

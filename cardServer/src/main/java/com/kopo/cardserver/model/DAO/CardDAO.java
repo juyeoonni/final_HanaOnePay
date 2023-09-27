@@ -1,10 +1,7 @@
 package com.kopo.cardserver.model.DAO;
 
 
-import com.kopo.cardserver.model.DTO.AccPaymentLogDTO;
-import com.kopo.cardserver.model.DTO.AccountDTO;
-import com.kopo.cardserver.model.DTO.CardDTO;
-import com.kopo.cardserver.model.DTO.PendingPaymentDTO;
+import com.kopo.cardserver.model.DTO.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -58,6 +55,17 @@ public interface CardDAO {
 
 
 
+    List<ChartDTO> getWooriCardPaymentsByMonth(int month);
+
+    List<ChartDTO> getWooriAccountPaymentsByMonth(int month);
+
+    List<ChartDTO> getShinhanCardPaymentsByMonth(int month);
+
+    List<ChartDTO> getShinhanAccountPaymentsByMonth(int month);
+
+    List<ChartDTO> getKBCardPaymentsByMonth(int month);
+
+    List<ChartDTO> getKBAccountPaymentsByMonth(int month);
 
 }
 

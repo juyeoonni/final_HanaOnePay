@@ -131,8 +131,11 @@
             (payment_log_seq.NEXTVAL, #{cardNumber}, #{payAmount})
     </insert>
 
-
-
+<!--    &lt;!&ndash;    차트 데이터 조회   &ndash;&gt;-->
+<!--    <select id="getPendingPaymentsByDate" resultType="com.kopo.cardserver.model.DTO.ChartDTO">-->
+<!--        SELECT * FROM ${tableCode}_card_pending_pay-->
+<!--        WHERE withdrawalDate = #{withdrawalDate} AND payStatus = 'Pending'-->
+<!--    </select>-->
 
 
 

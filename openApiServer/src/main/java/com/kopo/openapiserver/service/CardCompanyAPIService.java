@@ -108,4 +108,24 @@ public class CardCompanyAPIService {
             return null;
         }
     }
+
+    public String fetchMonthlyPaymentData(int month) {
+        // 카드사 API URL
+        String baseUrl = "http://localhost:8081/api/monthly-payment-data";
+
+        URI uri = UriComponentsBuilder.fromHttpUrl(baseUrl)
+                .queryParam("month", month)
+                .build()
+                .toUri();
+
+        ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.GET, null, String.class);
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            logger.info("Received Monthly Payment Data: {}", response.getBody());
+            return response.getBody();
+        } else {
+            logger.error("Failed to fetch monthly payment data. Status code: {}", response.getStatusCode());
+            return null;
+        }
+    }
 }

@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayAccountDTO;
 import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayCardDTO;
 import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayhanaCardDTO;
 import com.kopo.finalhanaonepayproject.hanaOnePay.service.HanaOnePayService;
@@ -171,6 +172,7 @@ public class HanaOnePayController {
         String identityNumber = (String) session.getAttribute("identityNumber");
 
         List<HanaOnePayCardDTO> cardInfos = hanaOnePayService.getHanaCardDetailsByIdentity(identityNumber);
+
         System.out.println("하나카드 조회 성공!");
         mav.addObject("cardInfos", cardInfos);
 
@@ -183,8 +185,26 @@ public class HanaOnePayController {
     }
 
     @GetMapping("/hanaOnePay/selectHanaPayAccount")
-    public String selectPayselectHanaPayAccountAccount() {
-        return "hanaOnePay/selectHanaPayAccount";
+    public ModelAndView selectHanaPayAccount(HttpSession session) {
+        ModelAndView mav = new ModelAndView("hanaOnePay/selectHanaPayAccount");
+
+        String identityNumber = (String) session.getAttribute("identityNumber");
+
+        List<HanaOnePayAccountDTO> accountInfos = hanaOnePayService.getHanaAccountDetailsByIdentity(identityNumber);
+        System.out.println("하나계좌 조회 성공!");
+        mav.addObject("accountInfos", accountInfos);
+
+        return mav;
+    }
+
+    @GetMapping("/hanaOnePay/payHistory")
+    public String payHistory() {
+        return "hanaOnePay/payHistory";
+    }
+
+    @GetMapping("/hanaOnePay/payReport")
+    public String payReport() {
+        return "hanaOnePay/payReport";
     }
 
 

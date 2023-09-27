@@ -2,6 +2,7 @@ package com.kopo.cardserver.controller;
 
 import com.kopo.cardserver.model.DTO.AccountDTO;
 import com.kopo.cardserver.model.DTO.CardDTO;
+import com.kopo.cardserver.model.DTO.ChartDTO;
 import com.kopo.cardserver.model.DTO.CustomerDTO;
 import com.kopo.cardserver.service.CardService;
 import org.slf4j.Logger;
@@ -63,6 +64,19 @@ public class CardInfoController {
         String result = cardService.processAccountPayment(accountNumber, identityNumber, productPrice);
 
         return ResponseEntity.ok(result);
+    }
+
+//    @GetMapping("/byMonth")
+//    public ResponseEntity<List<ChartDTO>> getPaymentsByMonth(@RequestParam int month) {
+//        List<ChartDTO> results = paymentLogService.getWooriCardPaymentsByMonth(month);
+//        return ResponseEntity.ok(results);
+//    }
+
+    @GetMapping("/monthly-payment-data")
+    public ResponseEntity<List<ChartDTO>> getCardListforChart(@RequestParam int month) {
+        List<ChartDTO> results = cardService.getCardListforChart(month);
+
+        return ResponseEntity.ok(results);
     }
 
 
