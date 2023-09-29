@@ -137,7 +137,11 @@
 <!--        WHERE withdrawalDate = #{withdrawalDate} AND payStatus = 'Pending'-->
 <!--    </select>-->
 
-
+    <select id="selectTransactionsByCard" resultType="com.kopo.cardserver.model.DTO.HanaOnePayTransDTO">
+        select *
+        from ${cardCode}_card_payment_log
+        where cardNumber = #{cardNumber}
+    </select>
 
 </mapper>
 

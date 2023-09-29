@@ -5,8 +5,10 @@ import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kopo.finalhanaonepayproject.api.service.OpenAPIService;
 import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayAccountDTO;
 import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayCardDTO;
+import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayTransDTO;
 import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayhanaCardDTO;
 import com.kopo.finalhanaonepayproject.hanaOnePay.service.HanaOnePayService;
 import com.kopo.finalhanaonepayproject.shop.service.ShopService;
@@ -28,6 +30,8 @@ public class HanaOnePayController {
 
     @Autowired
     private HanaOnePayService hanaOnePayService;
+    @Autowired
+    private  OpenAPIService openAPIService;
     private ShopService shopService;
 
     @PostMapping ("/hanaOnePay/payCardList")
@@ -206,6 +210,45 @@ public class HanaOnePayController {
     public String payReport() {
         return "hanaOnePay/payReport";
     }
+
+
+
+    @GetMapping("/hanaOnePay/selectCardTransList")
+    public ModelAndView selectCardTransList(
+            @RequestParam(value = "cardCode", required = false) String cardCode,
+            @RequestParam(value = "cardNumber", required = false) String cardNumber,
+            @RequestParam(value = "cardName", required = false) String cardName) { // 여기에 cardName을 추가
+        ModelAndView modelAndView = new ModelAndView();
+
+        try {
+            if (cardCode != null && cardNumber != null) {
+                // 특정 카드의 거래내역 조회 서비스 호출
+                List<HanaOnePayTransDTO> transactions = openAPIService.fetchTransactionsByCard(cardCode, cardNumber);
+                List<HanaOnePayCardDTO> allCards = hanaOnePayService.getAllCards();
+                modelAndView.addObject("allCards", allCards);
+                modelAndView.addObject("transactions", transactions);
+                modelAndView.addObject("selectedCardName", cardName);
+                modelAndView.addObject("selectedCardNumber", cardNumber);
+
+                modelAndView.setViewName("hanaOnePay/selectCardTransList");
+            } else {
+                // 예외 처리 or 다른 로직
+            }
+            System.out.println("거래내역 조회 성공!");
+        } catch (Exception e) {
+            // 예외 처리 로직
+            e.printStackTrace();
+        }
+
+        return modelAndView;
+    }
+
+    @GetMapping("/hanaOnePay/payTendencyTest")
+    public String payTendencyTest() {
+        return "hanaOnePay/payTendencyTest";
+    }
+
+
 
 
 }

@@ -136,5 +136,44 @@ public class CardInfoController {
         }
     }
 
+    @GetMapping("/api/monthly-payment-data2")
+    public ResponseEntity<String> fetchMonthlyPaymentData2() {
+        try {
+            String monthlyPaymentData = cardCompanyAPIService.fetchMonthlyPaymentData2();
+
+            if (monthlyPaymentData != null) {
+                return new ResponseEntity<>(monthlyPaymentData, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("No Data Found", HttpStatus.NOT_FOUND);
+            }
+
+        } catch (Exception e) {
+            logger.error("Failed to fetch monthly payment data", e);
+            return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/api/card-transactions")
+    public ResponseEntity<String> fetchTransactionsByCard(@RequestBody Map<String, Object> payload) {
+        try {
+            String cardCode = (String) payload.get("cardCode");
+            String cardNumber = (String) payload.get("cardNumber");
+
+            System.out.println("카드사별 거래내역조회 컨트롤러 들어옴");
+            String transactionsData = cardCompanyAPIService.fetchTransactionsByCard(cardCode, cardNumber);
+
+            if (transactionsData != null) {
+                return new ResponseEntity<>(transactionsData, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("No Transactions Found", HttpStatus.NOT_FOUND);
+            }
+
+        } catch (Exception e) {
+            logger.error("Failed to fetch transactions by card", e);
+            return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 
 }

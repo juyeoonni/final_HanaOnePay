@@ -14,7 +14,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>내 지출 조회</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -24,10 +25,10 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sidebars/">
 
 
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
-    <link href="/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
     <style>
         body {
@@ -48,7 +49,9 @@
             overflow-y: hidden;
         }
 
-        .dropdown-toggle { outline: 0; }
+        .dropdown-toggle {
+            outline: 0;
+        }
 
         .btn-toggle {
             padding: .25rem .5rem;
@@ -56,6 +59,7 @@
             color: var(--bs-emphasis-color);
             background-color: transparent;
         }
+
         .btn-toggle:hover,
         .btn-toggle:focus {
             color: rgba(var(--bs-emphasis-color-rgb), .85);
@@ -77,6 +81,7 @@
         .btn-toggle[aria-expanded="true"] {
             color: rgba(var(--bs-emphasis-color-rgb), .85);
         }
+
         .btn-toggle[aria-expanded="true"]::before {
             transform: rotate(90deg);
         }
@@ -86,6 +91,7 @@
             margin-top: .125rem;
             margin-left: 1.25rem;
         }
+
         .btn-toggle-nav a:hover,
         .btn-toggle-nav a:focus {
             background-color: var(--bs-tertiary-bg);
@@ -104,7 +110,7 @@
         }
 
         .mypageMain {
-            flex: 1;  /* 나머지 공간을 채우도록 설정 */
+            flex: 1; /* 나머지 공간을 채우도록 설정 */
             /* 필요에 따라 여기에 추가 스타일을 설정하세요 */
         }
 
@@ -119,25 +125,25 @@
 
         .mypageName {
             margin-right: 130px;
-            text-align: center;  /* 텍스트 중앙 정렬 */
-            width: 100%;         /* 너비를 100%로 설정하여 왼쪽 및 오른쪽 여백 없음 */
+            text-align: center; /* 텍스트 중앙 정렬 */
+            width: 100%; /* 너비를 100%로 설정하여 왼쪽 및 오른쪽 여백 없음 */
         }
 
         .mypageMain > .mypageName {
             align-self: center;
         }
 
-        .myCardInfo{
+        .myCardInfo {
             font-size: 20px;
             width: 450px;
             height: 300px;
             background-color: whitesmoke;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             border-radius: 20px;
-            text-align: center;  /* 텍스트 중앙 정렬 */
+            text-align: center; /* 텍스트 중앙 정렬 */
         }
 
-        .monthlyCardInfo{
+        .monthlyCardInfo {
             font-size: 20px;
             margin-left: 80px;
             width: 450px;
@@ -146,7 +152,7 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             border-radius: 20px;
             margin-right: 130px;
-            text-align: center;  /* 텍스트 중앙 정렬 */
+            text-align: center; /* 텍스트 중앙 정렬 */
         }
 
         table {
@@ -154,34 +160,38 @@
             border-collapse: collapse;
             text-align: center;
         }
+
         th, td {
             padding: 10px;
             border: 1px solid #ddd;
         }
+
         th {
             background-color: #f2f2f2;
         }
+
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
+
         tr:hover {
             background-color: #ddd;
         }
 
-        .plusBtn{
+        .plusBtn {
             color: white;
-            background-color:#00857E ;
+            background-color: #00857E;
             border-radius: 10px;
             border: none;
         }
 
-        .mainCard{
+        .mainCard {
             display: flex; /* flex를 사용하여 아이템들을 가로로 나열합니다 */
             align-items: center; /* 아이템들을 수직 중앙에 배치합니다 */
             text-align: left;
         }
 
-        .payCardImg{
+        .payCardImg {
             margin-left: 20px;
             margin-right: 20px;
             order: -1;
@@ -193,23 +203,23 @@
             flex-direction: column;
         }
 
-        .payTag{
+        .payTag {
             margin-top: 10px;
             align-items: center;
             background-color: white;
             padding: 20px;
-            border-radius: 15px;  /* 둥근 모서리 */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* 그림자 효과 */
+            border-radius: 15px; /* 둥근 모서리 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
             width: 60%;
 
         }
 
         .pieChart {
-            width: 500px;
-            height: 500px;
+            width: 450px;
+            height: 700px;
         }
 
-        .pieChartContainer{
+        .pieChartContainer {
             display: flex;
         }
 
@@ -217,23 +227,25 @@
             margin-right: 50px;
         }
 
-        .pieChartsideDiv{
+        .pieChartsideDiv {
+            padding: 13px;
             font-size: 20px;
-            width: 450px;
-            height: 500px;
+            width: 500px;
+            height: 600px;
             background-color: white;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             border-radius: 20px;
-            text-align: center;  /* 텍스트 중앙 정렬 */
-            margin-top: 70px;
+            text-align: center; /* 텍스트 중앙 정렬 */
+            margin-top: 100px;
         }
 
-        .businessCode{
+        .businessCode {
+            padding: 10px;
             margin: 0 auto;
             margin-top: 25px;
             background-color: whitesmoke;
-            width: 350px;
-            height: 50px;
+            width: 450px;
+            height: 80px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             border-radius: 15px;
         }
@@ -249,45 +261,99 @@
             margin: 10px;
         }
 
-        .arrow{
+        .arrow {
             border: none;
             background-color: white;
         }
+
+        .monthlyChartDiv{
+            font-size: 20px;
+            width: 1000px;
+            height: 500px;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            text-align: center; /* 텍스트 중앙 정렬 */
+            margin-top: 70px;
+        }
+
+        .business-layout {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .business-name {
+            flex: 1;
+        }
+
+        .business-percentage {
+            margin-left: 8px; /* or any space you want between the name and the percentage */
+            flex: 0;
+        }
+
+        .business-amount {
+            flex: 1;
+            text-align: right;
+        }
+
+        .testdiv{
+            margin-right: 50px;
+            margin-bottom: 100px;
+            padding: 13px;
+            font-size: 20px;
+            width: 450px;
+            height: 200px;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            text-align: center; /* 텍스트 중앙 정렬 */
+            margin-top: 100px;
+        }
+
 
     </style>
 
 </head>
 <body>
 
-<%@ include file="/WEB-INF/views/comm/header.jsp"%>
+<%@ include file="/WEB-INF/views/comm/header.jsp" %>
 
 <div class="flex-container">
     <div class="flex-shrink-0 p-3" style="width: 280px; margin-left: 90px;">
         <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
-            <svg class="bi pe-none me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
+            <svg class="bi pe-none me-2" width="30" height="24">
+                <use xlink:href="#bootstrap"/>
+            </svg>
             <span class="fs-5 fw-semibold">마이하나</span>
         </a>
         <ul class="list-unstyled ps-0">
             <li class="mb-1">
-                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                        data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
                     하나원페이
                 </button>
                 <div class="collapse show" id="home-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                         <%--                    <li><a href="/api/linkedAccount" class="link-body-emphasis d-inline-flex text-decoration-none rounded">연동카드조회</a></li>--%>
                         <%--                    <li><a href="/hanaOnePay/selectPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>--%>
-                        <li><a href="/hanaOnePay/selectHanaPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>
-                        <li><a onclick="fetchAccountData()" class="link-body-emphasis d-inline-flex text-decoration-none rounded" style="cursor: pointer;">간편결제 계좌</a></li>
+                        <li><a href="/hanaOnePay/selectHanaPayCard"
+                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>
+                        <li><a onclick="fetchAccountData()"
+                               class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                               style="cursor: pointer;">간편결제 계좌</a></li>
                     </ul>
                 </div>
             </li>
             <li class="mb-1">
-                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                        data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
                     거래내역조회
                 </button>
                 <div class="collapse" id="dashboard-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="/hanaOnePay/payHistory" class="link-body-emphasis d-inline-flex text-decoration-none rounded">내 지출 조회</a></li>
+                        <li><a href="/hanaOnePay/payHistory"
+                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">내 지출 조회</a></li>
                         <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">명세서 조회</a></li>--%>
                         <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>--%>
                         <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>--%>
@@ -295,12 +361,14 @@
                 </div>
             </li>
             <li class="mb-1">
-                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
+                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                        data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
                     내 소비분석
                 </button>
                 <div class="collapse" id="orders-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="/hanaOnePay/payReport" class="link-body-emphasis d-inline-flex text-decoration-none rounded">소비레포트</a></li>
+                        <li><a href="/hanaOnePay/payReport"
+                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">소비레포트</a></li>
                         <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Processed</a></li>--%>
                         <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Shipped</a></li>--%>
                         <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Returned</a></li>--%>
@@ -309,15 +377,20 @@
             </li>
             <li class="border-top my-3"></li>
             <li class="mb-1">
-                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                        data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
                     Account
                 </button>
                 <div class="collapse" id="account-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New...</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Profile</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Settings</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign out</a></li>
+                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New...</a>
+                        </li>
+                        <li><a href="#"
+                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Profile</a></li>
+                        <li><a href="#"
+                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Settings</a></li>
+                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign
+                            out</a></li>
                     </ul>
                 </div>
             </li>
@@ -337,9 +410,9 @@
             ${sessionScope.name}님의 이번달 소비 분포입니다.
         </div>
 
-<%--        월 나타내기 슬라이드--%>
+        <%--        월 나타내기 슬라이드--%>
 
-<%--        슬라이드끝--%>
+        <%--        슬라이드끝--%>
 
         <div class="pieChartContainer">
             <div class="pieChart">
@@ -352,20 +425,36 @@
             </div>
             <div class="pieChartsideDiv">
                 <!-- 다른 div의 내용 -->
-                <p>여기에 다른 내용을 넣습니다.</p>
+                <p>이번달 지출 TOP 5</p>
 
-                <div class="businessCode">요식</div>
-                <div class="businessCode">문화시설</div>
-                <div class="businessCode">쇼핑</div>
-                <div class="businessCode">카페</div>
-                <div class="businessCode">편의점</div>
-                <div class="businessCode">그 외</div>
+                <div class="businessCode" id="top1"></div>
+                <div class="businessCode" id="top2"></div>
+                <div class="businessCode" id="top3"></div>
+                <div class="businessCode" id="top4"></div>
+                <div class="businessCode" id="top5"></div>
+
             </div>
         </div>
 
+        <div class="monthlyChartDiv">
+            <div class="monthlyChartMent">
+                ${sessionScope.name}님의 1년간 소비 추이입니다.
+            </div>
+            <canvas id="myChart2" width="400" height="200"></canvas>
+<%--            <img src="/img/starChracterPay.gif">--%>
+        </div>
 
+        <div class="pieChartContainer">
+            <div class="testdiv">
+                나의 소비성향은?<br>
+                하나원페이 소비성향 테스트를 통해<br>
+                나만의 소비 유형을 확인해보세요!<br>
+                <button class="plusBtn" onclick="goToTest()">소비성향 테스트 GO!</button>
+            </div>
+            <div class="testdiv">
 
-
+            </div>
+        </div>
 
 
 
@@ -374,25 +463,34 @@
 
 </div>
 
-<%@ include file="/WEB-INF/views/comm/footer.jsp"%>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+<%--<%@ include file="/WEB-INF/views/comm/footer.jsp" %>--%>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
 
 
 <script>
+    function goToTest() {
+        window.location.href = "/hanaOnePay/payTendencyTest";
+    }
+
     let currentMonth = new Date().getMonth(); // 0 (January) to 11 (December)
     const months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
 
     document.getElementById('prev').addEventListener('click', () => {
-        if(currentMonth > 0) {
+        if (currentMonth > 0) {
             currentMonth--;
             updateMonth();
+            getMonthPaylog();
         }
     });
 
     document.getElementById('next').addEventListener('click', () => {
-        if(currentMonth < 11) {
+        if (currentMonth < 11) {
             currentMonth++;
             updateMonth();
+            getMonthPaylog();
         }
     });
 
@@ -403,6 +501,82 @@
     // Initial setup
     updateMonth();
 
+    function getImageUrlForBusinessCode(businessCode) {
+        return "/img/payCategory/" + businessCode + ".png";
+    }
+
+    function updateTop5Businesses(dataFromServer) {
+        // 서버로부터 받은 데이터를 payAmount 기준으로 내림차순 정렬합니다.
+        var sortedData = dataFromServer.sort((a, b) => b.payAmount - a.payAmount);
+
+        // 전체 지출 금액을 계산합니다.
+        var totalAmount = dataFromServer.reduce((sum, data) => sum + data.payAmount, 0);
+
+        // 상위 5개 데이터만 선택합니다.
+        var top5Data = sortedData.slice(0, 5);
+
+        // 각 데이터를 순서대로 해당 div에 표시합니다.
+        for (var i = 0; i < top5Data.length; i++) {
+            var businessName = getBusinessName(top5Data[i].businessCode);
+
+            // 각 항목의 payAmount 값이 전체 지출 중 얼마의 비율을 차지하는지 계산합니다.
+            var percentage = ((top5Data[i].payAmount / totalAmount) * 100).toFixed(1);  // 소수점 두 번째 자리까지 표시
+
+            var divId = "top" + (i + 1);
+            var divElement = document.getElementById(divId);
+            if (divElement) {
+                divElement.textContent = ""; // Clear the content
+                divElement.classList.add("business-layout");
+
+                // 이미지 요소를 생성합니다.
+                var imgElement = document.createElement("img");
+                imgElement.src = getImageUrlForBusinessCode(top5Data[i].businessCode);
+                imgElement.alt = businessName + " 이미지";
+                imgElement.classList.add("business-image");
+
+                // 이미지 요소를 divElement에 추가합니다.
+                divElement.appendChild(imgElement);
+
+                let nameElement = document.createElement("div");
+                nameElement.textContent = businessName;
+                nameElement.classList.add("business-name");
+
+                let amountElement = document.createElement("div");
+                amountElement.textContent = top5Data[i].payAmount.toLocaleString() + "원";
+                amountElement.classList.add("business-amount");
+
+                let percentageElement = document.createElement("div");
+                percentageElement.textContent = percentage + "%";
+                percentageElement.classList.add("business-percentage");
+
+                // 기존과 같이 나머지 요소들을 divElement에 추가합니다.
+                divElement.appendChild(nameElement);
+                divElement.appendChild(percentageElement);
+                divElement.appendChild(amountElement);
+            }
+        }
+    }
+
+
+    //ajax
+    function getMonthPaylog() {
+
+        $.ajax({
+            url: "/api/payments-by-month2",
+            type: "GET",
+            data: {"month": months[currentMonth]},
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                updateChartData(data);
+                updateTop5Businesses(data);
+                // alert("월별 차트 조회 성공");
+            },
+            error: function (request, status, error) {
+                alert("월별 차트 조회 실패");
+            }
+        });
+    }
 
 
     // 서버로부터 받은 데이터를 JavaScript 객체로 파싱
@@ -430,13 +604,15 @@
         return businessNames[code] || '기타';  // 코드에 해당하는 이름이 없으면 '기타' 반환
     }
 
-    for(var i=0; i<dataFromServer.length; i++) {
+    for (var i = 0; i < dataFromServer.length; i++) {
         labels.push(getBusinessName(dataFromServer[i].businessCode));  // 업종 코드에 해당하는 이름으로 라벨 설정
         dataset.push(dataFromServer[i].payAmount);
     }
 
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
+    var pieChart;
+
+    var ctxPie = document.getElementById('myChart').getContext('2d');
+    pieChart = new Chart(ctxPie, {
         type: 'pie',
         data: {
             labels: labels,
@@ -444,19 +620,19 @@
                 label: '지출',
                 data: dataset,
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)', // red
-                    'rgba(54, 162, 235, 0.2)', // blue
-                    'rgba(255, 206, 86, 0.2)', // yellow
-                    'rgba(75, 192, 192, 0.2)', // teal
-                    'rgba(153, 102, 255, 0.2)', // purple
-                    'rgba(255, 159, 64, 0.2)', // orange
-                    'rgba(201, 203, 207, 0.2)', // grey
-                    'rgba(131, 117, 224, 0.2)', // violet
-                    'rgba(85, 239, 196, 0.2)', // mint
-                    'rgba(129, 236, 236, 0.2)', // cyan
-                    'rgba(250, 177, 160, 0.2)', // coral
-                    'rgba(253, 121, 168, 0.2)', // pink
-                    'rgba(178, 190, 195, 0.2)', // light grey
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(201, 203, 207, 1)',
+                    'rgba(131, 117, 224, 1)',
+                    'rgba(85, 239, 196, 1)',
+                    'rgba(129, 236, 236, 1)',
+                    'rgba(250, 177, 160, 1)',
+                    'rgba(253, 121, 168, 1)',
+                    'rgba(178, 190, 195, 1)',
                 ],
                 borderColor: [
                     'rgba(255, 99, 132, 1)',
@@ -490,6 +666,130 @@
                     display: true,
                     position: 'top',
                     text: '<월별 지출 분포>'
+                }
+            }
+        }
+    });
+
+
+    // 차트 데이터를 업데이트하는 함수
+    function updateChartData(dataFromServer) {
+        var labels = [];
+        var dataset = [];
+        var totalBusiness = {};
+
+        for (var i = 0; i < dataFromServer.length; i++) {
+            var businessName = getBusinessName(dataFromServer[i].businessCode);
+            labels.push(businessName);
+            dataset.push(dataFromServer[i].payAmount);
+
+            // 여기서 totalBusiness 객체에 각 업종별 지출 금액을 합산합니다.
+            totalBusiness[dataFromServer[i].businessCode] = (totalBusiness[dataFromServer[i].businessCode] || 0) + dataFromServer[i].payAmount;
+        }
+
+        // 여기서 각 업종별 지출 금액을 해당 <div>에 표시합니다.
+        for (var code in totalBusiness) {
+            var divId = "business_" + code;
+            var divElement = document.getElementById(divId);
+            if (divElement) {
+                divElement.textContent = getBusinessName(code) + " " + totalBusiness[code].toLocaleString() + "원";
+            }
+        }
+
+        if (pieChart) {  // 기존 차트가 존재하면 차트를 파괴
+            pieChart.destroy();
+        }
+
+        var ctxPie = document.getElementById('myChart').getContext('2d');
+        pieChart  = new Chart(ctxPie, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: '지출',
+                    data: dataset,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(201, 203, 207, 1)',
+                        'rgba(131, 117, 224, 1)',
+                        'rgba(85, 239, 196, 1)',
+                        'rgba(129, 236, 236, 1)',
+                        'rgba(250, 177, 160, 1)',
+                        'rgba(253, 121, 168, 1)',
+                        'rgba(178, 190, 195, 1)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(201, 203, 207, 1)',
+                        'rgba(131, 117, 224, 1)',
+                        'rgba(85, 239, 196, 1)',
+                        'rgba(129, 236, 236, 1)',
+                        'rgba(250, 177, 160, 1)',
+                        'rgba(253, 121, 168, 1)',
+                        'rgba(178, 190, 195, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            usePointStyle: true,    // 이 옵션을 true로 설정
+                            boxWidth: 1000            // 이 값을 조절하여 원하는 간격을 설정
+                        }
+                    },
+                    title: {
+                        display: true,
+                        position: 'top',
+                        text: '<월별 지출 분포>'
+                    }
+                }
+            }
+        });
+    }
+
+    // 차트 막대
+    var barChart = JSON.parse('${response2}');
+    console.log(barChart);
+
+    // businessCode와 payAmount 데이터를 분리합니다.
+    var month = [];
+    var payAmount = [];
+    for (var i = 0; i < barChart.length; i++) {
+        month.push(barChart[i].month);
+        payAmount.push(barChart[i].totalAmount);
+    }
+
+    var ctx = document.getElementById('myChart2').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: month,  // businessCode 데이터
+            datasets: [{
+                label: 'payAmount by month',
+                data: payAmount, // payAmount 데이터
+                backgroundColor: 'rgba(75, 192, 192, 1)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
             }
         }

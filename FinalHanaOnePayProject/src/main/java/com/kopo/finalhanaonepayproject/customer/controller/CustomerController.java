@@ -136,6 +136,8 @@ public class CustomerController {
             session.setAttribute("id", loginMember.getCustomerId());
             session.setAttribute("identityNumber", loginMember.getIdentityNumber());
             session.setAttribute("payPw", loginMember.getPayPw());
+            session.setAttribute("email", loginMember.getEmail());
+            session.setAttribute("phoneNumber", loginMember.getPhoneNumber());
 
 
             // Set data in application scope

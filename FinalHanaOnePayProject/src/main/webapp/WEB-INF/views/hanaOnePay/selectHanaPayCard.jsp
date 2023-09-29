@@ -465,7 +465,12 @@
                 <img src="/img/${cardInfo.cardName}.png" class="d-block payCardImg" alt="${cardInfo.cardName}">
                     ${cardInfo.cardName}<br>
                 [본인] ${cardInfo.cardNumber}<br>
+                <button class="show-card-number-btn">
+                    카드번호 보기
+                </button>
+                <a class="show-card-number-btn" href="/hanaOnePay/selectCardTransList?cardCode=${card.cardCode}&cardNumber=${card.cardNumber}&cardName=${card.cardName}">내역조회</a>
             </div>
+
         </c:forEach>
     </div>
 

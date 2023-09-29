@@ -310,4 +310,18 @@ public class CardService {
         return allResults;
     }
 
+    public List<MonthTransDTO> getAllOrgTranDatabyMonth() {
+        List<MonthTransDTO> result = cardDAO.getAllOrgTranDatabyMonth();
+
+        // 로그로 결과 출력
+        logger.info("Retrieved Data: " + result);
+
+        return result;
+    }
+
+    public List<HanaOnePayTransDTO> selectTransactionsByCard(String cardCode, String cardNumber) {
+        return cardDAO.selectTransactionsByCard(cardCode, cardNumber);
+    }
+
+
 }

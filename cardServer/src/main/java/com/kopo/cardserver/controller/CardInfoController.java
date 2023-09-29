@@ -1,9 +1,6 @@
 package com.kopo.cardserver.controller;
 
-import com.kopo.cardserver.model.DTO.AccountDTO;
-import com.kopo.cardserver.model.DTO.CardDTO;
-import com.kopo.cardserver.model.DTO.ChartDTO;
-import com.kopo.cardserver.model.DTO.CustomerDTO;
+import com.kopo.cardserver.model.DTO.*;
 import com.kopo.cardserver.service.CardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,7 +76,26 @@ public class CardInfoController {
         return ResponseEntity.ok(results);
     }
 
+    @GetMapping("/monthly-payment-data2")
+    public List<MonthTransDTO> getAllOrgTranDatabyMonth() {
+        return cardService.getAllOrgTranDatabyMonth();
+    }
 
+    @PostMapping("/card-transactions")
+    public ResponseEntity<List<HanaOnePayTransDTO>> selectTransactionsByCard(@RequestBody Map<String, String> payload) {
+        System.out.println("카드사 서버 카드내역 컨트롤러 들어옴");
+
+        String cardCode = payload.get("cardCode");
+        String cardNumber = payload.get("cardNumber");
+
+        List<HanaOnePayTransDTO> transactions = cardService.selectTransactionsByCard(cardCode, cardNumber);
+
+        if (transactions.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(transactions, HttpStatus.OK);
+    }
 
 }
 

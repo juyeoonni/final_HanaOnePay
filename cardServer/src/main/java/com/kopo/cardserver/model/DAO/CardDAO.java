@@ -53,8 +53,6 @@ public interface CardDAO {
                               @Param("payAmount") BigDecimal payAmount,
                               @Param("tableCode") String tableCode);
 
-
-
     List<ChartDTO> getWooriCardPaymentsByMonth(int month);
 
     List<ChartDTO> getWooriAccountPaymentsByMonth(int month);
@@ -66,6 +64,10 @@ public interface CardDAO {
     List<ChartDTO> getKBCardPaymentsByMonth(int month);
 
     List<ChartDTO> getKBAccountPaymentsByMonth(int month);
+
+    List<MonthTransDTO> getAllOrgTranDatabyMonth();
+
+    List<HanaOnePayTransDTO> selectTransactionsByCard(String cardCode, String cardNumber);
 
 }
 

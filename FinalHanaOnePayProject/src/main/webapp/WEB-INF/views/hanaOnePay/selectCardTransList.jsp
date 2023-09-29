@@ -16,7 +16,13 @@
     <title>마이하나페이지</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<%--    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>--%>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+
+
     <link rel="stylesheet" href="/css/card.css">
     <title>마이하나</title>
 
@@ -330,6 +336,92 @@
             align-items: center;
             margin-left: 570px;
         }
+
+        #transactionTable_wrapper {  /* DataTables가 .wrapper 클래스를 테이블 주변에 추가합니다. 이 클래스로 너비와 여백을 조정해보세요. */
+            width: 95%;
+
+        }
+
+        #transactionTable {
+            width: 100%!important; /* !important를 사용하여 다른 스타일의 우선순위를 덮어쓰기 시도해보세요. */
+        }
+
+        /*카드선택 디브들 css*/
+        .selectCard {
+            display: flex; /* Flexbox 사용 */
+            align-items: center; /* 수직 중앙 정렬 */
+            background-color: #ffffff; /* 배경색을 흰색으로 변경 */
+            border: 4px solid #d9ede8; /* 테두리 색상 설정 */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 박스 섀도우 효과 추가 */
+            border-radius: 10px;
+            width: 90.3%;
+            height: 100px;
+            padding: 0 10px; /* 좌우 패딩 추가 */
+        }
+
+        .TransPageCardImg img {
+            width: auto; /* 이미지 크기에 따라 수정 가능 */
+            height: 70px; /* 이미지 크기에 따라 수정 가능 */
+            margin-right: 20px; /* 이미지 우측 간격 추가 */
+            margin-left: 20px;
+        }
+
+        .cardDesc {
+            flex-grow: 1; /* 남은 공간을 cardDesc 요소가 차지하도록 설정 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* 수직 중앙 정렬 */
+        }
+
+        .changeCardBtn{
+            margin-right: 30px;
+            padding-top: 4px;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            height: 30px;
+            width: 100px;
+            background-color: #d9ede8;
+            border: none; /* 기본 테두리 제거 */
+            border-radius: 4px; /* 모서리 둥글게 */
+            color: #333; /* 버튼의 글자색 */
+            font-size: 16px;
+            cursor: pointer; /* 마우스 오버시 손가락 모양으로 변경 */
+            transition: background-color 0.3s; /* 버튼 클릭 효과 */
+        }
+        .changeCardBtn:hover {
+            background-color: #c4e0d0; /* 마우스 오버시 버튼 색상 변경 */
+        }
+
+        .changeCardBtn:active {
+            background-color: #b0d5c2; /* 버튼 클릭시 색상 변경 */
+        }
+
+        .changeCardBtn:focus {
+            outline: none; /* 포커스시 테두리 제거 */
+            box-shadow: 0 0 0 2px rgba(217, 237, 232, 0.5); /* 포커스시 박스 섀도우 추가 */
+        }
+
+/*모달 css*/
+        .selectCardModal {
+            /* 다른 스타일을 여기에 추가하세요. */
+            display: flex;
+            justify-content: space-between; /* 내용을 양쪽으로 분산 정렬합니다. */
+            align-items: center; /* 수직 정렬을 가운데로 설정합니다. */
+        }
+
+        .cardInfo {
+            /* 카드 정보 스타일을 여기에 추가하세요. */
+            display: flex;
+            align-items: center; /* 수직 정렬을 가운데로 설정합니다. */
+        }
+
+        .modalCardImg{
+            margin-right: 20px;
+        }
+
+
+
     </style>
 
 </head>
@@ -417,128 +509,123 @@
 
     <div class="mypageMain">
         <div class="mypageName">
-            <div style="font-size: 30px">마이하나페이지</div>
+            <div style="font-size: 30px">내 카드 조회</div>
             <div style="color: #959595">나만의 카드 생활</div>
         </div>
         <br>
 
 
-        <div>
-            ${sessionScope.name}님은 일반고객이십니다.
-        </div>
-
-        <br>
-
-        <c:set var="card1" value="${cardInfos[0]}"/>
-        <c:set var="card2" value="${cardInfos[1]}"/>
-
-        <c:set var="cardPayLog1" value="${thisMonthTransData[card1.cardNumber]}"/>
-        <c:set var="cardPayLog2" value="${thisMonthTransData[card2.cardNumber]}"/>
-        <div class="flex-container">
-            <div class="myCardInfo">
-                <div class=" fs-3 mx-auto mt-2">대표카드</div>
-                <div class="dropdown" style="margin-left: 300px;">
-                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                        카드 선택
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" onclick="showCardInfo(0)">${card1.cardName}</a></li>
-                        <li><a class="dropdown-item" onclick="showCardInfo(1)">${card2.cardName}</a></li>
-                    </ul>
-                </div>
-                <div class="mainCard mt-4" style="font-size: 20px" id="cardInfoDiv">
-                    <img src="/img/${cardInfos[0].cardName}.png" class="d-block payCardImg" id="cardImage"
-                         alt="${cardInfos[0].cardName}">
-
-                    <br>
-
-                    <div class="flex-container custom-flex-container">
-                        <div id="cardName" style="color: #666666; font-size: 18px;">${card1.cardName}</div>
-                        <span id="monthlyUsageTitle" style="color: #666666; font-size: 18px;">이번달 사용금액</span> <br>
-                        <span id="monthlyUsage"
-                              style="font-size: 25px">${thisMonthTotalAmounts[card1.cardNumber]}원 ></span>
-
-                    </div>
-
-                </div>
-
-
-                <br><br>
-                <%--            <div class="btn-group" role="group" aria-label="Basic outlined example" style="border: none">--%>
-                <%--                <button type="button" class="btn btn-outline-primary" style="background-color: #00857E; color: white;">카드관리</button>--%>
-                <%--                <button type="button" class="btn btn-outline-primary" style="background-color: #00857E; color: white;">받은혜택</button>--%>
-                <%--                <button type="button" class="btn btn-outline-primary" style="background-color: #00857E; color: white;">한도조회</button>--%>
-                <%--            </div>--%>
-
-
-            </div>
-
-            <div class="monthlyCardInfo fs-3 mx-auto">
-                <p class="mt-2">내 정보 관리</p>
-                <img class="proImg" src="/img/myprofile.png" alt=""><br>
-
-                <div class="proInfo">
-                    연락처: <span id="phone">${sessionScope.phoneNumber}</span><br>
-                    이메일: ${sessionScope.email} <br>
-                </div>
-
-                <div class="withdralDate" style="text-align: left; margin-left: 5%; margin-top: 3%; margin-bottom: 3%; font-size: 18px">
-                    <div class="holicontainer">
-                        <div class="profile">
-                            <a href="/customer/customer_myPage">개인정보 변경</a>
+        <div class="selectCard">
+           <div class="TransPageCardImg">
+               <img src="/img/${selectedCardName}.png" alt="">
+           </div>
+            <div class="cardDesc">
+            ${selectedCardName}<br>
+<%--               [본인] ${selectedCardNumber.substring(0, 5)} **** - **** ${selectedCardNumber.substring(selectedCardNumber.length() - 5)}--%>
+           </div>
+            <button type="button" class="changeCardBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                카드변경
+            </button>
+            <!-- 모달 시작 -->
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <img src="/img/hanaLogo.png" alt="하나원페이 로고" style="margin-right: 10px; width: 45px; height: 45px;">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel"  style="font-weight: bold;">하나원페이</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="profile">
-                            마케팅 수신동의 변경
+                        <div class="modal-body">
+                            ■ 변경할 카드를 선택하세요.
+                            <hr>
+                            <c:forEach items="${allCards}" var="card">
+                                <c:if test="${card.cardName ne selectedCardName}">
+                                    <div class="selectCardModal">
+                                        <div class="cardInfo">
+                                            <img src="/img/${card.cardName}.png" class="modalCardImg" style="width: 100px; height: 70px;">
+                                                ${card.cardName}
+                                        </div>
+                                        <div class="changeCardBtn">
+                                            카드변경
+                                        </div>
+                                    </div>
+                                    <hr>
+                                </c:if>
+                            </c:forEach>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <br><br>
-
-        <div class="adPayTag">
-            <img src="/img/adpayTag.png" style="width: 37px; height: 37px;">
-            최근 내 지출 패턴을 확인하고 지금 ${sessionScope.name}님의 <span class="tagcolor" style="color: #d14369; font-size: 20px; margin-left: 4px">소비태그</span>를 확인해보세요! >
+            <!-- 모달 끝 -->
         </div>
 
         <br>
-        <div class="recentCardUse">
-            <div class="using" style="font-size: 20px">최근 카드 이용내역
-                <button class="plusBtn">더보기 +</button>
 
-                <%--            토글버튼--%>
+<%--        <c:forEach items="${allCards}" var="card">--%>
 
-                <div class="toggleContainer">
-                    잔액숨기기
-                    <input type="checkbox" id="toggle" hidden>
-                    <label for="toggle" class="toggleSwitch">
-                        <span class="toggleButton"></span>
-                    </label>
-                </div>
-            </div>
+<%--            <div class="que">--%>
+<%--                 <span class="cardCode">--%>
+<%--            <c:choose>--%>
+<%--                <c:when test="${card.cardCode == 'shinhan'}">신한</c:when>--%>
+<%--                <c:when test="${card.cardCode == 'KB'}">KB국민</c:when>--%>
+<%--                <c:when test="${card.cardCode == 'woori'}">우리</c:when>--%>
+<%--                <c:otherwise>${card.cardCode}</c:otherwise>--%>
+<%--            </c:choose>--%>
+<%--        </span>--%>
+<%--                <div class="arrow-wrap">--%>
+<%--                    <span class="arrow-top">↑</span>--%>
+<%--                    <span class="arrow-bottom">↓</span>--%>
+<%--                </div>--%>
+<%--            </div>--%>
 
-            <div>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>결제일시</th>
-                        <th>거래처</th>
-                        <th>카드 번호</th>
-                        <th>상태</th>
-                        <th>거래금액</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!-- 이 부분은 JavaScript에서 동적으로 채워집니다. -->
-                    </tbody>
-                </table>
-            </div>
+<%--            <div class="anw">--%>
+<%--                <img src="/img/${card.cardName}.png" class="d-block payCardImg" alt="${card.cardName}">--%>
+<%--                <div class="cardInfo">--%>
+<%--                    <span>${card.cardName}</span>--%>
+
+<%--                    <span class="hidden-card-number">--%>
+<%--                         [본인] ${card.cardNumber.substring(0, 5)} **** - **** ${card.cardNumber.substring(card.cardNumber.length() - 5)}--%>
+<%--                    </span>--%>
+<%--                    <span class="card-number-field" style="display: none">--%>
+<%--                        [본인] ${card.cardNumber}--%>
+<%--                    </span>--%>
+<%--                </div>--%>
+
+<%--                <button class="show-card-number-btn">--%>
+<%--                    카드번호/유효기간 보기--%>
+<%--                </button>--%>
+<%--                <a href="/hanaOnePay/selectCardTransList">내역조회</a>--%>
+
+<%--            </div>--%>
+<%--        </c:forEach>--%>
+
+        <div id="transactionTable_wrapper" class="dataTables_wrapper no-footer">
+        <table id="transactionTable" class="display" style="width: 90.3%;">
+            <thead>
+            <tr>
+                <th>거래 ID</th>
+                <th>카드 번호</th>
+                <th>결제 날짜</th>
+                <th>결제 금액</th>
+                <th>사업 코드</th>
+                <th>상점</th>
+                <th>결제 상태</th>
+                <th>결제 유형</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
         </div>
-
 
     </div>
+
 </div>
 
 </div>
@@ -551,43 +638,39 @@
 <script>
 
     window.onload = function () {
-        console.log("Script is running"); // 로그 추가
+        // console.log("Script is running"); // 로그 추가
+        //
+        // let phoneElement = document.getElementById("phone");
+        // let originalPhone = phoneElement.textContent.trim();
+        //
+        // console.log("Original phone:", originalPhone); // 로그 추가
 
-        let phoneElement = document.getElementById("phone");
-        let originalPhone = phoneElement.textContent.trim();
+        <%--if (originalPhone) {--%>
+        <%--    let phoneParts = originalPhone.split('-');--%>
+        <%--    if (phoneParts.length === 3) {--%>
+        <%--        phoneParts[2] = "****";--%>
+        <%--        let modifiedPhone = phoneParts.join('-');--%>
+        <%--        phoneElement.textContent = modifiedPhone;--%>
+        <%--    }--%>
+        <%--}--%>
 
-        console.log("Original phone:", originalPhone); // 로그 추가
+        <%--const targetAmount = parseInt('${thisMonthTotalAmounts[card1.cardNumber]}'.replace(/[^0-9]/g, ''));--%>
+        <%--const displayElement = document.getElementById("monthlyUsage");--%>
+        <%--const duration = 500; // 애니메이션 시간 (2초)--%>
+        <%--const stepTime = 10;--%>
+        <%--let currentAmount = 0;--%>
+        <%--const increment = targetAmount / (duration / stepTime);--%>
 
-        if (originalPhone) {
-            let phoneParts = originalPhone.split('-');
-            if (phoneParts.length === 3) {
-                phoneParts[2] = "****";
-                let modifiedPhone = phoneParts.join('-');
-                phoneElement.textContent = modifiedPhone;
-            }
-        }
+        <%--const intervalId = setInterval(function () {--%>
+        <%--    currentAmount += increment;--%>
+        <%--    if (currentAmount >= targetAmount) {--%>
+        <%--        clearInterval(intervalId);--%>
+        <%--        currentAmount = targetAmount;--%>
+        <%--    }--%>
+        <%--    displayElement.textContent = numberWithCommas(Math.round(currentAmount)) + "원";--%>
+        <%--}, stepTime);--%>
 
-        const targetAmount = parseInt('${thisMonthTotalAmounts[card1.cardNumber]}'.replace(/[^0-9]/g, ''));
-        const displayElement = document.getElementById("monthlyUsage");
-        const duration = 500; // 애니메이션 시간 (2초)
-        const stepTime = 10;
-        let currentAmount = 0;
-        const increment = targetAmount / (duration / stepTime);
-
-        const intervalId = setInterval(function () {
-            currentAmount += increment;
-            if (currentAmount >= targetAmount) {
-                clearInterval(intervalId);
-                currentAmount = targetAmount;
-            }
-            displayElement.textContent = numberWithCommas(Math.round(currentAmount)) + "원";
-        }, stepTime);
     }
-
-    function numberWithCommas(x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-
 
     var cardNames = ['${card1.cardName}', '${card2.cardName}'];
     var cardImages = ['/img/${card1.cardName}.png', '/img/${card2.cardName}.png'];
@@ -668,20 +751,20 @@
         }
     }
 
-    function showCardInfo(index) {
-        // 카드 이미지와 이름 업데이트
-        document.querySelector('#cardImage').src = cardImages[index];
-        document.querySelector('#cardImage').alt = cardNames[index];
-        document.querySelector('#cardName').textContent = cardNames[index];
+    <%--function showCardInfo(index) {--%>
+    <%--    // 카드 이미지와 이름 업데이트--%>
+    <%--    document.querySelector('#cardImage').src = cardImages[index];--%>
+    <%--    document.querySelector('#cardImage').alt = cardNames[index];--%>
+    <%--    document.querySelector('#cardName').textContent = cardNames[index];--%>
 
-        // 카드 사용금액 업데이트
-        var formattedAmount = formatCardAmount(cardAmounts[index]);
-        document.querySelector('#monthlyUsage').textContent = formattedAmount;
+    <%--    // 카드 사용금액 업데이트--%>
+    <%--    var formattedAmount = formatCardAmount(cardAmounts[index]);--%>
+    <%--    document.querySelector('#monthlyUsage').textContent = formattedAmount;--%>
 
-        // 추가된 거래내역 표시 로직
-        var cardNumber = (index === 0) ? '${card1.cardNumber}' : '${card2.cardNumber}';
-        showTransData(cardNumber);
-    }
+    <%--    // 추가된 거래내역 표시 로직--%>
+    <%--    var cardNumber = (index === 0) ? '${card1.cardNumber}' : '${card2.cardNumber}';--%>
+    <%--    showTransData(cardNumber);--%>
+    <%--}--%>
 
 
     function fetchAccountData() {
@@ -706,6 +789,56 @@
                 console.error("계좌 정보 조회 중 오류 발생:", error);
             });
     }
+
+    var rawData = '${transactions}';
+
+    // rawData 정제하기
+    var cleanedData = rawData.replace(/HanaOnePayTransDTO/g, "")
+        .replace(/\(/g, "{")
+        .replace(/\)/g, "}")
+        .replace(/=/g, ":\"")
+        .replace(/, /g, "\", ")
+        .replace(/:\"\{/g, ":{")
+        .replace(/\},\" /g, "}, ")
+        .replace(/}\"/g, "}")
+        .replace(/(\w+):/g, "\"$1\":"); // 프로퍼티 이름에 큰따옴표 추가
+
+    // businessMall 값 내에 쌍따옴표 추가하기
+    cleanedData = cleanedData.replace(/"businessMall":([^\,]*),/g, function(match, p1) {
+        return '"businessMall":"' + p1.trim().replace(/"/g, '') + '",';
+    });
+
+    // 날짜 형식 정제하기
+    cleanedData = cleanedData.replace(/\"([0-9]{4}-[0-9]{2}-[0-9]{2}) \"(\d{2})\":\"(\d{2})\":(\d{2})\"/g, "\"$1 $2:$3:$4\"");
+    cleanedData = cleanedData.replace(/:(\"[^\"]*)}$/g, "$1\"}");
+
+    // payType 필드 값의 닫는 따옴표 추가
+    cleanedData = cleanedData.replace(/(\"payType\":\")([^\"]+)(\"?})/g, "$1$2\"$3");
+
+    console.log(cleanedData);
+
+    // DataTable 초기화
+    var transactions = JSON.parse(cleanedData);
+    $('#transactionTable').DataTable({
+        data: transactions,
+        columns: [
+            { data: 'payId' },
+            { data: 'cardNumber' },
+            { data: 'payDate' },
+            { data: 'payAmount' },
+            { data: 'businessCode' },
+            { data: 'businessMall' },
+            { data: 'payStatus' },
+            { data: 'payType' }
+        ]
+    });
+
+    var selectedCardImage = document.querySelector('.selectCard .TransPageCardImg img');
+    var selectedCardName = document.querySelector('.selectCard .cardDesc').textContent.trim();
+
+
+
+
 </script>
 
 </body>

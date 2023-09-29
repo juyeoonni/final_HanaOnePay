@@ -1,6 +1,7 @@
 package com.kopo.finalhanaonepayproject.api.controller;
 
 import com.kopo.finalhanaonepayproject.api.service.OpenAPIService;
+import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.ChartDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -134,9 +135,12 @@ public class OpenAPIController {
         ModelAndView modelAndView = new ModelAndView();
 
         String response = openAPIService.fetchPaymentsByMonthFromAPI(month);
+        String response2 = openAPIService.fetchPaymentsByMonthFromAPI2();
+        System.out.println("response2:" + response2);
 
         if (response != null) {
             modelAndView.addObject("response", response);
+            modelAndView.addObject("response2", response2);
             modelAndView.setViewName("hanaOnePay/payReport");
         } else {
             modelAndView.addObject("message", "Failed to fetch payments by month");
@@ -146,6 +150,13 @@ public class OpenAPIController {
         return modelAndView;
     }
 
+    // 월별 업종별 소비 분포 조회
+    @GetMapping("/api/payments-by-month2")
+    public String getPaymentsByMonth2(@RequestParam String month) {
+        String response = openAPIService.fetchPaymentsByMonthFromAPI(month);
+        System.out.println("화살표로 월 전환 성공");
+        return response;
+    }
 
 
 }

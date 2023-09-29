@@ -487,9 +487,12 @@
                 </div>
 
                 <button class="show-card-number-btn">
-                    카드번호/유효기간 보기
+                    카드번호 보기
                 </button>
-                <a href="https://www.shinhancard.com/pconts/html/card/apply/check/1188313_2206.html" class="show-card-benefit">혜택보기</a>
+                <a class="show-card-number-btn" href="/hanaOnePay/selectCardTransList?cardCode=${card.cardCode}&cardNumber=${card.cardNumber}&cardName=${card.cardName}">내역조회</a>
+
+
+
 
             </div>
         </c:forEach>

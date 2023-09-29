@@ -1,5 +1,6 @@
 package com.kopo.finalhanaonepayproject.api.service;
 
+import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayTransDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
@@ -155,6 +156,54 @@ public class OpenAPIService {
         } else {
             logger.error("Failed to fetch monthly payments. Status code: {}", response.getStatusCode());
             return null;
+        }
+    }
+
+    // 월별 결제 내역 조회 서비스
+    public String fetchPaymentsByMonthFromAPI2() {
+        System.out.println("월별 결제 내역 조회 서비스까지 들어오는거 확인");
+
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8082/api/monthly-payment-data2");
+
+        URI uri = builder.build().encode().toUri();
+
+        ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            logger.info("Received Response for Monthly Payments: {}", response.getBody());
+            return response.getBody();
+        } else {
+            logger.error("Failed to fetch monthly payments. Status code: {}", response.getStatusCode());
+            return null;
+        }
+    }
+
+    // 특정 카드의 거래내역 조회 서비스
+    public List<HanaOnePayTransDTO> fetchTransactionsByCard(String cardCode, String cardNumber) {
+        System.out.println("특정 카드의 거래내역 조회 서비스 요청 시작");
+
+        // URL 설정
+        String url = "http://localhost:8082/api/card-transactions";
+
+        // POST 요청에 보낼 데이터 설정
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("cardCode", cardCode);
+        payload.put("cardNumber", cardNumber);
+
+        HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(payload);
+
+        ResponseEntity<List<HanaOnePayTransDTO>> response = restTemplate.exchange(
+                url,
+                HttpMethod.POST,
+                requestEntity,
+                new ParameterizedTypeReference<List<HanaOnePayTransDTO>>() {});
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            logger.info("Received Transactions Response: {}", response.getBody());
+            return response.getBody();
+        } else {
+            logger.error("Failed to fetch transactions. Status code: {}", response.getStatusCode());
+            return Collections.emptyList();
         }
     }
 

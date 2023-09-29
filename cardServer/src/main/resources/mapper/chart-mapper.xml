@@ -5,10 +5,10 @@
 
 <mapper namespace="com.kopo.cardserver.model.DAO.CardDAO">
 
-    <resultMap id="chartDTOResultMap" type="com.kopo.cardserver.model.DTO.ChartDTO">
-        <result column="businessCode" property="businessCode" />
-        <result column="payAmount" property="payAmount" />
-    </resultMap>
+<!--    <resultMap id="chartDTOResultMap" type="com.kopo.cardserver.model.DTO.ChartDTO">-->
+<!--        <result column="businessCode" property="businessCode" />-->
+<!--        <result column="payAmount" property="payAmount" />-->
+<!--    </resultMap>-->
 
     <!--    우리카드리스트-->
     <select id="getWooriCardPaymentsByMonth" resultType="com.kopo.cardserver.model.DTO.ChartDTO">
@@ -58,6 +58,29 @@
         WHERE TO_NUMBER(TO_CHAR(TO_DATE(payDate, 'YYYY-MM-DD HH24:MI:SS'), 'MM')) = #{month}
         GROUP BY businessCode
     </select>
+
+    <!--    전체기관 카드와 계좌 사용금액 월별 조회-->
+    <select id="getAllOrgTranDatabyMonth" resultType="com.kopo.cardserver.model.DTO.MonthTransDTO">
+        SELECT
+            TO_NUMBER(TO_CHAR(TO_DATE(payDate, 'YYYY-MM-DD HH24:MI:SS'), 'MM')) AS month, SUM(payAmount) AS totalAmount
+        FROM
+            (
+            SELECT payDate, payAmount FROM woori_acc_payment_log
+            UNION ALL
+            SELECT payDate, payAmount FROM woori_card_payment_log
+            UNION ALL
+            SELECT payDate, payAmount FROM kb_acc_payment_log
+            UNION ALL
+            SELECT payDate, payAmount FROM kb_card_payment_log
+            UNION ALL
+            SELECT payDate, payAmount FROM shinhan_acc_payment_log
+            UNION ALL
+            SELECT payDate, payAmount FROM shinhan_card_payment_log
+            ) combined
+        GROUP BY TO_NUMBER(TO_CHAR(TO_DATE(payDate, 'YYYY-MM-DD HH24:MI:SS'), 'MM'))
+        ORDER BY month
+    </select>
+
 
 </mapper>
 

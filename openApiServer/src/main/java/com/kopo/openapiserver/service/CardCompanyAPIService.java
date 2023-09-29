@@ -128,4 +128,43 @@ public class CardCompanyAPIService {
             return null;
         }
     }
+
+    public String  fetchMonthlyPaymentData2() {
+        // 카드사 API URL
+        String baseUrl = "http://localhost:8081/api/monthly-payment-data2";
+
+        URI uri = UriComponentsBuilder.fromHttpUrl(baseUrl)
+                .build()
+                .toUri();
+
+        ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.GET, null, String.class);
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            logger.info("Received Monthly Payment Data: {}", response.getBody());
+            return response.getBody();
+        } else {
+            logger.error("Failed to fetch monthly payment data. Status code: {}", response.getStatusCode());
+            return null;
+        }
+    }
+
+    public String fetchTransactionsByCard(String cardCode, String cardNumber) {
+        // 카드사 API에 요청을 보내고 응답을 처리하는 로직
+        URI uri = URI.create("http://localhost:8081/api/card-transactions"); // 실제 카드사 API URL을 설정해야 합니다.
+
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("cardCode", cardCode);
+        payload.put("cardNumber", cardNumber);
+
+        ResponseEntity<String> response = restTemplate.postForEntity(uri, payload, String.class);
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            logger.info("Received Transactions by Card Data: {}", response.getBody());
+            return response.getBody();
+        } else {
+            logger.error("Failed to fetch transactions by card. Status code: {}", response.getStatusCode());
+            return null;
+        }
+    }
+
 }
