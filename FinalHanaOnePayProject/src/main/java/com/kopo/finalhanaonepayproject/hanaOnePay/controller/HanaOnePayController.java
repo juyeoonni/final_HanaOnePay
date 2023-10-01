@@ -6,10 +6,7 @@ import javax.servlet.http.HttpSession;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kopo.finalhanaonepayproject.api.service.OpenAPIService;
-import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayAccountDTO;
-import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayCardDTO;
-import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayTransDTO;
-import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayhanaCardDTO;
+import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.*;
 import com.kopo.finalhanaonepayproject.hanaOnePay.service.HanaOnePayService;
 import com.kopo.finalhanaonepayproject.shop.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -248,6 +246,21 @@ public class HanaOnePayController {
         return "hanaOnePay/payTendencyTest";
     }
 
+    @GetMapping("/hanaOnePay/payTendencyTestResult")
+    public ModelAndView payTendencyTestResult() {
+        List<String> businessCodes = Arrays.asList("1000", "5500");
+        List<CardItemDTO> cardList = hanaOnePayService.getCardsByBusinessCodes(businessCodes);
+
+        ModelAndView mav = new ModelAndView("hanaOnePay/payTendencyTestResult");
+        mav.addObject("cards", cardList);
+
+        return mav;
+    }
+
+    @GetMapping("/hanaOnePay/cardTerms")
+    public String cardTerms() {
+        return "hanaOnePay/cardTerms";
+    }
 
 
 

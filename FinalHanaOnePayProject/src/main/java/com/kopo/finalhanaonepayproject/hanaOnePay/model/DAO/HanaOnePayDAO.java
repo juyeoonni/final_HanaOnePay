@@ -1,9 +1,6 @@
 package com.kopo.finalhanaonepayproject.hanaOnePay.model.DAO;
 
-import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayAccountDTO;
-import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayCardDTO;
-import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayTransDTO;
-import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayhanaCardDTO;
+import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -32,5 +29,7 @@ public interface HanaOnePayDAO {
 
     // 이번달 사용금액
     int getThisMonthTotalAmount(String cardNumber);
+
+    List<CardItemDTO> getCardsByBusinessCodes(List<String> businessCodes);
 
 }

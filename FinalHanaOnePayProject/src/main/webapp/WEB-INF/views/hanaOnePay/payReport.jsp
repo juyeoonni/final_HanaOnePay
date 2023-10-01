@@ -204,14 +204,49 @@
         }
 
         .payTag {
-            margin-top: 10px;
             align-items: center;
-            background-color: white;
+            border: #BCD9D3 5px solid;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            margin-top: 70px;
             padding: 20px;
-            border-radius: 15px; /* 둥근 모서리 */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-            width: 60%;
+            border-radius: 15px;
+            width: 90%;
+            height: 200px;
+        }
 
+        .payTagDetail{
+            padding-top: 12px;
+            padding-left: 20px;
+            border: #BCD9D3 5px solid;
+            border-radius: 15px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            height: 80px;
+            margin-top: 25px;
+            margin-right: 18px;
+        }
+        .payTagDetails {
+            display: flex;  /* 두 payTagDetail을 수평으로 정렬 */
+            margin-right: 10px; /* 오른쪽 이미지와의 간격을 조절 */
+        }
+
+        .payTagUser {
+            height: 80px;
+            display: flex;
+            align-items: center; /* 중앙 정렬 */
+            margin-right: 10px;  /* 오른쪽에 간격 추가 */
+        }
+
+        .payTagStar {
+            margin-left: 50px;
+            margin-bottom: 50px;
+            height: 200px;  /* 이미지의 높이. 필요에 따라 조절 가능 */
+            width: auto;  /* 이미지의 너비를 자동으로 설정 */
+        }
+
+        .payTagMessage{
+            font-size: 17px;
+            margin-right: 20px;
         }
 
         .pieChart {
@@ -436,6 +471,27 @@
             </div>
         </div>
 
+        <div class="payTag">
+            <div class="payTagMessage">
+            ${sessionScope.name}님, <br>
+                <span class="underlineText" style="font-size: 25px; color: #666666; display: inline-block; border-bottom: 4px solid #BCD9D3;">소비태그 2개</span>를 획득했어요!
+            </div>
+            <div class="payTagUser">
+                <div class="payTagDetails">
+                    <div class="payTagDetail">
+                        <%-- 첫번째 소비태그 --%>
+                    </div>
+                    <div class="payTagDetail">
+                        <%-- 두번째 소비태그 --%>
+                    </div>
+                </div>
+                <img class="payTagStar" src="/img/payTagStar.png">
+            </div>
+        </div>
+
+
+
+
         <div class="monthlyChartDiv">
             <div class="monthlyChartMent">
                 ${sessionScope.name}님의 1년간 소비 추이입니다.
@@ -570,6 +626,7 @@
                 console.log(data);
                 updateChartData(data);
                 updateTop5Businesses(data);
+                updatePayTag(data);
                 // alert("월별 차트 조회 성공");
             },
             error: function (request, status, error) {
@@ -794,6 +851,70 @@
             }
         }
     });
+
+    // 소비태그
+    // 소비태그에 대한 매핑 객체
+    var payTagMapping  = {
+        '1000': '# 쇼핑마스터',
+        '2000': '# 맛집컬렉터',
+        '2500': '# 카페인홀릭',
+        '5100': '# 생활의 달인',
+        '5200': '# 편의점족',
+        '6600': '# 드라이브 러버',
+        '6306': '# 자유로운 트래블러',
+        '6301': '# 대중교통 이용러',
+        '8000': '# 교양있는 생활자',
+        '6000': '# 자유로운 여행가',
+        '4000': '# 괜찮아 잘될거야! 아프지마',
+        '7000': '# 똑똑이',
+        '5500': '# 슬기로운 인터넷 웹서퍼'
+    };
+
+    var payTagSubtitles = {
+        '1000': '쇼핑에 진심이에요. 쇼핑없인 못살아!',
+        '2000': '매일 매일 새로운 맛집 탐방!',
+        '2500': '커피 수혈 없이는 못살아~',
+        '5100': '생활의 달인이 되고 싶어요!',
+        '5200': '편의점은 내 두번째 집!',
+        '6600': '드라이브가 취미에요!',
+        '6306': '여행은 언제나 환영이에요!',
+        '6301': '대중교통을 이용해 환경을 지켜요!',
+        '8000': '교양있는 생활을 위해 노력해요!',
+        '6000': '여행은 언제나 환영이에요!',
+        '4000': '건강은 최고의 부! 건강을 위해 노력해요!',
+        '7000': '똑똑한 사람이 되고 싶어요!',
+        '5500': '웹이란 바다의 슬기로운 인터넷 서퍼!'
+    };
+
+    function updatePayTag(dataFromServer) {
+        // 데이터를 payAmount 기준으로 내림차순 정렬
+        dataFromServer.sort((a, b) => b.payAmount - a.payAmount);
+
+        // 상위 2개의 데이터를 추출
+        var top2Data = dataFromServer.slice(0, 2);
+
+        var payTagElements = document.querySelectorAll('.payTagDetail');
+
+        for (var i = 0; i < top2Data.length; i++) {
+            var tag = payTagMapping[top2Data[i].businessCode];
+            var subtitle = payTagSubtitles[top2Data[i].businessCode];  // 부제목 가져오기
+
+            if (tag) {
+                payTagElements[i].innerHTML = tag;  // innerHTML을 사용하여 태그 내용 갱신
+
+                if (subtitle) {
+                    // 부제목을 추가하기 위한 div 생성
+                    var subtitleDiv = document.createElement('div');
+                    subtitleDiv.textContent = subtitle;
+                    subtitleDiv.classList.add('payTagSubtitle');  // CSS 스타일을 위한 클래스 추가
+                    payTagElements[i].appendChild(subtitleDiv);  // payTagDetail 내에 부제목 div 추가
+                }
+            }
+        }
+
+    }
+
+
 
 
 </script>

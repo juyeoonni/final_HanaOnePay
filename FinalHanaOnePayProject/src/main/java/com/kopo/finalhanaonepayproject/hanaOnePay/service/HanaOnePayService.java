@@ -3,10 +3,7 @@ package com.kopo.finalhanaonepayproject.hanaOnePay.service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kopo.finalhanaonepayproject.hanaOnePay.model.DAO.HanaOnePayDAO;
-import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayAccountDTO;
-import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayCardDTO;
-import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayTransDTO;
-import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayhanaCardDTO;
+import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -93,6 +90,8 @@ public class HanaOnePayService {
         return hanaOnePayDAO.getThisMonthTotalAmount(cardNumber);
     };
 
-
+    public List<CardItemDTO> getCardsByBusinessCodes(List<String> businessCodes) {
+        return hanaOnePayDAO.getCardsByBusinessCodes(businessCodes);
+    }
 
 }

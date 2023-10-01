@@ -87,4 +87,15 @@
                  JOIN customer_hana cu ON a.identityNumber = cu.identityNumber
         where cu.identityNumber = #{identityNumber};
     </select>
+
+    <select id="getCardsByBusinessCodes" parameterType="list" resultType="com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.CardItemDTO">
+        SELECT ci.cardName, ci.cardTypeCode, ci.cardDesc, ci.annualFee
+        FROM cardItem ci
+        JOIN cardBenefit cb ON ci.cardName = cb.cardName
+        WHERE cb.businessCode IN
+        <foreach item="businessCode" collection="list" open="(" separator="," close=")">
+            #{businessCode}
+        </foreach>
+    </select>
+
 </mapper>
