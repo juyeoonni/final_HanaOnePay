@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: JuYeon
-  Date: 2023-09-02
-  Time: 오후 3:28
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -16,8 +10,8 @@
     <title>joinHanaOnePay</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/card.css">
+
+<%--    <link rel="stylesheet" href="/css/card.css">--%>
 
     <style>
         .card-btn:hover {
@@ -125,7 +119,7 @@
         }
 
         .mycardConnect{
-            width: 300px;
+            width: 500px;
             height: 200px;
             display: block;
             margin: auto;
@@ -222,8 +216,9 @@
 
 <div class="container">
     <div class="intro" style="padding-top: 20px;">
+        <div style="text-align: center; font-size:18px; color: #00857E;">마이카드</div>
         <h1 style="text-align: center; font-size: 2em;">마이하나원페이</h1>
-        <img class="mycardConnect" src="/img/mycardConnect.gif">
+        <img class="mycardConnect" src="/img/connectMydata.png">
         <p style="text-align: center;">흩어진 내 자산을 모아 간편하게 결제하세요!</p>
         <%--        <p style="text-align: center; font-weight: bold;">연결할 카드기관 선택</p>--%>
     </div>
@@ -233,10 +228,10 @@
     <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="true" data-toggle="tab" href="#bankContent">은행</a>
+                <a class="nav-link active" aria-current="true" data-toggle="tab" href="#" id="bankLink">은행</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#cardContent">카드</a>
+                <a class="nav-link" data-toggle="tab" href="#cardContent" id="cardLink">카드</a>
             </li>
         </ul>
     </div>
@@ -425,6 +420,116 @@
     </div>
 </div>
 
+<%--<!-- Button trigger modal -->--%>
+<%--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">--%>
+<%--    Launch demo modal--%>
+<%--</button>--%>
+<!--Modal 1 -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="/img/hanaLogo.png" alt="하나원페이 로고"
+                     style="margin-right: 10px; width: 45px; height: 45px;">
+                <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-weight: bold;">
+                    하나원페이</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h5 id="authentification">
+
+                </h5>
+                    <div style="color: #FFFFFF; background-color: #00857E; border-radius: 5px; width: 460px; height: 40px; padding: 10px;">[하나 SMS 본인인증]</div>
+                <hr>
+
+                <div class="container">
+                    <!-- <h2>SMS 문자 인증</h2> -->
+                    <form id="smsForm" action="/user/sms" method="POST">
+
+                        <div class="form-group">
+                            <label for="name">이름</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="birth">생년월일</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="birth" name="birth" placeholder="YYYYMMDD" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phoneNumber">전화번호</label>
+                            <div class="input-wrapper">
+                                <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="010XXXXXXXX" required maxlength="11" oninput="sanitizePhoneNumber()">
+                                <!-- <button type="submit" id="sendSmsButton">인증번호 전송</button> -->
+                                <button onclick="sendSmsRequest()" class="button">인증번호 전송</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phoneNumberCheck">인증확인</label>
+                            <div class="input-wrapper">
+                                <input type="tel" id="phoneNumberCheck" name="phoneNumberCheck" placeholder="인증번호 4자리를 입력하세요" required maxlength="11" oninput="sanitizePhoneNumber()">
+                                <button type="button" onclick="showConfirmationAlert(); displayConfirmationMessage()">인증</button>
+                            </div>
+                            <p id="confirmationMessage"></p>
+                        </div>
+
+                    </form>
+                </div>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="custom-button" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-dismiss="modal">확인</button>
+
+            <%--                <button type="button" class="custom-button" onclick="hideModal1AndShowModal2()">확인</button>--%>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<<!-- Modal2 -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="/img/hanaLogo.png" alt="하나원페이 로고"
+                     style="margin-right: 10px; width: 45px; height: 45px;">
+                <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-weight: bold;">
+                    하나원페이</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h5 id="selectedCardCount" style="font-size: 18px;">
+                    다음의 기관에
+                    <% out.print((String) session.getAttribute("name")); %> 님의 <br>
+                    카드 정보 연결을 요청했어요.
+                </h5>
+                <hr>
+                <p>요청 기관</p>
+                <ul id="selectedCardList">
+                    <!-- 여기에 선택한 카드사의 이름이 들어갑니다. -->
+                </ul>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="custom-button" onclick="window.location.href='/card/connectMyData'">연동</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 
 
@@ -436,8 +541,26 @@
 </button>
 
 
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <script>
+    // 은행 링크 클릭 시 스크롤 방지
+    $("#bankLink").click(function(e) {
+        e.preventDefault(); // 기본 동작 중지
+        // 여기에 원하는 동작을 추가할 수 있습니다.
+    });
+
+    // 카드 링크 클릭 시 스크롤 방지
+    $("#cardLink").click(function(e) {
+        e.preventDefault(); // 기본 동작 중지
+        // 여기에 원하는 동작을 추가할 수 있습니다.
+    });
+
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        var modals = document.querySelectorAll('.modal');
+        modals.forEach(m => new bootstrap.Modal(m));
+    });
+
     $(document).ready(function(){
         // 초기에 '은행' 탭이 활성화되도록 설정
         $('.nav-link.active').tab('show');
@@ -645,118 +768,13 @@
     }
 
     function hideModal1AndShowModal2() {
-        // 모달1 숨기기
-        var modal1 = new bootstrap.Modal(document.getElementById('exampleModal1'), {});
-        modal1.hide();
-
-        // 모달2 띄우기
-        var modal2 = new bootstrap.Modal(document.getElementById('exampleModal2'), {});
-        modal2.show();
+        $('#exampleModal1').modal('hide');
+        $('#exampleModal2').modal('show');
     }
+
+
+
 </script>
-
-<%--<!-- Button trigger modal -->--%>
-<%--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">--%>
-<%--    Launch demo modal--%>
-<%--</button>--%>
-<!--Modal 1 -->
-<!-- Modal -->
-<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel1">하나 SMS 본인인증</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <h5 id="authentification">
-
-                </h5>
-                <img class="hanaAuth" src="/img/hanaAuth.png">
-                <hr>
-
-                <div class="container">
-                    <!-- <h2>SMS 문자 인증</h2> -->
-                    <form id="smsForm" action="/user/sms" method="POST">
-
-                        <div class="form-group">
-                            <label for="name">이름</label>
-                            <div class="input-wrapper">
-                                <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="birth">생년월일</label>
-                            <div class="input-wrapper">
-                                <input type="text" id="birth" name="birth" placeholder="YYYYMMDD" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="phoneNumber">전화번호</label>
-                            <div class="input-wrapper">
-                                <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="010XXXXXXXX" required maxlength="11" oninput="sanitizePhoneNumber()">
-                                <!-- <button type="submit" id="sendSmsButton">인증번호 전송</button> -->
-                                <button onclick="sendSmsRequest()" class="button">인증번호 전송</button>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="phoneNumberCheck">인증확인</label>
-                            <div class="input-wrapper">
-                                <input type="tel" id="phoneNumberCheck" name="phoneNumberCheck" placeholder="인증번호 4자리를 입력하세요" required maxlength="11" oninput="sanitizePhoneNumber()">
-                                <button type="button" onclick="showConfirmationAlert(); displayConfirmationMessage()">인증</button>
-                            </div>
-                            <p id="confirmationMessage"></p>
-                        </div>
-
-                    </form>
-                </div>
-
-
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="custom-button" onclick="hideModal1AndShowModal2()">확인</button>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-<<!-- Modal2 -->
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">기관연동</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <h5 id="selectedCardCount">
-                    다음의 기관에
-                    <% out.print((String) session.getAttribute("name")); %> 님의 <br>
-                    카드 정보 연결을 요청했어요.
-                </h5>
-                <hr>
-                <p>요청 기관</p>
-                <ul id="selectedCardList">
-                    <!-- 여기에 선택한 카드사의 이름이 들어갑니다. -->
-                </ul>
-
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="custom-button" onclick="window.location.href='/card/connectMyData'">연동</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-
-
 
 <%@ include file="/WEB-INF/views/comm/footer.jsp"%>
 </body>

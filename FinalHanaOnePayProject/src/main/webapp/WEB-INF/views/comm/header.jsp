@@ -7,6 +7,22 @@
     <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/nav.css">
+
+    <style>
+        .custom_logout_btn{
+            background-color: #00857E;
+            border: none;
+            border-radius: 5px;
+            color: #FFFFFF;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
@@ -15,11 +31,11 @@
     <% String name = (String) session.getAttribute("name");
        if (name != null) {
     %>
-    <div class="col-md-3 text-end">
+    <div class="col-md-3 text-end" style="margin-left: 1000px; margin-top: 10px">
         <span class="myinfo"><%=name%>님 반갑습니다!</span>
-        <a href="/logout" class="custom_login_btn">로그아웃</a>
+        <a href="/logout" class="custom_logout_btn">로그아웃</a>
     <% } else { %>
-    <div class="col-md-3 text-end">
+    <div class="col-md-3 text-end" style="margin-left: 1000px; margin-top: 10px">
         <a href="/customer/customer_login">
             <button type="button" class="custom_login_btn">로그인</button>
         </a>
@@ -41,13 +57,14 @@
             <ul class="nav">
                 <li><a href="/home" class="nav-link px-2 link-secondary" onclick="return checkLogin();">Home</a></li>
 
-                <li><a href="/card/selectCardList" class="nav-link px-2 link-secondary" onclick="return checkLogin();">카드</a></li>
+<%--                <li><a href="/card/selectCardList" class="nav-link px-2 link-secondary" onclick="return checkLogin();">카드</a></li>--%>
 
-                <li><a href="/customer/selectAllCustomer" class="nav-link px-2" onclick="return checkLogin();">조회</a></li>
+<%--                <li><a href="/customer/selectAllCustomer" class="nav-link px-2" onclick="return checkLogin();">조회</a></li>--%>
                 <li><a href="/shop/shopMain" class="nav-link px-2" onclick="return checkLogin();">라이프</a></li>
 
                 <% if (name != null) { %>
-                <li><a href="/customer/customer_myHana" class="nav-link px-2" >마이하나</a></li>
+<%--                <li><a href="/customer/customer_myHana" class="nav-link px-2" >마이하나</a></li>--%>
+                <li><a href="/customer/customer_myHanaPage" class="nav-link px-2">마이페이</a></li>
                 <li><a href="/customer/customer_myHanaPage" class="nav-link px-2">마이하나</a></li>
                 <% } %>
 

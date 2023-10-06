@@ -56,12 +56,17 @@ dependencies {
     implementation 'org.apache.httpcomponents:httpclient:4.5.13'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
 
+    // naver OCR
+    implementation 'org.hibernate.validator:hibernate-validator:6.2.5.Final'
+    implementation 'org.json:json:20211205'
+
     // QR pay
     implementation 'com.google.zxing:core:3.4.1'
     implementation 'com.google.zxing:javase:3.4.1'
 
     // json 파싱
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
+
 }
 
 tasks.named('test') {

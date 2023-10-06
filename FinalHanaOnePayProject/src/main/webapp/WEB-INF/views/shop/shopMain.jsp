@@ -60,6 +60,13 @@
         margin-top: 15%;
         margin-bottom: 26%;
     }
+
+    .carousel-slide{
+        width: 1400px;
+        height: 500px;
+    }
+
+
     </style>
 </head>
 
@@ -113,6 +120,31 @@
             </div>
         </header>
 
+
+<%--        <!-- Carousel 코드 -->--%>
+<%--        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3000">--%>
+<%--            <div class="carousel-inner">--%>
+<%--                <div class="carousel-item active">--%>
+<%--                    <img src="/img/shop/shopMainPage.jpg" class="d-block w-75 h-50 mx-auto p-3 carousel-slide" alt="...">--%>
+<%--                </div>--%>
+<%--                <div class="carousel-item">--%>
+<%--                    <img src="/img/shop/shopMainPage1.png" class="d-block w-75 h-50 mx-auto p-3 carousel-slide" alt="...">--%>
+<%--                </div>--%>
+<%--                <div class="carousel-item">--%>
+<%--                    <img src="/img/shop/shopMainPage3.jpg" class="d-block w-75 h-50 mx-auto p-3 carousel-slide" alt="...">--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">--%>
+<%--                <span class="carousel-control-prev-icon" aria-hidden="true"></span>--%>
+<%--                <span class="visually-hidden">Previous</span>--%>
+<%--            </button>--%>
+<%--            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">--%>
+<%--                <span class="carousel-control-next-icon" aria-hidden="true"></span>--%>
+<%--                <span class="visually-hidden">Next</span>--%>
+<%--            </button>--%>
+<%--        </div>--%>
+
+
         <!-- Section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
@@ -127,12 +159,12 @@
                                     <!-- Product name-->
                                     <h5 class="fw-bolder">[기획] STAND 탁상용 무선 선풍기</h5>
                                     <!-- Product price-->
-                                    $40.00 - $80.00
+                                    39,900원
                                 </div>
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">카트담기</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상세보기</a></div>
                             </div>
                         </div>
                     </div>
@@ -162,7 +194,7 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="./shopItem1">카트담기</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="./shopItem1">상세보기</a></div>
                             </div>
                         </div>
                     </div>
@@ -178,13 +210,13 @@
                                     <!-- Product name-->
                                     <h5 class="fw-bolder">공용 오가닉 코튼 폴로</h5>
                                     <!-- Product price-->
-                                    <span class="text-muted text-decoration-line-through">$50.00</span>
-                                    $25.00
+                                    <span class="text-muted text-decoration-line-through">97,000원</span>
+                                    77,000원
                                 </div>
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">카트담기</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상세보기</a></div>
                             </div>
                         </div>
                     </div>
@@ -206,12 +238,12 @@
                                         <div class="bi-star-fill"></div>
                                     </div>
                                     <!-- Product price-->
-                                    $40.00
+                                    670,000원
                                 </div>
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">카트담기</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상세보기</a></div>
                             </div>
                         </div>
                     </div>
@@ -227,13 +259,13 @@
                                     <!-- Product name-->
                                     <h5 class="fw-bolder">[리앤쿡] 펫 쿨매트 M</h5>
                                     <!-- Product price-->
-                                    <span class="text-muted text-decoration-line-through">$50.00</span>
-                                    $25.00
+                                    <span class="text-muted text-decoration-line-through">29,000원</span>
+                                    15,000원
                                 </div>
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">카트담기</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상세보기</a></div>
                             </div>
                         </div>
                     </div>
@@ -247,12 +279,13 @@
                                     <!-- Product name-->
                                     <h5 class="fw-bolder">[kopo타월] KING 무지 수건타올 170g 10장</h5>
                                     <!-- Product price-->
-                                    $120.00 - $280.00
+                                    <span class="text-muted text-decoration-line-through">67,000원</span>
+                                    47,000원
                                 </div>
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">카트담기</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상세보기</a></div>
                             </div>
                         </div>
                     </div>
@@ -276,13 +309,13 @@
                                         <div class="bi-star-fill"></div>
                                     </div>
                                     <!-- Product price-->
-                                    <span class="text-muted text-decoration-line-through">29,900</span>
+                                    <span class="text-muted text-decoration-line-through">29,900원</span>
                                     19,500원
                                 </div>
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="./shopItem2">카트담기</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="./shopItem2">상세보기</a></div>
                             </div>
                         </div>
                     </div>
@@ -304,12 +337,12 @@
                                         <div class="bi-star-fill"></div>
                                     </div>
                                     <!-- Product price-->
-                                    $40.00
+                                    28,000원
                                 </div>
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">카트담기</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상세보기</a></div>
                             </div>
                         </div>
                     </div>
@@ -337,10 +370,25 @@
 <%@ include file="/WEB-INF/views/comm/footer.jsp"%>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-
-
-
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<script>
+    const sliderContainer = document.getElementById('slider-container');
+    let slideIndex = 0;
+
+    function showSlide(index) {
+        sliderContainer.style.transform = `translateX(-${index * 320}px)`;
+    }
+
+    function nextSlide() {
+        slideIndex++;
+        if (slideIndex >= 2) {
+            slideIndex = 0;
+        }
+        showSlide(slideIndex);
+    }
+
+    setInterval(nextSlide, 3000); // 3초마다 슬라이드 전환
+</script>
+
 </body>
 </html>

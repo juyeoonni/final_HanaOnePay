@@ -223,7 +223,7 @@
             height: 200px;
             top: 0;
             left: 0;
-            background-color: #00857E;
+            background-color: #00907F;
             border-radius: 10px;
             color: white;
             visibility: hidden;  /* 초기에 숨김 */
@@ -235,6 +235,37 @@
             transform: translateY(20px); /* 초기 상태에서 아래로 조금 내려감 */
             transition: opacity 0.3s, transform 0.5s;  /* opacity와 transform이 0.3초 동안 변하도록 설정 */
         }
+
+        .btn-detail {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #404B57;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            width: 250px;
+            height: 40px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .btn-detail:hover {
+            background-color: #2B333B;
+        }
+
+        .openTerms{
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: whitesmoke;
+            color: #666666;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            width: 250px;
+            height: 40px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
 
 
 
@@ -358,8 +389,8 @@
                                                 <li>생활 쇼핑 5% 적립</li>
                                                 <li>아울렛 쇼핑 5% 적립</li>
                                             </ul>
-                                            <a href="https://www.hanacard.co.kr/OPI41000000D.web?schID=pcd&mID=PI41011881P&CD_PD_SEQ=11881&" class="btn-detail">상세보기</a>
-                                            <button onclick="openTermsPage()">상세보기</button>
+                                            <a href="https://www.hanacard.co.kr/OPI41000000D.web?schID=pcd&mID=PI41011881P&CD_PD_SEQ=11881&" class="btn-detail">상세보기</a><br>
+                                            <button class="openTerms" onclick="openTermsPage()">상품약관보기</button>
                                         </c:when>
                                         <c:when test="${card.cardName eq 'MULTI On 모바일카드'}">
                                             <ul>
@@ -368,6 +399,7 @@
                                                 <li>온라인 쇼핑 2.0% 적립</li>
                                             </ul>
                                             <a href="https://www.hanacard.co.kr/OPI41000000D.web?schID=pcd&mID=PI41012934P&CD_PD_SEQ=12934&" class="btn-detail">상세보기</a>
+                                            <button class="openTerms" onclick="openTermsPage()">상품약관보기</button>
                                         </c:when>
                                         <c:when test="${card.cardName eq 'MULTI Living 모바일카드'}">
                                             <ul>
@@ -376,6 +408,7 @@
                                                 <li>페이결제 매일 1% 할인</li>
                                             </ul>
                                             <a href="https://www.hanacard.co.kr/OPI41000000D.web?schID=pcd&mID=PI41012900P&CD_PD_SEQ=12900&" class="btn-detail">상세보기</a>
+                                            <button class="openTerms" onclick="openTermsPage()">상품약관보기</button>
                                         </c:when>
                                     </c:choose>
                                 </div>

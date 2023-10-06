@@ -21,11 +21,13 @@ body {
 .custom_login_btn {
     color: white;
     background-color: #00857E !important;
+    border: none;
 }
 
 .custom_join_btn {
     color: black;
     background-color: #D9D9D9;
+    border: none;
 }
 
 .nav {

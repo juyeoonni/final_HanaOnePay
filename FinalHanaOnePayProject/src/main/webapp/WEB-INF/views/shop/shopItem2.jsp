@@ -191,8 +191,8 @@
                         </tr>
 
                         <tr>
-                            <td class="product-price-label">총 상품 금액</td>
-                            <td class="product-price-value">19500</td>
+                            <td class="product-price-label">총 합계 금액</td>
+                            <td class="product-price-value" style="color: #00857E; font-size: 25px;">19500</td>
                         </tr>
 
                         <input type="hidden" id="businessCode" name="businessCode" value="5500">
@@ -238,7 +238,7 @@
     <!-- Related items section-->
     <section class="py-5 bg-light">
         <div class="container px-4 px-lg-5 mt-5">
-            <h2 class="fw-bolder mb-4">Related products</h2>
+            <h2 class="fw-bolder mb-4">다른 상품 둘러보기</h2>
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 <div class="col mb-5">
                     <div class="card h-100">
@@ -248,14 +248,15 @@
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <!-- Product name-->
-                                <h5 class="fw-bolder">Fancy Product</h5>
+                                <h5 class="fw-bolder">[리앤쿡] 펫 쿨매트 M</h5>
                                 <!-- Product price-->
-                                $40.00 - $80.00
+                                <span class="text-muted text-decoration-line-through">29,000원</span>
+                                15,000원
                             </div>
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a>
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상세보기</a>
                             </div>
                         </div>
                     </div>
@@ -272,7 +273,7 @@
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <!-- Product name-->
-                                <h5 class="fw-bolder">Special Item</h5>
+                                <h5 class="fw-bolder">[kopo타월] KING 무지 수건타올 170g 10장</h5>
                                 <!-- Product reviews-->
                                 <div class="d-flex justify-content-center small text-warning mb-2">
                                     <div class="bi-star-fill"></div>
@@ -282,13 +283,13 @@
                                     <div class="bi-star-fill"></div>
                                 </div>
                                 <!-- Product price-->
-                                <span class="text-muted text-decoration-line-through">$20.00</span>
-                                $18.00
+                                <span class="text-muted text-decoration-line-through">67,000원</span>
+                                47,000원
                             </div>
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상세보기</a>
                             </div>
                         </div>
                     </div>
@@ -305,15 +306,15 @@
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <!-- Product name-->
-                                <h5 class="fw-bolder">Sale Item</h5>
+                                <h5 class="fw-bolder">Cocod'or Signature Diffuser 200ml</h5>
                                 <!-- Product price-->
-                                <span class="text-muted text-decoration-line-through">$50.00</span>
-                                $25.00
+                                <span class="text-muted text-decoration-line-through">29,900원</span>
+                                19,500원
                             </div>
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상세보기</a>
                             </div>
                         </div>
                     </div>
@@ -326,7 +327,7 @@
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <!-- Product name-->
-                                <h5 class="fw-bolder">Popular Item</h5>
+                                <h5 class="fw-bolder">아로하트리즈 솔루션 미스트 100ml</h5>
                                 <!-- Product reviews-->
                                 <div class="d-flex justify-content-center small text-warning mb-2">
                                     <div class="bi-star-fill"></div>
@@ -336,12 +337,12 @@
                                     <div class="bi-star-fill"></div>
                                 </div>
                                 <!-- Product price-->
-                                $40.00
+                                28,000원
                             </div>
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상세보기</a>
                             </div>
                         </div>
                     </div>
@@ -377,6 +378,16 @@
 
 
 <script>
+    // 숫자 포맷팅 함수
+    function formatNumber(number) {
+        return new Intl.NumberFormat('ko-KR').format(number);
+    }
+
+    // 특정 요소에서 숫자를 가져와 포맷팅 적용 후 다시 설정
+    const priceElement = document.querySelector('.product-price-value');
+    const price = parseInt(priceElement.textContent);
+    priceElement.textContent = formatNumber(price) + '원';
+
     function decreaseQuantity() {
         var quantityInput = document.getElementById('quantity');
         var currentValue = parseInt(quantityInput.value, 10);
@@ -414,6 +425,8 @@
         // 상품명과 가격 정보를 가져옴
         let productName = document.querySelector(".product-name").innerText;
         let productPrice = document.querySelector(".product-price-value").innerText;
+        productPrice = productPrice.replace('원', '');
+        productPrice = productPrice.replace(',', '');
         console.log(productPrice);
         console.log(productName);
 

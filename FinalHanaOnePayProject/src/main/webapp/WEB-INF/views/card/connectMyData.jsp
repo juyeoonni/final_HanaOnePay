@@ -36,6 +36,7 @@
             text-align: left;
             width: 100%;
         }
+
         .page-center {
             display: flex;
             justify-content: center;
@@ -103,6 +104,7 @@
         .pinButton:hover {
             box-shadow: #00857E 1 1 2px 2px;
         }
+
         .pinButton:active {
             background: #00857E;
             color: #fff;
@@ -125,6 +127,7 @@
             background: #00857E;
             color: #fff;
         }
+
         .modal-body {
             display: flex;
             flex-direction: column;
@@ -143,29 +146,225 @@
         }
 
         .pinButton.calc {
-            transition: transform 0.3s ease;  /* smooth transition effect */
+            transition: transform 0.3s ease; /* smooth transition effect */
         }
 
         .pinButton.calc:hover {
-            transform: scale(1.3);  /* enlarges the button by 10% when hovered */
+            transform: scale(1.3); /* enlarges the button by 10% when hovered */
         }
 
+        .submitBtn {
+            width: 51.85px;
+            height: 37.6px;
+            font-size: 16px;
+            border-radius: 5px;
+            background-color: #00857E;
+            border: none;
+            color: #FFFFFF;
+        }
+
+        body {
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+        }
+
+
+        html {
+            height: -webkit-fill-available;
+        }
+
+        main {
+            height: 100vh;
+            height: -webkit-fill-available;
+            max-height: 100vh;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+
+        .dropdown-toggle {
+            outline: 0;
+        }
+
+        .btn-toggle {
+            padding: .25rem .5rem;
+            font-weight: 600;
+            color: var(--bs-emphasis-color);
+            background-color: transparent;
+        }
+
+        .btn-toggle:hover,
+        .btn-toggle:focus {
+            color: rgba(var(--bs-emphasis-color-rgb), .85);
+            background-color: var(--bs-tertiary-bg);
+        }
+
+        .btn-toggle::before {
+            width: 1.25em;
+            line-height: 0;
+            content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+            transition: transform .35s ease;
+            transform-origin: .5em 50%;
+        }
+
+        [data-bs-theme="dark"] .btn-toggle::before {
+            content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%28255,255,255,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+        }
+
+        .btn-toggle[aria-expanded="true"] {
+            color: rgba(var(--bs-emphasis-color-rgb), .85);
+        }
+
+        .btn-toggle[aria-expanded="true"]::before {
+            transform: rotate(90deg);
+        }
+
+        .btn-toggle-nav a {
+            padding: .1875rem .5rem;
+            margin-top: .125rem;
+            margin-left: 1.25rem;
+        }
+
+        .btn-toggle-nav a:hover,
+        .btn-toggle-nav a:focus {
+            background-color: var(--bs-tertiary-bg);
+        }
+
+        .scrollarea {
+            overflow-y: auto;
+        }
+
+        .flex-container {
+            display: flex;
+        }
+
+        .flex-shrink-0 {
+            /* 필요에 따라 여기에 추가 스타일을 설정하세요 */
+        }
+
+        .mypageMain {
+            flex: 1; /* 나머지 공간을 채우도록 설정 */
+            /* 필요에 따라 여기에 추가 스타일을 설정하세요 */
+        }
+
+        .mypageMain {
+            display: flex;
+            flex-direction: column;
+            margin-left: 30px;
+        }
+
+        /* 우선순위를 높이기 위해 ID를 사용하여 덮어쓰는 스타일 */
+        #custom-register-button {
+            background-color: #00857E !important; /* 배경색 */
+            color: #fff !important; /* 텍스트 색상 */
+            border: none !important; /* 테두리 없음 */
+            padding: 10px 20px !important; /* 내부 여백 */
+            border-radius: 5px !important; /* 테두리 둥글기 */
+            cursor: pointer !important; /* 커서 모양을 손가락으로 변경 */
+            margin-top: 10px;
+            margin-left: 295px;
+            width: 300px;
+        }
+
+        /* 호버 효과 덮어쓰기 */
+        #custom-register-button:hover {
+            background-color: #015550 !important; /* 호버 시 배경색 변경 */
+        }
+
+        /*자연스러운 사이드바 이동*/
+        .flex-shrink-0 {
+            width: 280px;
+            margin-left: 90px;
+            transition: all 0.3s ease; /* 부드러운 이동 효과 */
+        }
 
     </style>
 
 </head>
 <body>
 <%@ include file="/WEB-INF/views/comm/header.jsp" %>
+<%--사이드바시작--%>
+<div class="flex-shrink-0 p-3" style="width: 280px; margin-left: 90px;">
+    <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+        <svg class="bi pe-none me-2" width="30" height="24">
+            <use xlink:href="#bootstrap"/>
+        </svg>
+        <span class="fs-5 fw-semibold">마이페이</span>
+    </a>
+    <ul class="list-unstyled ps-0">
+        <li class="mb-1">
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                    data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                하나원페이
+            </button>
+            <div class="collapse show" id="home-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <%--                    <li><a href="/api/linkedAccount" class="link-body-emphasis d-inline-flex text-decoration-none rounded">연동카드조회</a></li>--%>
+                    <%--                    <li><a href="/hanaOnePay/selectPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>--%>
+                    <li><a href="/hanaOnePay/selectHanaPayCard"
+                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">마이하나원페이 연동</a></li>
+                    <li><a onclick="fetchAccountData()"
+                           class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                           style="cursor: pointer;">내 카드 불러오기</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="mb-1">
+
+            <div class="collapse" id="dashboard-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><a href="/api/payments-by-month?month=09"
+                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">내 지출 조회</a></li>
+                    <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">명세서 조회</a></li>--%>
+                    <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>--%>
+                    <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>--%>
+                </ul>
+            </div>
+        </li>
+        <li class="mb-1">
+
+            <div class="collapse" id="orders-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><a href="/api/payments-by-month?month=09"
+                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">소비레포트</a></li>
+                    <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Processed</a></li>--%>
+                    <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Shipped</a></li>--%>
+                    <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Returned</a></li>--%>
+                </ul>
+            </div>
+        </li>
+        <li class="border-top my-3"></li>
+        <li class="mb-1">
+
+            <div class="collapse" id="account-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New...</a>
+                    </li>
+                    <li><a href="#"
+                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">Profile</a></li>
+                    <li><a href="#"
+                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">Settings</a></li>
+                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign
+                        out</a></li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>
 
 <div class="page-center">
-    <div class="content-container">
 
-        <div class="d-flex justify-content-start align-items-center mb-2">
+    <div class="content-container" style="margin-top: -150px;">
+        <div style="margin-left: 260px">
+            <div style="text-align: center; font-size:18px; color: #00857E;">마이카드</div>
+            <h1 style="text-align: center; font-size: 2em;">마이하나원페이</h1>
+        </div>
+        <div class="d-flex justify-content-start align-items-center mb-2" style="margin-top: 50px;">
             <h3 class="mb-0 me-3">내 카드 불러오기</h3>
 
             <!-- 드롭다운 시작 -->
             <div class="dropdown" style="display: inline-block;">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
                     전체카드조회
                 </button>
                 <ul class="dropdown-menu">
@@ -179,7 +378,7 @@
         </div>
 
         <div id="selectedCardCount" class="mb-2">
-            연동된 카드 개수: <span id="count">0</span> 개
+            불러온 카드 개수: <span id="count">0</span> 개
         </div>
         <br>
         <!-- 데이터를 표시할 컨테이너 -->
@@ -197,40 +396,42 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">카드 등록</h1>
+                        <img src="/img/hanaLogo.png" alt="하나원페이 로고"
+                             style="margin-right: 10px; width: 45px; height: 45px;">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-weight: bold;">하나원페이</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         카드 등록을 위해 결제비밀번호를 입력해주세요
                     </div>
 
-                    <h4 class="modal-body">결제 비밀번호 6자리 입력<h4>
-                        <div id="pinpad">
-                            <form >
-                                <input type="password" id="password" /></br>
-                                <input type="button" value="1" id="1" class="pinButton calc"/>
-                                <input type="button" value="2" id="2" class="pinButton calc"/>
-                                <input type="button" value="3" id="3" class="pinButton calc"/><br>
-                                <input type="button" value="4" id="4" class="pinButton calc"/>
-                                <input type="button" value="5" id="5" class="pinButton calc"/>
-                                <input type="button" value="6" id="6" class="pinButton calc"/><br>
-                                <input type="button" value="7" id="7" class="pinButton calc"/>
-                                <input type="button" value="8" id="8" class="pinButton calc"/>
-                                <input type="button" value="9" id="9" class="pinButton calc"/><br>
-                                <input type="button" value="삭제" id="clear" class="pinButton clear"/>
-                                <input type="button" value="0" id="0 " class="pinButton calc"/>
-                                <input type="button" value="확인" id="enter" class="pinButton enter"/>
-                            </form>
-                        </div>
+                    <h4 class="modal-body">결제 비밀번호 6자리 입력
+                        <h4>
+                            <div id="pinpad">
+                                <form>
+                                    <input type="password" id="password"/></br>
+                                    <input type="button" value="1" id="1" class="pinButton calc"/>
+                                    <input type="button" value="2" id="2" class="pinButton calc"/>
+                                    <input type="button" value="3" id="3" class="pinButton calc"/><br>
+                                    <input type="button" value="4" id="4" class="pinButton calc"/>
+                                    <input type="button" value="5" id="5" class="pinButton calc"/>
+                                    <input type="button" value="6" id="6" class="pinButton calc"/><br>
+                                    <input type="button" value="7" id="7" class="pinButton calc"/>
+                                    <input type="button" value="8" id="8" class="pinButton calc"/>
+                                    <input type="button" value="9" id="9" class="pinButton calc"/><br>
+                                    <input type="button" value="삭제" id="clear" class="pinButton clear"/>
+                                    <input type="button" value="0" id="0 " class="pinButton calc"/>
+                                    <input type="button" value="확인" id="enter" class="pinButton enter"/>
+                                </form>
+                            </div>
 
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                            <button type="button" class="btn btn-primary" id="confirmRegister">등록</button>
-                        </div>
-                    </h4>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                <button type="button" class="submitBtn" id="confirmRegister">등록</button>
+                            </div>
+                        </h4>
                     </h4>
                 </div>
-
 
 
                 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -270,7 +471,7 @@
                                     cardDiv.classList.add("card-info");
 
                                     cardDiv.style.border = "1px solid #ccc";
-                                    cardDiv.style.width = "600px";
+                                    cardDiv.style.width = "900px";
                                     cardDiv.style.padding = "10px";
                                     cardDiv.style.marginBottom = "10px";
                                     cardDiv.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
@@ -295,7 +496,7 @@
                                     cardDiv.innerHTML =
                                         '<img src="' + imageUrl + '" style="width: 200px; height: 130px; margin-right: 10px;">' +
                                         '<div style="flex: 1;">' +
-                                        '<div class="card-code" style="width: 100px; color: white; background-color: #BCD9D3; border-radius: 5px; padding: 5px;">' +
+                                        '<div class="card-code" style="width: 100px; height:34px; color: white; background-color: #BCD9D3; border-radius: 5px; padding: 5px;">' +
                                         cardCompany +
                                         '</div>' +
                                         '카드 이름: ' + cardData.cardName + '<br>' +
@@ -309,7 +510,7 @@
                                 // "등록" 버튼을 페이지에 추가
                                 const registerButton = document.createElement("button");
                                 registerButton.textContent = "하나원페이 등록";
-                                registerButton.className = "btn btn-primary";
+                                registerButton.id = "custom-register-button"; // ID 추가
                                 registerButton.addEventListener("click", registerSelectedCards);
 
                                 // "등록" 버튼을 페이지에 추가
@@ -341,7 +542,7 @@
                             }
 
                             // 모달의 "등록" 버튼 클릭 이벤트
-                            $('#confirmRegister').on('click', function() {
+                            $('#confirmRegister').on('click', function () {
                                 const selectedCards = [];
                                 const cardDivs = document.querySelectorAll('.card-info');
 
@@ -363,7 +564,7 @@
                         }
                     });
 
-                    $(document).on('change', '.card-info input[type="checkbox"]', function() {
+                    $(document).on('change', '.card-info input[type="checkbox"]', function () {
                         const cardDiv = $(this).closest('.card-info');
                         if (this.checked) {
                             cardDiv.addClass('checked');
@@ -401,13 +602,27 @@
 
                     });
 
-                    document.addEventListener('DOMContentLoaded', function() {
+                    document.addEventListener('DOMContentLoaded', function () {
                         var enterButton = document.getElementById('enter');
 
-                        enterButton.addEventListener('click', function() {
+                        enterButton.addEventListener('click', function () {
                             // 폼 제출
                             document.getElementById('paymentForm').submit();
                         });
+                    });
+
+                    // 스크롤 이벤트 리스너 추가
+                    window.addEventListener("scroll", function () {
+                        const sidebar = document.querySelector(".flex-shrink-0");
+                        const offsetTop = window.scrollY; // 현재 스크롤 위치
+
+                        // 원하는 스크롤 위치에 따라 사이드바를 조절
+                        if (offsetTop >= 200) {
+                            sidebar.style.position = "fixed";
+                            sidebar.style.top = "50px"; // 원하는 거리 설정
+                        } else {
+                            sidebar.style.position = "static";
+                        }
                     });
 
 

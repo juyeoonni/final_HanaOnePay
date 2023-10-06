@@ -210,6 +210,12 @@
         .btn-pay {
             background-color: #00857E !important;
             color: #f7f7f7 !important;
+            width: 300px !important;
+            height: 50px !important;
+            border: none;
+            border-radius: 10px;
+            margin-left: 260px;
+            font-size: 20px;
         }
 
         /* 캐러셀의 너비와 높이를 조절합니다. */
@@ -253,7 +259,6 @@
             right: 0;
             /* 추가 스타일을 여기에 추가하세요. */
         }
-
 
 
         .payAgree {
@@ -366,6 +371,253 @@
             border-color: #BCD9D3;
         }
 
+        /* 스크롤 가능한 디브의 스타일 설정 */
+        .scrollable-div {
+            background-color: #FFFFFF;
+            height: 250px; /* 디브의 높이 설정 */
+            overflow: auto; /* 스크롤 가능하도록 설정 */
+            border: 1px solid #ccc; /* 테두리 스타일 설정 */
+            padding: 10px; /* 내부 여백 설정 */
+        }
+
+        .useBtn {
+            border: none;
+            background-color: #00857E;
+            color: #FFFFFF;
+            border-radius: 5px;
+        }
+
+        /*토글*/
+        label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        [type="checkbox"] {
+            appearance: none;
+            position: relative;
+            border: max(2px, 0.1em) solid gray;
+            border-radius: 1.25em;
+            width: 2.25em;
+            height: 1.25em;
+        }
+
+        [type="checkbox"]::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            width: 1em;
+            height: 1em;
+            border-radius: 50%;
+            transform: scale(0.8);
+            background-color: gray;
+            transition: left 250ms linear;
+        }
+
+        [type="checkbox"]:checked {
+            background-color: #00857E;
+            border-color: #00857E;
+        }
+
+        [type="checkbox"]:checked::before {
+            background-color: white;
+            left: 1em;
+        }
+
+        [type="checkbox"]:disabled {
+            border-color: lightgray;
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        [type="checkbox"]:disabled:before {
+            background-color: lightgray;
+        }
+
+        [type="checkbox"]:disabled + span {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        [type="checkbox"]:focus-visible {
+            outline-offset: max(2px, 0.1em);
+            outline: max(2px, 0.1em) solid #00857E;
+        }
+
+        [type="checkbox"]:enabled:hover {
+            box-shadow: 0 0 0 max(4px, 0.2em) lightgray;
+        }
+
+        /* Global CSS */
+        body {
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        fieldset {
+            border: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        /*포인트사용 인풋박스*/
+        #usePointInput {
+            padding: 4px; /* 내부 패딩으로 텍스트와 인풋 박스 경계 사이의 간격을 설정 */
+            font-size: 16px; /* 폰트 크기 설정 */
+            border: 2px solid #ddd; /* 테두리 설정 */
+            border-radius: 5px; /* 테두리 둥글게 */
+            outline: none; /* 포커스 시 생기는 기본 테두리 스타일 제거 */
+            width: 200px; /* 너비 설정 */
+            height: 30px;
+            transition: border-color 0.3s ease; /* 테두리 색상 변화에 애니메이션 효과 추가 */
+        }
+
+        #usePointInput:disabled {
+            background-color: #f3f3f3; /* 비활성화 상태의 배경색 */
+            cursor: not-allowed; /* 비활성화 상태의 마우스 커서 스타일 */
+        }
+
+        #usePointInput:focus {
+            border-color: #00857E; /* 포커스 상태의 테두리 색상 */
+        }
+
+        .hanaMoney {
+            display: flex; /* Flexbox를 사용하여 .hanaMoney의 자식 요소들을 수평 정렬 */
+            align-items: center; /* 자식 요소들을 수직으로 가운데 정렬 */
+        }
+
+        .hanaMoney h4.mb-3 {
+            margin-right: 20px; /* 오른쪽 여백을 추가하여 h4와 fieldset 사이에 간격 제공 */
+        }
+
+        .hanaMoney fieldset {
+            margin: 0; /* 기본 margin을 0으로 설정하여 불필요한 간격 제거 */
+        }
+
+        /*계좌선택 체크박스*/
+        .custom-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #00857E;
+            border-radius: 50%;
+            margin-right: 10px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        input[type="radio"]:checked + .custom-checkbox {
+            background-color: #00857E;
+        }
+
+        input[type="radio"]:checked + .custom-checkbox::before {
+            content: "";
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: white;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* 각 계좌 디브에 대해 아래와 같은 CSS 스타일을 추가합니다. */
+        #accountCollapse .accordion-body > div {
+            margin-bottom: 15px; /* 원하는 간격 값으로 설정 */
+        }
+
+        /* 활성화된 아코디언의 버튼 배경색 변경 */
+        .accordion-button:not(.collapsed) {
+            background-color: #00857E; /* 원하는 색으로 변경 */
+        }
+
+        .list-group-item .text.right-aligned {
+            text-align: right;
+            width: 100%; /* 요소의 전체 너비를 차지하도록 지정 */
+        }
+
+        .pay-Info {
+            background-color: #FFFFFF;
+            margin-right: 8px;
+            border: none;
+            border-radius: 5px;
+            padding: 13px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .userInfo {
+            background-color: #FFFFFF;
+            margin-right: 8px;
+            border: none;
+            border-radius: 5px;
+            padding: 13px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .deliveryInfo {
+            background-color: #FFFFFF;
+            margin-right: 8px;
+            border: none;
+            border-radius: 5px;
+            padding: 13px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .hanaMoney {
+            background-color: #FFFFFF;
+            margin-right: 8px;
+            border: none;
+            border-radius: 5px;
+            padding: 13px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* 왼쪽 정렬 */
+        }
+
+        .payMethod{
+            background-color: #FFFFFF;
+            margin-right: 8px;
+            border: none;
+            border-radius: 5px;
+            padding: 13px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 스크롤 시 우측에 고정되는 스타일*/
+        /*.scrolled-right {*/
+        /*    position: fixed;*/
+        /*    right: 0; !* 오른쪽에 고정 *!*/
+        /*    top: 340px; !* 위에 고정 *!*/
+        /*    width: 300px; !* 원하는 너비로 조절 *!*/
+        /*    background-color: #fff; !* 배경색을 설정하세요. *!*/
+        /*    padding: 10px;*/
+        /*    border: 1px solid #ddd;*/
+        /*}*/
+
+        #scrolling-element {
+            position: fixed;
+            right: 0;
+            top: 640px;
+            width: 500px;
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ddd;
+            transition: none;
+        }
+
+
 
     </style>
 
@@ -473,10 +725,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#!">팍팍딜</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                           data-bs-toggle="dropdown" aria-expanded="false">기획전</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#!">All Products</a></li>
                             <li>
@@ -502,8 +754,11 @@
         <main>
             <div class="py-5 text-center">
                 <img class="d-block mx-auto mb-4" src="/img/buyItemStar.png" alt="" width="300" height="150">
-                <h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">주문서 작성</font></font>
+                <h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">주문결제</font></font>
                 </h2>
+                <div><font style="vertical-align: inherit; font-size: 16px; color: #959595;"><font
+                        style="vertical-align: inherit;">주문정보 입력 및 결제를 진행해 주세요.</font></font></div>
+                <br>
 
                 <%--                stepper--%>
                 <div class="container pb-5 mb-sm-4">
@@ -583,260 +838,349 @@
             </div>
 
             <div class="row g-3">
-                <div id="scrolling-element" class="col-md-5 col-lg-4 order-md-last">
-                    <h4 class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="text-body-secondary"><font style="vertical-align: inherit;"><font
-                                style="vertical-align: inherit;">쇼핑 카트</font></font></span>
-                        <span class="badge bg-secondary rounded-pill"><font style="vertical-align: inherit;"><font
-                                style="vertical-align: inherit;">삼</font></font></span>
-                    </h4>
+                <div id="scrolling-element" class="col-md-5 col-lg-4 order-md-last pay-Info" >
+                    <h4 class="mb-3" style="color: #00857E"> ◼ 결제 정보</h4>
                     <ul class="list-group mb-3">
                         <li class="list-group-item d-flex justify-content-between lh-sm">
                             <div>
                                 <h6 class="my-0"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">상품명 : ${productName}</font></font></h6>
-                                <small class="text-body-secondary"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">간단한 설명</font></font></small>
+                                        style="vertical-align: inherit;">상품명</font></font></h6>
                             </div>
-                            <span id="productPriceDisplay" class="text-body-secondary"><font style="vertical-align: inherit;"><font
-                                    style="vertical-align: inherit;">${productPrice}</font></font></span>원
+                            <span id="productNameDisplay" class="text-body-secondary"><font
+                                    style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">${productName}</font></font></span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between lh-sm">
                             <div>
                                 <h6 class="my-0"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">두 번째 제품</font></font></h6>
-                                <small class="text-body-secondary"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">간단한 설명</font></font></small>
+                                        style="vertical-align: inherit;">금액</font></font></h6>
                             </div>
-                            <span class="text-body-secondary"><font style="vertical-align: inherit;"><font
-                                    style="vertical-align: inherit;">$8</font></font></span>
+                            <span id="realProductPriceDisplay" class="text right-aligned">${productPrice}</span>원
                         </li>
-                        <li class="list-group-item d-flex justify-content-between lh-sm">
-                            <div>
-                                <h6 class="my-0"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">세 번째 항목</font></font></h6>
-                                <small class="text-body-secondary"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">간단한 설명</font></font></small>
-                            </div>
-                            <span class="text-body-secondary"><font style="vertical-align: inherit;"><font
-                                    style="vertical-align: inherit;">$5</font></font></span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between bg-body-tertiary">
-                            <div class="text-success">
-                                <h6 class="my-0"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">프로모션 코드</font></font></h6>
-                                <small><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">예시코드</font></font></small>
-                            </div>
-                            <span class="text-success"><font style="vertical-align: inherit;"><font
-                                    style="vertical-align: inherit;">-$5</font></font></span>
-                        </li>
+
                         <li class="list-group-item d-flex justify-content-between">
-                            <span><font style="vertical-align: inherit;"><font
-                                    style="vertical-align: inherit;">총액(USD)</font></font></span>
+                            <div class="tex">
+                                <h6 class="my-0"><font style="vertical-align: inherit;"><font
+                                        style="vertical-align: inherit;">포인트 사용</font></font></h6>
+                            </div>
+                            <span id="usePointDisplay" class="text right-aligned">0</span>원
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between" style="color: #00857E">
+                            <span>총 결제 금액</span>
                             <strong><font style="vertical-align: inherit;"><font
-                                    style="vertical-align: inherit;">$20</font></font></strong>
+                                    style="vertical-align: inherit;"
+                                    id="productPriceDisplay">${productPrice}</font></font> 원</strong>
                         </li>
                     </ul>
-
-                    <form class="card p-2">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="프로모션 코드">
-                            <button type="submit" class="btn btn-secondary"><font style="vertical-align: inherit;"><font
-                                    style="vertical-align: inherit;">확인</font></font></button>
-                        </div>
-                    </form>
                 </div>
+
                 <div class="col-md-7 col-lg-8">
-                    <h4 class="mb-3"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">청구지
-                        주소</font></font></h4>
-                    <form class="needs-validation" novalidate="">
-                        <div class="row g-3">
-                            <div class="col-sm-6">
-                                <label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">이름</font></font></label>
-                                <input type="text" class="form-control" id="firstName" placeholder="" value=""
-                                       required="">
-                                <div class="invalid-feedback"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">
-                                    유효한 이름을 입력하세요.
-                                </font></font></div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <label for="lastName" class="form-label"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">성</font></font></label>
-                                <input type="text" class="form-control" id="lastName" placeholder="" value=""
-                                       required="">
-                                <div class="invalid-feedback"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">
-                                    올바른 성을 입력하세요.
-                                </font></font></div>
-                            </div>
-
-                            <div class="col-12">
-                                <label for="username" class="form-label"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">사용자 이름</font></font></label>
-                                <div class="input-group has-validation">
-                                    <span class="input-group-text"><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">@</font></font></span>
-                                    <input type="text" class="form-control" id="username" placeholder="사용자 이름"
+                    <div class="userInfo" style="margin-top: -100px;">
+                        <h4 class="mb-3" style="color: #00857E"> ◼ 주문자 정보</h4>
+                        <form class="needs-validation" novalidate="">
+                            <div class="row g-3">
+                                <div class="col-sm-6">
+                                    <label for="firstName" class="form-label"><font
+                                            style="vertical-align: inherit;"><font
+                                            style="vertical-align: inherit;">이름</font></font></label>
+                                    <input type="text" class="form-control" id="firstName" placeholder="" value="정하나"
                                            required="">
                                     <div class="invalid-feedback"><font style="vertical-align: inherit;"><font
                                             style="vertical-align: inherit;">
-                                        귀하의 사용자 이름이 필요합니다.
+                                        유효한 이름을 입력하세요.
+                                    </font></font></div>
+                                </div>
+
+                                <%--                            <div class="col-12">--%>
+                                <%--                                <label for="username" class="form-label"><font style="vertical-align: inherit;"><font--%>
+                                <%--                                        style="vertical-align: inherit;">사용자 이름</font></font></label>--%>
+                                <%--                                <div class="input-group has-validation">--%>
+                                <%--                                    <span class="input-group-text"><font style="vertical-align: inherit;"><font--%>
+                                <%--                                            style="vertical-align: inherit;">@</font></font></span>--%>
+                                <%--                                    <input type="text" class="form-control" id="username" placeholder="사용자 이름"--%>
+                                <%--                                           required="">--%>
+                                <%--                                    <div class="invalid-feedback"><font style="vertical-align: inherit;"><font--%>
+                                <%--                                            style="vertical-align: inherit;">--%>
+                                <%--                                        귀하의 사용자 이름이 필요합니다.--%>
+                                <%--                                    </font></font></div>--%>
+                                <%--                                </div>--%>
+                                <%--                            </div>--%>
+
+                                <div class="col-12">
+
+                                </div>
+
+                                <div class="col-md-5">
+                                    <label for="country" class="form-label"><font style="vertical-align: inherit;"><font
+                                            style="vertical-align: inherit;">전화번호</font></font></label>
+                                    <select class="form-select" id="country" required="">
+                                        <option value=""><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">010</font></font></option>
+                                        <option><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">011</font></font></option>
+                                        <option><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">018</font></font></option>
+                                    </select>
+                                </div>
+
+                                <
+                                <div class="col-md-3">
+                                    <label for="zip" class="form-label"><font style="vertical-align: inherit;"><font
+                                            style="vertical-align: inherit;"></font></font></label>
+                                    <input type="text" class="form-control" id="zip" value="1234">
+                                    <div class="invalid-feedback"><font style="vertical-align: inherit;"><font
+                                            style="vertical-align: inherit;">
+                                        우편번호가 필요합니다.
+                                    </font></font></div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label for="zip" class="form-label"><font style="vertical-align: inherit;"><font
+                                            style="vertical-align: inherit;"></font></font></label>
+                                    <input type="text" class="form-control" id="zip" value="5678">
+                                    <div class="invalid-feedback"><font style="vertical-align: inherit;"><font
+                                            style="vertical-align: inherit;">
+                                        우편번호가 필요합니다.
+                                    </font></font></div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="email" class="form-label"><font style="vertical-align: inherit;"><font
+                                            style="vertical-align: inherit;">이메일 </font></font><span
+                                            class="text-body-secondary"><font style="vertical-align: inherit;"><font
+                                            style="vertical-align: inherit;"></font></font></span></label>
+                                    <input type="email" class="form-control" id="email" placeholder="you@example.com"
+                                           value="hana@naver.com">
+                                    <div class="invalid-feedback"><font style="vertical-align: inherit;"><font
+                                            style="vertical-align: inherit;">
+                                        배송 업데이트를 받으려면 유효한 이메일 주소를 입력하세요.
                                     </font></font></div>
                                 </div>
                             </div>
-
-                            <div class="col-12">
-                                <label for="email" class="form-label"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">이메일 </font></font><span
-                                        class="text-body-secondary"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">(선택사항)</font></font></span></label>
-                                <input type="email" class="form-control" id="email" placeholder="you@example.com">
-                                <div class="invalid-feedback"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">
-                                    배송 업데이트를 받으려면 유효한 이메일 주소를 입력하세요.
-                                </font></font></div>
-                            </div>
-
-                            <div class="col-12">
-                                <label for="address" class="form-label"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">주소</font></font></label>
-                                <input type="text" class="form-control" id="address" placeholder="1234 퍼스트 스트리트"
-                                       required="">
-                                <div class="invalid-feedback"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">
-                                    배송지 주소를 입력해주세요.
-                                </font></font></div>
-                            </div>
-
-                            <div class="col-12">
-                                <label for="address2" class="form-label"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">제목 2 </font></font><span
-                                        class="text-body-secondary"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">(선택사항)</font></font></span></label>
-                                <input type="text" class="form-control" id="address2" placeholder="아파트먼트 24">
-                            </div>
-
-                            <div class="col-md-5">
-                                <label for="country" class="form-label"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">국가</font></font></label>
-                                <select class="form-select" id="country" required="">
-                                    <option value=""><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">선택하다...</font></font></option>
-                                    <option><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">미국</font></font></option>
-                                </select>
-                                <div class="invalid-feedback"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">
-                                    유효한 국가를 선택하세요.
-                                </font></font></div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <label for="state" class="form-label"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">지역</font></font></label>
-                                <select class="form-select" id="state" required="">
-                                    <option value=""><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">선택하다...</font></font></option>
-                                    <option><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">캘리포니아</font></font></option>
-                                </select>
-                                <div class="invalid-feedback"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">
-                                    유효한 지역 이름을 선택하세요.
-                                </font></font></div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <label for="zip" class="form-label"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">우편 번호</font></font></label>
-                                <input type="text" class="form-control" id="zip" placeholder="" required="">
-                                <div class="invalid-feedback"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">
-                                    우편번호가 필요합니다.
-                                </font></font></div>
-                            </div>
+                    </div>
+                    <br>
+                    <div class="deliveryInfo">
+                        <h4 class="mb-3" style="color: #00857E"> ◼ 배송지 정보</h4>
+                        <div class="col-md-3">
+                            <label for="zip" class="form-label"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">우편 번호</font></font></label>
+                            <input type="text" class="form-control" id="zip" placeholder="" required=""
+                                   value="14222">
+                            <div class="invalid-feedback"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">
+                                우편번호가 필요합니다.
+                            </font></font></div>
                         </div>
 
-                        <hr class="my-4">
-
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="same-address">
-                            <label class="form-check-label" for="same-address"><font
-                                    style="vertical-align: inherit;"><font style="vertical-align: inherit;">귀하의 배송 주소가 내
-                                청구서 수신 주소와 동일합니다</font></font></label>
+                        <div class="col-12">
+                            <label for="address" class="form-label"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">주소</font></font></label>
+                            <input type="text" class="form-control" id="address" placeholder="1234 퍼스트 스트리트"
+                                   required="" value="경기도 광명시 오리로 904 (철산동)">
+                            <div class="invalid-feedback"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">
+                                배송지 주소를 입력해주세요.
+                            </font></font></div>
                         </div>
 
+
+                        <div class="col-md-5">
+                            <label for="country" class="form-label"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">배송시 요청사항</font></font></label>
+                            <textarea class="form-control" id="deliveryInstructions" name="deliveryInstructions"
+                                      rows="4" placeholder="배송시 요청사항을 입력하세요"></textarea>
+
+
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="form-check">
+                        ◼ 개인정보 수집 및 이용동의
+                        <div class="scrollable-div">
+                            <!-- 내용 전체를 스크롤 가능한 디브에 포함 -->
+                            <h5>1. 개인정보의 수집∙이용 목적</h5>
+                            <p>
+                                - 구매한 물품의 배송/설치 등 고객과 체결한 계약의 이행<br>
+                                - 불만처리 등을 위한 본인확인에 이용
+                            </p>
+
+                            <h5>2. 수집하려는 개인정보의 항목</h5>
+                            <p>
+                                - 성명, 아이디, 주소, 전화번호, 휴대폰번호, 주문정보, 수취인 정보(성명, 전화번호, 휴대폰번호, 주소)
+                            </p>
+
+                            <h5>3. 개인정보 이용 목적</h5>
+                            <p>
+                                개인정보의 보유 기간은 아래와 같습니다.
+                                <br>
+
+                                <strong>① 고객의 개인정보는 다음과 같이 개인정보의 수집목적 또는 제공받은 목적이 달성시 까지 이용하지만, '전자상거래 등에서의 소비자보호에 관한
+                                    법률’, ‘통신비밀보호법’, ‘국세기본법’ 등 관련 법령의 규정에 의하여 다음과 같이 거래 관련 권리 의무 관계의 확인 등을 이유로 일정기간 보유하여야
+                                    할 필요가 있을 경우에는 일정기간 보유합니다.</strong>
+
+                                <br><br>
+
+                                <strong>1. 「전자상거래 등에서의 소비자보호에 관한 법률」에 의한 보관</strong>
+                                <br>
+                                가. 계약 또는 청약철회 등에 관한 기록 : 5년
+                                <br>
+                                나. 대금결제 및 재화 등의 공급에 관한 기록 : 5년
+                                <br>
+                                다. 소비자의 불만 또는 분쟁처리에 관한 기록 : 3년
+                                <br>
+                                라. 기타 고객의 동의를 받은 경우 : 동의를 받은 기간까지
+
+                                <br><br>
+
+                                <strong>② 회원 탈퇴시 부정이용 방지를 위하여 3개월간 보관 후 삭제하며, 거래가 있는 경우에는 전항 법률에 의거하여 별도보관 합니다.</strong>
+
+                                <br><br>
+
+                                <strong>③ 개인정보를 파기하지 않고 보존하는 경우에는, 다른 개인정보 및 개인정보파일과 분리하여 보관하고 해당 목적을 달성하기 위한 목적으로만
+                                    이용합니다.</strong>
+                            </p>
+                        </div>
+                        <br>
+                        ◼ 구매동의 <br>
+                        <p style="color: #959595;">주문할 상품의 상품명, 상품가격, 배송정보를 확인하였으며, 구매에 동의하시겠습니까? (전자상거래법 제 8조 2항)</p>
+                        <div class="scrollable-div">
+                            <!-- 내용 전체를 스크롤 가능한 디브에 포함 -->
+                            <h5>1. 개인정보 제공 동의</h5>
+                            <p>
+                                회사는 정보통신망 이용촉진 및 정보보호 등에 관한 법률에 따라 이용자의 개인정보에 있어 아래와 같이 알리고 동의를 받아 협력사에게 제공합니다.
+                            </p>
+
+                            <h5>2. 개인정보 제공받는 자</h5>
+                            <p>
+                                주식회사 명진엘티디
+                            </p>
+
+                            <h5>3. 개인정보 이용 목적</h5>
+                            <p>
+                                청약의사의 확인, 거래이행, 배송, 고객상담, AS 등 불만 처리
+                            </p>
+
+                            <h5>4. 개인정보 제공 항목</h5>
+                            <p>
+                                성명, 아이디, 주소, 전화번호, 휴대폰번호, 주문정보, 수취인 정보(성명, 전화번호, 휴대폰번호, 주소)
+                            </p>
+
+                            <h5>5. 개인정보 보유 및 이용 기간</h5>
+                            <p>
+                                개인정보의 보유 기간은 아래와 같습니다.
+                                <br>
+
+                                <strong>① 고객의 개인정보는 다음과 같이 개인정보의 수집목적 또는 제공받은 목적이 달성시 까지 이용하지만, '전자상거래 등에서의 소비자보호에 관한
+                                    법률’, ‘통신비밀보호법’, ‘국세기본법’ 등 관련 법령의 규정에 의하여 다음과 같이 거래 관련 권리 의무 관계의 확인 등을 이유로 일정기간 보유하여야
+                                    할 필요가 있을 경우에는 일정기간 보유합니다.</strong>
+
+                                <br><br>
+
+                                <strong>1.「전자상거래 등에서의 소비자보호에 관한 법률」에 의한 보관</strong>
+                                <br>
+                                가. 계약 또는 청약철회 등에 관한 기록 : 5년
+                                <br>
+                                나. 대금결제 및 재화 등의 공급에 관한 기록 : 5년
+                                <br>
+                                다. 소비자의 불만 또는 분쟁처리에 관한 기록 : 3년
+                                <br>
+                                라. 기타 고객의 동의를 받은 경우 : 동의를 받은 기간까지
+
+                                <br><br>
+
+                                <strong>② 회원 탈퇴시 부정이용 방지를 위하여 3개월간 보관 후 삭제하며, 거래가 있는 경우에는 전항 법률에 의거하여 별도보관 합니다.</strong>
+
+                                <br><br>
+
+                                <strong>③ 개인정보를 파기하지 않고 보존하는 경우에는, 다른 개인정보 및 개인정보파일과 분리하여 보관하고 해당 목적을 달성하기 위한 목적으로만
+                                    이용합니다.</strong>
+                            </p>
+                        </div>
+                        <br>
+                        <p style="color: #959595;">※ 배송 및 주문 처리를 위한 목적으로만 개인정보가 제공됩니다.</p>
+
+
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="save-info">
-                            <label class="form-check-label" for="save-info"><font style="vertical-align: inherit;"><font
-                                    style="vertical-align: inherit;">다음 시간을 위해 이 정보를 저장하세요.</font></font></label>
+                            <input id="agree" name="paymentMethod" type="radio" class="form-check-input"
+                                   required="">
+                            <label for="agreeCheckbox">위 상품의 정보를 확인하셨으며 구매에 동의하십니까? (전자상거래법 제 8조 2항에 의거)</label>
                         </div>
 
                         <hr class="my-4">
 
                         <div class="hanaMoney">
-                            <h4 class="mb-3"><font style="vertical-align: inherit;"><font
-                                    style="vertical-align: inherit;">하나머니</font></font>
-                            </h4>
-                        </div>
+                            <div style="display: flex; ">
+                                <h4 class="mb-3" style="color: #00857E"> ◼ 하나머니</h4>
 
-                        <div>
-                            보유: <span id="hanaMoneyDisplay">${hanaMoney}</span> 원
-                        </div>
+                                <fieldset style="margin-top: -2px;">
+                                    <label>
+                                        <span style="margin-right: 5px; color: #666666">포인트 사용 동의</span>
+                                        <input role="switch" type="checkbox" id="agreeCheckbox"
+                                               onchange="toggleInput()"/>
+                                    </label>
+                                </fieldset>
+                            </div>
+                            <div>
+                                보유: <span id="hanaMoneyDisplay">${hanaMoney}</span> 원
+                            </div>
 
-                        <div>
-                            사용:
-                            <input type="text" id="usePointInput" placeholder="0원" oninput="calculateNewAmounts()">
-                            <button type="button" onclick="useAllPoints()">전액 사용</button>
+                            <div>
+                                사용:
+                                <input type="text" id="usePointInput" placeholder="0 원" oninput="calculateNewAmounts()"
+                                       onfocus="checkAgreement()" disabled>
+                                <button type="button" onclick="useAllPoints()" class="useBtn">전액 사용</button>
+                            </div>
                         </div>
-
 
                         <hr class="my-4">
 
-                        <h4 class="mb-3"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">결제수단</font></font>
-                        </h4>
+                        <div class="payMethod">
+                            <h4 class="mb-3" style="color: #00857E"> ◼ 결제수단</h4>
 
-                        <div class="my-3">
-                            <!-- 계좌 간편결제 체크박스 -->
-                            <div class="form-check">
-                                <input id="accountPay" name="paymentMethod" type="radio" class="form-check-input"
-                                       required="">
-                                <label class="form-check-label" for="accountPay">계좌 간편결제</label>
-                            </div>
+                            <div class="my-3">
+                                <!-- 계좌 간편결제 체크박스 -->
+                                <div class="form-check">
+                                    <input id="accountPay" name="paymentMethod" type="radio" class="form-check-input"
+                                           required="">
+                                    <label class="form-check-label" for="accountPay">계좌 간편결제</label>
+                                </div>
 
-                            <!-- 아코디언 아이템 -->
-                            <div class="accordion" id="accountAccordion">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="accountHeader">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#accountCollapse" aria-expanded="false"
-                                                aria-controls="accountCollapse" disabled>
-                                            계좌 선택
-                                        </button>
-                                    </h2>
-                                    <div id="accountCollapse" class="accordion-collapse collapse"
-                                         aria-labelledby="accountHeader" data-bs-parent="#accountAccordion">
-                                        <div class="accordion-body">
-                                            <!-- 여기에 계좌 목록 및 선택 옵션을 추가하세요 -->
-                                            <!-- 스크립트 파일에서 처리합니다. -->
+                                <!-- 아코디언 아이템 -->
+                                <div class="accordion" id="accountAccordion">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="accountHeader">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#accountCollapse" aria-expanded="false"
+                                                    aria-controls="accountCollapse" disabled
+                                                    style="color: #FFFFFF; background-color: #959595;">
+                                                계좌 선택
+                                            </button>
+                                        </h2>
+                                        <div id="accountCollapse" class="accordion-collapse collapse"
+                                             aria-labelledby="accountHeader" data-bs-parent="#accountAccordion">
+                                            <div class="accordion-body">
+                                                <!-- 여기에 계좌 목록 및 선택 옵션을 추가하세요 -->
+                                                <!-- 스크립트 파일에서 처리합니다. -->
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="form-check">
-                            <input id="hanaOnePay" name="paymentMethod" type="radio" class="form-check-input">
-                            <label class="form-check-label" for="hanaOnePay">카드 간편결제</label>
-                        </div>
+                            <div class="form-check">
+                                <input id="hanaOnePay" name="paymentMethod" type="radio" class="form-check-input">
+                                <label class="form-check-label" for="hanaOnePay">카드 간편결제</label>
+                            </div>
 
-                        <div class="form-check">
-                            <input id="kakaoPay" name="paymentMethod" type="radio" class="form-check-input" required="">
-                            <label class="form-check-label" for="kakaoPay"><font style="vertical-align: inherit;"><font
-                                    style="vertical-align: inherit;">카카오페이</font></font></label>
+                            <div class="form-check">
+                                <input id="kakaoPay" name="paymentMethod" type="radio" class="form-check-input"
+                                       required="">
+                                <label class="form-check-label" for="kakaoPay"><font
+                                        style="vertical-align: inherit;"><font
+                                        style="vertical-align: inherit;">일반결제</font></font></label>
+                            </div>
                         </div>
 
                         <!-- 원페이를 위한 Modal -->
@@ -919,85 +1263,139 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+
+                    <hr class="my-4">
+
+                    <button class="btn-pay" type="submit">결제하기
+                    </button>
+                    <br>
+                    <div style="margin-left: 250px; margin-top: 4px; color: #666666">주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.</div>
+                    </form>
                 </div>
 
-
-                <hr class="my-4">
-
-                <button class="w-100 btn btn-pay btn-lg" type="submit"><font
-                        style="vertical-align: inherit;"><font style="vertical-align: inherit;">결제하기</font></font>
-                </button>
-                <br>
-                <div style="margin-left: 270px;">주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.</div>
-                </form>
-            </div>
-
-            <!-- 결제비밀번호 모달시작 -->
-            <div class="modal modal-fullscreen" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="paymentModalLabel">결제 비밀번호 입력</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="password-panel text-center mb-3">
-                                <div class="password-dots">
-                                    <div class="dot"></div>
-                                    <div class="dot"></div>
-                                    <div class="dot"></div>
-                                    <div class="dot"></div>
-                                    <div class="dot"></div>
-                                    <div class="dot"></div>
+                <!-- 결제비밀번호 모달시작 -->
+                <div class="modal modal-fullscreen" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="paymentModalLabel">결제 비밀번호 입력</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="password-panel text-center mb-3">
+                                    <div class="password-dots">
+                                        <div class="dot"></div>
+                                        <div class="dot"></div>
+                                        <div class="dot"></div>
+                                        <div class="dot"></div>
+                                        <div class="dot"></div>
+                                        <div class="dot"></div>
+                                    </div>
+                                    <input type="password" class="form-control" id="paymentPassword" hidden="hidden"
+                                           readonly>
                                 </div>
-                                <input type="password" class="form-control" id="paymentPassword" hidden="hidden" readonly>
-                            </div>
-                            <div class="keypad">
-                                <button class="btn btn-light keypad-btn" data-value="1">1</button>
-                                <button class="btn btn-light keypad-btn" data-value="2">2</button>
-                                <button class="btn btn-light keypad-btn" data-value="3">3</button>
-                                <button class="btn btn-light keypad-btn" data-value="4">4</button>
-                                <button class="btn btn-light keypad-btn" data-value="5">5</button>
-                                <button class="btn btn-light keypad-btn" data-value="6">6</button>
-                                <button class="btn btn-light keypad-btn" data-value="7">7</button>
-                                <button class="btn btn-light keypad-btn" data-value="8">8</button>
-                                <button class="btn btn-light keypad-btn" data-value="9">9</button>
-                                <button class="btn btn-danger keypad-btn-delete">C</button>
-                                <button class="btn btn-light keypad-btn" data-value="0">0</button>
-                                <button class="btn btn-light keypad-btn-delete">⬅</button>
-                            </div>
+                                <div class="keypad">
+                                    <button class="btn btn-light keypad-btn" data-value="1">1</button>
+                                    <button class="btn btn-light keypad-btn" data-value="2">2</button>
+                                    <button class="btn btn-light keypad-btn" data-value="3">3</button>
+                                    <button class="btn btn-light keypad-btn" data-value="4">4</button>
+                                    <button class="btn btn-light keypad-btn" data-value="5">5</button>
+                                    <button class="btn btn-light keypad-btn" data-value="6">6</button>
+                                    <button class="btn btn-light keypad-btn" data-value="7">7</button>
+                                    <button class="btn btn-light keypad-btn" data-value="8">8</button>
+                                    <button class="btn btn-light keypad-btn" data-value="9">9</button>
+                                    <button class="btn btn-danger keypad-btn-delete">C</button>
+                                    <button class="btn btn-light keypad-btn" data-value="0">0</button>
+                                    <button class="btn btn-light keypad-btn-delete">⬅</button>
+                                </div>
 
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                            <button type="button" class="btn btn-primary" id="confirmPayment">결제</button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                <button type="button" class="btn btn-primary" id="confirmPayment">결제</button>
 
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- 결제비밀번호 모달 끝 -->
-        </main>
+                <!-- 결제비밀번호 모달 끝 -->
 
 
 
-</div>
+    </div>
 
-</body>
+
 
 
 </main>
-
+    </body>
 <!-- 푸터위치 -->
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %>
 
 
 <script>
+    // input 요소에 값을 입력할 때 호출되는 함수
+    function formatNumberInput() {
+        const inputElement = document.getElementById('usePointInput');
+        let value = inputElement.value.replace(/\D/g, ''); // 숫자 이외의 문자 제거
+        value = parseInt(value).toLocaleString(); // 숫자를 세 자리마다 쉼표로 구분하여 포맷팅
+
+        if (value === 'NaN') {
+            // 값이 "NaN"인 경우, 화면에서 숨기기
+            inputElement.value = 0;
+        } else {
+            inputElement.value = value; // 포맷팅된 값과 ' 원'을 추가하여 표시
+        }
+    }
+
+    // input 요소에 이벤트 핸들러 등록
+    const inputElement = document.getElementById('usePointInput');
+    inputElement.addEventListener('input', formatNumberInput);
+
+    // 초기화할 때 한 번 호출하여 현재 값 포맷팅
+    formatNumberInput();
+
+
+    const productPrice = parseInt("${productPrice}");
+    const newProductPrice = parseInt("${productPrice}");
+    const hanaMoney = parseInt("${hanaMoney}");
+
+    // 숫자를 세 자리마다 쉼표로 구분하여 표시합니다.
+    const formattedPrice = productPrice.toLocaleString();
+    const formattedHanaMoney = hanaMoney.toLocaleString();
+
+    // formattedPrice를 화면에 표시합니다.
+    document.getElementById('productPriceDisplay').innerText = formattedPrice;
+    document.getElementById('realProductPriceDisplay').innerText = formattedPrice;
+    document.getElementById('hanaMoneyDisplay').innerText = formattedHanaMoney;
+
+
+    function toggleInput() {
+        const checkbox = document.getElementById('agreeCheckbox');
+        const input = document.getElementById('usePointInput');
+
+        if (checkbox.checked) {
+            input.removeAttribute('disabled');
+        } else {
+            input.setAttribute('disabled', 'disabled');
+        }
+    }
+
+    function checkAgreement() {
+        const checkbox = document.getElementById('agreeCheckbox');
+        if (!checkbox.checked) {
+            alert('동의해주세요!');
+        }
+    }
+
 
     function useAllPoints() {
         const initialHanaMoney = parseInt("${hanaMoney}");
-        document.getElementById('usePointInput').value = initialHanaMoney;
+        document.getElementById('usePointInput').value = initialHanaMoney.toLocaleString();
         calculateNewAmounts();
     }
 
@@ -1015,8 +1413,11 @@
         const newHanaMoney = initialHanaMoney - usePoint;
         const newProductPrice = initialProductPrice - usePoint;
 
-        document.getElementById('hanaMoneyDisplay').innerText = newHanaMoney;
-        document.getElementById('productPriceDisplay').innerText = newProductPrice;
+        const formattedProductPrice = newProductPrice.toLocaleString();
+
+        document.getElementById('hanaMoneyDisplay').innerText = newHanaMoney.toLocaleString();
+        document.getElementById('productPriceDisplay').innerText = newProductPrice.toLocaleString();
+        document.getElementById('usePointDisplay').innerText = usePoint.toLocaleString();
     }
 
 
@@ -1113,19 +1514,16 @@
     // 페이지 스크롤 자스
     // 페이지가 로드되면 스크롤 이벤트를 추가
     document.addEventListener("DOMContentLoaded", function () {
-        // 요소와 해당 클래스를 가져옴
         var element = document.getElementById("scrolling-element");
+        var initialTop = 640;
 
-        // 스크롤 이벤트 핸들러를 추가
         window.addEventListener("scroll", function () {
-            // 스크롤 위치를 가져오기
             var scrollPosition = window.scrollY;
 
-            // 원하는 스크롤 위치를 조절하고 해당 클래스를 추가 또는 제거
-            if (scrollPosition > 200) { // 원하는 스크롤 위치를 지정하세요.
-                element.classList.add("scrolled-right");
+            if (scrollPosition >= initialTop) {
+                element.style.top = scrollPosition + "px";
             } else {
-                element.classList.remove("scrolled-right");
+                element.style.top = initialTop + "px";
             }
         });
     });
@@ -1138,7 +1536,8 @@
     // });
     //
     // "계좌 간편결제" 라디오 버튼 클릭 시 아코디언을 활성화합니다.
-    document.getElementById("accountPay").addEventListener("click", function() {
+
+    document.getElementById("accountPay").addEventListener("click", function () {
         var accountAccordion = new bootstrap.Collapse(document.getElementById("accountCollapse"), {
             toggle: true
         });
@@ -1151,41 +1550,107 @@
             var accountList = document.querySelector("#accountCollapse .accordion-body");
 
             accountData.forEach(function (account, index) {
+                var accountDiv = document.createElement("div");
                 var label = document.createElement("label");
                 var input = document.createElement("input");
-                var br = document.createElement("br");
-                var labelText = document.createTextNode(" " + account.accName + " : " + account.accNumber);
+                var accInfoDiv = document.createElement("div");
+                var accNameDiv = document.createElement("div");
+                var bankImg = document.createElement("img");
 
+                // 계좌 번호에 따른 은행 이름과 로고 설정
+                let bankName = "";
+                if (account.accNumber.includes("1002")) {
+                    bankName = "우리은행";
+                    bankImg.src = "/img/bank/bankName=woori.png";
+                } else if (account.accNumber.includes("110")) {
+                    bankName = "신한은행";
+                    bankImg.src = "/img/bank/bankName=shinhan.png";
+                } else if (account.accNumber.includes("04")) {
+                    bankName = "국민은행";
+                    bankImg.src = "/img/bank/bankName=KB.png";
+                }
+
+                accNameDiv.textContent = bankName + " - " + account.accName;
+
+                // accInfoDiv 스타일 설정 및 flexbox 적용
+                accInfoDiv.style.display = "flex";            // flexbox를 사용하여 이미지와 텍스트를 가로로 배치
+                accInfoDiv.style.alignItems = "center";       // 내용을 수직 중앙에 배치
+                accInfoDiv.style.color = "#FFFFFF";
+                accInfoDiv.style.width = "600px";
+                accInfoDiv.style.height = "60px";
+                accInfoDiv.style.borderRadius = "5px";
+                accInfoDiv.style.padding = "20px";
+
+                // 계좌 번호에 따른 배경색 설정
+                if (account.accNumber.includes("1002")) {
+                    accInfoDiv.style.backgroundColor = "#0182CD";
+                } else if (account.accNumber.includes("110")) {
+                    accInfoDiv.style.backgroundColor = "#3253BC";
+                } else if (account.accNumber.includes("04")) {
+                    accInfoDiv.style.backgroundColor = "#7C7268";
+                }
+
+                // 커스텀 체크박스 스타일링
                 input.type = "radio";
+                input.id = "account" + (index + 1); // 각 체크박스에 고유한 ID 부여
                 input.name = "account";
                 input.value = "account" + (index + 1);
+                input.style.display = "none"; // 기본 체크박스 숨기기
+
+                var customCheckbox = document.createElement("span");
+                customCheckbox.classList.add("custom-checkbox");
+
+                label.style.display = "flex";
+                label.style.alignItems = "center";
+                label.htmlFor = input.id; // 라벨 연결
+
+                bankImg.style.marginRight = "15px";
 
                 label.appendChild(input);
-                label.appendChild(labelText);
+                label.appendChild(customCheckbox);
+                accInfoDiv.appendChild(bankImg);
+                accInfoDiv.appendChild(accNameDiv);
+                label.appendChild(accInfoDiv);
 
-                // 줄 바꿈 추가
-                accountList.appendChild(label);
-                accountList.appendChild(document.createElement("br"));
+                accountDiv.appendChild(label);
+                accountList.appendChild(accountDiv);
             });
         }
-        // "결제하기" 버튼 클릭 이벤트
-        document.querySelector(".btn-pay").addEventListener("click", function (event) {
-            event.preventDefault(); // 기본 동작 중지
-
-            // 체크된 계좌번호를 가져오는 함수 호출
-            var selectedAccountNumber = getCheckedAccountNumber();
-
-            if (selectedAccountNumber) {
-                // 모달 보이기
-                var paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
-                paymentModal.show();
-            } else {
-                // alert("계좌를 선택해주세요.");
-            }
-        });
-
-
     });
+
+
+    // 기존 함수
+    // document.getElementById("accountPay").addEventListener("click", function() {
+    //     var accountAccordion = new bootstrap.Collapse(document.getElementById("accountCollapse"), {
+    //         toggle: true
+    //     });
+    // });
+    //
+    // var accountData = JSON.parse(sessionStorage.getItem("accountData"));
+    //
+    // document.addEventListener("DOMContentLoaded", function () {
+    //     if (accountData) {
+    //         var accountList = document.querySelector("#accountCollapse .accordion-body");
+    //
+    //         accountData.forEach(function (account, index) {
+    //             var label = document.createElement("label");
+    //             var input = document.createElement("input");
+    //             var br = document.createElement("br");
+    //             var labelText = document.createTextNode(" " + account.accName + " : " + account.accNumber);
+    //
+    //             input.type = "radio";
+    //             input.name = "account";
+    //             input.value = "account" + (index + 1);
+    //
+    //             label.appendChild(input);
+    //             label.appendChild(labelText);
+    //
+    //             // 줄 바꿈 추가
+    //             accountList.appendChild(label);
+    //             accountList.appendChild(document.createElement("br"));
+    //         });
+    //     }
+
 
     // "계좌 간편결제" 라디오 버튼 클릭 시 아코디언 활성화
     // document.getElementById("accountPay").addEventListener("click", function () {
@@ -1208,12 +1673,12 @@
     }
 
     // 계좌 선택시 저장
-    document.querySelectorAll('input[name="account"]').forEach(function(radio) {
+    document.querySelectorAll('input[name="account"]').forEach(function (radio) {
         radio.addEventListener('change', getCheckedAccountNumber);
     });
 
     //시작
-    $(document).ready(function() {
+    $(document).ready(function () {
 
         var passwordInput = $('#paymentPassword');
         var dots = $('.dot');
@@ -1226,7 +1691,7 @@
             }
         }
 
-        $('.keypad-btn').click(function() {
+        $('.keypad-btn').click(function () {
             var value = $(this).data('value');
             if (passwordInput.val().length < 6) {
                 passwordInput.val(passwordInput.val() + value);
@@ -1234,19 +1699,18 @@
             }
         });
 
-        $('.keypad-btn-clear').click(function() {
+        $('.keypad-btn-clear').click(function () {
             passwordInput.val('');
             updateDots();
         });
 
-        $('.keypad-btn-delete').click(function() {
+        $('.keypad-btn-delete').click(function () {
             passwordInput.val(passwordInput.val().slice(0, -1));
             updateDots();
         });
 
 
-
-        $("#payStart").click(function() {
+        $("#payStart").click(function () {
             var selectedAccount = getCheckedAccountNumber();
             console.log(selectedAccount);
 
@@ -1275,7 +1739,7 @@
             return null;
         }
 
-        $("#confirmPayment").click(function() {
+        $("#confirmPayment").click(function () {
             var enteredPassword = passwordInput.val();
             var sessionPassword = '<%= session.getAttribute("payPw") %>';
 
@@ -1304,7 +1768,7 @@
                     url: "/api/payRequest/account",
                     data: JSON.stringify(requestData),
                     contentType: "application/json; charset=utf-8",
-                    success: function(response) {
+                    success: function (response) {
                         if (response === "Payment Approved") {
                             window.location.href = "/hanaOnePay/payRequestSuccess";
                         } else {
@@ -1313,7 +1777,7 @@
                             window.location.href = "/hanaOnePay/payRequestFail";
                         }
                     },
-                    error: function(jqXHR, textStatus, errorThrown) {
+                    error: function (jqXHR, textStatus, errorThrown) {
                         console.log("AJAX Error Status:", jqXHR.status);
                         console.log("Text Status:", textStatus);
                         console.log("Error Thrown:", errorThrown);
@@ -1327,9 +1791,10 @@
     });
 
 
-
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
 
 
 </body>

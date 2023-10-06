@@ -54,6 +54,11 @@
             background-color: white;
         }
 
+        .btn-agree{
+            color: #FFFFFF !important;
+            background-color: #00857E !important;
+        }
+
     </style>
 </head>
 <body>
@@ -128,17 +133,15 @@
             <div class="modal-dialog modal-dialog-scrollable" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">하나원페이</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <img src="/img/hanaLogo.png" alt="하나원페이 로고" style="margin-right: 10px; width: 45px; height: 45px;">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel"  style="font-weight: bold;">하나원페이</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <!-- Your modal content here -->
-                        <h3>◼ 마이 하나원페이</h3>
-                        <hr>
+                        <h4 style="background-color: #00857E; color: #FFFFFF;">[하나원페이 약관동의서]</h4>
 
-                        <img class="hanaCharacter" src="/img/myWallet.png">
+<%--                        <img class="hanaCharacter" src="/img/myWallet.png">--%>
                         <br>
                         <h6>마이하나원페이는 통합 결제수단 관리에 특화된 마이데이터 서비스 입니다.</h6>
                         <h6>지갑 연결 진행을 위해 약관에 동의해 주세요.</h6> <br>
@@ -303,7 +306,7 @@
                         <a href="/home">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
                         </a>
-                        <button type="button" class="btn btn-success confirm-go">동의</button>
+                        <button type="button" class="btn btn-agree confirm-go">동의</button>
                     </div>
                 </div>
             </div>
