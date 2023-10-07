@@ -7,6 +7,7 @@ import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +31,16 @@ public class HanaOnePayService {
     // 대표 하나카드 조회
     public List<HanaOnePayhanaCardDTO> getMainHanaCardByIdentity(String identityNumber) {
         return hanaOnePayDAO.getMainHanaCardByIdentity(identityNumber);
+    }
+
+    // 하나카드 중 신용카드 조회
+    public List<HanaOnePayhanaCardDTO> getHanaCreditCardByIdentity(String identityNumber) {
+        return hanaOnePayDAO.getHanaCreditCardByIdentity(identityNumber);
+    }
+
+    //신용카드의 전월 1일부터 말일까지의 거래내역에서 금액합산
+    public BigDecimal calculateTotalSpentAmountForPreviousMonth(String cardNumber) {
+        return hanaOnePayDAO.getLastMonthTotalAmount(cardNumber);
     }
 
     // 페이카드 등록전 이미 등록된 카드를 확인하기 위해 페이카드 select
@@ -93,5 +104,9 @@ public class HanaOnePayService {
     public List<CardItemDTO> getCardsByBusinessCodes(List<String> businessCodes) {
         return hanaOnePayDAO.getCardsByBusinessCodes(businessCodes);
     }
+
+//    public int getLastMonthTotalAmount(String identityNumber) {
+//        return hanaOnePayDAO.getLastMonthTotalAmount(identityNumber);
+//    }
 
 }

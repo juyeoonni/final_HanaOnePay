@@ -69,6 +69,13 @@ public interface CardDAO {
 
     List<HanaOnePayTransDTO> selectTransactionsByCard(String cardCode, String cardNumber);
 
+    // 각 은행의 신용카드 리스트를 가져오는 메서드
+    List<CreditCardDTO> getCustomerCreditCards(String tableCode);
+
+    // 카드 번호와 전월의 사용 금액을 조회
+    BigDecimal calculateTotalSpentAmountForPreviousMonth(@Param("cardNumber") String cardNumber, @Param("tableCode") String tableCode);
+
+    void deductAmountFromLinkedAccount(@Param("cardNumber") String cardNumber, @Param("totalSpentAmount") BigDecimal totalSpentAmount, @Param("tableCode") String tableCode);
 }
 
 

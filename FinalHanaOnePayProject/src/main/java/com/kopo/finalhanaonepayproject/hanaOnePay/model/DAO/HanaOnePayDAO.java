@@ -3,6 +3,7 @@ package com.kopo.finalhanaonepayproject.hanaOnePay.model.DAO;
 import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.*;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,12 @@ public interface HanaOnePayDAO {
 
     // 하나 대표카드
     List<HanaOnePayhanaCardDTO> getMainHanaCardByIdentity(String identityNumber);
+
+    // 하나 신용카드
+    List<HanaOnePayhanaCardDTO> getHanaCreditCardByIdentity(String identityNumber);
+
+    // 신용카드의 전월 1일부터 말일까지의 거래내역에서 금액합산
+    BigDecimal getLastMonthTotalAmount(String cardNumber);
 
     List<HanaOnePayCardDTO> getRegisteredCards(String identityNumber);
 

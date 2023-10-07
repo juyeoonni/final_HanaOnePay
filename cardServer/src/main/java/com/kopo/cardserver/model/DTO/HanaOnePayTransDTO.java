@@ -16,5 +16,4 @@ public class HanaOnePayTransDTO {
     private String businessMall;
     private String payStatus;
     private String payType;
-
 }

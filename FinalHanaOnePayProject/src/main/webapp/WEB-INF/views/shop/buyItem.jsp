@@ -586,7 +586,7 @@
             align-items: flex-start; /* 왼쪽 정렬 */
         }
 
-        .payMethod{
+        .payMethod {
             background-color: #FFFFFF;
             margin-right: 8px;
             border: none;
@@ -609,12 +609,26 @@
         #scrolling-element {
             position: fixed;
             right: 0;
-            top: 640px;
+            top: 500px;
+            /* bottom: 100px; */
             width: 500px;
             background-color: #fff;
             padding: 10px;
             border: 1px solid #ddd;
             transition: none;
+            /* margin-top: 20%; */
+            /* padding: 5%; */
+            /* margin-bottom: 10%; */
+        }
+
+        .row {
+            position: relative;
+        }
+
+        .scroll-box {
+            position: fixed;
+            max-height: 100%;  /* 혹은 .row의 높이 값에 따라 조정 */
+            overflow-y: auto;
         }
 
 
@@ -838,42 +852,43 @@
             </div>
 
             <div class="row g-3">
-                <div id="scrolling-element" class="col-md-5 col-lg-4 order-md-last pay-Info" >
-                    <h4 class="mb-3" style="color: #00857E"> ◼ 결제 정보</h4>
-                    <ul class="list-group mb-3">
-                        <li class="list-group-item d-flex justify-content-between lh-sm">
-                            <div>
-                                <h6 class="my-0"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">상품명</font></font></h6>
-                            </div>
-                            <span id="productNameDisplay" class="text-body-secondary"><font
-                                    style="vertical-align: inherit;"><font
-                                    style="vertical-align: inherit;">${productName}</font></font></span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-sm">
-                            <div>
-                                <h6 class="my-0"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">금액</font></font></h6>
-                            </div>
-                            <span id="realProductPriceDisplay" class="text right-aligned">${productPrice}</span>원
-                        </li>
+                <div class="scroll-box">
+                    <div id="scrolling-element" class="col-md-3 col-lg-4 order-md-last pay-Info">
+                        <h4 class="mb-3" style="color: #00857E"> ◼ 결제 정보</h4>
+                        <ul class="list-group mb-3">
+                            <li class="list-group-item d-flex justify-content-between lh-sm">
+                                <div>
+                                    <h6 class="my-0"><font style="vertical-align: inherit;"><font
+                                            style="vertical-align: inherit;">상품명</font></font></h6>
+                                </div>
+                                <span id="productNameDisplay" class="text-body-secondary"><font
+                                        style="vertical-align: inherit;"><font
+                                        style="vertical-align: inherit;">${productName}</font></font></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-sm">
+                                <div>
+                                    <h6 class="my-0"><font style="vertical-align: inherit;"><font
+                                            style="vertical-align: inherit;">금액</font></font></h6>
+                                </div>
+                                <span id="realProductPriceDisplay" class="text right-aligned">${productPrice}</span>원
+                            </li>
 
-                        <li class="list-group-item d-flex justify-content-between">
-                            <div class="tex">
-                                <h6 class="my-0"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">포인트 사용</font></font></h6>
-                            </div>
-                            <span id="usePointDisplay" class="text right-aligned">0</span>원
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between" style="color: #00857E">
-                            <span>총 결제 금액</span>
-                            <strong><font style="vertical-align: inherit;"><font
-                                    style="vertical-align: inherit;"
-                                    id="productPriceDisplay">${productPrice}</font></font> 원</strong>
-                        </li>
-                    </ul>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <div class="tex">
+                                    <h6 class="my-0"><font style="vertical-align: inherit;"><font
+                                            style="vertical-align: inherit;">포인트 사용</font></font></h6>
+                                </div>
+                                <span id="usePointDisplay" class="text right-aligned">0</span>원
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between" style="color: #00857E">
+                                <span>총 결제 금액</span>
+                                <strong><font style="vertical-align: inherit;"><font
+                                        style="vertical-align: inherit;"
+                                        id="productPriceDisplay">${productPrice}</font></font> 원</strong>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-
                 <div class="col-md-7 col-lg-8">
                     <div class="userInfo" style="margin-top: -100px;">
                         <h4 class="mb-3" style="color: #00857E"> ◼ 주문자 정보</h4>
@@ -1271,7 +1286,8 @@
                     <button class="btn-pay" type="submit">결제하기
                     </button>
                     <br>
-                    <div style="margin-left: 250px; margin-top: 4px; color: #666666">주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.</div>
+                    <div style="margin-left: 250px; margin-top: 4px; color: #666666">주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.
+                    </div>
                     </form>
                 </div>
 
@@ -1325,476 +1341,473 @@
                 <!-- 결제비밀번호 모달 끝 -->
 
 
-
-    </div>
-
+            </div>
 
 
-
-</main>
+        </main>
     </body>
-<!-- 푸터위치 -->
-<%@ include file="/WEB-INF/views/comm/footer.jsp" %>
+    <!-- 푸터위치 -->
+    <%@ include file="/WEB-INF/views/comm/footer.jsp" %>
 
 
-<script>
-    // input 요소에 값을 입력할 때 호출되는 함수
-    function formatNumberInput() {
-        const inputElement = document.getElementById('usePointInput');
-        let value = inputElement.value.replace(/\D/g, ''); // 숫자 이외의 문자 제거
-        value = parseInt(value).toLocaleString(); // 숫자를 세 자리마다 쉼표로 구분하여 포맷팅
+    <script>
+        // input 요소에 값을 입력할 때 호출되는 함수
+        function formatNumberInput() {
+            const inputElement = document.getElementById('usePointInput');
+            let value = inputElement.value.replace(/\D/g, ''); // 숫자 이외의 문자 제거
+            value = parseInt(value).toLocaleString(); // 숫자를 세 자리마다 쉼표로 구분하여 포맷팅
 
-        if (value === 'NaN') {
-            // 값이 "NaN"인 경우, 화면에서 숨기기
-            inputElement.value = 0;
-        } else {
-            inputElement.value = value; // 포맷팅된 값과 ' 원'을 추가하여 표시
-        }
-    }
-
-    // input 요소에 이벤트 핸들러 등록
-    const inputElement = document.getElementById('usePointInput');
-    inputElement.addEventListener('input', formatNumberInput);
-
-    // 초기화할 때 한 번 호출하여 현재 값 포맷팅
-    formatNumberInput();
-
-
-    const productPrice = parseInt("${productPrice}");
-    const newProductPrice = parseInt("${productPrice}");
-    const hanaMoney = parseInt("${hanaMoney}");
-
-    // 숫자를 세 자리마다 쉼표로 구분하여 표시합니다.
-    const formattedPrice = productPrice.toLocaleString();
-    const formattedHanaMoney = hanaMoney.toLocaleString();
-
-    // formattedPrice를 화면에 표시합니다.
-    document.getElementById('productPriceDisplay').innerText = formattedPrice;
-    document.getElementById('realProductPriceDisplay').innerText = formattedPrice;
-    document.getElementById('hanaMoneyDisplay').innerText = formattedHanaMoney;
-
-
-    function toggleInput() {
-        const checkbox = document.getElementById('agreeCheckbox');
-        const input = document.getElementById('usePointInput');
-
-        if (checkbox.checked) {
-            input.removeAttribute('disabled');
-        } else {
-            input.setAttribute('disabled', 'disabled');
-        }
-    }
-
-    function checkAgreement() {
-        const checkbox = document.getElementById('agreeCheckbox');
-        if (!checkbox.checked) {
-            alert('동의해주세요!');
-        }
-    }
-
-
-    function useAllPoints() {
-        const initialHanaMoney = parseInt("${hanaMoney}");
-        document.getElementById('usePointInput').value = initialHanaMoney.toLocaleString();
-        calculateNewAmounts();
-    }
-
-    function calculateNewAmounts() {
-        const initialHanaMoney = parseInt("${hanaMoney}");
-        const initialProductPrice = parseInt("${productPrice}");
-
-        let usePoint = parseInt(document.getElementById('usePointInput').value) || 0;
-
-        if (usePoint > initialHanaMoney) {
-            usePoint = initialHanaMoney;
-            document.getElementById('usePointInput').value = usePoint;
-        }
-
-        const newHanaMoney = initialHanaMoney - usePoint;
-        const newProductPrice = initialProductPrice - usePoint;
-
-        const formattedProductPrice = newProductPrice.toLocaleString();
-
-        document.getElementById('hanaMoneyDisplay').innerText = newHanaMoney.toLocaleString();
-        document.getElementById('productPriceDisplay').innerText = newProductPrice.toLocaleString();
-        document.getElementById('usePointDisplay').innerText = usePoint.toLocaleString();
-    }
-
-
-    function redirectToSuccessPage() {
-        window.location.href = "/hanaOnePay/payRequestSuccess";
-    }
-
-
-    $(document).ready(function () {
-        $('#hanaOnePay').change(function () {
-            if ($(this).prop('checked')) {
-                $('#collapseOne').collapse('show'); // 아코디언 펼치기
-            }
-        });
-
-        // 다른 결제 수단을 선택할 경우 아코디언 닫기 기능을 위한 코드 (예: PayPal)
-        $('#paypal').change(function () {
-            if ($(this).prop('checked')) {
-                $('#collapseOne').collapse('hide'); // 아코디언 닫기
-            }
-        });
-    });
-
-    document.addEventListener('DOMContentLoaded', function () {
-        const hanaOnePayRadio = document.getElementById('hanaOnePay');
-        const payButton = document.querySelector('.btn-pay');
-
-        payButton.addEventListener('click', function (event) {
-            if (hanaOnePayRadio.checked) {
-                event.preventDefault(); // 폼의 기본 제출을 방지합니다.
-                const modal = new bootstrap.Modal(document.getElementById('exampleModal'));
-                modal.show();
-            }
-        });
-    });
-
-    // $(document).ready(function(){
-    //     // 결제하기 버튼을 누르면 실행될 이벤트
-    //     $('[data-bs-target="#secondModal"]').on('click', function(){
-    //         // QR 코드 생성 API 요청
-    //         $.get("/QR/api/generateQRCode", function(data, status){
-    //             if (status === "success") {
-    //                 // base64로 인코딩된 응답 데이터를 이미지로 변환하여 .createQR div에 삽입
-    //                 $('.createQR').html('<img src="data:image/png;base64,' + data + '" alt="QR Code"/>');
-    //             } else {
-    //                 console.error("Error generating QR code");
-    //             }
-    //         });
-    //     });
-    // });
-
-    // 0922
-    $(document).ready(function () {
-        // 결제하기 버튼을 누르면 실행될 이벤트
-        $('[data-bs-target="#secondModal"]').on('click', function () {
-
-            let productName = $(this).data('product-name'); // 버튼의 data-product-name 값 가져오기
-            let encodedProductName = encodeURIComponent(productName); // productName 인코딩
-
-            // QR 코드 생성 API 요청
-            $.get("/QR/api/generateQRCode", {productName: encodedProductName}, function (data, status) { // 인코딩된 productName을 매개변수로 추가
-                if (status === "success") {
-                    // base64로 인코딩된 응답 데이터를 이미지로 변환하여 .createQR div에 삽입
-                    $('.createQR').html('<img src="data:image/png;base64,' + data + '" alt="QR Code"/>');
-                } else {
-                    console.error("Error generating QR code");
-                }
-            });
-        });
-    });
-
-    // $(document).ready(function () {
-    //     $('[data-bs-target="#secondModal"]').on('click', function () {
-    //         let productName = $(this).data('product-name');
-    //
-    //         // data attribute에서 상품의 원래 가격 가져오기
-    //         let originalProductPrice = parseInt($('#productInfo').data('product-price'));
-    //
-    //         let usedPoint = parseInt($('#usePointInput').val()) || 0;
-    //         let finalProductPrice = originalProductPrice - usedPoint;
-    //
-    //         let encodedProductName = encodeURIComponent(productName);
-    //
-    //         $.get("/QR/api/generateQRCode", {productName: encodedProductName, price: finalProductPrice}, function (data, status) {
-    //             if (status === "success") {
-    //                 $('.createQR').html('<img src="data:image/png;base64,' + data + '" alt="QR Code"/>');
-    //             } else {
-    //                 console.error("Error generating QR code");
-    //             }
-    //         });
-    //     });
-    // });
-
-    // 페이지 스크롤 자스
-    // 페이지가 로드되면 스크롤 이벤트를 추가
-    document.addEventListener("DOMContentLoaded", function () {
-        var element = document.getElementById("scrolling-element");
-        var initialTop = 640;
-
-        window.addEventListener("scroll", function () {
-            var scrollPosition = window.scrollY;
-
-            if (scrollPosition >= initialTop) {
-                element.style.top = scrollPosition + "px";
+            if (value === 'NaN') {
+                // 값이 "NaN"인 경우, 화면에서 숨기기
+                inputElement.value = 0;
             } else {
-                element.style.top = initialTop + "px";
+                inputElement.value = value; // 포맷팅된 값과 ' 원'을 추가하여 표시
             }
-        });
-    });
+        }
 
-    // // 페이지가 로드될 때 아코디언을 비활성화 상태로 설정합니다.
-    // document.addEventListener("DOMContentLoaded", function() {
-    //     var accountAccordion = new bootstrap.Collapse(document.getElementById("accountCollapse"), {
-    //         toggle: false
-    //     });
-    // });
-    //
-    // "계좌 간편결제" 라디오 버튼 클릭 시 아코디언을 활성화합니다.
+        // input 요소에 이벤트 핸들러 등록
+        const inputElement = document.getElementById('usePointInput');
+        inputElement.addEventListener('input', formatNumberInput);
 
-    document.getElementById("accountPay").addEventListener("click", function () {
-        var accountAccordion = new bootstrap.Collapse(document.getElementById("accountCollapse"), {
-            toggle: true
-        });
-    });
+        // 초기화할 때 한 번 호출하여 현재 값 포맷팅
+        formatNumberInput();
 
-    var accountData = JSON.parse(sessionStorage.getItem("accountData"));
 
-    document.addEventListener("DOMContentLoaded", function () {
-        if (accountData) {
-            var accountList = document.querySelector("#accountCollapse .accordion-body");
+        const productPrice = parseInt("${productPrice}");
+        const newProductPrice = parseInt("${productPrice}");
+        const hanaMoney = parseInt("${hanaMoney}");
 
-            accountData.forEach(function (account, index) {
-                var accountDiv = document.createElement("div");
-                var label = document.createElement("label");
-                var input = document.createElement("input");
-                var accInfoDiv = document.createElement("div");
-                var accNameDiv = document.createElement("div");
-                var bankImg = document.createElement("img");
+        // 숫자를 세 자리마다 쉼표로 구분하여 표시합니다.
+        const formattedPrice = productPrice.toLocaleString();
+        const formattedHanaMoney = hanaMoney.toLocaleString();
 
-                // 계좌 번호에 따른 은행 이름과 로고 설정
-                let bankName = "";
-                if (account.accNumber.includes("1002")) {
-                    bankName = "우리은행";
-                    bankImg.src = "/img/bank/bankName=woori.png";
-                } else if (account.accNumber.includes("110")) {
-                    bankName = "신한은행";
-                    bankImg.src = "/img/bank/bankName=shinhan.png";
-                } else if (account.accNumber.includes("04")) {
-                    bankName = "국민은행";
-                    bankImg.src = "/img/bank/bankName=KB.png";
+        // formattedPrice를 화면에 표시합니다.
+        document.getElementById('productPriceDisplay').innerText = formattedPrice;
+        document.getElementById('realProductPriceDisplay').innerText = formattedPrice;
+        document.getElementById('hanaMoneyDisplay').innerText = formattedHanaMoney;
+
+
+        function toggleInput() {
+            const checkbox = document.getElementById('agreeCheckbox');
+            const input = document.getElementById('usePointInput');
+
+            if (checkbox.checked) {
+                input.removeAttribute('disabled');
+            } else {
+                input.setAttribute('disabled', 'disabled');
+            }
+        }
+
+        function checkAgreement() {
+            const checkbox = document.getElementById('agreeCheckbox');
+            if (!checkbox.checked) {
+                alert('동의해주세요!');
+            }
+        }
+
+
+        function useAllPoints() {
+            const initialHanaMoney = parseInt("${hanaMoney}");
+            document.getElementById('usePointInput').value = initialHanaMoney.toLocaleString();
+            calculateNewAmounts();
+        }
+
+        function calculateNewAmounts() {
+            const initialHanaMoney = parseInt("${hanaMoney}");
+            const initialProductPrice = parseInt("${productPrice}");
+
+            let usePoint = parseInt(document.getElementById('usePointInput').value) || 0;
+
+            if (usePoint > initialHanaMoney) {
+                usePoint = initialHanaMoney;
+                document.getElementById('usePointInput').value = usePoint;
+            }
+
+            const newHanaMoney = initialHanaMoney - usePoint;
+            const newProductPrice = initialProductPrice - usePoint;
+
+            const formattedProductPrice = newProductPrice.toLocaleString();
+
+            document.getElementById('hanaMoneyDisplay').innerText = newHanaMoney.toLocaleString();
+            document.getElementById('productPriceDisplay').innerText = newProductPrice.toLocaleString();
+            document.getElementById('usePointDisplay').innerText = usePoint.toLocaleString();
+        }
+
+
+        function redirectToSuccessPage() {
+            window.location.href = "/hanaOnePay/payRequestSuccess";
+        }
+
+
+        $(document).ready(function () {
+            $('#hanaOnePay').change(function () {
+                if ($(this).prop('checked')) {
+                    $('#collapseOne').collapse('show'); // 아코디언 펼치기
                 }
-
-                accNameDiv.textContent = bankName + " - " + account.accName;
-
-                // accInfoDiv 스타일 설정 및 flexbox 적용
-                accInfoDiv.style.display = "flex";            // flexbox를 사용하여 이미지와 텍스트를 가로로 배치
-                accInfoDiv.style.alignItems = "center";       // 내용을 수직 중앙에 배치
-                accInfoDiv.style.color = "#FFFFFF";
-                accInfoDiv.style.width = "600px";
-                accInfoDiv.style.height = "60px";
-                accInfoDiv.style.borderRadius = "5px";
-                accInfoDiv.style.padding = "20px";
-
-                // 계좌 번호에 따른 배경색 설정
-                if (account.accNumber.includes("1002")) {
-                    accInfoDiv.style.backgroundColor = "#0182CD";
-                } else if (account.accNumber.includes("110")) {
-                    accInfoDiv.style.backgroundColor = "#3253BC";
-                } else if (account.accNumber.includes("04")) {
-                    accInfoDiv.style.backgroundColor = "#7C7268";
-                }
-
-                // 커스텀 체크박스 스타일링
-                input.type = "radio";
-                input.id = "account" + (index + 1); // 각 체크박스에 고유한 ID 부여
-                input.name = "account";
-                input.value = "account" + (index + 1);
-                input.style.display = "none"; // 기본 체크박스 숨기기
-
-                var customCheckbox = document.createElement("span");
-                customCheckbox.classList.add("custom-checkbox");
-
-                label.style.display = "flex";
-                label.style.alignItems = "center";
-                label.htmlFor = input.id; // 라벨 연결
-
-                bankImg.style.marginRight = "15px";
-
-                label.appendChild(input);
-                label.appendChild(customCheckbox);
-                accInfoDiv.appendChild(bankImg);
-                accInfoDiv.appendChild(accNameDiv);
-                label.appendChild(accInfoDiv);
-
-                accountDiv.appendChild(label);
-                accountList.appendChild(accountDiv);
             });
-        }
-    });
 
-
-    // 기존 함수
-    // document.getElementById("accountPay").addEventListener("click", function() {
-    //     var accountAccordion = new bootstrap.Collapse(document.getElementById("accountCollapse"), {
-    //         toggle: true
-    //     });
-    // });
-    //
-    // var accountData = JSON.parse(sessionStorage.getItem("accountData"));
-    //
-    // document.addEventListener("DOMContentLoaded", function () {
-    //     if (accountData) {
-    //         var accountList = document.querySelector("#accountCollapse .accordion-body");
-    //
-    //         accountData.forEach(function (account, index) {
-    //             var label = document.createElement("label");
-    //             var input = document.createElement("input");
-    //             var br = document.createElement("br");
-    //             var labelText = document.createTextNode(" " + account.accName + " : " + account.accNumber);
-    //
-    //             input.type = "radio";
-    //             input.name = "account";
-    //             input.value = "account" + (index + 1);
-    //
-    //             label.appendChild(input);
-    //             label.appendChild(labelText);
-    //
-    //             // 줄 바꿈 추가
-    //             accountList.appendChild(label);
-    //             accountList.appendChild(document.createElement("br"));
-    //         });
-    //     }
-
-
-    // "계좌 간편결제" 라디오 버튼 클릭 시 아코디언 활성화
-    // document.getElementById("accountPay").addEventListener("click", function () {
-    //     var accountAccordion = new bootstrap.Collapse(document.getElementById("accountCollapse"), {
-    //         toggle: true
-    //     });
-    // });
-
-    // 체크된 계좌번호를 가져오는 함수
-    function getCheckedAccountNumber() {
-        var radios = document.getElementsByName("account");
-        for (var i = 0; i < radios.length; i++) {
-            if (radios[i].checked) {
-                var selectedAccountNumber = accountData[i].accNumber;
-                sessionStorage.setItem('selectedAccountNumber', selectedAccountNumber);
-                return selectedAccountNumber;
-            }
-        }
-        return null; // 선택된 계좌 없음
-    }
-
-    // 계좌 선택시 저장
-    document.querySelectorAll('input[name="account"]').forEach(function (radio) {
-        radio.addEventListener('change', getCheckedAccountNumber);
-    });
-
-    //시작
-    $(document).ready(function () {
-
-        var passwordInput = $('#paymentPassword');
-        var dots = $('.dot');
-
-        function updateDots() {
-            var length = passwordInput.val().length;
-            dots.removeClass('dot-filled');
-            for (var i = 0; i < length; i++) {
-                $(dots[i]).addClass('dot-filled');
-            }
-        }
-
-        $('.keypad-btn').click(function () {
-            var value = $(this).data('value');
-            if (passwordInput.val().length < 6) {
-                passwordInput.val(passwordInput.val() + value);
-                updateDots();
-            }
-        });
-
-        $('.keypad-btn-clear').click(function () {
-            passwordInput.val('');
-            updateDots();
-        });
-
-        $('.keypad-btn-delete').click(function () {
-            passwordInput.val(passwordInput.val().slice(0, -1));
-            updateDots();
-        });
-
-
-        $("#payStart").click(function () {
-            var selectedAccount = getCheckedAccountNumber();
-            console.log(selectedAccount);
-
-            if (!selectedAccount) {
-                alert("계좌를 선택해주세요.");
-                return;
-            }
-
-            sessionStorage.setItem('selectedAccountNumber', selectedAccount);
-            sessionStorage.setItem('productName', productName);
-            // sessionStorage.setItem('productPrice', productPrice);
-
-            var paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
-            passwordInput.val('');
-            dots.removeClass('dot-filled');
-            paymentModal.show();
-        });
-
-        function getCheckedAccountNumber() {
-            var radios = document.querySelectorAll('input[name="account"]');
-            for (var i = 0; i < radios.length; i++) {
-                if (radios[i].checked) {
-                    return radios[i].value.split("account")[1]; // 'account1' -> '1' 반환
+            // 다른 결제 수단을 선택할 경우 아코디언 닫기 기능을 위한 코드 (예: PayPal)
+            $('#paypal').change(function () {
+                if ($(this).prop('checked')) {
+                    $('#collapseOne').collapse('hide'); // 아코디언 닫기
                 }
-            }
-            return null;
-        }
+            });
+        });
 
-        $("#confirmPayment").click(function () {
-            var enteredPassword = passwordInput.val();
-            var sessionPassword = '<%= session.getAttribute("payPw") %>';
+        document.addEventListener('DOMContentLoaded', function () {
+            const hanaOnePayRadio = document.getElementById('hanaOnePay');
+            const payButton = document.querySelector('.btn-pay');
 
-            var selectedAccountNumber = sessionStorage.getItem('selectedAccountNumber');
-            var productName = "<%= session.getAttribute("productName") %>";
-            var productPrice = document.getElementById("productPriceDisplay").textContent;
-            sessionStorage.setItem('productPrice', document.getElementById("productPriceDisplay").textContent);
-            var identityNumber = "${sessionScope.identityNumber}";
+            payButton.addEventListener('click', function (event) {
+                if (hanaOnePayRadio.checked) {
+                    event.preventDefault(); // 폼의 기본 제출을 방지합니다.
+                    const modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+                    modal.show();
+                }
+            });
+        });
 
-            // 콘솔에 정보 출력
-            console.log("선택한 계좌번호:", selectedAccountNumber);
-            console.log("상품명:", productName);
-            console.log("상품금액:", productPrice);
-            console.log("주민번호:", identityNumber);
+        // $(document).ready(function(){
+        //     // 결제하기 버튼을 누르면 실행될 이벤트
+        //     $('[data-bs-target="#secondModal"]').on('click', function(){
+        //         // QR 코드 생성 API 요청
+        //         $.get("/QR/api/generateQRCode", function(data, status){
+        //             if (status === "success") {
+        //                 // base64로 인코딩된 응답 데이터를 이미지로 변환하여 .createQR div에 삽입
+        //                 $('.createQR').html('<img src="data:image/png;base64,' + data + '" alt="QR Code"/>');
+        //             } else {
+        //                 console.error("Error generating QR code");
+        //             }
+        //         });
+        //     });
+        // });
 
-            if (enteredPassword === sessionPassword) {
-                var requestData = {
-                    accountNumber: selectedAccountNumber,
-                    productName: productName,
-                    productPrice: productPrice,
-                    identityNumber: identityNumber
-                };
+        // 0922
+        $(document).ready(function () {
+            // 결제하기 버튼을 누르면 실행될 이벤트
+            $('[data-bs-target="#secondModal"]').on('click', function () {
 
-                $.ajax({
-                    type: "POST",
-                    url: "/api/payRequest/account",
-                    data: JSON.stringify(requestData),
-                    contentType: "application/json; charset=utf-8",
-                    success: function (response) {
-                        if (response === "Payment Approved") {
-                            window.location.href = "/hanaOnePay/payRequestSuccess";
-                        } else {
-                            alert('결제 실패: ' + response.message);
-                            // sessionStorage.setItem('productPrice', document.getElementById("productPriceDisplay").textContent);
-                            window.location.href = "/hanaOnePay/payRequestFail";
-                        }
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        console.log("AJAX Error Status:", jqXHR.status);
-                        console.log("Text Status:", textStatus);
-                        console.log("Error Thrown:", errorThrown);
+                let productName = $(this).data('product-name'); // 버튼의 data-product-name 값 가져오기
+                let encodedProductName = encodeURIComponent(productName); // productName 인코딩
+
+                // QR 코드 생성 API 요청
+                $.get("/QR/api/generateQRCode", {productName: encodedProductName}, function (data, status) { // 인코딩된 productName을 매개변수로 추가
+                    if (status === "success") {
+                        // base64로 인코딩된 응답 데이터를 이미지로 변환하여 .createQR div에 삽입
+                        $('.createQR').html('<img src="data:image/png;base64,' + data + '" alt="QR Code"/>');
+                    } else {
+                        console.error("Error generating QR code");
                     }
                 });
+            });
+        });
 
-            } else {
-                alert("[하나원페이]\n비밀번호가 일치하지 않습니다. \n다시 입력해주세요.");
+        // $(document).ready(function () {
+        //     $('[data-bs-target="#secondModal"]').on('click', function () {
+        //         let productName = $(this).data('product-name');
+        //
+        //         // data attribute에서 상품의 원래 가격 가져오기
+        //         let originalProductPrice = parseInt($('#productInfo').data('product-price'));
+        //
+        //         let usedPoint = parseInt($('#usePointInput').val()) || 0;
+        //         let finalProductPrice = originalProductPrice - usedPoint;
+        //
+        //         let encodedProductName = encodeURIComponent(productName);
+        //
+        //         $.get("/QR/api/generateQRCode", {productName: encodedProductName, price: finalProductPrice}, function (data, status) {
+        //             if (status === "success") {
+        //                 $('.createQR').html('<img src="data:image/png;base64,' + data + '" alt="QR Code"/>');
+        //             } else {
+        //                 console.error("Error generating QR code");
+        //             }
+        //         });
+        //     });
+        // });
+
+        // 페이지 스크롤 자스
+        // 페이지가 로드되면 스크롤 이벤트를 추가
+        // document.addEventListener("DOMContentLoaded", function () {
+        //     var element = document.getElementById("scrolling-element");
+        //     var initialTop = 640;
+        //
+        //     window.addEventListener("scroll", function () {
+        //         var scrollPosition = window.scrollY;
+        //
+        //         if (scrollPosition >= initialTop) {
+        //             element.style.top = scrollPosition + "px";
+        //         } else {
+        //             element.style.top = initialTop + "px";
+        //         }
+        //     });
+        // });
+
+        // // 페이지가 로드될 때 아코디언을 비활성화 상태로 설정합니다.
+        // document.addEventListener("DOMContentLoaded", function() {
+        //     var accountAccordion = new bootstrap.Collapse(document.getElementById("accountCollapse"), {
+        //         toggle: false
+        //     });
+        // });
+        //
+        // "계좌 간편결제" 라디오 버튼 클릭 시 아코디언을 활성화합니다.
+
+        document.getElementById("accountPay").addEventListener("click", function () {
+            var accountAccordion = new bootstrap.Collapse(document.getElementById("accountCollapse"), {
+                toggle: true
+            });
+        });
+
+        var accountData = JSON.parse(sessionStorage.getItem("accountData"));
+
+        document.addEventListener("DOMContentLoaded", function () {
+            if (accountData) {
+                var accountList = document.querySelector("#accountCollapse .accordion-body");
+
+                accountData.forEach(function (account, index) {
+                    var accountDiv = document.createElement("div");
+                    var label = document.createElement("label");
+                    var input = document.createElement("input");
+                    var accInfoDiv = document.createElement("div");
+                    var accNameDiv = document.createElement("div");
+                    var bankImg = document.createElement("img");
+
+                    // 계좌 번호에 따른 은행 이름과 로고 설정
+                    let bankName = "";
+                    if (account.accNumber.includes("1002")) {
+                        bankName = "우리은행";
+                        bankImg.src = "/img/bank/bankName=woori.png";
+                    } else if (account.accNumber.includes("110")) {
+                        bankName = "신한은행";
+                        bankImg.src = "/img/bank/bankName=shinhan.png";
+                    } else if (account.accNumber.includes("04")) {
+                        bankName = "국민은행";
+                        bankImg.src = "/img/bank/bankName=KB.png";
+                    }
+
+                    accNameDiv.textContent = bankName + " - " + account.accName;
+
+                    // accInfoDiv 스타일 설정 및 flexbox 적용
+                    accInfoDiv.style.display = "flex";            // flexbox를 사용하여 이미지와 텍스트를 가로로 배치
+                    accInfoDiv.style.alignItems = "center";       // 내용을 수직 중앙에 배치
+                    accInfoDiv.style.color = "#FFFFFF";
+                    accInfoDiv.style.width = "600px";
+                    accInfoDiv.style.height = "60px";
+                    accInfoDiv.style.borderRadius = "5px";
+                    accInfoDiv.style.padding = "20px";
+
+                    // 계좌 번호에 따른 배경색 설정
+                    if (account.accNumber.includes("1002")) {
+                        accInfoDiv.style.backgroundColor = "#0182CD";
+                    } else if (account.accNumber.includes("110")) {
+                        accInfoDiv.style.backgroundColor = "#3253BC";
+                    } else if (account.accNumber.includes("04")) {
+                        accInfoDiv.style.backgroundColor = "#7C7268";
+                    }
+
+                    // 커스텀 체크박스 스타일링
+                    input.type = "radio";
+                    input.id = "account" + (index + 1); // 각 체크박스에 고유한 ID 부여
+                    input.name = "account";
+                    input.value = "account" + (index + 1);
+                    input.style.display = "none"; // 기본 체크박스 숨기기
+
+                    var customCheckbox = document.createElement("span");
+                    customCheckbox.classList.add("custom-checkbox");
+
+                    label.style.display = "flex";
+                    label.style.alignItems = "center";
+                    label.htmlFor = input.id; // 라벨 연결
+
+                    bankImg.style.marginRight = "15px";
+
+                    label.appendChild(input);
+                    label.appendChild(customCheckbox);
+                    accInfoDiv.appendChild(bankImg);
+                    accInfoDiv.appendChild(accNameDiv);
+                    label.appendChild(accInfoDiv);
+
+                    accountDiv.appendChild(label);
+                    accountList.appendChild(accountDiv);
+                });
             }
         });
-    });
 
 
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-        crossorigin="anonymous"></script>
+        // 기존 함수
+        // document.getElementById("accountPay").addEventListener("click", function() {
+        //     var accountAccordion = new bootstrap.Collapse(document.getElementById("accountCollapse"), {
+        //         toggle: true
+        //     });
+        // });
+        //
+        // var accountData = JSON.parse(sessionStorage.getItem("accountData"));
+        //
+        // document.addEventListener("DOMContentLoaded", function () {
+        //     if (accountData) {
+        //         var accountList = document.querySelector("#accountCollapse .accordion-body");
+        //
+        //         accountData.forEach(function (account, index) {
+        //             var label = document.createElement("label");
+        //             var input = document.createElement("input");
+        //             var br = document.createElement("br");
+        //             var labelText = document.createTextNode(" " + account.accName + " : " + account.accNumber);
+        //
+        //             input.type = "radio";
+        //             input.name = "account";
+        //             input.value = "account" + (index + 1);
+        //
+        //             label.appendChild(input);
+        //             label.appendChild(labelText);
+        //
+        //             // 줄 바꿈 추가
+        //             accountList.appendChild(label);
+        //             accountList.appendChild(document.createElement("br"));
+        //         });
+        //     }
+
+
+        // "계좌 간편결제" 라디오 버튼 클릭 시 아코디언 활성화
+        // document.getElementById("accountPay").addEventListener("click", function () {
+        //     var accountAccordion = new bootstrap.Collapse(document.getElementById("accountCollapse"), {
+        //         toggle: true
+        //     });
+        // });
+
+        // 체크된 계좌번호를 가져오는 함수
+        function getCheckedAccountNumber() {
+            var radios = document.getElementsByName("account");
+            for (var i = 0; i < radios.length; i++) {
+                if (radios[i].checked) {
+                    var selectedAccountNumber = accountData[i].accNumber;
+                    sessionStorage.setItem('selectedAccountNumber', selectedAccountNumber);
+                    return selectedAccountNumber;
+                }
+            }
+            return null; // 선택된 계좌 없음
+        }
+
+        // 계좌 선택시 저장
+        document.querySelectorAll('input[name="account"]').forEach(function (radio) {
+            radio.addEventListener('change', getCheckedAccountNumber);
+        });
+
+        //시작
+        $(document).ready(function () {
+
+            var passwordInput = $('#paymentPassword');
+            var dots = $('.dot');
+
+            function updateDots() {
+                var length = passwordInput.val().length;
+                dots.removeClass('dot-filled');
+                for (var i = 0; i < length; i++) {
+                    $(dots[i]).addClass('dot-filled');
+                }
+            }
+
+            $('.keypad-btn').click(function () {
+                var value = $(this).data('value');
+                if (passwordInput.val().length < 6) {
+                    passwordInput.val(passwordInput.val() + value);
+                    updateDots();
+                }
+            });
+
+            $('.keypad-btn-clear').click(function () {
+                passwordInput.val('');
+                updateDots();
+            });
+
+            $('.keypad-btn-delete').click(function () {
+                passwordInput.val(passwordInput.val().slice(0, -1));
+                updateDots();
+            });
+
+
+            $("#payStart").click(function () {
+                var selectedAccount = getCheckedAccountNumber();
+                console.log(selectedAccount);
+
+                if (!selectedAccount) {
+                    alert("계좌를 선택해주세요.");
+                    return;
+                }
+
+                sessionStorage.setItem('selectedAccountNumber', selectedAccount);
+                sessionStorage.setItem('productName', productName);
+                // sessionStorage.setItem('productPrice', productPrice);
+
+                var paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
+                passwordInput.val('');
+                dots.removeClass('dot-filled');
+                paymentModal.show();
+            });
+
+            function getCheckedAccountNumber() {
+                var radios = document.querySelectorAll('input[name="account"]');
+                for (var i = 0; i < radios.length; i++) {
+                    if (radios[i].checked) {
+                        return radios[i].value.split("account")[1]; // 'account1' -> '1' 반환
+                    }
+                }
+                return null;
+            }
+
+            $("#confirmPayment").click(function () {
+                var enteredPassword = passwordInput.val();
+                var sessionPassword = '<%= session.getAttribute("payPw") %>';
+
+                var selectedAccountNumber = sessionStorage.getItem('selectedAccountNumber');
+                var productName = "<%= session.getAttribute("productName") %>";
+                var productPrice = document.getElementById("productPriceDisplay").textContent;
+                sessionStorage.setItem('productPrice', document.getElementById("productPriceDisplay").textContent);
+                var identityNumber = "${sessionScope.identityNumber}";
+
+                // 콘솔에 정보 출력
+                console.log("선택한 계좌번호:", selectedAccountNumber);
+                console.log("상품명:", productName);
+                console.log("상품금액:", productPrice);
+                console.log("주민번호:", identityNumber);
+
+                if (enteredPassword === sessionPassword) {
+                    var requestData = {
+                        accountNumber: selectedAccountNumber,
+                        productName: productName,
+                        productPrice: productPrice,
+                        identityNumber: identityNumber
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/api/payRequest/account",
+                        data: JSON.stringify(requestData),
+                        contentType: "application/json; charset=utf-8",
+                        success: function (response) {
+                            if (response === "Payment Approved") {
+                                window.location.href = "/hanaOnePay/payRequestSuccess";
+                            } else {
+                                alert('결제 실패: ' + response.message);
+                                // sessionStorage.setItem('productPrice', document.getElementById("productPriceDisplay").textContent);
+                                window.location.href = "/hanaOnePay/payRequestFail";
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.log("AJAX Error Status:", jqXHR.status);
+                            console.log("Text Status:", textStatus);
+                            console.log("Error Thrown:", errorThrown);
+                        }
+                    });
+
+                } else {
+                    alert("[하나원페이]\n비밀번호가 일치하지 않습니다. \n다시 입력해주세요.");
+                }
+            });
+        });
+
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+            crossorigin="anonymous"></script>
 
 
 </body>

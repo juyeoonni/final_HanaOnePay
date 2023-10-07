@@ -153,6 +153,21 @@
             text-align: center; /* 텍스트 중앙 정렬 */
         }
 
+        .creditCardWithDraw {
+            font-size: 20px;
+            margin-left: -5px;
+            width: 90.3%;
+            height: 150px;
+            background-color: whitesmoke;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            margin-right: 130px;
+            margin-bottom: 30px;
+            text-align: center; /* 텍스트 중앙 정렬 */
+        }
+
+
+
         table {
             width: 90.3%;
             border-collapse: collapse;
@@ -498,10 +513,21 @@
 
         <br><br>
 
+        <div class="creditCardWithDraw">
+            <div>다가오는 결제일</div>
+            <div payCreditCardList>
+                하나카드 23.10.13 233,000원<br>
+                우리카드 23.10.14 482,000원<br>
+            </div>
+
+        </div>
+
+        <a  href="/api/payments-by-month?month=09" style="text-decoration: none; color: inherit;">
         <div class="adPayTag">
             <img src="/img/adpayTag.png" style="width: 37px; height: 37px;">
             최근 내 지출 패턴을 확인하고 지금 ${sessionScope.name}님의 <span class="tagcolor" style="color: #d14369; font-size: 20px; margin-left: 4px">소비태그</span>를 확인해보세요! >
         </div>
+        </a>
 
         <br>
         <div class="recentCardUse">

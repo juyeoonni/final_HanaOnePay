@@ -140,11 +140,12 @@ public class CardService {
 
                 if (limit.compareTo(productPrice) >= 0) {
 
+                    // 신용카드 한도에서 결제 금액만큼 차감
                     cardDAO.updateCreditCardLimitByCardNumberAndIdentityNumber(cardNumber, identityNumber, tableCode, productPrice);
 
-                    // 결제 승인 후 미결제 금액 관리 테이블에 해당 금액을 기록하는 로직
-                    String withdrawalDate = LocalDate.now().plusMonths(1).withDayOfMonth(13).toString(); // 다음 달 13일로 설정.
-                    cardDAO.insertPendingPayment(cardNumber, productPrice, withdrawalDate, "Pending", tableCode);
+//                    // 결제 승인 후 미결제 금액 관리 테이블에 해당 금액을 기록하는 로직
+//                    String withdrawalDate = LocalDate.now().plusMonths(1).withDayOfMonth(13).toString(); // 다음 달 13일로 설정.
+//                    cardDAO.insertPendingPayment(cardNumber, productPrice, withdrawalDate, "Pending", tableCode);
 
                     // 신용카드 거래 내역 생성 및 저장
                     insertCardPaymentLog(cardNumber, productPrice, tableCode);
@@ -322,6 +323,23 @@ public class CardService {
     public List<HanaOnePayTransDTO> selectTransactionsByCard(String cardCode, String cardNumber) {
         return cardDAO.selectTransactionsByCard(cardCode, cardNumber);
     }
+
+    // 각 은행의 신용카드 리스트를 가져오는 메서드
+    public List<CreditCardDTO> getCreditCardsByBank(String bankCode) {
+        String tableCode = determineTableCode(bankCode);
+        return cardDAO.getCustomerCreditCards(tableCode);
+    }
+
+    // 각 은행의 신용카드의 전월 거래내역을 조회해서 전월 1일부터 말일까지 사용금액을 조회하는 메서드
+    public BigDecimal calculateTotalSpentAmountForPreviousMonth(String cardNumber, String tableCode) {
+        return cardDAO.calculateTotalSpentAmountForPreviousMonth(cardNumber, tableCode);
+    }
+
+    public void deductAmountFromLinkedAccount(String cardNumber, BigDecimal totalSpentAmount, String tableCode) {
+        cardDAO.deductAmountFromLinkedAccount(cardNumber, totalSpentAmount, tableCode);
+    }
+
+
 
 
 }
