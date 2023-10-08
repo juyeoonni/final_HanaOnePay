@@ -18,4 +18,5 @@ public class HanaOnePayhanaCardDTO {
     private String cardCode;
     private String cardTypeCode;
     private int limit;
+    private String paymentDate;
 }

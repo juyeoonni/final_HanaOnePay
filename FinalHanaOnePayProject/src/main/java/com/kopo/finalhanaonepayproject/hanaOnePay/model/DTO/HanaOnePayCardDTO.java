@@ -20,6 +20,7 @@ public class HanaOnePayCardDTO {
     private String cardCode;
     private String cardTypeCode;
     private int limit;
+    private String paymentDate;
 
     // 기본생성자
     public HanaOnePayCardDTO() {

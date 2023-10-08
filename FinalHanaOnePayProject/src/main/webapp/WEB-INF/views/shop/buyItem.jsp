@@ -627,10 +627,25 @@
 
         .scroll-box {
             position: fixed;
-            max-height: 100%;  /* 혹은 .row의 높이 값에 따라 조정 */
+            max-height: 100%; /* 혹은 .row의 높이 값에 따라 조정 */
             overflow-y: auto;
         }
 
+        .hanaBankAccount {
+            display: flex;
+            align-items: center;
+            color: #FFFFFF;
+            width: 600px;
+            height: 60px;
+            border-radius: 5px;
+            padding: 20px;
+            background-color: #BCD9D3; /* 하나은행에 대한 예시 배경색 */
+            margin-bottom: 10px; /* 각 계좌 항목 사이에 간격을 주기 위해 추가 */
+        }
+
+        .hanaBankAccount img {
+            margin-right: 15px;
+        }
 
 
     </style>
@@ -882,9 +897,11 @@
                             </li>
                             <li class="list-group-item d-flex justify-content-between" style="color: #00857E">
                                 <span>총 결제 금액</span>
-                                <strong><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;"
-                                        id="productPriceDisplay">${productPrice}</font></font> 원</strong>
+<%--                                <strong><font style="vertical-align: inherit;"><font--%>
+<%--                                        style="vertical-align: inherit;"--%>
+<%--                                        id="productPriceDisplay">${productPrice}</font></font> 원</strong>--%>
+                                <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" id="productPriceDisplay" data-raw-price="${productPrice}">${formattedProductPrice}</font></font> 원</strong>
+
                             </li>
                         </ul>
                     </div>
@@ -938,7 +955,7 @@
                                     </select>
                                 </div>
 
-                                <
+
                                 <div class="col-md-3">
                                     <label for="zip" class="form-label"><font style="vertical-align: inherit;"><font
                                             style="vertical-align: inherit;"></font></font></label>
@@ -972,323 +989,358 @@
                                     </font></font></div>
                                 </div>
                             </div>
-                    </div>
-                    <br>
-                    <div class="deliveryInfo">
-                        <h4 class="mb-3" style="color: #00857E"> ◼ 배송지 정보</h4>
-                        <div class="col-md-3">
-                            <label for="zip" class="form-label"><font style="vertical-align: inherit;"><font
-                                    style="vertical-align: inherit;">우편 번호</font></font></label>
-                            <input type="text" class="form-control" id="zip" placeholder="" required=""
-                                   value="14222">
-                            <div class="invalid-feedback"><font style="vertical-align: inherit;"><font
-                                    style="vertical-align: inherit;">
-                                우편번호가 필요합니다.
-                            </font></font></div>
-                        </div>
-
-                        <div class="col-12">
-                            <label for="address" class="form-label"><font style="vertical-align: inherit;"><font
-                                    style="vertical-align: inherit;">주소</font></font></label>
-                            <input type="text" class="form-control" id="address" placeholder="1234 퍼스트 스트리트"
-                                   required="" value="경기도 광명시 오리로 904 (철산동)">
-                            <div class="invalid-feedback"><font style="vertical-align: inherit;"><font
-                                    style="vertical-align: inherit;">
-                                배송지 주소를 입력해주세요.
-                            </font></font></div>
-                        </div>
 
 
-                        <div class="col-md-5">
-                            <label for="country" class="form-label"><font style="vertical-align: inherit;"><font
-                                    style="vertical-align: inherit;">배송시 요청사항</font></font></label>
-                            <textarea class="form-control" id="deliveryInstructions" name="deliveryInstructions"
-                                      rows="4" placeholder="배송시 요청사항을 입력하세요"></textarea>
+                            <br>
+                            <div class="deliveryInfo">
+                                <h4 class="mb-3" style="color: #00857E"> ◼ 배송지 정보</h4>
+                                <div class="col-md-3">
+                                    <label for="zip" class="form-label"><font style="vertical-align: inherit;"><font
+                                            style="vertical-align: inherit;">우편 번호</font></font></label>
+                                    <input type="text" class="form-control" id="zip" placeholder="" required=""
+                                           value="14222">
+                                    <div class="invalid-feedback"><font style="vertical-align: inherit;"><font
+                                            style="vertical-align: inherit;">
+                                        우편번호가 필요합니다.
+                                    </font></font></div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="address" class="form-label"><font style="vertical-align: inherit;"><font
+                                            style="vertical-align: inherit;">주소</font></font></label>
+                                    <input type="text" class="form-control" id="address" placeholder="1234 퍼스트 스트리트"
+                                           required="" value="경기도 광명시 오리로 904 (철산동)">
+                                    <div class="invalid-feedback"><font style="vertical-align: inherit;"><font
+                                            style="vertical-align: inherit;">
+                                        배송지 주소를 입력해주세요.
+                                    </font></font></div>
+                                </div>
 
 
-                        </div>
-                    </div>
-
-                    <hr class="my-4">
-
-                    <div class="form-check">
-                        ◼ 개인정보 수집 및 이용동의
-                        <div class="scrollable-div">
-                            <!-- 내용 전체를 스크롤 가능한 디브에 포함 -->
-                            <h5>1. 개인정보의 수집∙이용 목적</h5>
-                            <p>
-                                - 구매한 물품의 배송/설치 등 고객과 체결한 계약의 이행<br>
-                                - 불만처리 등을 위한 본인확인에 이용
-                            </p>
-
-                            <h5>2. 수집하려는 개인정보의 항목</h5>
-                            <p>
-                                - 성명, 아이디, 주소, 전화번호, 휴대폰번호, 주문정보, 수취인 정보(성명, 전화번호, 휴대폰번호, 주소)
-                            </p>
-
-                            <h5>3. 개인정보 이용 목적</h5>
-                            <p>
-                                개인정보의 보유 기간은 아래와 같습니다.
-                                <br>
-
-                                <strong>① 고객의 개인정보는 다음과 같이 개인정보의 수집목적 또는 제공받은 목적이 달성시 까지 이용하지만, '전자상거래 등에서의 소비자보호에 관한
-                                    법률’, ‘통신비밀보호법’, ‘국세기본법’ 등 관련 법령의 규정에 의하여 다음과 같이 거래 관련 권리 의무 관계의 확인 등을 이유로 일정기간 보유하여야
-                                    할 필요가 있을 경우에는 일정기간 보유합니다.</strong>
-
-                                <br><br>
-
-                                <strong>1. 「전자상거래 등에서의 소비자보호에 관한 법률」에 의한 보관</strong>
-                                <br>
-                                가. 계약 또는 청약철회 등에 관한 기록 : 5년
-                                <br>
-                                나. 대금결제 및 재화 등의 공급에 관한 기록 : 5년
-                                <br>
-                                다. 소비자의 불만 또는 분쟁처리에 관한 기록 : 3년
-                                <br>
-                                라. 기타 고객의 동의를 받은 경우 : 동의를 받은 기간까지
-
-                                <br><br>
-
-                                <strong>② 회원 탈퇴시 부정이용 방지를 위하여 3개월간 보관 후 삭제하며, 거래가 있는 경우에는 전항 법률에 의거하여 별도보관 합니다.</strong>
-
-                                <br><br>
-
-                                <strong>③ 개인정보를 파기하지 않고 보존하는 경우에는, 다른 개인정보 및 개인정보파일과 분리하여 보관하고 해당 목적을 달성하기 위한 목적으로만
-                                    이용합니다.</strong>
-                            </p>
-                        </div>
-                        <br>
-                        ◼ 구매동의 <br>
-                        <p style="color: #959595;">주문할 상품의 상품명, 상품가격, 배송정보를 확인하였으며, 구매에 동의하시겠습니까? (전자상거래법 제 8조 2항)</p>
-                        <div class="scrollable-div">
-                            <!-- 내용 전체를 스크롤 가능한 디브에 포함 -->
-                            <h5>1. 개인정보 제공 동의</h5>
-                            <p>
-                                회사는 정보통신망 이용촉진 및 정보보호 등에 관한 법률에 따라 이용자의 개인정보에 있어 아래와 같이 알리고 동의를 받아 협력사에게 제공합니다.
-                            </p>
-
-                            <h5>2. 개인정보 제공받는 자</h5>
-                            <p>
-                                주식회사 명진엘티디
-                            </p>
-
-                            <h5>3. 개인정보 이용 목적</h5>
-                            <p>
-                                청약의사의 확인, 거래이행, 배송, 고객상담, AS 등 불만 처리
-                            </p>
-
-                            <h5>4. 개인정보 제공 항목</h5>
-                            <p>
-                                성명, 아이디, 주소, 전화번호, 휴대폰번호, 주문정보, 수취인 정보(성명, 전화번호, 휴대폰번호, 주소)
-                            </p>
-
-                            <h5>5. 개인정보 보유 및 이용 기간</h5>
-                            <p>
-                                개인정보의 보유 기간은 아래와 같습니다.
-                                <br>
-
-                                <strong>① 고객의 개인정보는 다음과 같이 개인정보의 수집목적 또는 제공받은 목적이 달성시 까지 이용하지만, '전자상거래 등에서의 소비자보호에 관한
-                                    법률’, ‘통신비밀보호법’, ‘국세기본법’ 등 관련 법령의 규정에 의하여 다음과 같이 거래 관련 권리 의무 관계의 확인 등을 이유로 일정기간 보유하여야
-                                    할 필요가 있을 경우에는 일정기간 보유합니다.</strong>
-
-                                <br><br>
-
-                                <strong>1.「전자상거래 등에서의 소비자보호에 관한 법률」에 의한 보관</strong>
-                                <br>
-                                가. 계약 또는 청약철회 등에 관한 기록 : 5년
-                                <br>
-                                나. 대금결제 및 재화 등의 공급에 관한 기록 : 5년
-                                <br>
-                                다. 소비자의 불만 또는 분쟁처리에 관한 기록 : 3년
-                                <br>
-                                라. 기타 고객의 동의를 받은 경우 : 동의를 받은 기간까지
-
-                                <br><br>
-
-                                <strong>② 회원 탈퇴시 부정이용 방지를 위하여 3개월간 보관 후 삭제하며, 거래가 있는 경우에는 전항 법률에 의거하여 별도보관 합니다.</strong>
-
-                                <br><br>
-
-                                <strong>③ 개인정보를 파기하지 않고 보존하는 경우에는, 다른 개인정보 및 개인정보파일과 분리하여 보관하고 해당 목적을 달성하기 위한 목적으로만
-                                    이용합니다.</strong>
-                            </p>
-                        </div>
-                        <br>
-                        <p style="color: #959595;">※ 배송 및 주문 처리를 위한 목적으로만 개인정보가 제공됩니다.</p>
+                                <div class="col-md-5">
+                                    <label for="country" class="form-label"><font style="vertical-align: inherit;"><font
+                                            style="vertical-align: inherit;">배송시 요청사항</font></font></label>
+                                    <textarea class="form-control" id="deliveryInstructions" name="deliveryInstructions"
+                                              rows="4" placeholder="배송시 요청사항을 입력하세요"></textarea>
 
 
-                        <div class="form-check">
-                            <input id="agree" name="paymentMethod" type="radio" class="form-check-input"
-                                   required="">
-                            <label for="agreeCheckbox">위 상품의 정보를 확인하셨으며 구매에 동의하십니까? (전자상거래법 제 8조 2항에 의거)</label>
-                        </div>
-
-                        <hr class="my-4">
-
-                        <div class="hanaMoney">
-                            <div style="display: flex; ">
-                                <h4 class="mb-3" style="color: #00857E"> ◼ 하나머니</h4>
-
-                                <fieldset style="margin-top: -2px;">
-                                    <label>
-                                        <span style="margin-right: 5px; color: #666666">포인트 사용 동의</span>
-                                        <input role="switch" type="checkbox" id="agreeCheckbox"
-                                               onchange="toggleInput()"/>
-                                    </label>
-                                </fieldset>
-                            </div>
-                            <div>
-                                보유: <span id="hanaMoneyDisplay">${hanaMoney}</span> 원
+                                </div>
                             </div>
 
-                            <div>
-                                사용:
-                                <input type="text" id="usePointInput" placeholder="0 원" oninput="calculateNewAmounts()"
-                                       onfocus="checkAgreement()" disabled>
-                                <button type="button" onclick="useAllPoints()" class="useBtn">전액 사용</button>
-                            </div>
-                        </div>
+                            <hr class="my-4">
 
-                        <hr class="my-4">
+                            <div class="form-check">
+                                ◼ 개인정보 수집 및 이용동의
+                                <div class="scrollable-div">
+                                    <!-- 내용 전체를 스크롤 가능한 디브에 포함 -->
+                                    <h5>1. 개인정보의 수집∙이용 목적</h5>
+                                    <p>
+                                        - 구매한 물품의 배송/설치 등 고객과 체결한 계약의 이행<br>
+                                        - 불만처리 등을 위한 본인확인에 이용
+                                    </p>
 
-                        <div class="payMethod">
-                            <h4 class="mb-3" style="color: #00857E"> ◼ 결제수단</h4>
+                                    <h5>2. 수집하려는 개인정보의 항목</h5>
+                                    <p>
+                                        - 성명, 아이디, 주소, 전화번호, 휴대폰번호, 주문정보, 수취인 정보(성명, 전화번호, 휴대폰번호, 주소)
+                                    </p>
 
-                            <div class="my-3">
-                                <!-- 계좌 간편결제 체크박스 -->
+                                    <h5>3. 개인정보 이용 목적</h5>
+                                    <p>
+                                        개인정보의 보유 기간은 아래와 같습니다.
+                                        <br>
+
+                                        <strong>① 고객의 개인정보는 다음과 같이 개인정보의 수집목적 또는 제공받은 목적이 달성시 까지 이용하지만, '전자상거래 등에서의
+                                            소비자보호에 관한
+                                            법률’, ‘통신비밀보호법’, ‘국세기본법’ 등 관련 법령의 규정에 의하여 다음과 같이 거래 관련 권리 의무 관계의 확인 등을 이유로
+                                            일정기간 보유하여야
+                                            할 필요가 있을 경우에는 일정기간 보유합니다.</strong>
+
+                                        <br><br>
+
+                                        <strong>1. 「전자상거래 등에서의 소비자보호에 관한 법률」에 의한 보관</strong>
+                                        <br>
+                                        가. 계약 또는 청약철회 등에 관한 기록 : 5년
+                                        <br>
+                                        나. 대금결제 및 재화 등의 공급에 관한 기록 : 5년
+                                        <br>
+                                        다. 소비자의 불만 또는 분쟁처리에 관한 기록 : 3년
+                                        <br>
+                                        라. 기타 고객의 동의를 받은 경우 : 동의를 받은 기간까지
+
+                                        <br><br>
+
+                                        <strong>② 회원 탈퇴시 부정이용 방지를 위하여 3개월간 보관 후 삭제하며, 거래가 있는 경우에는 전항 법률에 의거하여 별도보관
+                                            합니다.</strong>
+
+                                        <br><br>
+
+                                        <strong>③ 개인정보를 파기하지 않고 보존하는 경우에는, 다른 개인정보 및 개인정보파일과 분리하여 보관하고 해당 목적을 달성하기 위한
+                                            목적으로만
+                                            이용합니다.</strong>
+                                    </p>
+                                </div>
+                                <br>
+                                ◼ 구매동의 <br>
+                                <p style="color: #959595;">주문할 상품의 상품명, 상품가격, 배송정보를 확인하였으며, 구매에 동의하시겠습니까? (전자상거래법 제 8조
+                                    2항)</p>
+                                <div class="scrollable-div">
+                                    <!-- 내용 전체를 스크롤 가능한 디브에 포함 -->
+                                    <h5>1. 개인정보 제공 동의</h5>
+                                    <p>
+                                        회사는 정보통신망 이용촉진 및 정보보호 등에 관한 법률에 따라 이용자의 개인정보에 있어 아래와 같이 알리고 동의를 받아 협력사에게 제공합니다.
+                                    </p>
+
+                                    <h5>2. 개인정보 제공받는 자</h5>
+                                    <p>
+                                        주식회사 명진엘티디
+                                    </p>
+
+                                    <h5>3. 개인정보 이용 목적</h5>
+                                    <p>
+                                        청약의사의 확인, 거래이행, 배송, 고객상담, AS 등 불만 처리
+                                    </p>
+
+                                    <h5>4. 개인정보 제공 항목</h5>
+                                    <p>
+                                        성명, 아이디, 주소, 전화번호, 휴대폰번호, 주문정보, 수취인 정보(성명, 전화번호, 휴대폰번호, 주소)
+                                    </p>
+
+                                    <h5>5. 개인정보 보유 및 이용 기간</h5>
+                                    <p>
+                                        개인정보의 보유 기간은 아래와 같습니다.
+                                        <br>
+
+                                        <strong>① 고객의 개인정보는 다음과 같이 개인정보의 수집목적 또는 제공받은 목적이 달성시 까지 이용하지만, '전자상거래 등에서의
+                                            소비자보호에 관한
+                                            법률’, ‘통신비밀보호법’, ‘국세기본법’ 등 관련 법령의 규정에 의하여 다음과 같이 거래 관련 권리 의무 관계의 확인 등을 이유로
+                                            일정기간 보유하여야
+                                            할 필요가 있을 경우에는 일정기간 보유합니다.</strong>
+
+                                        <br><br>
+
+                                        <strong>1.「전자상거래 등에서의 소비자보호에 관한 법률」에 의한 보관</strong>
+                                        <br>
+                                        가. 계약 또는 청약철회 등에 관한 기록 : 5년
+                                        <br>
+                                        나. 대금결제 및 재화 등의 공급에 관한 기록 : 5년
+                                        <br>
+                                        다. 소비자의 불만 또는 분쟁처리에 관한 기록 : 3년
+                                        <br>
+                                        라. 기타 고객의 동의를 받은 경우 : 동의를 받은 기간까지
+
+                                        <br><br>
+
+                                        <strong>② 회원 탈퇴시 부정이용 방지를 위하여 3개월간 보관 후 삭제하며, 거래가 있는 경우에는 전항 법률에 의거하여 별도보관
+                                            합니다.</strong>
+
+                                        <br><br>
+
+                                        <strong>③ 개인정보를 파기하지 않고 보존하는 경우에는, 다른 개인정보 및 개인정보파일과 분리하여 보관하고 해당 목적을 달성하기 위한
+                                            목적으로만
+                                            이용합니다.</strong>
+                                    </p>
+                                </div>
+                                <br>
+                                <p style="color: #959595;">※ 배송 및 주문 처리를 위한 목적으로만 개인정보가 제공됩니다.</p>
+
+
                                 <div class="form-check">
-                                    <input id="accountPay" name="paymentMethod" type="radio" class="form-check-input"
+                                    <input id="agree" name="paymentMethod" type="radio" class="form-check-input"
                                            required="">
-                                    <label class="form-check-label" for="accountPay">계좌 간편결제</label>
+                                    <label for="agreeCheckbox">위 상품의 정보를 확인하셨으며 구매에 동의하십니까? (전자상거래법 제 8조 2항에 의거)</label>
                                 </div>
 
-                                <!-- 아코디언 아이템 -->
-                                <div class="accordion" id="accountAccordion">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="accountHeader">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#accountCollapse" aria-expanded="false"
-                                                    aria-controls="accountCollapse" disabled
-                                                    style="color: #FFFFFF; background-color: #959595;">
-                                                계좌 선택
-                                            </button>
-                                        </h2>
-                                        <div id="accountCollapse" class="accordion-collapse collapse"
-                                             aria-labelledby="accountHeader" data-bs-parent="#accountAccordion">
-                                            <div class="accordion-body">
-                                                <!-- 여기에 계좌 목록 및 선택 옵션을 추가하세요 -->
-                                                <!-- 스크립트 파일에서 처리합니다. -->
+                                <hr class="my-4">
+
+                                <div class="hanaMoney">
+                                    <div style="display: flex; ">
+                                        <h4 class="mb-3" style="color: #00857E"> ◼ 하나머니</h4>
+
+                                        <fieldset style="margin-top: -2px;">
+                                            <label>
+                                                <span style="margin-right: 5px; color: #666666">포인트 사용 동의</span>
+                                                <input role="switch" type="checkbox" id="agreeCheckbox"
+                                                       onchange="toggleInput()"/>
+                                            </label>
+                                        </fieldset>
+                                    </div>
+                                    <div>
+                                        보유: <span id="hanaMoneyDisplay">${hanaMoney}</span> 원
+                                    </div>
+
+                                    <div>
+                                        사용:
+                                        <input type="text" id="usePointInput" placeholder="0 원"
+                                               oninput="calculateNewAmounts()"
+                                               onfocus="checkAgreement()" disabled>
+                                        <button type="button" onclick="useAllPoints()" class="useBtn">전액 사용</button>
+                                    </div>
+                                </div>
+
+                                <hr class="my-4">
+
+                                <div class="payMethod">
+                                    <h4 class="mb-3" style="color: #00857E"> ◼ 결제수단</h4>
+
+                                    <div class="my-3">
+                                        <!-- 계좌 간편결제 체크박스 -->
+                                        <div class="form-check">
+                                            <input id="accountPay" name="paymentMethod" type="radio"
+                                                   class="form-check-input"
+                                                   required="">
+                                            <label class="form-check-label" for="accountPay">계좌 간편결제</label>
+                                        </div>
+
+                                        <!-- 아코디언 아이템 -->
+                                        <div class="accordion" id="accountAccordion">
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header" id="accountHeader">
+                                                    <button class="accordion-button" type="button"
+                                                            data-bs-toggle="collapse"
+                                                            data-bs-target="#accountCollapse" aria-expanded="false"
+                                                            aria-controls="accountCollapse" disabled
+                                                            style="color: #FFFFFF; background-color: #959595;">
+                                                        계좌 선택
+                                                    </button>
+                                                </h2>
+                                                <div id="accountCollapse" class="accordion-collapse collapse"
+                                                     aria-labelledby="accountHeader" data-bs-parent="#accountAccordion">
+                                                    <div class="accordion-body">
+                                                        <c:forEach var="account" items="${accountInfos}">
+                                                            <!-- 체크박스와 계좌 정보를 담는 부모 컨테이너 -->
+                                                            <div class="accountContainer">
+                                                                <!-- 체크박스 추가 -->
+                                                                <input type="radio" id="account-${account.accNumber}" name="accountSelection" class="account-checkbox">
+                                                                <label for="account-${account.accNumber}" class="account-label">
+                                                                    <span class="custom-checkbox"></span>
+                                                                </label>
+                                                                <div class="hanaBankAccount">
+                                                                    <img src="/img/bank/bankName=hana.png" alt="">
+                                                                    하나은행 - ${account.accName}
+                                                                </div>
+                                                            </div>
+                                                        </c:forEach>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input id="hanaOnePay" name="paymentMethod" type="radio"
+                                               class="form-check-input">
+                                        <label class="form-check-label" for="hanaOnePay">카드 간편결제</label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input id="kakaoPay" name="paymentMethod" type="radio" class="form-check-input"
+                                               required="">
+                                        <label class="form-check-label" for="kakaoPay"><font
+                                                style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">일반결제</font></font></label>
+                                    </div>
+                                </div>
+
+                                <!-- 원페이를 위한 Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1"
+                                     aria-labelledby="exampleModalLabel"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <img src="/img/hanaLogo.png" alt="하나원페이 로고"
+                                                     style="margin-right: 10px; width: 45px; height: 45px;">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel"
+                                                    style="font-weight: bold;">
+                                                    하나원페이</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <%--                                            모달 바디입니다--%>
+                                                <div class="card text-center">
+                                                    <div class="card-header">
+                                                        <ul class="nav nav-pills card-header-pills">
+                                                            <li class="nav-item">
+                                                                <a class="nav-link active" href="#"
+                                                                   style="background-color: #00857E; color: white !important;">하나원페이</a>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <a class="nav-link" href="#">제휴결제</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <img src="/img/hanapayAppIcon.png"
+                                                             style="margin-right: 10px; width: 250px; height: 130px;">
+                                                        <p class="card-text">하나원페이 앱카드로 <br>쉽고 빠르게 결제하세요</p>
+                                                        <a href="#" class="btn btn-primary" data-bs-toggle="modal"
+                                                           data-bs-target="#secondModal"
+                                                           style="border:none; width: 300px; background-color: #00857E; color: white !important;">결제하기</a>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <%--                            두번째 모달입니다--%>
+                                <!-- Second Modal -->
+                                <div class="modal fade" id="secondModal" tabindex="-1"
+                                     aria-labelledby="secondModalLabel"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <img src="/img/hanaLogo.png" alt="하나원페이 로고"
+                                                     style="margin-right: 10px; width: 45px; height: 45px;">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel2"
+                                                    style="font-weight: bold;">
+                                                    하나원페이</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body d-flex justify-content-center align-items-center flex-column">
+                                                휴대폰으로 스캔하면
+                                                결제 화면으로 이동합니다. <br>
+                                                <span style="color: #999;">스마트폰 카메라 및 모든 QR 스캐너로 가능</span><br>
+                                                <div class="createQR"
+                                                     style="border: 5px solid #00857E; border-radius:25px;">
+                                                    <%--                                                <img src="/api/generateQRCode" alt="QR Code" />--%>
+                                                </div>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="transparentButton"
+                                                        onclick="redirectToSuccessPage()">Go to Success Page
+                                                </button>
+
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                    닫기
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="form-check">
-                                <input id="hanaOnePay" name="paymentMethod" type="radio" class="form-check-input">
-                                <label class="form-check-label" for="hanaOnePay">카드 간편결제</label>
+
+                            <hr class="my-4">
+
+                            <button class="btn btn-pay" id="payStart" type="submit">결제하기
+                            </button>
+                            <br>
+                            <div style="margin-left: 250px; margin-top: 4px; color: #666666">주문 내용을 확인하였으며, 정보 제공 등에
+                                동의합니다.
                             </div>
-
-                            <div class="form-check">
-                                <input id="kakaoPay" name="paymentMethod" type="radio" class="form-check-input"
-                                       required="">
-                                <label class="form-check-label" for="kakaoPay"><font
-                                        style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">일반결제</font></font></label>
-                            </div>
-                        </div>
-
-                        <!-- 원페이를 위한 Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                             aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <img src="/img/hanaLogo.png" alt="하나원페이 로고"
-                                             style="margin-right: 10px; width: 45px; height: 45px;">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-weight: bold;">
-                                            하나원페이</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <%--                                            모달 바디입니다--%>
-                                        <div class="card text-center">
-                                            <div class="card-header">
-                                                <ul class="nav nav-pills card-header-pills">
-                                                    <li class="nav-item">
-                                                        <a class="nav-link active" href="#"
-                                                           style="background-color: #00857E; color: white !important;">하나원페이</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" href="#">제휴결제</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="card-body">
-                                                <img src="/img/hanapayAppIcon.png"
-                                                     style="margin-right: 10px; width: 250px; height: 130px;">
-                                                <p class="card-text">하나원페이 앱카드로 <br>쉽고 빠르게 결제하세요</p>
-                                                <a href="#" class="btn btn-primary" data-bs-toggle="modal"
-                                                   data-bs-target="#secondModal"
-                                                   style="border:none; width: 300px; background-color: #00857E; color: white !important;">결제하기</a>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <%--                            두번째 모달입니다--%>
-                        <!-- Second Modal -->
-                        <div class="modal fade" id="secondModal" tabindex="-1" aria-labelledby="secondModalLabel"
-                             aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <img src="/img/hanaLogo.png" alt="하나원페이 로고"
-                                             style="margin-right: 10px; width: 45px; height: 45px;">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel2" style="font-weight: bold;">
-                                            하나원페이</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body d-flex justify-content-center align-items-center flex-column">
-                                        휴대폰으로 스캔하면
-                                        결제 화면으로 이동합니다. <br>
-                                        <span style="color: #999;">스마트폰 카메라 및 모든 QR 스캐너로 가능</span><br>
-                                        <div class="createQR" style="border: 5px solid #00857E; border-radius:25px;">
-                                            <%--                                                <img src="/api/generateQRCode" alt="QR Code" />--%>
-                                        </div>
-                                    </div>
-
-                                    <div class="modal-footer">
-                                        <button type="button" class="transparentButton"
-                                                onclick="redirectToSuccessPage()">Go to Success Page
-                                        </button>
-
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </form>
                     </div>
-
-
-                    <hr class="my-4">
-
-                    <button class="btn-pay" type="submit">결제하기
-                    </button>
-                    <br>
-                    <div style="margin-left: 250px; margin-top: 4px; color: #666666">주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.
-                    </div>
-                    </form>
                 </div>
 
                 <!-- 결제비밀번호 모달시작 -->
@@ -1297,9 +1349,10 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="paymentModalLabel">결제 비밀번호 입력</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
+                                <img src="/img/hanaLogo.png" alt="하나원페이 로고"
+                                     style="margin-right: 10px; width: 45px; height: 45px;">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-weight: bold;">하나원페이</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <div class="password-panel text-center mb-3">
@@ -1340,7 +1393,7 @@
                 </div>
                 <!-- 결제비밀번호 모달 끝 -->
 
-
+c:
             </div>
 
 
@@ -1456,6 +1509,7 @@
 
         document.addEventListener('DOMContentLoaded', function () {
             const hanaOnePayRadio = document.getElementById('hanaOnePay');
+            const accountPayRadio = document.getElementById('accountPay');  // accountPay radio 버튼
             const payButton = document.querySelector('.btn-pay');
 
             payButton.addEventListener('click', function (event) {
@@ -1463,9 +1517,14 @@
                     event.preventDefault(); // 폼의 기본 제출을 방지합니다.
                     const modal = new bootstrap.Modal(document.getElementById('exampleModal'));
                     modal.show();
+                } else if (accountPayRadio.checked) {  // accountPay radio 버튼이 체크된 경우
+                    event.preventDefault();
+                    const paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
+                    paymentModal.show();
                 }
             });
         });
+
 
         // $(document).ready(function(){
         //     // 결제하기 버튼을 누르면 실행될 이벤트
@@ -1557,18 +1616,29 @@
         });
 
         var accountData = JSON.parse(sessionStorage.getItem("accountData"));
-
+        console.log("accountData:", accountData);
         document.addEventListener("DOMContentLoaded", function () {
             if (accountData) {
                 var accountList = document.querySelector("#accountCollapse .accordion-body");
+                console.log("accountList:", accountList)
 
                 accountData.forEach(function (account, index) {
+                    console.log("account:", account);
                     var accountDiv = document.createElement("div");
                     var label = document.createElement("label");
                     var input = document.createElement("input");
                     var accInfoDiv = document.createElement("div");
                     var accNameDiv = document.createElement("div");
+                    var accNumberDiv = document.createElement("div");
                     var bankImg = document.createElement("img");
+
+                    // input 엘리먼트의 값으로 account.accNumber 설정
+                    input.value = account.accNumber;
+                    input.addEventListener('change', function() {
+                        // 선택된 계좌번호 읽어와서 sessionStorage에 저장
+                        sessionStorage.setItem('selectedAccountNumber', this.value);
+                        console.log("저장된 계좌번호:", this.value);
+                    });
 
                     // 계좌 번호에 따른 은행 이름과 로고 설정
                     let bankName = "";
@@ -1623,6 +1693,7 @@
                     label.appendChild(customCheckbox);
                     accInfoDiv.appendChild(bankImg);
                     accInfoDiv.appendChild(accNameDiv);
+                    accInfoDiv.appendChild(accNumberDiv);
                     label.appendChild(accInfoDiv);
 
                     accountDiv.appendChild(label);
@@ -1725,7 +1796,7 @@
 
             $("#payStart").click(function () {
                 var selectedAccount = getCheckedAccountNumber();
-                console.log(selectedAccount);
+                console.log("getChecked",selectedAccount);
 
                 if (!selectedAccount) {
                     alert("계좌를 선택해주세요.");
@@ -1743,14 +1814,15 @@
             });
 
             function getCheckedAccountNumber() {
-                var radios = document.querySelectorAll('input[name="account"]');
+                var radios = document.getElementsByName("account");
                 for (var i = 0; i < radios.length; i++) {
                     if (radios[i].checked) {
-                        return radios[i].value.split("account")[1]; // 'account1' -> '1' 반환
+                        return accountData[i].accNumber;  // 실제 계좌 번호를 반환
                     }
                 }
-                return null;
+                return null; // 선택된 계좌 없음
             }
+
 
             $("#confirmPayment").click(function () {
                 var enteredPassword = passwordInput.val();
@@ -1758,7 +1830,9 @@
 
                 var selectedAccountNumber = sessionStorage.getItem('selectedAccountNumber');
                 var productName = "<%= session.getAttribute("productName") %>";
-                var productPrice = document.getElementById("productPriceDisplay").textContent;
+                //var productPrice = document.getElementById("productPriceDisplay").textContent;
+                var productPrice = document.getElementById("productPriceDisplay").getAttribute("data-raw-price");
+
                 sessionStorage.setItem('productPrice', document.getElementById("productPriceDisplay").textContent);
                 var identityNumber = "${sessionScope.identityNumber}";
 

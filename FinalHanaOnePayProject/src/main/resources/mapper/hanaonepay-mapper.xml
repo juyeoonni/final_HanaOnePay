@@ -41,7 +41,7 @@
     </select>
 
 <!--    신용카드의 전월 1일부터 말일까지의 거래내역에서 금액합산-->
-    <select id="calculateTotalSpentAmountForPreviousMonth" resultType="java.math.BigDecimal">
+    <select id="getLastMonthTotalAmount" resultType="java.math.BigDecimal">
         SELECT SUM(PAYAMOUNT) AS TotalAmount
         FROM hana_card_payment_log
         WHERE CARDNUMBER = #{cardNumber}

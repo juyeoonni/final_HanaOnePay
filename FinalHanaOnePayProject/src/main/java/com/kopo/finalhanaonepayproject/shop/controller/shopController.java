@@ -1,7 +1,8 @@
 package com.kopo.finalhanaonepayproject.shop.controller;
 
-import com.kopo.finalhanaonepayproject.customer.service.CustomerService;
+import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayAccountDTO;
 import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayCardDTO;
+import com.kopo.finalhanaonepayproject.hanaOnePay.service.HanaOnePayService;
 import com.kopo.finalhanaonepayproject.shop.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +24,12 @@ public class ShopController {
     private final ShopService shopService;
 
     @Autowired
-    public ShopController(ShopService shopService) {
+    private final HanaOnePayService hanaOnePayService;
+
+    @Autowired
+    public ShopController(ShopService shopService, HanaOnePayService hanaOnePayService) {
         this.shopService = shopService;
+        this.hanaOnePayService = hanaOnePayService;
     }
 
 
@@ -77,12 +82,16 @@ public class ShopController {
         int hanaMoney = shopService.selectHanaMoney(identityNumber);
         System.out.println("User's Hana Money: " + hanaMoney);
 
+        List<HanaOnePayAccountDTO> accountInfos = hanaOnePayService.getHanaAccountDetailsByIdentity(identityNumber);
+        System.out.println("하나계좌 조회 성공!");
+
         ModelAndView mav = new ModelAndView();
         mav.addObject("hanaOnePayCardList", hanaOnePayCardList);
         mav.addObject("productName", productName);
         mav.addObject("productPrice", productPrice);
         mav.addObject("hanaMoney", hanaMoney);
         mav.addObject("productDataJSON", productDataJSON);
+        mav.addObject("accountInfos", accountInfos);
         mav.setViewName("shop/buyItem");
 
         return mav;

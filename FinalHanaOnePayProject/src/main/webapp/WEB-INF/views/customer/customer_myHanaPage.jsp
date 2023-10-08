@@ -143,20 +143,19 @@
 
         .monthlyCardInfo {
             font-size: 20px;
-            margin-left: 80px;
-            width: 450px;
+            margin-left: 40px;
+            width: 510px;
             height: 300px;
             background-color: whitesmoke;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             border-radius: 20px;
-            margin-right: 130px;
             text-align: center; /* 텍스트 중앙 정렬 */
         }
 
         .creditCardWithDraw {
             font-size: 20px;
             margin-left: -5px;
-            width: 90.3%;
+            width: 60%;
             height: 150px;
             background-color: whitesmoke;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
@@ -166,7 +165,18 @@
             text-align: center; /* 텍스트 중앙 정렬 */
         }
 
-
+        .myHanaMoney {
+            font-size: 20px;
+            margin-left: -100px;
+            width: 28%;
+            height: 150px;
+            background-color: whitesmoke;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            /*margin-right: 130px;*/
+            margin-bottom: 30px;
+            text-align: center; /* 텍스트 중앙 정렬 */
+        }
 
         table {
             width: 90.3%;
@@ -275,19 +285,20 @@
             text-decoration: none; /* 밑줄 제거 */
             color: inherit; /* 부모 요소의 폰트색을 상속받음 */
         }
+
         .profile a:hover {
             text-decoration: none; /* 마우스 호버 상태에서도 밑줄 제거 */
         }
 
-        .adPayTag{
+        .adPayTag {
             width: 90.3%;
             height: 50px;
             background-color: #d9ede8;
         }
 
         .adPayTag {
-            display: flex;         /* flexbox를 사용합니다. */
-            align-items: center;   /* 수직으로 가운데 정렬합니다. */
+            display: flex; /* flexbox를 사용합니다. */
+            align-items: center; /* 수직으로 가운데 정렬합니다. */
             justify-content: center; /* 수평으로 가운데 정합니다. */
             height: 65px;
         }
@@ -317,7 +328,7 @@
         }
 
         #toggle:checked ~ .toggleSwitch {
-            background:#00857E;
+            background: #00857E;
         }
 
         #toggle:checked ~ .toggleSwitch .toggleButton {
@@ -331,8 +342,8 @@
 
         .toggleContainer {
             display: flex;
-            align-items: center;  /* 항목들을 수직으로 중앙에 배치합니다. */
-            gap: 10px;  /* 항목들 사이의 간격을 추가합니다. */
+            align-items: center; /* 항목들을 수직으로 중앙에 배치합니다. */
+            gap: 10px; /* 항목들 사이의 간격을 추가합니다. */
         }
 
         .using {
@@ -340,6 +351,7 @@
             align-items: center;
             /*justify-content: space-between;*/
         }
+
         .toggleContainer {
             display: flex;
             align-items: center;
@@ -489,7 +501,7 @@
 
             </div>
 
-            <div class="monthlyCardInfo fs-3 mx-auto">
+            <div class="monthlyCardInfo fs-3">
                 <p class="mt-2">내 정보 관리</p>
                 <img class="proImg" src="/img/myprofile.png" alt=""><br>
 
@@ -498,7 +510,8 @@
                     이메일: ${sessionScope.email} <br>
                 </div>
 
-                <div class="withdralDate" style="text-align: left; margin-left: 5%; margin-top: 3%; margin-bottom: 3%; font-size: 18px">
+                <div class="withdralDate"
+                     style="text-align: left; margin-left: 11%; margin-top: 3%; margin-bottom: 3%; font-size: 18px">
                     <div class="holicontainer">
                         <div class="profile">
                             <a href="/customer/customer_myPage">개인정보 변경</a>
@@ -513,20 +526,40 @@
 
         <br><br>
 
-        <div class="creditCardWithDraw">
-            <div>다가오는 결제일</div>
-            <div payCreditCardList>
-                하나카드 23.10.13 233,000원<br>
-                우리카드 23.10.14 482,000원<br>
+        <div class="flex-container">
+            <div class="creditCardWithDraw" >
+                <div style="margin-top: 7px;">다가오는 결제일</div>
+                <div payCreditCardList>
+                    <div class="flex-container" style="font-size: 15px; margin-left: 25px;">
+                        <p style="color: #959595; margin-right: 15px;">결제계좌 </p>
+                        하나은행 ${creditCards[0].cardNumber}</div> <br>
+
+                    <div class="flex-container" style="font-size: 15px; margin-left: 25px; margin-top: -30px;">
+                        <p style="color: #959595; margin-right: 15px;">결제일 </p> 매월${creditCards[0].paymentDate}일</div><br>
+                    <div class="flex-container" style="font-size: 15px; margin-left: 25px; margin-top: -30px;">
+                        <p style="color: #959595; margin-right: 15px;">예상 결제금액 </p> <div id="totalSpentAmount">총 ${totalSpentAmount}원</div></div><br>
+                    <br>
+                </div>
             </div>
 
+            <div class="myHanaMoney">
+                <div style="margin-top: 7px;"> 하나머니</div>
+                <div class="flex-container" style="margin-left: 90px; margin-top: 12px;">
+                        <img style="width: 50px; height: 50px;" src="/img/hanaMoney.png" alt="">
+                        <div id="hanaMoney" style="margin-top: 10px;">${hanaMoney} 원</div>
+                </div>
+                <div class="profile" style="margin-left: 90px; margin-top: 10px;">등록계좌 관리</div>
+            </div>
         </div>
 
-        <a  href="/api/payments-by-month?month=09" style="text-decoration: none; color: inherit;">
-        <div class="adPayTag">
-            <img src="/img/adpayTag.png" style="width: 37px; height: 37px;">
-            최근 내 지출 패턴을 확인하고 지금 ${sessionScope.name}님의 <span class="tagcolor" style="color: #d14369; font-size: 20px; margin-left: 4px">소비태그</span>를 확인해보세요! >
-        </div>
+
+        <a href="/api/payments-by-month?month=09" style="text-decoration: none; color: inherit;">
+            <div class="adPayTag">
+                <img src="/img/adpayTag.png" style="width: 37px; height: 37px;">
+                최근 내 지출 패턴을 확인하고 지금 ${sessionScope.name}님의 <span class="tagcolor"
+                                                                 style="color: #d14369; font-size: 20px; margin-left: 4px">소비태그</span>를
+                확인해보세요! >
+            </div>
         </a>
 
         <br>
@@ -608,7 +641,34 @@
             }
             displayElement.textContent = numberWithCommas(Math.round(currentAmount)) + "원";
         }, stepTime);
+
+        // 하나머니
+        const targetHanaMoney = parseInt('${hanaMoney}'.replace(/[^0-9]/g, ''));
+        const displayHanaMoneyElement = document.getElementById("hanaMoney");
+
+        let currentHanaMoney = 0;
+
+        const hanaMoneyIntervalId = setInterval(function () {
+            currentHanaMoney += increment;
+            if (currentHanaMoney >= targetHanaMoney) {
+                clearInterval(hanaMoneyIntervalId);
+                currentHanaMoney = targetHanaMoney;
+            }
+            displayHanaMoneyElement.textContent = numberWithCommas(Math.round(currentHanaMoney)) + "원";
+        }, stepTime);
+
     }
+
+    window.addEventListener('DOMContentLoaded', (event) => {
+        // 숫자에 세 자리마다 콤마 추가하는 함수
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        let totalSpentAmountDiv = document.getElementById('totalSpentAmount');
+        let value = parseInt(totalSpentAmountDiv.textContent.replace(/[^0-9]/g, '')); // 숫자만 추출
+        totalSpentAmountDiv.textContent = "총 " + numberWithCommas(value) + "원";
+    });
 
     function numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
