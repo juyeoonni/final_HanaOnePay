@@ -167,8 +167,8 @@
 </div>
 
 <div class="paySuccess" style="margin-left: 61px">
-    <img class="paySuccessImg" src="/img/paySuccess.png" alt="paySuccess" style="margin-right: 80px; margin-top: 25px; width: 200px;"> <br>
-    <div style="margin-left: 63px; margin-top: 10px; margin-bottom: 10px;">결제가 승인되었습니다.</div>
+    <img class="paySuccessImg" src="/img/starChracterPay.gif" alt="paySuccess" style="margin-right: 400px;"> <br>
+    <div style="margin-left: 35px;">결제가 미승인되었습니다.</div>
 </div>
 <br>
 
@@ -190,11 +190,11 @@
         </tr>
         <tr>
             <td>결제상태</td>
-            <td>정상승인</td>
+            <td>승인거절</td>
         </tr>
         <tr>
-            <td>결제요금</td>
-            <td id="productPrice"></td>
+            <td>거절사유</td>
+            <td>한도초과</td>
         </tr>
     </table>
     <hr>

@@ -263,6 +263,12 @@ public class HanaOnePayController {
         return mav;
     }
 
+    @GetMapping("/hanaOnePay/emailTemplate")
+    public String emailTemplate() {
+        return "hanaOnePay/emailTemplate";
+    }
+
+
     @GetMapping("/hanaOnePay/cardTerms")
     public String cardTerms() {
         return "hanaOnePay/cardTerms";
@@ -280,5 +286,30 @@ public class HanaOnePayController {
 
         return ResponseEntity.ok(result);
     }
+
+    // 신용카드 한도초과로 결제 실패시
+    @GetMapping("/hanaOnePay/payRequestFailforLimit")
+    public String payRequestFailforLimit(Model model) {
+        // 현재 시간을 가져옵니다.
+        String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+
+        // 현재 시간을 모델에 추가하여 JSP 페이지로 전달합니다.
+        model.addAttribute("time", currentTime);
+
+        return "hanaOnePay/payRequestFailforLimit"; // 결제 성공을 알리는 JSP 페이지를 반환합니다.
+    }
+
+    // 체크카드 잔액부족으로 결제 실패시
+    @GetMapping("/hanaOnePay/payRequestFailforBalance")
+    public String payRequestFailforBalance(Model model) {
+        // 현재 시간을 가져옵니다.
+        String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+
+        // 현재 시간을 모델에 추가하여 JSP 페이지로 전달합니다.
+        model.addAttribute("time", currentTime);
+
+        return "hanaOnePay/payRequestFailforBalance"; // 결제 성공을 알리는 JSP 페이지를 반환합니다.
+    }
+
 
 }

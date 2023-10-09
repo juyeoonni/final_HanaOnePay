@@ -23,13 +23,6 @@ public class SmsController {
 
     private final SmsService smsService;
 
-//    @PostMapping("/user/sms")
-//    public ResponseEntity<SmsResponse> test(@RequestBody Request request) throws NoSuchAlgorithmException, URISyntaxException, UnsupportedEncodingException, InvalidKeyException, JsonProcessingException {
-//        System.out.println("sms 컨틀롤러 들어옴");
-//        SmsResponse data = smsService.sendSms(request.getRecipientPhoneNumber(), request.getContent());
-//        return ResponseEntity.ok().body(data);
-//    }
-
     @PostMapping("/user/sms")
     public ResponseEntity<SmsResponse> test(@RequestBody Request request, HttpSession session) throws NoSuchAlgorithmException, URISyntaxException, UnsupportedEncodingException, InvalidKeyException, JsonProcessingException {
         System.out.println("sms 컨틀롤러 들어옴");

@@ -2,6 +2,7 @@ package com.kopo.finalhanaonepayproject.hanaOnePay.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kopo.finalhanaonepayproject.config.CreditCardDTO;
 import com.kopo.finalhanaonepayproject.hanaOnePay.model.DAO.HanaOnePayDAO;
 import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,7 +107,6 @@ public class HanaOnePayService {
     }
 
     // 하나카드 결제
-
     private void insertCardPaymentLog(String cardNumber, BigDecimal payAmount, String tableCode) {
         hanaOnePayDAO.insertCardPaymentLog(cardNumber, payAmount, tableCode);
     }
@@ -166,6 +166,21 @@ public class HanaOnePayService {
             return "Invalid Card Type";
         }
 
+    }
+
+    // 하나카드 스케줄러
+    public List<CreditCardDTO> getCreditCardsByBank(String bankCode) {
+        String tableCode = "hana";
+        return hanaOnePayDAO.getCustomerCreditCards(tableCode);
+    }
+
+    // 각 은행의 신용카드의 전월 거래내역을 조회해서 전월 1일부터 말일까지 사용금액을 조회하는 메서드
+    public BigDecimal calculateTotalSpentAmountForPreviousMonth(String cardNumber, String tableCode) {
+        return hanaOnePayDAO.calculateTotalSpentAmountForPreviousMonth(cardNumber, tableCode);
+    }
+
+    public void deductAmountFromLinkedAccount(String cardNumber, BigDecimal totalSpentAmount, String tableCode) {
+        hanaOnePayDAO.deductAmountFromLinkedAccount(cardNumber, totalSpentAmount, tableCode);
     }
 
 

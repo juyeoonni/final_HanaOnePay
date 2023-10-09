@@ -425,11 +425,14 @@
                     contentType: "application/json; charset=utf-8",
                     success: function (response) {
                         console.log(response);
-                        // 결제 승인을 받았을 때의 코드를 아래에 추가
-                        if (response === "Payment Approved") {  // 서버에서 success 필드를 true로 반환한다고 가정합니다.
+                        if (response === "Payment Approved") {
                             window.location.href = "/hanaOnePay/payRequestSuccess"; // 결제 성공 페이지로 리디렉션
+                        } else if (response === "Insufficient Credit Limit") {
+                            window.location.href = "/hanaOnePay/payRequestFailforLimit"; // 신용카드 한도 초과 페이지로 리디렉션
+                        } else if (response === "Insufficient Balance") {
+                            window.location.href = "/hanaOnePay/payRequestFailforBalance"; // 체크카드 잔액 부족 페이지로 리디렉션
                         } else {
-                            alert('결제 실패: ' + response.message); // 서버에서 오류 메시지를 반환
+                            alert('결제 실패: ' + response); // 서버에서 오류 메시지를 반환
                             window.location.href = "/hanaOnePay/payRequestFail"; // 결제 실패 페이지로 리디렉션
                         }
                     },

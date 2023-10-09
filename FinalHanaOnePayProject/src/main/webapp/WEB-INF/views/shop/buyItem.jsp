@@ -1274,7 +1274,7 @@
                                                     <div class="card-body">
                                                         <img src="/img/hanapayAppIcon.png"
                                                              style="margin-right: 10px; width: 250px; height: 130px;">
-                                                        <p class="card-text">하나원페이 앱카드로 <br>쉽고 빠르게 결제하세요</p>
+                                                        <p class="card-text">하나원페이 즉시결제로 <br>쉽고 빠르게 결제하세요</p>
                                                         <a href="#" class="btn btn-primary" data-bs-toggle="modal"
                                                            data-bs-target="#secondModal"
                                                            style="border:none; width: 300px; background-color: #00857E; color: white !important;">결제하기</a>
