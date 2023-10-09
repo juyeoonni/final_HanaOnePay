@@ -321,7 +321,7 @@
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <!-- Product name-->
-                                <h5 class="fw-bolder">Cocod'or Signature Diffuser 200ml</h5>
+                                <h5 class="fw-bolder">Cocod'or Signature Diffuser</h5>
                                 <!-- Product price-->
                                 <span class="text-muted text-decoration-line-through">29,900원</span>
                                 19,500원

@@ -166,9 +166,9 @@
     <div class="headername">하나원페이</div>
 </div>
 
-<div class="paySuccess">
-    <img class="paySuccessImg" src="/img/paySuccess.gif" alt="paySuccess"> <br>
-    결제요청이 완료되었습니다.
+<div class="paySuccess" style="margin-left: 61px">
+    <img class="paySuccessImg" src="/img/paySuccess.gif" alt="paySuccess" style="margin-right: 400px;"> <br>
+    <div style="margin-left: 52px; margin-top: -30px; margin-bottom: 20px;">결제가 승인되었습니다.</div>
 </div>
 <br>
 
@@ -189,6 +189,10 @@
             <td>${time}</td>
         </tr>
         <tr>
+            <td>결제상태</td>
+            <td>정상승인</td>
+        </tr>
+        <tr>
             <td>결제요금</td>
             <td id="productPrice"></td>
         </tr>
@@ -203,6 +207,8 @@
         확인
     </button>
 </div>
+
+<br><br><br>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <script>

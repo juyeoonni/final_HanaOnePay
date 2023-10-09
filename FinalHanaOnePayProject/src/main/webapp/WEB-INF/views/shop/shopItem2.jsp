@@ -158,7 +158,7 @@
                 <div class="col-md-6">
 
                     <div class="small mb-1">하나원페이로 결제 시 9월 5% 할인</div>
-                    <h1 class="display-5 fw-bolder product-name"> Cocod'or Signature Diffuser 200ml </h1>
+                    <h1 class="display-5 fw-bolder product-name"> Cocod'or Signature Diffuser</h1>
                     <div class="fs-5 mb-5">
                         <span class="text-decoration-line-through">29,900</span>
                         <span>19,500원</span>

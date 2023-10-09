@@ -118,4 +118,76 @@
         </foreach>
     </select>
 
+<!--    카드결제매퍼-->
+    <!-- 카드가 신용인지 체크인지 검사위해 조회 -->
+    <select id="getCardTypeByCardNumberAndIdentityNumber" resultType="string">
+        SELECT i.cardTypeCode
+        FROM ${tableCode}_card c
+                 JOIN carditem i ON c.cardName = i.cardName
+                 JOIN ${tableCode}_account a ON c.accNumber = a.accNumber
+                 JOIN customer_${tableCode} cu ON a.identityNumber = cu.identityNumber
+        WHERE c.cardNumber = #{cardNumber} AND cu.identityNumber = #{identityNumber}
+    </select>
+
+    <!-- 카드가 활성상태인지 확인하기 위해 조회 -->
+    <select id="getCardStatusByCardNumberAndIdentityNumber" resultType="String">
+        SELECT c.cardStatus
+        FROM ${tableCode}_card c
+                 JOIN carditem p ON c.cardName = p.cardName
+                 JOIN ${tableCode}_account a ON c.accNumber = a.accNumber
+                 JOIN customer_${tableCode} cu ON a.identityNumber = cu.identityNumber
+        WHERE c.cardNumber = #{cardNumber} AND cu.identityNumber = #{identityNumber}
+    </select>
+
+    <!-- 결제카드의 잔액을 조회 for 체크카드 -->
+    <select id="getAccountBalanceByCardNumber" resultType="BigDecimal">
+        SELECT a.accBalance
+        FROM ${tableCode}_card c
+                 JOIN ${tableCode}_account a ON c.accNumber = a.accNumber
+        WHERE c.cardNumber = #{cardNumber}
+    </select>
+
+    <!-- 결제 시 계좌 잔액 마이너스 업데이트 for 체크카드 -->
+    <update id="updateAccountBalanceByCardNumber">
+        UPDATE ${tableCode}_account a
+        SET a.accbalance = a.accbalance - #{amount}
+        WHERE a.accNumber = (
+            SELECT c.accNumber
+            FROM ${tableCode}_card c
+            WHERE c.cardNumber = #{cardNumber}
+        )
+    </update>
+
+    <!--    신용카드 한도 조회-->
+    <select id="getCreditCardLimitByCardNumberAndIdentityNumber" resultType="BigDecimal">
+        SELECT c.limit
+        FROM ${tableCode}_card c
+                 JOIN ${tableCode}_account a ON c.accNumber = a.accNumber
+                 JOIN customer_${tableCode} cu ON a.identityNumber = cu.identityNumber
+        WHERE c.cardNumber = #{cardNumber} AND cu.identityNumber = #{identityNumber}
+    </select>
+
+    <!--   결제 시 신용카드 한도 update-->
+    <update id="updateCreditCardLimitByCardNumberAndIdentityNumber">
+        UPDATE ${tableCode}_card c
+        SET c.limit = c.limit - #{amount}
+        WHERE c.cardNumber = #{cardNumber}
+          AND EXISTS (
+            SELECT 1
+            FROM ${tableCode}_account a
+                     JOIN customer_${tableCode} cu ON a.identityNumber = cu.identityNumber
+            WHERE a.accNumber = c.accNumber
+              AND cu.identityNumber = #{identityNumber}
+        )
+    </update>
+
+    <!-- 카드 거래내역에 인서트 -->
+    <insert id="insertCardPaymentLog">
+        INSERT INTO ${tableCode}_card_payment_log
+            (payId, cardNumber, payAmount)
+        VALUES
+            (payment_log_seq.NEXTVAL, #{cardNumber}, #{payAmount})
+    </insert>
+
+
 </mapper>

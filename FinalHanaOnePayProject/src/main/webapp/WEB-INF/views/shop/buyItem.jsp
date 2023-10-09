@@ -1207,13 +1207,14 @@
                                                      aria-labelledby="accountHeader" data-bs-parent="#accountAccordion">
                                                     <div class="accordion-body">
                                                         <c:forEach var="account" items="${accountInfos}">
-                                                            <!-- 체크박스와 계좌 정보를 담는 부모 컨테이너 -->
-                                                            <div class="accountContainer">
+                                                            <div class="accountContainer" style="display: flex; align-items: center;">
                                                                 <!-- 체크박스 추가 -->
+                                                                <div class="hanaAccCheck">
                                                                 <input type="radio" id="account-${account.accNumber}" name="accountSelection" class="account-checkbox">
                                                                 <label for="account-${account.accNumber}" class="account-label">
                                                                     <span class="custom-checkbox"></span>
                                                                 </label>
+                                                                </div>
                                                                 <div class="hanaBankAccount">
                                                                     <img src="/img/bank/bankName=hana.png" alt="">
                                                                     하나은행 - ${account.accName}
@@ -1260,13 +1261,13 @@
                                                 <%--                                            모달 바디입니다--%>
                                                 <div class="card text-center">
                                                     <div class="card-header">
-                                                        <ul class="nav nav-pills card-header-pills">
+                                                        <ul class="nav nav-pills card-header-pills" style="margin-right: 170px;">
                                                             <li class="nav-item">
                                                                 <a class="nav-link active" href="#"
                                                                    style="background-color: #00857E; color: white !important;">하나원페이</a>
                                                             </li>
                                                             <li class="nav-item">
-                                                                <a class="nav-link" href="#">제휴결제</a>
+                                                                <a class="nav-link" href="#" style="font-size: 18px !important; color: #666666 !important; margin-top: 4px !important;">제휴결제</a>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -1393,7 +1394,6 @@
                 </div>
                 <!-- 결제비밀번호 모달 끝 -->
 
-c:
             </div>
 
 
@@ -1799,7 +1799,7 @@ c:
                 console.log("getChecked",selectedAccount);
 
                 if (!selectedAccount) {
-                    alert("계좌를 선택해주세요.");
+                    // alert("계좌를 선택해주세요.");
                     return;
                 }
 

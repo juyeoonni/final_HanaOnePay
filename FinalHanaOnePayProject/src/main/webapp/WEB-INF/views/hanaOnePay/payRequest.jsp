@@ -182,45 +182,49 @@
 <div class="selectPayCard">
     <h2>결제 카드 선택</h2>
     <hr>
-    <%--                                            캐러셀--%>
+    <!-- 캐러셀 -->
     <div id="carouselExampleIndicators" class="carousel slide">
         <div class="carousel-indicators">
-            <c:forEach items="${allCards}" var="card"
-                       varStatus="status">
-                <button type="button"
-                        data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide-to="${status.index}"
-                        class="<c:if test="${status.index == 0}">active</c:if>"
-                        aria-label="Slide ${status.index + 1}"></button>
+            <!-- cardInfos 캐러셀 인디케이터 추가 -->
+            <c:forEach items="${cardInfos}" var="card" varStatus="status">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${status.index}" class="<c:if test="${status.index == 0}">active</c:if>" aria-label="Slide ${status.index + 1}"></button>
             </c:forEach>
 
+            <!-- allCards 캐러셀 인디케이터 추가 -->
+            <c:forEach items="${allCards}" var="card" varStatus="status">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${status.index + cardInfos.size()}" class="" aria-label="Slide ${status.index + cardInfos.size() + 1}"></button>
+            </c:forEach>
         </div>
 
-
         <div class="carousel-inner">
-            <c:forEach items="${allCards}" var="card" varStatus="status">
+            <!-- cardInfos를 순회하여 캐러셀 아이템 추가 -->
+            <c:forEach items="${cardInfos}" var="card" varStatus="status">
                 <div class="carousel-item <c:if test="${status.index == 0}">active</c:if>">
-                    <!-- 이미지 경로 생성 -->
                     <img src="/img/${card.cardName}.png" class="d-block w-100" alt="${card.cardName}">
                     <div class="text-center mt-2">${card.cardName}</div>
-                    <div class="text-center">${card.cardNumber}</div>
-                    <div class="text-center">${card.cardCode}</div>
+                    <div class="text-center card--number" data-cardnumber="${card.cardNumber}">${card.cardNumber}</div>
+                    <div class="text-center" style="display: none;">hana</div>
+                    <hr>
+                </div>
+            </c:forEach>
 
+            <!-- 기존 allCards를 순회하여 캐러셀 아이템 추가 -->
+            <c:forEach items="${allCards}" var="card" varStatus="status">
+                <div class="carousel-item">
+                    <img src="/img/${card.cardName}.png" class="d-block w-100" alt="${card.cardName}">
+                    <div class="text-center mt-2">${card.cardName}</div>
+                    <div class="text-center card--number">${card.cardNumber}</div>
+                    <div class="text-center" style="display: none;">${card.cardCode}</div>
                     <hr>
                 </div>
             </c:forEach>
         </div>
 
-
-        <button class="carousel-control-prev" type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
@@ -234,6 +238,7 @@
     <button type="button" class="btn-qr" id="payStart" data-bs-toggle="modal" data-bs-target="#paymentModal">결제하기
     </button>
     <div class="payAgree">결제조건 확인 및 개인정보 제공에 동의합니다.</div>
+    <br><br><br>
 </div>
 
 <!-- 결제비밀번호 모달시작 -->
@@ -286,6 +291,19 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 
+    // document.addEventListener("DOMContentLoaded", function () {
+    //     const cardNumbers = document.querySelectorAll('.card--number');
+    //
+    //     cardNumbers.forEach(cardNumber => {
+    //         const originalCardNumber = cardNumber.getAttribute('data-cardnumber');
+    //
+    //         // 문자열 처리: 2번째, 3번째 네자리를 *로 변환
+    //         const maskedCardNumber = originalCardNumber.replace(/(\d{4})-(\d{4})-(\d{4})-(\d{4})/, "$1-****-****-$4");
+    //         cardNumber.textContent = maskedCardNumber;
+    //     });
+    // });
+
+
     // 금액을 3자리마다 콤마로 구분하여 표시하는 함수
     function formatNumberWithCommas(number) {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -303,7 +321,7 @@
     });
 
 
-    $(document).ready(function() {
+    $(document).ready(function () {
 
         var businessCode = sessionStorage.getItem('businessCode');
         console.log(businessCode); // businessCode 값을 로그에 출력해보세요.
@@ -314,30 +332,30 @@
         function updateDots() {
             var length = passwordInput.val().length;
             dots.removeClass('dot-filled');
-            for(var i = 0; i < length; i++) {
+            for (var i = 0; i < length; i++) {
                 $(dots[i]).addClass('dot-filled');
             }
         }
 
-        $('.keypad-btn').click(function() {
+        $('.keypad-btn').click(function () {
             var value = $(this).data('value');
-            if(passwordInput.val().length < 6) { // 4자리 비밀번호 제한
+            if (passwordInput.val().length < 6) { // 4자리 비밀번호 제한
                 passwordInput.val(passwordInput.val() + value);
                 updateDots();
             }
         });
 
-        $('.keypad-btn-clear').click(function() {
+        $('.keypad-btn-clear').click(function () {
             passwordInput.val('');
             updateDots();
         });
 
-        $('.keypad-btn-delete').click(function() {
+        $('.keypad-btn-delete').click(function () {
             passwordInput.val(passwordInput.val().slice(0, -1));
             updateDots();
         });
 
-        $("#payStart").click(function() {
+        $("#payStart").click(function () {
             var paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
             passwordInput.val('');
             dots.removeClass('dot-filled');
@@ -356,7 +374,7 @@
 
         //끝
 
-        $("#confirmPayment").click(function() {
+        $("#confirmPayment").click(function () {
 
             // 사용자가 입력한 비밀번호
             var enteredPassword = passwordInput.val();
@@ -365,7 +383,7 @@
 
             // 세션 스토리지에서 activeCardNumber 가져오기
             var storedActiveCardNumber = sessionStorage.getItem('activeCardNumber');
-            var storedActiveCardCode = sessionStorage.getItem('activeCardCode');  // 세션 스토리지에서 activeCardCode 가져오기
+            var storedActiveCardCode = sessionStorage.getItem('activeCardCode');
             var productName = "${sessionScope.productName}";
             var productPrice = "${sessionScope.productPrice}";
             var hanaMoney = "${sessionScope.hanaMoney}";
@@ -373,50 +391,55 @@
             sessionStorage.setItem("hanaMoney", hanaMoney);
             var identityNumber = "${sessionScope.identityNumber}";
 
-            // 세션 스토리지의 값을 콘솔에 출력
+            // 값을 콘솔에 출력
             console.log("Stored Active Card Number:", storedActiveCardNumber);
             console.log("Stored Active Card Code:", storedActiveCardCode);
             console.log("Stored Product Name:", productName);
             console.log("Stored Product Price:", productPrice);
             console.log("Stored Identity Number:", identityNumber);
 
+            // 하나카드 결제 로직. 예를 들어, 카드 코드가 "HANA"인 경우
+            var isHanaCard = storedActiveCardCode === "hana";
+            // 하나카드일 경우 "/hanaOnePay/card-payRequest" 엔드포인트 사용, 그렇지 않은 경우 기존 엔드포인트 사용
+            var endpoint = isHanaCard ? "/hanaOnePay/card-payRequest" : "/api/payRequest";
 
             if (enteredPassword === sessionPassword) {
                 console.log("간편결제 비밀번호 일치")
                 console.log("결제할 카드 번호:", storedActiveCardNumber);
                 console.log("결제할 카드 코드:", storedActiveCardCode);
 
-                    // AJAX로 결제 요청 전송
-                    var requestData = {
-                        activeCard: storedActiveCardNumber,
-                        activeCardCode: storedActiveCardCode,
-                        productName:productName,
-                        productPrice: productPrice,
-                        identityNumber:identityNumber
-                    };
+                // AJAX로 결제 요청 전송
+                var requestData = {
+                    activeCard: storedActiveCardNumber,
+                    activeCardCode: storedActiveCardCode,
+                    productName: productName,
+                    productPrice: productPrice,
+                    identityNumber: identityNumber
+                };
 
-                    $.ajax({
-                        type: "POST",
-                        url: "/api/payRequest", // 여기서 해당 컨트롤러의 endpoint를 설정해줍니다.
-                        data: JSON.stringify(requestData),
-                        contentType: "application/json; charset=utf-8",
-                        success: function(response) {
-                            console.log(response);
-                            // 결제 승인을 받았을 때의 코드를 아래에 추가
-                            if(response === "Payment Approved") {  // 서버에서 success 필드를 true로 반환한다고 가정합니다.
-                                window.location.href = "/hanaOnePay/payRequestSuccess"; // 결제 성공 페이지로 리디렉션
-                            } else {
-                                alert('결제 실패: ' + response.message); // 서버에서 오류 메시지를 반환
-                                window.location.href = "/hanaOnePay/payRequestFail"; // 결제 성공 페이지로 리디렉션
-                            }
-                        },
-                        error: function(jqXHR, textStatus, errorThrown) {
-                            console.log("AJAX Error Status:", jqXHR.status); // HTTP 상태 코드 출력 (예: 404, 500)
-                            console.log("Text Status:", textStatus);        // 텍스트 상태 출력 (예: "error", "timeout", "abort", "parsererror")
-                            console.log("Error Thrown:", errorThrown);      // 발생한 예외 정보 출력
+                // 타 카드사 결제 로직
+                $.ajax({
+                    type: "POST",
+                    url: endpoint, // 여기서 해당 컨트롤러의 endpoint를 설정해줍니다.
+                    data: JSON.stringify(requestData),
+                    contentType: "application/json; charset=utf-8",
+                    success: function (response) {
+                        console.log(response);
+                        // 결제 승인을 받았을 때의 코드를 아래에 추가
+                        if (response === "Payment Approved") {  // 서버에서 success 필드를 true로 반환한다고 가정합니다.
+                            window.location.href = "/hanaOnePay/payRequestSuccess"; // 결제 성공 페이지로 리디렉션
+                        } else {
+                            alert('결제 실패: ' + response.message); // 서버에서 오류 메시지를 반환
+                            window.location.href = "/hanaOnePay/payRequestFail"; // 결제 실패 페이지로 리디렉션
                         }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log("AJAX Error Status:", jqXHR.status); // HTTP 상태 코드 출력 (예: 404, 500)
+                        console.log("Text Status:", textStatus);        // 텍스트 상태 출력 (예: "error", "timeout", "abort", "parsererror")
+                        console.log("Error Thrown:", errorThrown);      // 발생한 예외 정보 출력
+                    }
 
-                    });
+                });
 
 
             } else {
@@ -425,8 +448,6 @@
         });
 
     });
-
-
 
 
 </script>

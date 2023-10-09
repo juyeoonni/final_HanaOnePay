@@ -176,6 +176,8 @@ public class CardService {
                 return "shinhan";
             case "kb":
                 return "KB";
+            case "hana":
+                return "hana";
             default:
                 throw new IllegalArgumentException("Invalid card code");
         }

@@ -20,7 +20,6 @@
             src: url('/fonts/Hana2-CM.ttf') format('truetype');
         }
 
-
         body {
             font-family: 'Hana2CM', sans-serif !important; /* sans-serif는 폰트가 로드되지 않을 때 사용될 대체 폰트입니다. */
         }
@@ -102,9 +101,9 @@
 
                     <br/>
                     <br/>
-                    <div></div>
+
                     <div id="test" width="100%">
-                        <h1>QR 코드 스캔 결과</h1>
+<%--                        <h1>QR 코드 스캔 결과</h1>--%>
                         <div id="output">
                             <div id="outputMessage">
 

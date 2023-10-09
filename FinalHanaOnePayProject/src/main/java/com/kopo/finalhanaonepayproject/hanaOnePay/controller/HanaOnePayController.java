@@ -10,18 +10,18 @@ import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.*;
 import com.kopo.finalhanaonepayproject.hanaOnePay.service.HanaOnePayService;
 import com.kopo.finalhanaonepayproject.shop.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class HanaOnePayController {
@@ -81,8 +81,14 @@ public class HanaOnePayController {
 
 
     @RequestMapping("/hanaOnePay/payRequest")
-    public ModelAndView processQR(@RequestParam("qrData") String qrData, HttpServletRequest request) {
+    public ModelAndView processQR(@RequestParam("qrData") String qrData, HttpSession session, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
+
+        String identityNumber = (String) session.getAttribute("identityNumber");
+        List<HanaOnePayCardDTO> cardInfos = hanaOnePayService.getHanaCardDetailsByIdentity(identityNumber);
+
+        System.out.println("결제 페이지 하나카드 조회 성공!");
+        modelAndView.addObject("cardInfos", cardInfos);
 
         // QR 코드 데이터 처리 로직
         // 예: QR 데이터를 사용하여 결제 요청을 처리하고 결과 페이지로 이동
@@ -104,7 +110,7 @@ public class HanaOnePayController {
 //            modelAndView.addObject("productPrice", productPrice);
 
             // QR 코드 스캔 결과를 세션에 저장
-            HttpSession session = request.getSession();
+//            HttpSession session = request.getSession();
             session.setAttribute("productName", productName);
             session.setAttribute("productPrice", productPrice);
 
@@ -262,6 +268,17 @@ public class HanaOnePayController {
         return "hanaOnePay/cardTerms";
     }
 
+    // 하나카드 결제 로직
+    @PostMapping("/hanaOnePay/card-payRequest")
+    public ResponseEntity<String> hanaCardPayment(@RequestBody Map<String, Object> requestData) {
+        String activeCard = (String) requestData.get("activeCard");
+        String activeCardCode = (String) requestData.get("activeCardCode");
+        BigDecimal productPrice = new BigDecimal((String) requestData.get("productPrice"));
+        String identityNumber = (String) requestData.get("identityNumber");
 
+        String result = hanaOnePayService.hanaCardPaymentProcess(activeCard, activeCardCode, identityNumber, productPrice);
+
+        return ResponseEntity.ok(result);
+    }
 
 }

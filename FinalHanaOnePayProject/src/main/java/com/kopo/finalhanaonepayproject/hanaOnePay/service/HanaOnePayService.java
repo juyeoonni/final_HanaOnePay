@@ -105,8 +105,68 @@ public class HanaOnePayService {
         return hanaOnePayDAO.getCardsByBusinessCodes(businessCodes);
     }
 
-//    public int getLastMonthTotalAmount(String identityNumber) {
-//        return hanaOnePayDAO.getLastMonthTotalAmount(identityNumber);
-//    }
+    // 하나카드 결제
+
+    private void insertCardPaymentLog(String cardNumber, BigDecimal payAmount, String tableCode) {
+        hanaOnePayDAO.insertCardPaymentLog(cardNumber, payAmount, tableCode);
+    }
+    public String hanaCardPaymentProcess(String cardNumber, String cardCode, String identityNumber, BigDecimal productPrice) {
+        String tableCode = "hana";
+        String cardType = hanaOnePayDAO.getCardTypeByCardNumberAndIdentityNumber(cardNumber, identityNumber, tableCode);
+
+        // cardType == 2 (체크카드)
+        if ("2".equals(cardType)) {
+            String cardStatus = hanaOnePayDAO.getCardStatusByCardNumberAndIdentityNumber(cardNumber, identityNumber, tableCode);
+
+            if ("활성".equalsIgnoreCase(cardStatus)) {
+                BigDecimal balance = hanaOnePayDAO.getAccountBalanceByCardNumber(cardNumber, tableCode);
+
+                if (balance.compareTo(productPrice) >= 0) {
+                    // 계좌에서 금액 차감
+                    hanaOnePayDAO.updateAccountBalanceByCardNumber(cardNumber, tableCode, productPrice);
+
+                    // 체크카드 거래 내역 생성 및 저장
+                    insertCardPaymentLog(cardNumber, productPrice, tableCode);
+                    return "Payment Approved";
+                } else {
+                    return "Insufficient Balance";
+                }
+            } else {
+                return "Inactive Card";
+            }
+        }
+        // cardType == 1 (신용카드)
+        else if ("1".equals(cardType)) {
+            String cardStatus = hanaOnePayDAO.getCardStatusByCardNumberAndIdentityNumber(cardNumber, identityNumber, tableCode);
+
+            if ("활성".equalsIgnoreCase(cardStatus)) {
+                BigDecimal limit = hanaOnePayDAO.getCreditCardLimitByCardNumberAndIdentityNumber(cardNumber, identityNumber, tableCode);
+
+                if (limit.compareTo(productPrice) >= 0) {
+
+                    // 신용카드 한도에서 결제 금액만큼 차감
+                    hanaOnePayDAO.updateCreditCardLimitByCardNumberAndIdentityNumber(cardNumber, identityNumber, tableCode, productPrice);
+
+//                    // 결제 승인 후 미결제 금액 관리 테이블에 해당 금액을 기록하는 로직
+//                    String withdrawalDate = LocalDate.now().plusMonths(1).withDayOfMonth(13).toString(); // 다음 달 13일로 설정.
+//                    cardDAO.insertPendingPayment(cardNumber, productPrice, withdrawalDate, "Pending", tableCode);
+
+                    // 신용카드 거래 내역 생성 및 저장
+                    insertCardPaymentLog(cardNumber, productPrice, tableCode);
+
+                    return "Payment Approved";
+                } else {
+                    return "Insufficient Credit Limit";
+                }
+            } else {
+                return "Inactive Card";
+            }
+        }
+        else {
+            return "Invalid Card Type";
+        }
+
+    }
+
 
 }
