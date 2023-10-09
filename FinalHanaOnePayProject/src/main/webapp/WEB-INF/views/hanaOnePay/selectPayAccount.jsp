@@ -148,7 +148,7 @@
             padding: 30px 0;
             align-items: center; /* 아이템을 수직으로 중앙에 배치 */
             gap: 10px; /* 아이템 간의 간격 설정 (브라우저 지원 여부 확인 필요) */
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .anw span {
@@ -216,7 +216,7 @@
             padding: 20px;
             margin: 20px;
             width: 420px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 20px;
         }
 
@@ -244,16 +244,16 @@
             background-color: white;
         }
 
-        .plusBtn{
+        .plusBtn {
             color: white;
-            background-color:#00857E ;
+            background-color: #00857E;
             border-radius: 5px;
             border: none;
         }
 
-        .cancleButton{
+        .cancleButton {
             color: white;
-            background-color:#666666;
+            background-color: #666666;
             border-radius: 5px;
             border: none;
         }
@@ -276,20 +276,20 @@
             padding: 10px; /* 필요에 따라 패딩을 조절 */
         }
 
-        .cardInfo{
+        .cardInfo {
             font-size: 16px;
         }
 
-        .show-card-number-btn{
+        .show-card-number-btn {
             margin-left: 50px;
             color: white;
-            background-color:#666666 ;
+            background-color: #666666;
             border-radius: 5px;
             border: none;
             font-size: 17px;
         }
 
-        .addPayCard{
+        .addPayCard {
             margin: 0 auto;
             margin-top: 30px;
             padding-top: 10px;
@@ -352,7 +352,6 @@
         }
 
 
-
     </style>
 </head>
 <body>
@@ -377,8 +376,10 @@
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                         <%--                        <li><a href="/api/linkedAccount"--%>
                         <%--                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">연동카드조회</a></li>--%>
-                        <li><a href="/hanaOnePay/selectPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>
-                        <li><a href="/hanaOnePay/selectPayAccount" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 계좌</a></li>
+                        <li><a href="/hanaOnePay/selectPayCard"
+                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>
+                        <li><a href="/hanaOnePay/selectPayAccount"
+                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 계좌</a></li>
                     </ul>
                 </div>
             </li>
@@ -451,100 +452,108 @@
 
 
     </div>
-<%--<%@ include file="/WEB-INF/views/comm/footer.jsp"%>--%>
+    <%--<%@ include file="/WEB-INF/views/comm/footer.jsp"%>--%>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-<script>
+    <script>
 
 
-    function getBankNameByAccount(accNumber) {
-        if (accNumber.includes('1002')) {
-            return '우리은행';
-        } else if (accNumber.includes('110')) {
-            return '신한은행';
-        } else if (accNumber.includes('04')) {
-            return '국민은행';
-        } else {
-            return '기타';
-        }
-    }
-
-    const accountData = JSON.parse(sessionStorage.getItem('accountData'));
-
-    function groupAccountsByBank() {
-        const grouped = {};
-        accountData.forEach(account => {
-            const bankName = getBankNameByAccount(account.accNumber);
-            if (!grouped[bankName]) {
-                grouped[bankName] = [];
+        function getBankNameByAccount(accNumber) {
+            if (accNumber.includes('1002')) {
+                return '우리은행';
+            } else if (accNumber.includes('110')) {
+                return '신한은행';
+            } else if (accNumber.includes('04')) {
+                return '국민은행';
+            } else {
+                return '기타';
             }
-            grouped[bankName].push(account);
-        });
-        return grouped;
-    }
+        }
 
-    function displayAccounts() {
-        const accountContainer = document.getElementById('Accordion_wrap');
-        const groupedAccounts = groupAccountsByBank();
+        const accountData = JSON.parse(sessionStorage.getItem('accountData'));
 
-        for (const bankName in groupedAccounts) {
+        function groupAccountsByBank() {
+            const grouped = {};
+            accountData.forEach(account => {
+                const bankName = getBankNameByAccount(account.accNumber);
+                if (!grouped[bankName]) {
+                    grouped[bankName] = [];
+                }
+                grouped[bankName].push(account);
+            });
+            return grouped;
+        }
+
+        function displayAccounts() {
+            const accountContainer = document.getElementById('Accordion_wrap');
+            const groupedAccounts = groupAccountsByBank();
+
+            for (const bankName in groupedAccounts) {
 
 
-            // 은행 이름 표시
-            const bankDiv = document.createElement('div');
-            bankDiv.className = 'bank';
-            bankDiv.innerHTML = '<h3>' +'<img src="/img/bank/'+ bankName +'.png">' +' '+ bankName + '</h3>' ;
-            accountContainer.appendChild(bankDiv);
+                // 은행 이름 표시
+                const bankDiv = document.createElement('div');
+                bankDiv.className = 'bank';
+                bankDiv.innerHTML = '<h3>' + '<img src="/img/bank/' + bankName + '.png">' + ' ' + bankName + '</h3>';
+                accountContainer.appendChild(bankDiv);
 
-            // 각 은행의 계좌 정보 표시
-            groupedAccounts[bankName].forEach(account => {
-                const accountDiv = document.createElement('div');
-                accountDiv.className = 'account';
-                accountDiv.style.display = "flex"; // flex 설정
-                accountDiv.style.justifyContent = "space-between"; // 왼쪽과 오른쪽으로 내용을 분리
+                // 각 은행의 계좌 정보 표시
+                groupedAccounts[bankName].forEach(account => {
+                    const accountDiv = document.createElement('div');
+                    accountDiv.className = 'account';
+                    accountDiv.style.display = "flex"; // flex 설정
+                    accountDiv.style.justifyContent = "space-between"; // 왼쪽과 오른쪽으로 내용을 분리
 
-                const accountInfoDiv = document.createElement('div'); // 계좌 정보를 담는 컨테이너
-                accountInfoDiv.innerHTML =
-                    '<h5>' + account.accName + ' (' + account.accNickName + ')</h5>' +
-                    '<p>계좌 번호: ' + account.accNumber + '</p>';
+                    const accountInfoDiv = document.createElement('div'); // 계좌 정보를 담는 컨테이너
+
+                    // 계좌 번호에서 마지막 6자리를 '*'로 대체한 문자열 생성
+                    const accountNumber = account.accNumber;
+                    const maskedAccountNumber = '******' + accountNumber.slice(-6);
+
+                    accountInfoDiv.innerHTML =
+                        '<h5>' + account.accName + ' (' + account.accNickName + ')</h5>' +
+                        '<p>계좌 번호: ' + maskedAccountNumber + '</p>';
                     //'<p>계좌 상태: ' + account.accStatus + '</p>';
 
-                const balanceDiv = document.createElement('div'); // 잔액 정보를 담는 컨테이너
-                balanceDiv.innerHTML = '<p>잔액: ' + account.accBalance + '</p>';
-                balanceDiv.style.textAlign = "right"; // 잔액을 오른쪽으로 정렬
-                balanceDiv.style.marginRight = "150px";
+                    const balanceDiv = document.createElement('div'); // 잔액 정보를 담는 컨테이너
 
-                // "조회" 버튼 추가
-                const checkButton = document.createElement('button');
-                checkButton.textContent = "조회";
-                checkButton.style.marginTop = "10px"; // 버튼 위치 조절을 위한 마진 추가
+                    // 잔액을 포맷팅하여 컴마로 구분된 문자열로 변환
+                    const formattedBalance = new Intl.NumberFormat().format(account.accBalance);
 
-                // 스타일 적용
-                checkButton.style.color = "white";
-                checkButton.style.backgroundColor = "#666666";
-                checkButton.style.borderRadius = "5px";
-                checkButton.style.border = "none";
-                checkButton.style.fontSize = "20px";
-                checkButton.style.width = "100px";
+                    balanceDiv.innerHTML = '<p>잔액: ' + formattedBalance + '</p>';
+                    balanceDiv.style.textAlign = "right"; // 잔액을 오른쪽으로 정렬
+                    balanceDiv.style.marginRight = "150px";
 
 
-                balanceDiv.appendChild(checkButton); // balanceDiv 내에 버튼 추가
+                    // "조회" 버튼 추가
+                    const checkButton = document.createElement('button');
+                    checkButton.textContent = "조회";
+                    checkButton.style.marginTop = "10px"; // 버튼 위치 조절을 위한 마진 추가
 
-                accountDiv.appendChild(accountInfoDiv);
-                accountDiv.appendChild(balanceDiv);
+                    // 스타일 적용
+                    checkButton.style.color = "white";
+                    checkButton.style.backgroundColor = "#666666";
+                    checkButton.style.borderRadius = "5px";
+                    checkButton.style.border = "none";
+                    checkButton.style.fontSize = "20px";
+                    checkButton.style.width = "100px";
 
-                accountContainer.appendChild(accountDiv);
-            });
+
+                    balanceDiv.appendChild(checkButton); // balanceDiv 내에 버튼 추가
+
+                    accountDiv.appendChild(accountInfoDiv);
+                    accountDiv.appendChild(balanceDiv);
+
+                    accountContainer.appendChild(accountDiv);
+                });
+            }
         }
-    }
 
 
+        // 페이지 로드 시 함수 실행
+        window.onload = displayAccounts;
 
 
-    // 페이지 로드 시 함수 실행
-    window.onload = displayAccounts;
-
-
-</script>
+    </script>
 
 </body>
 </html>

@@ -274,6 +274,18 @@ public class HanaOnePayController {
         return "hanaOnePay/cardTerms";
     }
 
+    @GetMapping("/hanaOnePay/payRequestSuccessPC")
+    public String payRequestSuccessPC(Model model) {
+        
+        // 현재 시간을 가져옵니다.
+        String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+
+        // 현재 시간을 모델에 추가하여 JSP 페이지로 전달합니다.
+        model.addAttribute("time", currentTime);
+
+        return "hanaOnePay/payRequestSuccessPC"; // 결제 성공을 알리는 JSP 페이지를 반환합니다.
+    }
+
     // 하나카드 결제 로직
     @PostMapping("/hanaOnePay/card-payRequest")
     public ResponseEntity<String> hanaCardPayment(@RequestBody Map<String, Object> requestData) {

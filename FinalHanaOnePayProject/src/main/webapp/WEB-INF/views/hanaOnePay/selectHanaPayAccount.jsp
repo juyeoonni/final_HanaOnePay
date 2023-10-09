@@ -385,13 +385,15 @@
                 </button>
                 <div class="collapse show" id="home-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <%--                        <li><a href="/api/linkedAccount"--%>
-                        <%--                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">연동카드조회</a></li>--%>
-                        <li><a href="/hanaOnePay/selectPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>
-                        <li><a href="/hanaOnePay/selectPayAccount" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 계좌</a></li>
+                        <%--                    <li><a href="/api/linkedAccount" class="link-body-emphasis d-inline-flex text-decoration-none rounded">연동카드조회</a></li>--%>
+                        <%--                    <li><a href="/hanaOnePay/selectPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>--%>
+                        <li><a href="/hanaOnePay/selectHanaPayCard"
+                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>
+                        <li><a onclick="fetchAccountData()"
+                               class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                               style="cursor: pointer;">간편결제 계좌</a></li>
                     </ul>
                 </div>
-                <hr>
             </li>
             <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
@@ -400,14 +402,11 @@
                 </button>
                 <div class="collapse" id="dashboard-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">월사용금액
-                            조회</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">명세서 조회</a>
-                        </li>
-                        <li><a href="#"
-                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>
-                        <li><a href="#"
-                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>
+                        <li><a href="/api/payments-by-month?month=09"
+                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">내 지출 조회</a></li>
+                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">명세서 조회</a></li>--%>
+                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>--%>
+                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>--%>
                     </ul>
                 </div>
             </li>
@@ -418,14 +417,11 @@
                 </button>
                 <div class="collapse" id="orders-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New</a>
-                        </li>
-                        <li><a href="#"
-                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Processed</a></li>
-                        <li><a href="#"
-                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Shipped</a></li>
-                        <li><a href="#"
-                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Returned</a></li>
+                        <li><a href="/api/payments-by-month?month=09"
+                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">소비레포트</a></li>
+                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Processed</a></li>--%>
+                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Shipped</a></li>--%>
+                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Returned</a></li>--%>
                     </ul>
                 </div>
             </li>

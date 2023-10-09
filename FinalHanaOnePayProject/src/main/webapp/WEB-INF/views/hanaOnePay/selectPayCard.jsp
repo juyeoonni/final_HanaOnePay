@@ -384,7 +384,7 @@
 <%--                        <li><a href="/api/linkedAccount"--%>
 <%--                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">연동카드조회</a></li>--%>
     <li><a href="/hanaOnePay/selectPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>
-    <li><a href="/hanaOnePay/selectPayAccount" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 계좌</a></li>
+    <li><a href="/hanaOnePay/selectHanaPayAccount" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 계좌</a></li>
                     </ul>
                 </div>
             </li>

@@ -77,9 +77,15 @@
 
 <body>
 <div id="terms-content">
-  <div style="background-color: #cfd8dd; border-radius: 7px; height: 50px;">하나카드</div>
+<%--  <div style="background-color: #cfd8dd; border-radius: 7px; height: 50px;">하나카드</div>--%>
+  <div class="modal-header" style="margin-top: 20px;">
+    <img src="/img/hanaLogo.png" alt="하나원페이 로고" style="margin-right: 10px; width: 45px; height: 45px;">
+    <h1 class="modal-title fs-5" id="exampleModalLabel"  style="font-weight: bold; margin-right: 460px; font-size: 22px !important;">하나카드</h1>
+  </div>
+  <hr>
 
-  <h1>모두의 쇼핑 카드</h1>
+  <br>
+  <h2 style="color: #00857E;">∎ 모두의 쇼핑 카드 ∎</h2>
 
 
   <div class="container">
@@ -194,7 +200,10 @@
 
 </div>
 </div>
-<button onclick="convertToPDF()">PDF 다운로드</button>
+<hr>
+<br>
+<button onclick="convertToPDF()" style="background-color: #00857E; margin-left: 40%;">다운로드</button>
+<br><br><br>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.2.61/jspdf.min.js"></script>

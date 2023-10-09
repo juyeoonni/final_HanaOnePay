@@ -364,7 +364,9 @@
 
         <div class="resultContainer">
             <div class="textContent">
-                ${sessionScope.name}님의 소비 성향을 분석한 결과,
+                소비태그를 기반하여<br>
+                <span
+                    style="font-size:25px; font-weight: bold; color: #00857E;">${sessionScope.name} </span>님의 소비 성향을 분석한 결과,
                 <div class="resultMessage" id="resultMessage"></div>
                 는 스타일로 나타났습니다!
             </div>
