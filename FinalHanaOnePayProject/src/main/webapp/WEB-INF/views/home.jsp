@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html lang="en">
@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/home.css">
     <title>HanaOnePay Main</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
@@ -19,7 +20,7 @@
             padding: 20px;
             margin: 20px;
             width: 420px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 20px;
         }
 
@@ -42,7 +43,7 @@
             color: grey;
         }
 
-        .hanaCharacter{
+        .hanaCharacter {
             width: 250px;
             height: 250px;
             margin-left: 25%;
@@ -54,7 +55,7 @@
             background-color: white;
         }
 
-        .btn-agree{
+        .btn-agree {
             color: #FFFFFF !important;
             background-color: #00857E !important;
         }
@@ -63,275 +64,398 @@
 </head>
 <body>
 <!-- 헤더위치 -->
-<%@ include file="/WEB-INF/views/comm/header.jsp"%>
+<%@ include file="/WEB-INF/views/comm/header.jsp" %>
 
 <main>
 
     <!-- 캐러셀 슬라이드 -->
-    <div id="carouselExampleRide" class="carousel slide" data-bs-ride="true">
-        <div class="carousel-inner">
-            <div class="carousel-item active" data-bs-interval="3000">
-                <div class="flex-card-container">
-                    <div class="mainOnePay">
-                        <div class="mainText animate__animated animate__fadeInUp" style="font-size: 36px;">
-                            하나로 연결된 </br>
-                            모두의 원페이
-                        </div>
+    <%--    <div id="carouselExampleRide" class="carousel slide" data-bs-ride="true">--%>
+    <%--        <div class="carousel-inner">--%>
+    <%--            <div class="carousel-item active" data-bs-interval="3000">--%>
+    <%--                <div class="flex-card-container">--%>
+    <%--                    <div class="mainOnePay">--%>
+    <%--                        <div class="mainText animate__animated animate__fadeInUp" style="font-size: 36px;">--%>
+    <%--                            하나로 연결된 </br>--%>
+    <%--                            모두의 원페이--%>
+    <%--                        </div>--%>
 
-                        <div class="subText animate__animated animate__fadeInUp" style="margin-top: 30px">
-                            한번의 카드 등록으로
-                            편리하게 즐기는 모두의 결제 생활!
-                        </div>
+    <%--                        <div class="subText animate__animated animate__fadeInUp" style="margin-top: 30px">--%>
+    <%--                            한번의 카드 등록으로--%>
+    <%--                            편리하게 즐기는 모두의 결제 생활!--%>
+    <%--                        </div>--%>
+    <%--                    </div>--%>
+    <%--                    <img class="mainCardImage animate__animated animate__fadeInUp" src="/img/mainCard.png">--%>
+    <%--                </div>--%>
+
+    <%--            </div>--%>
+    <%--            <div class="carousel-item" data-bs-interval="3000">--%>
+    <%--                <div class="flex-card-container2">--%>
+    <%--                    <div class="mainOnePay2">--%>
+    <%--                        <div class="mainText2 animate__animated animate__fadeIn">--%>
+    <%--                            여행도 </br>--%>
+    <%--                            하나로 원페이--%>
+    <%--                        </div>--%>
+    <%--                        <div class="subText2 animate__animated animate__fadeIn">--%>
+    <%--                            해외여행도--%>
+    <%--                            하나카드 하나면 돼!--%>
+    <%--                        </div>--%>
+    <%--                    </div>--%>
+    <%--                    <img class="mainCardImage2 animate__animated animate__fadeIn" src="/img/mainCard.png">--%>
+
+    <%--                </div>--%>
+    <%--            </div>--%>
+
+    <%--            <div class="carousel-item" data-bs-interval="3000">--%>
+    <%--                <img src="/img/hanaMain2.png" class="d-block w-100" alt="...">--%>
+    <%--            </div>--%>
+    <%--        </div>--%>
+    <%--        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">--%>
+    <%--            <span class="carousel-control-prev-icon" aria-hidden="true"></span>--%>
+    <%--            <span class="visually-hidden">Previous</span>--%>
+    <%--        </button>--%>
+    <%--        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="next">--%>
+    <%--            <span class="carousel-control-next-icon" aria-hidden="true"></span>--%>
+    <%--            <span class="visually-hidden">Next</span>--%>
+    <%--        </button>--%>
+    <%--    </div>--%>
+
+    <%--    <img src="/img/mainPageImg.jpg" style="margin-left: 7.5%;"></img>--%>
+
+    <div id="carouselExampleIndicators" class="carousel slide">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner" style="position: relative;"> <!-- Relative positioning for carousel -->
+
+            <div class="animate__animated animate__fadeInDown" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3; color:#FFFFFF; font-size: 26px; font-weight: bold; margin-left: -500px; margin-top: -14%;">
+                모두의 하나원페이
+            </div>
+            <div class="animate__animated animate__fadeInUp" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3; color:#FFFFFF; font-size: 25px; font-weight: bold; margin-left: -470px; margin-top: -11%;">
+                간편하게 등록하고 결제하는 생활
+            </div>
+
+            <!-- Wrapping div -->
+            <div class="mainBox1"
+                 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin-left: 21.5%; z-index: 2;">
+                <!-- Original div -->
+                <div class="mainBox2"
+                     style="background-color: #FFFFFF; width: 600px; height: 270px; padding-top: 20px;">
+                    <div class="parentBox" style="display: flex; justify-content: start; align-items: center;">
+                        <div class="userName" style="margin-left: 10%; font-size: 20px;">${name} 님</div>
+                        <div class="myPage" style="color: #666666; margin-left: 53%;">마이페이지 ☰</div>
                     </div>
-                    <img class="mainCardImage animate__animated animate__fadeInUp" src="/img/mainCard.png">
+                    <hr style="margin-left: 10%; width: 80%;">
                 </div>
 
-            </div>
-            <div class="carousel-item" data-bs-interval="3000">
-                <div class="flex-card-container2">
-                    <div class="mainOnePay2">
-                        <div class="mainText2 animate__animated animate__fadeIn">
-                            여행도 </br>
-                            하나로 원페이
-                        </div>
-                        <div class="subText2 animate__animated animate__fadeIn">
-                            해외여행도
-                            하나카드 하나면 돼!
-                        </div>
-                    </div>
-                    <img class="mainCardImage2 animate__animated animate__fadeIn" src="/img/mainCard.png">
-
+                <!-- New div positioned right below the original div -->
+                <div style="background-color: #00857E; width: 600px; height: 50px; margin-top: 22px; display: flex; justify-content: space-around; align-items: center; font-size: 15px;">
+                    <a href="#" style="text-decoration: none; color: #FFFFFF;">하나원페이</a>
+                    <span style="color: #FFFFFF;">|</span>
+                    <a href="#" style="text-decoration: none; color: #FFFFFF;">승인내역</a>
+                    <span style="color: #FFFFFF;">|</span>
+                    <a href="#" style="text-decoration: none; color: #FFFFFF;">즉시결제</a>
+                    <span style="color: #FFFFFF;">|</span>
+                    <a href="#" style="text-decoration: none; color: #FFFFFF;">한도확인</a>
                 </div>
             </div>
 
-            <div class="carousel-item" data-bs-interval="3000">
-                <img src="/img/hanaMain2.png" class="d-block w-100" alt="...">
+            <!-- Carousel items below -->
+            <div class="carousel-item active">
+                <img src="/img/mainPageImg.jpg" class="d-block w-100" alt="..." style="height: 470px;">
+            </div>
+            <div class="carousel-item">
+                <img src="..." class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="..." class="d-block w-100" alt="...">
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
-    </div>
-
-    <!-- 메뉴바 -->
-    <div class="menu-bar">
-
-        <!-- Trigger element -->
-        <a data-href="/card/mydataCard" class="menu-item">
-            <div class="menu-content">
-                <img src="/img/menu1.png" alt="하나원페이">
-                마이페이연동
-            </div>
-        </a>
-
-        <!-- Modal -->
-        <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <img src="/img/hanaLogo.png" alt="하나원페이 로고" style="margin-right: 10px; width: 45px; height: 45px;">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel"  style="font-weight: bold;">하나원페이</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- Your modal content here -->
-                        <h4 style="background-color: #00857E; color: #FFFFFF;">[하나원페이 약관동의서]</h4>
-
-<%--                        <img class="hanaCharacter" src="/img/myWallet.png">--%>
-                        <br>
-                        <h6>마이하나원페이는 통합 결제수단 관리에 특화된 마이데이터 서비스 입니다.</h6>
-                        <h6>지갑 연결 진행을 위해 약관에 동의해 주세요.</h6> <br>
-
-                        <div>
-
-                            <div class="accordion" id="accordionExample">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            ▪ 통합결제관리서비스 이용약관
-                                        </button>
-                                    </h2>
-                                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <h5><strong>1. 서비스 목적</strong></h5>
-                                            <p>
-                                                마이데이터 서비스는 사용자의 개인정보를 효과적으로 관리하며, 사용자의 명시적 동의하에 해당 정보를 제3자에게 제공하는 서비스입니다. 이를 통해 사용자에게 맞춤형 서비스 제공이 가능합니다.
-                                            </p>
-
-                                            <h5><strong>2. 수집하는 데이터 정보</strong></h5>
-                                            <ul>
-                                                <li>기본 정보: 이름, 주민등록번호, 전화번호, 이메일</li>
-                                                <li>서비스 이용 정보: 로그인 기록, 서비스 이용 기록</li>
-                                                <li>기타 추가 정보: 선호하는 상품, 이용한 서비스 내역 등</li>
-                                            </ul>
-
-                                            <h5><strong>3. 데이터 제3자 제공</strong></h5>
-                                            <p>
-                                                사용자의 명시적인 동의 하에만, 위에서 수집한 데이터는 제3자와 공유됩니다. 공유하는 목적은 주로 사용자에게 더 나은 서비스 제공과 관련됩니다.
-                                            </p>
-
-                                            <h5><strong>4. 동의 철회와 데이터 삭제</strong></h5>
-                                            <p>
-                                                사용자는 언제든지 동의 철회를 원할 경우, 마이페이지에서 해당 기능을 선택하실 수 있습니다. 동의 철회 시, 모든 개인 데이터는 즉시 삭제되며, 복구가 불가능합니다.
-                                            </p>
-
-                                            <h5><strong>5. 데이터 보관 기간 및 정책</strong></h5>
-                                            <p>
-                                                사용자의 데이터는 동의 후 최대 3년간 보관됩니다. 보관 기간 이후에는 자동으로 파기되며, 별도의 안내 없이 파기될 수 있습니다.
-                                            </p>
-
-                                            <h5><strong>6. 동의 거부 및 제한</strong></h5>
-                                            <p>
-                                                사용자는 본 동의서에 대해 동의 거부 권리가 있으며, 동의하지 않을 경우 마이데이터 서비스의 일부 또는 전체 이용에 제한이 있을 수 있습니다.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                            ▪ 통합결제관리서비스 설명서
-                                        </button>
-                                    </h2>
-                                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <h5><strong>1. 서비스 목적</strong></h5>
-                                            <p>
-                                                마이데이터 서비스는 사용자의 개인정보를 효과적으로 관리하며, 사용자의 명시적 동의하에 해당 정보를 제3자에게 제공하는 서비스입니다. 이를 통해 사용자에게 맞춤형 서비스 제공이 가능합니다.
-                                            </p>
-
-                                            <h5><strong>2. 수집하는 데이터 정보</strong></h5>
-                                            <ul>
-                                                <li>기본 정보: 이름, 주민등록번호, 전화번호, 이메일</li>
-                                                <li>서비스 이용 정보: 로그인 기록, 서비스 이용 기록</li>
-                                                <li>기타 추가 정보: 선호하는 상품, 이용한 서비스 내역 등</li>
-                                            </ul>
-
-                                            <h5><strong>3. 데이터 제3자 제공</strong></h5>
-                                            <p>
-                                                사용자의 명시적인 동의 하에만, 위에서 수집한 데이터는 제3자와 공유됩니다. 공유하는 목적은 주로 사용자에게 더 나은 서비스 제공과 관련됩니다.
-                                            </p>
-
-                                            <h5><strong>4. 동의 철회와 데이터 삭제</strong></h5>
-                                            <p>
-                                                사용자는 언제든지 동의 철회를 원할 경우, 마이페이지에서 해당 기능을 선택하실 수 있습니다. 동의 철회 시, 모든 개인 데이터는 즉시 삭제되며, 복구가 불가능합니다.
-                                            </p>
-
-                                            <h5><strong>5. 데이터 보관 기간 및 정책</strong></h5>
-                                            <p>
-                                                사용자의 데이터는 동의 후 최대 3년간 보관됩니다. 보관 기간 이후에는 자동으로 파기되며, 별도의 안내 없이 파기될 수 있습니다.
-                                            </p>
-
-                                            <h5><strong>6. 동의 거부 및 제한</strong></h5>
-                                            <p>
-                                                사용자는 본 동의서에 대해 동의 거부 권리가 있으며, 동의하지 않을 경우 마이데이터 서비스의 일부 또는 전체 이용에 제한이 있을 수 있습니다.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                            ▪ 개인(신용)정보 수집 이용 동의서
-                                        </button>
-                                    </h2>
-                                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                            ▪ 이벤트, 혜택정보 수신 동의
-                                        </button>
-                                    </h2>
-                                    <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-
-                                        </div>
-                                    </div>
-                                </div>
 
 
-                            </div>
-
-
-                        </div>
-
-
-                        <br>
-                        <small class="text-muted">본 동의서는 <span class="text-primary">하나카드</span>의 서비스 정책에 따라 변경될 수 있습니다.</small>
-
-<%--                        약간동의체크박스--%>
-                        <div class="outer-box">
-                            <label class="agree-all-label" for="agree_all">
-                                <input type="checkbox" name="agree_all" id="agree_all">
-                                <span>모두 동의합니다</span>
-                            </label>
-                            <div class="inner-box">
-                                <label for="agree">
-                                    <input type="checkbox" name="agree" value="1">
-                                    <span><strong>[필수]</strong> 통합결제관리서비스 이용약관</span>
-                                </label>
-                                <br>
-                                <label for="agree">
-                                    <input type="checkbox" name="agree" value="2">
-                                    <span><strong>[필수]</strong> 통합결제관리서비스 설명서</span>
-                                </label>
-                                <br>
-                                <label for="agree">
-                                    <input type="checkbox" name="agree" value="3">
-                                    <span><strong>[필수]</strong> 개인(신용)정보 수집 이용 동의서</span>
-                                </label>
-                                <br>
-                                <label for="agree">
-                                    <input type="checkbox" name="agree" value="4">
-                                    <span><strong>[선택]</strong> 이벤트, 혜택정보 수신 동의</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-
-                        <div class="modal-footer">
-                        <a href="/home">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                        </a>
-                        <button type="button" class="btn btn-agree confirm-go">동의</button>
-                    </div>
+        <div style="display: flex; justify-content: space-between; width: 100%;  height: 600px;padding-top: 100px; background-color: #f5f6f8;">
+            <!-- First div -->
+            <div style="background-color: #FFFFFF; width: 600px; height: 285px; margin-left: 11%; display: flex; flex-direction: column; align-items: start;">
+                <p style="margin-left: 6%; margin-top: 5%; margin-bottom: -5%;">추천하나카드</p>
+                <div style="display: flex; justify-content: space-between; width: 100%;">
+                    <img src="/img/travellogCard.gif" alt="Image 1"
+                         style="width: 147px; height: 93px; margin-left: 5%; margin-top: 8%;">
+                    <img src="/img/샵마이웨이.gif" alt="Image 2" style="width: 147px; height: 93px;margin-top: 8%;">
+                    <img src="/img/샵애니하나카드.gif" alt="Image 3"
+                         style="width: 147px; height: 93px; margin-right: 5%;margin-top: 8%;">
                 </div>
+            </div>
+
+            <!-- Second div -->
+            <div style="background-color: #FFFFFF; width: 600px; height: 285px; margin-right: 130px; display: flex; flex-direction: column; align-items: start;">
+                <p style="margin-left: 6%; margin-top: 5%; margin-bottom: -5%;">추천하나카드</p>
             </div>
         </div>
 
-        <a href="#" class="menu-item">
-            <div class="menu-content">
-                <img src="/img/menu2.png" alt="하나머니조회">
-                하나머니조회
+
+        <!-- 메뉴바 -->
+        <div class="menu-bar"
+             style="border-radius:0px; background-color:#FFFFFF; position: absolute; top: 10px; left: 10px; z-index: 2; margin-left: 10.5%; width:80%; margin-top: 28%;">
+
+            <!-- Trigger element -->
+            <a data-href="/card/mydataCard" class="menu-item">
+                <div class="menu-content">
+                    <img src="/img/menu1.png" alt="하나원페이">
+                    마이페이연동
+                </div>
+            </a>
+
+            <!-- Modal -->
+            <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <img src="/img/hanaLogo.png" alt="하나원페이 로고"
+                                 style="margin-right: 10px; width: 45px; height: 45px;">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-weight: bold;">하나원페이</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Your modal content here -->
+                            <h4 style="background-color: #00857E; color: #FFFFFF;">[하나원페이 약관동의서]</h4>
+
+                            <%--                        <img class="hanaCharacter" src="/img/myWallet.png">--%>
+                            <br>
+                            <h6>마이하나원페이는 통합 결제수단 관리에 특화된 마이데이터 서비스 입니다.</h6>
+                            <h6>지갑 연결 진행을 위해 약관에 동의해 주세요.</h6> <br>
+
+                            <div>
+
+                                <div class="accordion" id="accordionExample">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#collapseOne" aria-expanded="true"
+                                                    aria-controls="collapseOne">
+                                                ▪ 통합결제관리서비스 이용약관
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne" class="accordion-collapse collapse show"
+                                             data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                <h5><strong>1. 서비스 목적</strong></h5>
+                                                <p>
+                                                    마이데이터 서비스는 사용자의 개인정보를 효과적으로 관리하며, 사용자의 명시적 동의하에 해당 정보를 제3자에게 제공하는
+                                                    서비스입니다. 이를 통해 사용자에게 맞춤형 서비스 제공이 가능합니다.
+                                                </p>
+
+                                                <h5><strong>2. 수집하는 데이터 정보</strong></h5>
+                                                <ul>
+                                                    <li>기본 정보: 이름, 주민등록번호, 전화번호, 이메일</li>
+                                                    <li>서비스 이용 정보: 로그인 기록, 서비스 이용 기록</li>
+                                                    <li>기타 추가 정보: 선호하는 상품, 이용한 서비스 내역 등</li>
+                                                </ul>
+
+                                                <h5><strong>3. 데이터 제3자 제공</strong></h5>
+                                                <p>
+                                                    사용자의 명시적인 동의 하에만, 위에서 수집한 데이터는 제3자와 공유됩니다. 공유하는 목적은 주로 사용자에게 더 나은
+                                                    서비스
+                                                    제공과 관련됩니다.
+                                                </p>
+
+                                                <h5><strong>4. 동의 철회와 데이터 삭제</strong></h5>
+                                                <p>
+                                                    사용자는 언제든지 동의 철회를 원할 경우, 마이페이지에서 해당 기능을 선택하실 수 있습니다. 동의 철회 시, 모든 개인
+                                                    데이터는
+                                                    즉시 삭제되며, 복구가 불가능합니다.
+                                                </p>
+
+                                                <h5><strong>5. 데이터 보관 기간 및 정책</strong></h5>
+                                                <p>
+                                                    사용자의 데이터는 동의 후 최대 3년간 보관됩니다. 보관 기간 이후에는 자동으로 파기되며, 별도의 안내 없이 파기될 수
+                                                    있습니다.
+                                                </p>
+
+                                                <h5><strong>6. 동의 거부 및 제한</strong></h5>
+                                                <p>
+                                                    사용자는 본 동의서에 대해 동의 거부 권리가 있으며, 동의하지 않을 경우 마이데이터 서비스의 일부 또는 전체 이용에 제한이
+                                                    있을
+                                                    수 있습니다.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                                    aria-expanded="false" aria-controls="collapseTwo">
+                                                ▪ 통합결제관리서비스 설명서
+                                            </button>
+                                        </h2>
+                                        <div id="collapseTwo" class="accordion-collapse collapse"
+                                             data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                <h5><strong>1. 서비스 목적</strong></h5>
+                                                <p>
+                                                    마이데이터 서비스는 사용자의 개인정보를 효과적으로 관리하며, 사용자의 명시적 동의하에 해당 정보를 제3자에게 제공하는
+                                                    서비스입니다. 이를 통해 사용자에게 맞춤형 서비스 제공이 가능합니다.
+                                                </p>
+
+                                                <h5><strong>2. 수집하는 데이터 정보</strong></h5>
+                                                <ul>
+                                                    <li>기본 정보: 이름, 주민등록번호, 전화번호, 이메일</li>
+                                                    <li>서비스 이용 정보: 로그인 기록, 서비스 이용 기록</li>
+                                                    <li>기타 추가 정보: 선호하는 상품, 이용한 서비스 내역 등</li>
+                                                </ul>
+
+                                                <h5><strong>3. 데이터 제3자 제공</strong></h5>
+                                                <p>
+                                                    사용자의 명시적인 동의 하에만, 위에서 수집한 데이터는 제3자와 공유됩니다. 공유하는 목적은 주로 사용자에게 더 나은
+                                                    서비스
+                                                    제공과 관련됩니다.
+                                                </p>
+
+                                                <h5><strong>4. 동의 철회와 데이터 삭제</strong></h5>
+                                                <p>
+                                                    사용자는 언제든지 동의 철회를 원할 경우, 마이페이지에서 해당 기능을 선택하실 수 있습니다. 동의 철회 시, 모든 개인
+                                                    데이터는
+                                                    즉시 삭제되며, 복구가 불가능합니다.
+                                                </p>
+
+                                                <h5><strong>5. 데이터 보관 기간 및 정책</strong></h5>
+                                                <p>
+                                                    사용자의 데이터는 동의 후 최대 3년간 보관됩니다. 보관 기간 이후에는 자동으로 파기되며, 별도의 안내 없이 파기될 수
+                                                    있습니다.
+                                                </p>
+
+                                                <h5><strong>6. 동의 거부 및 제한</strong></h5>
+                                                <p>
+                                                    사용자는 본 동의서에 대해 동의 거부 권리가 있으며, 동의하지 않을 경우 마이데이터 서비스의 일부 또는 전체 이용에 제한이
+                                                    있을
+                                                    수 있습니다.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                                    aria-expanded="false" aria-controls="collapseTwo">
+                                                ▪ 개인(신용)정보 수집 이용 동의서
+                                            </button>
+                                        </h2>
+                                        <div id="collapseThree" class="accordion-collapse collapse"
+                                             data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                                    aria-expanded="false" aria-controls="collapseTwo">
+                                                ▪ 이벤트, 혜택정보 수신 동의
+                                            </button>
+                                        </h2>
+                                        <div id="collapseFour" class="accordion-collapse collapse"
+                                             data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+
+
+                            <br>
+                            <small class="text-muted">본 동의서는 <span class="text-primary">하나카드</span>의 서비스 정책에 따라 변경될 수
+                                있습니다.</small>
+
+                            <%--                        약간동의체크박스--%>
+                            <div class="outer-box">
+                                <label class="agree-all-label" for="agree_all">
+                                    <input type="checkbox" name="agree_all" id="agree_all">
+                                    <span>모두 동의합니다</span>
+                                </label>
+                                <div class="inner-box">
+                                    <label for="agree">
+                                        <input type="checkbox" name="agree" value="1">
+                                        <span><strong>[필수]</strong> 통합결제관리서비스 이용약관</span>
+                                    </label>
+                                    <br>
+                                    <label for="agree">
+                                        <input type="checkbox" name="agree" value="2">
+                                        <span><strong>[필수]</strong> 통합결제관리서비스 설명서</span>
+                                    </label>
+                                    <br>
+                                    <label for="agree">
+                                        <input type="checkbox" name="agree" value="3">
+                                        <span><strong>[필수]</strong> 개인(신용)정보 수집 이용 동의서</span>
+                                    </label>
+                                    <br>
+                                    <label for="agree">
+                                        <input type="checkbox" name="agree" value="4">
+                                        <span><strong>[선택]</strong> 이벤트, 혜택정보 수신 동의</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="modal-footer">
+                            <a href="/home">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                            </a>
+                            <button type="button" class="btn btn-agree confirm-go">동의</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </a>
-        <a href="/hanaOnePay/payManage" class="menu-item">
-            <div class="menu-content">
-                <img src="/img/menu3.png" alt="카드조회">
-                빠른결제
-            </div>
-        </a>
-        <a href="#" class="menu-item">
-            <div class="menu-content">
-                <img src="/img/menu4.png" alt="라이프">
-                라이프
-            </div>
-        </a>
+
+            <a href="#" class="menu-item">
+                <div class="menu-content">
+                    <img src="/img/menu2.png" alt="하나머니조회">
+                    하나머니조회
+                </div>
+            </a>
+            <a href="/hanaOnePay/payManage" class="menu-item">
+                <div class="menu-content">
+                    <img src="/img/menu3.png" alt="카드조회">
+                    빠른결제
+                </div>
+            </a>
+            <a href="#" class="menu-item">
+                <div class="menu-content">
+                    <img src="/img/menu4.png" alt="라이프">
+                    라이프
+                </div>
+            </a>
+        </div>
     </div>
+
 
     <!-- 혜택 디브
     <div class="card-container">
@@ -364,11 +488,6 @@
     -->
 
 
-
-
-
-
-
 </main>
 <!-- 푸터위치
 <%@ include file="/WEB-INF/views/comm/footer.jsp"%>
@@ -377,20 +496,22 @@
 <img src="/img/footer.png">
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function(){
+    document.addEventListener("DOMContentLoaded", function () {
         var modalTriggerElement = document.querySelector('.menu-item');
         var myModal = new bootstrap.Modal(document.getElementById('confirmModal'), {
             keyboard: false
         });
 
-        modalTriggerElement.addEventListener('click', function() {
+        modalTriggerElement.addEventListener('click', function () {
             myModal.show();
         });
 
-        document.querySelector('.confirm-go').addEventListener('click', function() {
+        document.querySelector('.confirm-go').addEventListener('click', function () {
             window.location.href = modalTriggerElement.getAttribute('data-href');
         });
     });
@@ -399,7 +520,7 @@
     const agreeChkAll = document.querySelector('input[name=agree_all]');
     agreeChkAll.addEventListener('change', (e) => {
         let agreeChk = document.querySelectorAll('input[name=agree]');
-        for(let i = 0; i < agreeChk.length; i++){
+        for (let i = 0; i < agreeChk.length; i++) {
             agreeChk[i].checked = e.target.checked;
         }
     });
