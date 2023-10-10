@@ -81,6 +81,22 @@
         where cu.identityNumber = #{identityNumber}
 
     </select>
+
+<!--    하나카드 거래내역 전체 조회-->
+    <select id="hanaTransactionsByCard" resultType="com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayTransDTO">
+        SELECT *
+        FROM hana_card_payment_log
+        WHERE cardNumber = #{cardNumber}
+    </select>
+
+<!--    하나계좌 거래내역 전체 조회-->
+    <select id="hanaTransactionsByAccount" resultType="com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayAccTransDTO">
+        SELECT *
+        FROM hana_acc_payment_log
+        WHERE accNumber = #{accNumber}
+        ORDER BY payDate DESC
+    </select>
+
     <!--    하나카드 이번달 거래내역 조회 -->
     <select id="getThisMonthTransData" resultType="com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayTransDTO">
         SELECT *

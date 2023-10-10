@@ -142,11 +142,11 @@
         }
 
         .anw {
-            display: flex; /* flex를 사용하여 아이템들을 가로로 나열합니다 */
+            /*display: flex; !* flex를 사용하여 아이템들을 가로로 나열합니다 *!*/
             align-items: center; /* 아이템들을 수직 중앙에 배치합니다 */
             overflow: hidden;
             font-size: 14px;
-            background-color: #F5F5F5;
+            background-color: #FFFFFF;
             padding: 30px 0;
             align-items: center; /* 아이템을 수직으로 중앙에 배치 */
             gap: 10px; /* 아이템 간의 간격 설정 (브라우저 지원 여부 확인 필요) */
@@ -360,6 +360,12 @@
             margin-top: 0px; /* 원하는 대로 상단 여백 조정 */
         }
 
+        .inner-flex {
+            display: flex;
+            align-items: center; /* 요소들을 세로 중앙으로 정렬 */
+            gap: 20px; /* div 간의 간격 */
+        }
+
 
 
 
@@ -450,18 +456,35 @@
 
     <%--간편결제 등록 카드 화면 조회--%>
     <div id="Accordion_wrap" class="AccAccordion">
-        <h2>간편결제 등록 카드 조회</h2>
+        <h2>간편결제 등록 계좌 조회</h2>
         <br>
         <a href="/hanaOnePay/selectHanaPayAccount" class="select-org">하나은행</a>
         <a href="/hanaOnePay/selectPayAccount" class="select-org">다른기관</a>
         <hr class="custom-line">
 
+        <div class="flex-container" style="display: flex; align-items: center;">
+            <img src="/img/bank/bankName=hana.png">
+            <h3 style="margin-left: 10px;">하나은행</h3>
+        </div>
+
         <c:forEach var="accountInfos" items="${accountInfos}">
-            <div class="anw " style="font-size: 16px">
-                    ${accountInfos.accName} (${accountInfos.accNickName})<br>
-                    계좌번호: ${accountInfos.accNumber}<br>
-                            ${accountInfos.accBalance}
+            <div class="hanaCardcontainer">
+                <div class="anw" style="font-size: 16px">
+                    <div class="inner-flex">
+                        <div>
+                            <h5>${accountInfos.accName} (${accountInfos.accNickName})</h5>
+                            <p class="account-number">계좌번호: ${accountInfos.accNumber}</p>
+                        </div>
+                        <div style="margin-left: 45%;">
+                            <p class="balance">잔액: ${accountInfos.accBalance}원</p>
+                            <a href="/hanaOnePay/selectAccountTransList?accNumber=${accountInfos.accNumber}">
+                                <button style="margin-top: 10px; color: white; background-color: rgb(102, 102, 102); border-radius: 5px; border: none; font-size: 20px; width: 100px;">조회</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
+
 
         </c:forEach>
     </div>
@@ -548,6 +571,40 @@
         crossorigin="anonymous"></script>
 
 <script>
+    document.querySelector("button").addEventListener("click", function() {
+        window.location.href = "/hanaOnePay/selectAccountTransList";
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // 잔액 포맷팅
+        const balances = document.querySelectorAll('.balance');
+        balances.forEach(balance => {
+            const amount = balance.innerText.match(/\d+/)[0]; // 숫자만 가져오기
+            const formattedAmount = numberWithCommas(amount);
+            balance.innerText = balance.innerText.replace(amount, formattedAmount);
+        });
+
+        // 계좌번호 포맷팅
+        const accountNumbers = document.querySelectorAll('.account-number');
+        accountNumbers.forEach(account => {
+            let number = account.innerText.match(/\d+-\d+-\d+/)[0]; // 숫자와 하이픈만 가져오기
+            let maskedNumber = maskAccountNumber(number);
+            account.innerText = account.innerText.replace(number, maskedNumber);
+        });
+    });
+
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    function maskAccountNumber(number) {
+        // 5번째부터 13자리까지 *로 대체
+        return number.slice(0, 4) + number.slice(4, 13).replace(/./g, '*') + number.slice(13);
+    }
+
+
+
+
     $(".que").click(function () {
         $(this).next(".anw").stop().slideToggle(300);
         $(this).toggleClass('on').siblings().removeClass('on');
@@ -575,7 +632,7 @@
         console.log(recipientPhoneNumber)
         const requestData = {
             recipientPhoneNumber: recipientPhoneNumber,
-            content: `[sms테스트] 인증번호 :` + randomSixDigitNumber, // 메시지 내용을 형식에 맞게 수정
+            content: `[하나원페이] 하나원페이 사용을 위해 인증번호` + randomSixDigitNumber + `를 입력하세요.`, // 메시지 내용을 형식에 맞게 수정
             randomNumber: randomSixDigitNumber
         };
 
@@ -646,10 +703,10 @@
                 }
 
                 // 요청이 성공적으로 처리되었을 때 수행할 작업
-                alert("인증이 성공적으로 완료되었습니다.");
+                alert("[하나원페이] 인증이 성공적으로 완료되었습니다.");
             } else {
                 // 요청이 실패했을 때 수행할 작업
-                alert("인증에 실패했습니다. 다시 시도해주세요.");
+                alert("[하나원페이] 인증에 실패했습니다. 다시 시도해주세요.");
             }
         };
     }

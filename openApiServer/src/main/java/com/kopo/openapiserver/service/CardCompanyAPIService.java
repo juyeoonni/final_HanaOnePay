@@ -167,4 +167,23 @@ public class CardCompanyAPIService {
         }
     }
 
+    public String fetchTransactionsByAccount(String cardCode, String accNumber) {
+        // 카드사 API에 요청을 보내고 응답을 처리하는 로직
+        URI uri = URI.create("http://localhost:8081/api/account-transactions"); // 실제 카드사 API URL을 설정해야 합니다.
+
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("cardCode", cardCode);
+        payload.put("accNumber", accNumber);
+
+        ResponseEntity<String> response = restTemplate.postForEntity(uri, payload, String.class);
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            logger.info("Received Transactions by Card Data: {}", response.getBody());
+            return response.getBody();
+        } else {
+            logger.error("Failed to fetch transactions by card. Status code: {}", response.getStatusCode());
+            return null;
+        }
+    }
+
 }

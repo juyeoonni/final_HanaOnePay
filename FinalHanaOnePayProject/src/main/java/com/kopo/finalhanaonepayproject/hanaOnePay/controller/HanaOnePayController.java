@@ -29,10 +29,10 @@ public class HanaOnePayController {
     @Autowired
     private HanaOnePayService hanaOnePayService;
     @Autowired
-    private  OpenAPIService openAPIService;
+    private OpenAPIService openAPIService;
     private ShopService shopService;
 
-    @PostMapping ("/hanaOnePay/payCardList")
+    @PostMapping("/hanaOnePay/payCardList")
     public String payCardList(HttpServletRequest request) {
         String selectedCards = request.getParameter("selectedCards");
 
@@ -215,17 +215,31 @@ public class HanaOnePayController {
         return "hanaOnePay/payReport";
     }
 
-
-
+    // 타사카드거래내역
     @GetMapping("/hanaOnePay/selectCardTransList")
     public ModelAndView selectCardTransList(
             @RequestParam(value = "cardCode", required = false) String cardCode,
             @RequestParam(value = "cardNumber", required = false) String cardNumber,
-            @RequestParam(value = "cardName", required = false) String cardName) { // 여기에 cardName을 추가
+            @RequestParam(value = "cardName", required = false) String cardName) {
+
         ModelAndView modelAndView = new ModelAndView();
 
         try {
-            if (cardCode != null && cardNumber != null) {
+            if (cardCode == null) {
+                System.out.println("null");
+            } else {
+                System.out.println("null 아님");
+            }
+            if (cardNumber == null) {
+                System.out.println("null");
+            } else {
+                System.out.println("null 아님");
+            }
+            System.out.println("cardCode: " + cardCode);
+            System.out.println("cardNumber: " + cardNumber);
+            System.out.println("cardNam: " + cardName);
+
+            if (cardCode.length() != 0 && cardNumber.length() != 0) {
                 // 특정 카드의 거래내역 조회 서비스 호출
                 List<HanaOnePayTransDTO> transactions = openAPIService.fetchTransactionsByCard(cardCode, cardNumber);
                 List<HanaOnePayCardDTO> allCards = hanaOnePayService.getAllCards();
@@ -236,14 +250,105 @@ public class HanaOnePayController {
 
                 modelAndView.setViewName("hanaOnePay/selectCardTransList");
             } else {
-                // 예외 처리 or 다른 로직
+                System.out.println("else문 들어옴");
+                try {
+                    if ("6894-3339-3359-1029".equals(cardNumber) || "1903-3930-5959-1233".equals(cardNumber)) {
+                        System.out.println("if문 들어옴");
+                        // 자은행 계좌 거래내역 조회 로직 호출
+                        List<HanaOnePayTransDTO> transactions = hanaOnePayService.hanaTransactionsByCard(cardNumber);
+                        System.out.println("transaction.size(): " + transactions.size());
+                        List<HanaOnePayhanaCardDTO> allHanaCards = hanaOnePayService.getMainHanaCardByIdentity("980602-2000000");
+                        for (HanaOnePayTransDTO transaction : transactions) {
+                            System.out.println("transaction: " + transaction);
+                            modelAndView.addObject("selectedCardName", cardName);
+                            modelAndView.addObject("selectedCardNumber", cardNumber);
+                        }
+
+                        modelAndView.addObject("transactions", transactions);
+                        modelAndView.addObject("allHanaCards", allHanaCards);
+                        modelAndView.setViewName("hanaOnePay/selectHanaCardTransList");
+                    }// 여기서 else 구문을 닫아줘야 합니다
+                    else {
+                        System.out.println("else문 들어옴");
+                    }
+                } catch (Exception e) {
+                    System.out.println("else문 안의 catch문 들어옴");
+                    e.printStackTrace();
+                }
             }
             System.out.println("거래내역 조회 성공!");
         } catch (Exception e) {
+            System.out.println("오류");
             // 예외 처리 로직
             e.printStackTrace();
         }
+        return modelAndView;
+    }
 
+    //  계좌 거래내역
+    @GetMapping("/hanaOnePay/selectAccountTransList")
+    public ModelAndView selectAccountTransList(
+            @RequestParam(value = "accNumber", required = false) String accNumber)
+            {
+        ModelAndView modelAndView = new ModelAndView();
+
+        try {
+            if (accNumber == null) {
+                System.out.println("null");
+            } else {
+                System.out.println("null 아님");
+            }
+            System.out.println("accNumber: " + accNumber);
+            String bankCode = "";
+            if(accNumber.contains("1002")){
+                bankCode = "woori";
+            }else if(accNumber.contains("110")){
+                bankCode = "shinhan";
+            } else if (accNumber.contains("04")) {
+                bankCode = "kb";
+            }
+            System.out.println("bankCode: " + bankCode);
+            //타은행
+            if (!bankCode.equals("")) {
+                // 특정 카드의 거래내역 조회 서비스 호출
+                List<HanaOnePayAccTransDTO> transactions = openAPIService.fetchTransactionsByAccount(bankCode, accNumber);
+                modelAndView.addObject("transactions", transactions);
+                modelAndView.addObject("selectedCardNumber", accNumber);
+
+                modelAndView.setViewName("hanaOnePay/selectAccountTransList");
+                //하나은행
+            } else {
+                System.out.println("else문 들어옴");
+                try {
+                    if ("412-910717533-07".equals(accNumber) || "321-977345113-07".equals(accNumber)) {
+                        System.out.println("if문 들어옴");
+                        // 자은행 계좌 거래내역 조회 로직 호출
+                        List<HanaOnePayAccTransDTO> transactions = hanaOnePayService.hanaTransactionsByAccount(accNumber);
+                        System.out.println("transaction.size(): " + transactions.size());
+                        for (HanaOnePayAccTransDTO transaction : transactions) {
+                            System.out.println("transaction: " + transaction);
+
+                        }
+                        //모델에 담아놓고 왜 js로 가?
+                        //바로 jsp로 갈 수 있잖아
+
+                        modelAndView.addObject("transactions", transactions);
+                        modelAndView.setViewName("hanaOnePay/selectAccountTransList");
+                    }// 여기서 else 구문을 닫아줘야 합니다
+                    else {
+                        System.out.println("else문 들어옴");
+                    }
+                } catch (Exception e) {
+                    System.out.println("else문 안의 catch문 들어옴");
+                    e.printStackTrace();
+                }
+            }
+            System.out.println("거래내역 조회 성공!");
+        } catch (Exception e) {
+            System.out.println("오류");
+            // 예외 처리 로직
+            e.printStackTrace();
+        }
         return modelAndView;
     }
 
@@ -276,7 +381,7 @@ public class HanaOnePayController {
 
     @GetMapping("/hanaOnePay/payRequestSuccessPC")
     public String payRequestSuccessPC(Model model) {
-        
+
         // 현재 시간을 가져옵니다.
         String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 

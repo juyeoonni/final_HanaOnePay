@@ -170,5 +170,13 @@
         )
     </update>
 
+<!--    카드사별 계좌 거래내역 조회-->
+    <select id="selectTransactionsByAccount" resultType="com.kopo.cardserver.model.DTO.HanaOnePayAccTransDTO">
+        select *
+        from ${cardCode}_acc_payment_log
+        where accNumber = #{accNumber}
+    </select>
+
+
 </mapper>
 

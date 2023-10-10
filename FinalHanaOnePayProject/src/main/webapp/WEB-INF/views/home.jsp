@@ -73,11 +73,12 @@
             <div class="carousel-item active" data-bs-interval="3000">
                 <div class="flex-card-container">
                     <div class="mainOnePay">
-                        <div class="mainText animate__animated animate__fadeInUp">
+                        <div class="mainText animate__animated animate__fadeInUp" style="font-size: 36px;">
                             하나로 연결된 </br>
                             모두의 원페이
                         </div>
-                        <div class="subText animate__animated animate__fadeInUp">
+
+                        <div class="subText animate__animated animate__fadeInUp" style="margin-top: 30px">
                             한번의 카드 등록으로
                             편리하게 즐기는 모두의 결제 생활!
                         </div>

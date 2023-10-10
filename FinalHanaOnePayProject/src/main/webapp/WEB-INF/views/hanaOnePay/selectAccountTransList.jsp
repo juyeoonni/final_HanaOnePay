@@ -512,8 +512,8 @@
 
     <div class="mypageMain">
         <div class="mypageName">
-            <div style="font-size: 30px">내 카드 조회</div>
-            <div style="color: #959595">나만의 카드 생활</div>
+            <div style="font-size: 30px">내 계좌 조회</div>
+            <div style="color: #959595">나만의 거래 생활</div>
         </div>
         <br>
 
@@ -527,7 +527,7 @@
                 <%--               [본인] ${selectedCardNumber.substring(0, 5)} **** - **** ${selectedCardNumber.substring(selectedCardNumber.length() - 5)}--%>
             </div>
             <button type="button" class="changeCardBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                카드변경
+                계좌변경
             </button>
             <!-- 모달 시작 -->
             <!-- Modal -->
@@ -542,7 +542,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            ■ 변경할 카드를 선택하세요.
+                            ■ 변경할 계좌를 선택하세요.
                             <hr>
                             <c:forEach items="${allCards}" var="card">
                                 <c:if test="${card.cardName ne selectedCardName}">
@@ -615,7 +615,7 @@
                 <thead>
                 <tr>
                     <th>거래 ID</th>
-                    <th>카드 번호</th>
+                    <th>계좌 번호</th>
                     <th>결제 날짜</th>
                     <th>결제 금액</th>
                     <th>사업 코드</th>
@@ -625,9 +625,21 @@
                 </tr>
                 </thead>
                 <tbody>
-
+                <c:forEach items="${transactions}" var="transactionDTO">
+                    <tr>
+                        <td>${transactionDTO.payId}</td>
+                        <td>${transactionDTO.accNumber}</td>
+                        <td>${transactionDTO.payDate}</td>
+                        <td>${transactionDTO.payAmount}</td>
+                        <td>${transactionDTO.businessCode}</td>
+                        <td>${transactionDTO.businessMall}</td>
+                        <td>${transactionDTO.payStatus}</td>
+                        <td>${transactionDTO.payType}</td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
+
         </div>
 
     </div>
@@ -640,7 +652,25 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
-
+<script>
+    $(document).ready(function() {
+        $('#transactionTable').DataTable({
+            "pageLength": 10, // 한 페이지에 표시할 행의 수 설정
+            "lengthChange": false, // 사용자가 페이지네이션 크기를 변경할 수 있는지 여부
+            "info": true, // 현재 페이지 및 전체 페이지 수 표시 여부
+            "pagingType": "full_numbers", // 페이지네이션 스타일 설정
+            "language": {
+                "paginate": {
+                    "first": "처음",
+                    "last": "마지막",
+                    "next": "다음",
+                    "previous": "이전"
+                },
+                "info": "전체 _TOTAL_ 건 중 _START_에서 _END_까지 표시 중"
+            }
+        });
+    });
+</script>
 <script>
 
     window.onload = function () {
@@ -678,17 +708,14 @@
 
     }
 
-    var cardNames = ['${card1.cardName}', '${card2.cardName}'];
-    console.log('${card1.cardName}', '${card2.cardName}');
-    console.log(cardNames);
-    console.log("aewf")
-    var cardImages = ['/img/${card1.cardName}.png', '/img/${card2.cardName}.png'];
-    var cardAmounts = ['${thisMonthTotalAmounts[card1.cardNumber]}원', '${thisMonthTotalAmounts[card2.cardNumber]}원'];
-    var thisMonthTransData = {
-        '${card1.cardNumber}': '${thisMonthTransData[card1.cardNumber]}',
-        '${card2.cardNumber}': '${thisMonthTransData[card2.cardNumber]}'
-    };
-    console.log(thisMonthTransData);
+    <%--var cardNames = ['${card1.accNumber}', '${card2.accNumber}'];--%>
+    <%--var cardImages = ['/img/${card1.accNumber}.png', '/img/${card2.accNumber}.png'];--%>
+    <%--var cardAmounts = ['${thisMonthTotalAmounts[card1.accNumber]}원', '${thisMonthTotalAmounts[card2.accNumber]}원'];--%>
+    <%--var thisMonthTransData = {--%>
+    <%--    '${card1.accNumber}': '${thisMonthTransData[card1.accNumber]}',--%>
+    <%--    '${card2.accNumber}': '${thisMonthTransData[card2.accNumber]}'--%>
+    <%--};--%>
+    <%--console.log(thisMonthTransData);--%>
 
 
     function numberWithCommas(x) {
@@ -701,14 +728,14 @@
     }
 
     function parseTransList(transListString) {
-        var regex = /\(payId=(\d+), cardNumber=([\d\-]+), payDate=([\d\- :]+), payAmount=(\d+), businessCode=(\d+), businessMall=([^,]+), payStatus=([^,]+), payType=([^\)]+)\)/g;
+        var regex = /\(payId=(\d+), accNumber=([\d\-]+), payDate=([\d\- :]+), payAmount=(\d+), businessCode=(\d+), businessMall=([^,]+), payStatus=([^,]+), payType=([^\)]+)\)/g;
         var result = [];
         var match;
 
         while (match = regex.exec(transListString)) {
             result.push({
                 payId: parseInt(match[1]),
-                cardNumber: match[2],
+                accNumber: match[2],
                 payDate: match[3],
                 payAmount: parseInt(match[4]),
                 businessCode: parseInt(match[5]),
@@ -721,7 +748,7 @@
         return result;
     }
 
-    function showTransData(cardNumber) {
+    function showTransData(accNumber) {
         // tbody 참조
         var tbody = document.querySelector('.recentCardUse tbody');
 
@@ -729,7 +756,7 @@
         tbody.innerHTML = '';
 
         // cardTransData에서 해당 카드번호의 거래내역 문자열을 가져옵니다.
-        var transListString = thisMonthTransData[cardNumber];
+        var transListString = thisMonthTransData[accNumber];
 
         // 문자열을 파싱하여 JSON 형식의 객체 배열로 변환
         var transList = parseTransList(transListString);
@@ -753,7 +780,7 @@
             // 각 cell에 데이터 할당
             cell1.textContent = trans.payDate;
             cell2.textContent = trans.businessMall;
-            cell3.textContent = trans.cardNumber;
+            cell3.textContent = trans.accNumber;
             cell4.textContent = trans.payStatus;
             cell5.textContent = numberWithCommas(trans.payAmount) + "원";
 
@@ -800,9 +827,24 @@
     // }
 
     var rawData = '${transactions}';
+    // Step 1: rawData를 개별 객체 문자열로 분리
+    var objects = rawData.match(/HanaOnePayAccTransDTO\([^)]+\)/g);
+
+    var jsonArray = objects.map(function(obj) {
+        // Step 2: key-value 쌍으로 분리 및 JSON 형식으로 변환
+        var jsonStr = obj.replace(/HanaOnePayAccTransDTO\(/, '{').replace(/\)$/, '}')
+            .replace(/([a-zA-Z0-9]+)=/g, '"$1": ')
+            .replace(/: (\d+)/g, ': "$1"') // 숫자는 따옴표로 감쌈
+            .replace(/=("[^"]+")/g, ': $1') // 따옴표 안의 문자열
+            .replace(/=([^,]+)/g, ': "$1"'); // 나머지는 따옴표로 감쌈
+        return JSON.parse(jsonStr);
+    });
+
+    console.log('1',jsonArray); // 변환된 JSON 배열
+
 
     // rawData 정제하기
-    var cleanedData = rawData.replace(/HanaOnePayTransDTO/g, "")
+    var cleanedData = rawData.replace(/HanaOnePayAccTransDTO/g, "")
         .replace(/\(/g, "{")
         .replace(/\)/g, "}")
         .replace(/=/g, ":\"")
@@ -832,7 +874,7 @@
         data: transactions,
         columns: [
             {data: 'payId'},
-            {data: 'cardNumber'},
+            {data: 'accNumber'},
             {data: 'payDate'},
             {data: 'payAmount'},
             {data: 'businessCode'},

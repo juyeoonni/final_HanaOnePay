@@ -326,6 +326,10 @@ public class CardService {
         return cardDAO.selectTransactionsByCard(cardCode, cardNumber);
     }
 
+    public List<HanaOnePayAccTransDTO> selectTransactionsByAccount(String cardCode, String accNumber) {
+        return cardDAO.selectTransactionsByAccount(cardCode, accNumber);
+    }
+
     // 각 은행의 신용카드 리스트를 가져오는 메서드
     public List<CreditCardDTO> getCreditCardsByBank(String bankCode) {
         String tableCode = determineTableCode(bankCode);

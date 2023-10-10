@@ -1,5 +1,6 @@
 package com.kopo.finalhanaonepayproject.api.service;
 
+import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayAccTransDTO;
 import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayTransDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -197,6 +198,35 @@ public class OpenAPIService {
                 HttpMethod.POST,
                 requestEntity,
                 new ParameterizedTypeReference<List<HanaOnePayTransDTO>>() {});
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            logger.info("Received Transactions Response: {}", response.getBody());
+            return response.getBody();
+        } else {
+            logger.error("Failed to fetch transactions. Status code: {}", response.getStatusCode());
+            return Collections.emptyList();
+        }
+    }
+
+    // 특정 계좌의 거래내역 조회 서비스
+    public List<HanaOnePayAccTransDTO> fetchTransactionsByAccount(String cardCode, String accNumber) {
+        System.out.println("특정 계좌의 거래내역 조회 서비스 요청 시작");
+
+        // URL 설정
+        String url = "http://localhost:8082/api/account-transactions";
+
+        // POST 요청에 보낼 데이터 설정
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("cardCode", cardCode);
+        payload.put("accNumber", accNumber);
+
+        HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(payload);
+
+        ResponseEntity<List<HanaOnePayAccTransDTO>> response = restTemplate.exchange(
+                url,
+                HttpMethod.POST,
+                requestEntity,
+                new ParameterizedTypeReference<List<HanaOnePayAccTransDTO>>() {});
 
         if (response.getStatusCode().is2xxSuccessful()) {
             logger.info("Received Transactions Response: {}", response.getBody());

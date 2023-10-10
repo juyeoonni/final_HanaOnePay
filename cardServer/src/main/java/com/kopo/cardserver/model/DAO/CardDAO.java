@@ -67,7 +67,11 @@ public interface CardDAO {
 
     List<MonthTransDTO> getAllOrgTranDatabyMonth();
 
+    // 카드사별 거래내역 조회
     List<HanaOnePayTransDTO> selectTransactionsByCard(String cardCode, String cardNumber);
+
+    // 은행사별 거래내역 조회
+    List<HanaOnePayAccTransDTO> selectTransactionsByAccount(String cardCode, String accNumber);
 
     // 각 은행의 신용카드 리스트를 가져오는 메서드
     List<CreditCardDTO> getCustomerCreditCards(String tableCode);

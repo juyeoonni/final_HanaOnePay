@@ -527,7 +527,13 @@
                     // "조회" 버튼 추가
                     const checkButton = document.createElement('button');
                     checkButton.textContent = "조회";
-                    checkButton.style.marginTop = "10px"; // 버튼 위치 조절을 위한 마진 추가
+                    checkButton.style.marginTop = "10px";
+
+                    // 버튼 클릭시 연결될 URL 설정
+                    checkButton.addEventListener("click", function() {
+                        const accNumber = account.accNumber;
+                        window.location.href = "/hanaOnePay/selectAccountTransList?accNumber=" + accNumber;
+                    });
 
                     // 스타일 적용
                     checkButton.style.color = "white";

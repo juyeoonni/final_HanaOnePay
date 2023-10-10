@@ -174,6 +174,28 @@ public class CardInfoController {
         }
     }
 
+    @PostMapping("/api/account-transactions")
+    public ResponseEntity<String> fetchTransactionsByAccount(@RequestBody Map<String, Object> payload) {
+        try {
+            String cardCode = (String) payload.get("cardCode");
+            String accNumber = (String) payload.get("accNumber");
+
+            System.out.println("카드사별 계좌거래내역조회 컨트롤러 들어옴");
+            String transactionsData = cardCompanyAPIService.fetchTransactionsByAccount(cardCode, accNumber);
+
+            if (transactionsData != null) {
+                return new ResponseEntity<>(transactionsData, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("No Transactions Found", HttpStatus.NOT_FOUND);
+            }
+
+        } catch (Exception e) {
+            logger.error("Failed to fetch transactions by card", e);
+            return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 
 
 }

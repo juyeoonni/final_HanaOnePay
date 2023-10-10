@@ -97,6 +97,22 @@ public class CardInfoController {
         return new ResponseEntity<>(transactions, HttpStatus.OK);
     }
 
+    @PostMapping("/account-transactions")
+    public ResponseEntity<List<HanaOnePayAccTransDTO>> selectTransactionsByAccount(@RequestBody Map<String, String> payload) {
+        System.out.println("카드사 서버 계좌내역 컨트롤러 들어옴");
+
+        String cardCode = payload.get("cardCode");
+        String accNumber = payload.get("accNumber");
+
+        List<HanaOnePayAccTransDTO> transactions = cardService.selectTransactionsByAccount(cardCode, accNumber);
+
+        if (transactions.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(transactions, HttpStatus.OK);
+    }
+
 }
 
 

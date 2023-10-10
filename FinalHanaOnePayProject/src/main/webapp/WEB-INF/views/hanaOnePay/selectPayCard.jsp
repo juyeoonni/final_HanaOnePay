@@ -123,7 +123,7 @@
             position: relative;
             padding: 17px 0;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 14px ;
             border-bottom: 1px solid #dddddd;
 
         }
@@ -289,6 +289,18 @@
             border-radius: 5px;
             border: none;
             font-size: 17px;
+        }
+
+        .show-card-trans-btn{
+            margin-left: 50px;
+            color: white;
+            background-color:#666666 ;
+            border-radius: 5px;
+            border: none;
+            font-size: 17px;
+            text-decoration: none;
+            width: 80px;
+            text-align: center;
         }
 
         .show-card-benefit {
@@ -459,11 +471,12 @@
         <c:forEach items="${allCards}" var="card">
 
             <div class="que">
+                <img src="/img/bank/bankName=${card.cardCode}.png" alt="">
                  <span class="cardCode">
             <c:choose>
-                <c:when test="${card.cardCode == 'shinhan'}">신한</c:when>
-                <c:when test="${card.cardCode == 'KB'}">KB국민</c:when>
-                <c:when test="${card.cardCode == 'woori'}">우리</c:when>
+                <c:when test="${card.cardCode == 'shinhan'}">신한카드</c:when>
+                <c:when test="${card.cardCode == 'KB'}">KB국민카드</c:when>
+                <c:when test="${card.cardCode == 'woori'}">우리카드</c:when>
                 <c:otherwise>${card.cardCode}</c:otherwise>
             </c:choose>
         </span>
@@ -489,7 +502,7 @@
                 <button class="show-card-number-btn">
                     카드번호 보기
                 </button>
-                <a class="show-card-number-btn" href="/hanaOnePay/selectCardTransList?cardCode=${card.cardCode}&cardNumber=${card.cardNumber}&cardName=${card.cardName}">내역조회</a>
+                <a class="show-card-trans-btn" href="/hanaOnePay/selectCardTransList?cardCode=${card.cardCode}&cardNumber=${card.cardNumber}&cardName=${card.cardName}">내역조회</a>
 
 
 
@@ -497,9 +510,9 @@
             </div>
         </c:forEach>
 
-        <button class="addPayCard" >
-            <a href="/hanaOnePay/addPayCard">페이카드 등록</a>
-        </button>
+<%--        <button class="addPayCard" >--%>
+<%--            <a href="/hanaOnePay/addPayCard">페이카드 등록</a>--%>
+<%--        </button>--%>
 
     </div>
 
@@ -611,7 +624,7 @@
         console.log(recipientPhoneNumber)
         const requestData = {
             recipientPhoneNumber: recipientPhoneNumber,
-            content: `[sms테스트] 인증번호 :` + randomSixDigitNumber, // 메시지 내용을 형식에 맞게 수정
+            content: `[하나원페이] 하나원페이 사용을 위해 인증번호` + randomSixDigitNumber + `를 입력하세요.`, // 메시지 내용을 형식에 맞게 수정
             randomNumber: randomSixDigitNumber
         };
 
@@ -682,10 +695,10 @@
                 }
 
                 // 요청이 성공적으로 처리되었을 때 수행할 작업
-                alert("인증이 성공적으로 완료되었습니다.");
+                alert("[하나원페이] 인증이 성공적으로 완료되었습니다.");
             } else {
                 // 요청이 실패했을 때 수행할 작업
-                alert("인증에 실패했습니다. 다시 시도해주세요.");
+                alert("[하나원페이] 인증에 실패했습니다. 다시 시도해주세요.");
             }
         };
     }

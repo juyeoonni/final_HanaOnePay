@@ -32,6 +32,11 @@ public interface HanaOnePayDAO {
 
     List<HanaOnePayCardDTO> getAllCards();
 
+    //하나카드 거래내역 조회
+    List<HanaOnePayTransDTO> hanaTransactionsByCard(String cardNumber);
+
+    // 하나계좌 거래내역 조회
+    List<HanaOnePayAccTransDTO> hanaTransactionsByAccount(String accNumber);
 
     // 이번달 하나카드 거래내역 조회
     List<HanaOnePayTransDTO> getThisMonthTransData(String cardNumber);

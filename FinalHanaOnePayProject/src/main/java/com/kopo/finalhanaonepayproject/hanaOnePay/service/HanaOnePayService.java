@@ -29,6 +29,16 @@ public class HanaOnePayService {
         return hanaOnePayDAO.getHanaCardDetailsByIdentity(identityNumber);
     }
 
+    // 하나카드 거래내역 조회
+    public List<HanaOnePayTransDTO> hanaTransactionsByCard(String cardNumber) {
+        return hanaOnePayDAO.hanaTransactionsByCard(cardNumber);
+    }
+
+    // 하나계좌 거래내역 조회
+    public List<HanaOnePayAccTransDTO> hanaTransactionsByAccount(String accNumber){
+        return  hanaOnePayDAO.hanaTransactionsByAccount(accNumber);
+    }
+
     // 대표 하나카드 조회
     public List<HanaOnePayhanaCardDTO> getMainHanaCardByIdentity(String identityNumber) {
         return hanaOnePayDAO.getMainHanaCardByIdentity(identityNumber);

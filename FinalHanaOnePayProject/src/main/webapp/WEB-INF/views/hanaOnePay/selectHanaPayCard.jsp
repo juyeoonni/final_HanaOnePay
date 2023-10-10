@@ -293,6 +293,18 @@
             font-size: 17px;
         }
 
+        .show-card-trans-btn{
+            margin-left: 50px;
+            color: white;
+            background-color:#666666 ;
+            border-radius: 5px;
+            border: none;
+            font-size: 17px;
+            text-decoration: none;
+            width: 80px;
+            text-align: center;
+        }
+
         .show-card-benefit {
             margin-left: 50px;
             color: white;
@@ -456,15 +468,27 @@
         <a href="/hanaOnePay/selectPayCard" class="select-org">다른기관</a>
         <hr class="custom-line">
 
+        <img src="/img/bank/bankName=hana.png" alt="">
+        <span class="cardCode">하나카드</span><br><br>
+
         <c:forEach var="cardInfo" items="${cardInfos}">
             <div class="anw " style="font-size: 16px">
                 <img src="/img/${cardInfo.cardName}.png" class="d-block payCardImg" alt="${cardInfo.cardName}">
-                    ${cardInfo.cardName}<br>
-                [본인] ${cardInfo.cardNumber}<br>
+                <div class="cardInfo">
+                <span>${cardInfo.cardName}</span>
+
+                <span class="hidden-card-number">
+                         [본인] ${cardInfo.cardNumber.substring(0, 5)} **** - **** ${cardInfo.cardNumber.substring(cardInfo.cardNumber.length() - 5)}
+                    </span>
+                <span class="card-number-field" style="display: none">
+                        [본인] ${cardInfo.cardNumber}
+                    </span>
+                </div>
+
                 <button class="show-card-number-btn">
                     카드번호 보기
                 </button>
-                <a class="show-card-number-btn" href="/hanaOnePay/selectCardTransList?cardCode=${card.cardCode}&cardNumber=${card.cardNumber}&cardName=${card.cardName}">내역조회</a>
+                <a class="show-card-trans-btn" href="/hanaOnePay/selectCardTransList?cardCode=${cardInfo.cardCode}&cardNumber=${cardInfo.cardNumber}&cardName=${cardInfo.cardName}">내역조회</a>
             </div>
 
         </c:forEach>
@@ -579,7 +603,7 @@
         console.log(recipientPhoneNumber)
         const requestData = {
             recipientPhoneNumber: recipientPhoneNumber,
-            content: `[sms테스트] 인증번호 :` + randomSixDigitNumber, // 메시지 내용을 형식에 맞게 수정
+            content: `[하나원페이] 하나원페이 사용을 위해 인증번호` + randomSixDigitNumber + `를 입력하세요.`, // 메시지 내용을 형식에 맞게 수정
             randomNumber: randomSixDigitNumber
         };
 
@@ -650,10 +674,10 @@
                 }
 
                 // 요청이 성공적으로 처리되었을 때 수행할 작업
-                alert("인증이 성공적으로 완료되었습니다.");
+                alert("[하나원페이] 인증이 성공적으로 완료되었습니다.");
             } else {
                 // 요청이 실패했을 때 수행할 작업
-                alert("인증에 실패했습니다. 다시 시도해주세요.");
+                alert("[하나원페이] 인증에 실패했습니다. 다시 시도해주세요.");
             }
         };
     }
@@ -675,6 +699,7 @@
             agreeChk[i].checked = e.target.checked;
         }
     });
+
 
 </script>
 
