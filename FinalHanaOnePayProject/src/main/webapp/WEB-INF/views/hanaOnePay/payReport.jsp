@@ -207,7 +207,7 @@
             align-items: center;
             border: #BCD9D3 5px solid;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            margin-top: 70px;
+            margin-top: -20px;
             padding: 20px;
             border-radius: 15px;
             width: 90%;
@@ -271,7 +271,7 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             border-radius: 20px;
             text-align: center; /* 텍스트 중앙 정렬 */
-            margin-top: 100px;
+            margin-top: 1px;
         }
 
         .businessCode {
@@ -507,9 +507,7 @@
                 나만의 소비 유형을 확인해보세요!<br>
                 <button class="plusBtn" onclick="goToTest()">소비성향 테스트 GO!</button>
             </div>
-            <div class="testdiv">
 
-            </div>
         </div>
 
 

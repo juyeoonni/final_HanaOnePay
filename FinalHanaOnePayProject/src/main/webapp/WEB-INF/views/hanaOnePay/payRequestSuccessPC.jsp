@@ -894,6 +894,7 @@
                 <button type="button" class="btn bill" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     영수증 확인
                 </button>
+                <br><br><br><br><br><br><br><br><br>
             </div>
 
 
@@ -944,8 +945,8 @@
         </main>
     </body>
     <!-- 푸터위치 -->
-    <%@ include file="/WEB-INF/views/comm/footer.jsp" %>
-
+<%--    <%@ include file="/WEB-INF/views/comm/footer.jsp" %>--%>
+    <img src="/img/footer.png" style="margin-left: -10px;">
 
     <script>
         // input 요소에 값을 입력할 때 호출되는 함수

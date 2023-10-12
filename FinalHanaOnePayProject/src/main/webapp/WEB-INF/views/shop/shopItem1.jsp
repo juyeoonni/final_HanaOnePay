@@ -367,10 +367,7 @@
     </section>
 
 
-    <!-- Footer-->
-    <footer class="py-5 bg-dark">
-        <div class="container"><p class="m-0 text-center text-white">Copyright © Your Website 2023</p></div>
-    </footer>
+
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
@@ -383,7 +380,7 @@
 </main>
 
 <!-- 푸터위치 -->
-<%@ include file="/WEB-INF/views/comm/footer.jsp" %>
+<img src="/img/footer.png" style="margin-left: 8.8%;">
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> <!-- 여기에서 slim.min.js를 min.js로 변경하였습니다. -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"

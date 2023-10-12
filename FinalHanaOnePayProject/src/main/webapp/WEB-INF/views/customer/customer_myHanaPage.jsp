@@ -596,13 +596,15 @@
             </div>
         </div>
 
-
+<br><br><br><br><br>
     </div>
 </div>
 
 </div>
 
-<%@ include file="/WEB-INF/views/comm/footer.jsp" %>
+<%--<%@ include file="/WEB-INF/views/comm/footer.jsp" %>--%>
+<img src="/img/footer.png" style="margin-left: 9%;">
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>

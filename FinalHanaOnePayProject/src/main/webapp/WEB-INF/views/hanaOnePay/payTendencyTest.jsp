@@ -489,6 +489,7 @@
                         <button class="unique_choice" onclick="selectAnswer(5, 'A')">A. 나만의 시간 혹은 친구들과의 시간</button>
                         <button class="unique_choice" onclick="selectAnswer(5, 'B')">B. 가족과 보내는 시간</button>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"id="resultButton" style="display:none" onclick="showResult()">결과보기</button>
+                        <br>
                     </div>
                 </div>
             </div>

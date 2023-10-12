@@ -897,9 +897,9 @@
                             </li>
                             <li class="list-group-item d-flex justify-content-between" style="color: #00857E">
                                 <span>총 결제 금액</span>
-<%--                                <strong><font style="vertical-align: inherit;"><font--%>
-<%--                                        style="vertical-align: inherit;"--%>
-<%--                                        id="productPriceDisplay">${productPrice}</font></font> 원</strong>--%>
+                                <%--                                <strong><font style="vertical-align: inherit;"><font--%>
+                                <%--                                        style="vertical-align: inherit;"--%>
+                                <%--                                        id="productPriceDisplay">${productPrice}</font></font> 원</strong>--%>
                                 <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" id="productPriceDisplay" data-raw-price="${productPrice}">${formattedProductPrice}</font></font> 원</strong>
 
                             </li>
@@ -1210,10 +1210,10 @@
                                                             <div class="accountContainer" style="display: flex; align-items: center;">
                                                                 <!-- 체크박스 추가 -->
                                                                 <div class="hanaAccCheck">
-                                                                <input type="radio" id="account-${account.accNumber}" name="accountSelection" class="account-checkbox">
-                                                                <label for="account-${account.accNumber}" class="account-label">
-                                                                    <span class="custom-checkbox"></span>
-                                                                </label>
+                                                                    <input type="radio" id="account-${account.accNumber}" name="accountSelection" class="account-checkbox">
+                                                                    <label for="account-${account.accNumber}" class="account-label">
+                                                                        <span class="custom-checkbox"></span>
+                                                                    </label>
                                                                 </div>
                                                                 <div class="hanaBankAccount">
                                                                     <img src="/img/bank/bankName=hana.png" alt="">
@@ -1879,9 +1879,7 @@
 
 
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 
 
 </body>

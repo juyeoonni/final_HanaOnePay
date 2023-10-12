@@ -49,10 +49,11 @@
         }
 
         .selectCard label:hover {
-            background-color: #CFEBE5;
+            background-color: rgba(224, 221, 221, 0.41);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
         }
         .checked {
-            background-color: #CFEBE5;
+            background-color: rgba(224, 221, 221, 0.41);
         }
         /* 실제 체크박스를 숨김 */
         .selectCard label input[type="checkbox"] {
@@ -226,7 +227,7 @@
 
 <div class="card text-center">
     <div class="card-header">
-        <ul class="nav nav-tabs card-header-tabs">
+        <ul class="nav nav-tabs card-header-tabs" style="margin-left: 70px;">
             <li class="nav-item">
                 <a class="nav-link active" aria-current="true" data-toggle="tab" href="#" id="bankLink">은행</a>
             </li>
@@ -496,7 +497,7 @@
     </div>
 </div>
 
-<<!-- Modal2 -->
+<!-- Modal2 -->
 <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -539,6 +540,9 @@
 <button onclick="loadCardData()" class="center-button">
     연동하기
 </button>
+<br><br><br><br>
+<img src="/img/footer.png" style="margin-left: 7%;">
+</body>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
@@ -776,6 +780,4 @@
 
 </script>
 
-<%@ include file="/WEB-INF/views/comm/footer.jsp"%>
-</body>
 </html>

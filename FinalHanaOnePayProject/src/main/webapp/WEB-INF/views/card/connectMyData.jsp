@@ -26,10 +26,10 @@
         }
 
         .card-info:hover {
-            background-color: #CFEBE5;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transform: scale(1.02);
-            transition: all 0.3s ease;
+            background-color: rgba(224, 221, 221, 0.41);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            transform: scale(1.03);
+            transition: all 0.2s ease;
         }
 
         .left-aligned-content {
@@ -51,7 +51,7 @@
         }
 
         .card-info.checked {
-            background-color: #CFEBE5;
+            background-color: rgba(224, 221, 221, 0.41);
         }
 
         form {
@@ -432,202 +432,217 @@
                         </h4>
                     </h4>
                 </div>
+                </div>
+
+            </div>
 
 
-                <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-                <script src="/path/to/cdn/jquery.slim.min.js"></script>
-                <script>
-                    $(document).ready(function () {
-                        try {
-                            const selectCardCompanyFromSession = JSON.parse(sessionStorage.getItem('selectedCards') || "[]");
-                            const cardDataFromSession = JSON.parse(sessionStorage.getItem('cardData') || "[]");
-
-                            console.log(cardDataFromSession);
-
-                            function maskCardNumber(cardNumber) {
-                                // 카드 번호를 '-'로 분리
-                                const parts = cardNumber.split('-');
-
-                                // 중간 2개의 부분을 '*'로 대체
-                                if (parts.length === 4) {
-                                    const maskedParts = [
-                                        parts[0],
-                                        '****',
-                                        '****',
-                                        parts[3].substr(-4) // 마지막 4자리는 그대로 유지
-                                    ];
-                                    return maskedParts.join('-');
-                                }
-
-                                return cardNumber; // 형식이 맞지 않는 경우 그대로 반환
-                            }
-
-                            function displayCards(cards) {
-                                $('#count').text(cards.length);
-                                $('#cardDataContainer').empty();
-
-                                cards.forEach((cardData) => {
-                                    const cardDiv = document.createElement("div");
-                                    cardDiv.classList.add("card-info");
-
-                                    cardDiv.style.border = "1px solid #ccc";
-                                    cardDiv.style.width = "900px";
-                                    cardDiv.style.padding = "10px";
-                                    cardDiv.style.marginBottom = "10px";
-                                    cardDiv.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
-                                    cardDiv.style.display = "flex";
-                                    cardDiv.style.flexDirection = "row";
-                                    cardDiv.style.alignItems = "center";
-                                    cardDiv.style.borderRadius = "10px";
-
-                                    const imageUrl = "/img/" + cardData.cardName + ".png";
-                                    let cardCompany = cardData.cardCode;
-
-                                    // cardCode에 따라 카드 회사 이름 변경
-                                    if (cardData.cardCode === "shinhan") {
-                                        cardCompany = "신한카드";
-                                    } else if (cardData.cardCode === "KB") {
-                                        cardCompany = "KB국민카드";
-                                    } else if (cardData.cardCode === "woori") {
-                                        cardCompany = "우리카드";
-                                    } else if (cardData.cardCode === "hana") {
-                                        cardCompany = "하나카드";
-                                    }
-                                    cardDiv.innerHTML =
-                                        '<img src="' + imageUrl + '" style="width: 200px; height: 130px; margin-right: 10px;">' +
-                                        '<div style="flex: 1;">' +
-                                        '<div class="card-code" style="width: 100px; height:34px; color: white; background-color: #BCD9D3; border-radius: 5px; padding: 5px;">' +
-                                        cardCompany +
-                                        '</div>' +
-                                        '카드 이름: ' + cardData.cardName + '<br>' +
-                                        '카드 번호: ' + maskCardNumber(cardData.cardNumber) + // 카드 번호 마스킹 적용
-                                        '</div>' +
-                                        '<input type="checkbox" style="margin-left: 20px;">';
-
-                                    cardDataContainer.appendChild(cardDiv);
-                                });
-
-                                // "등록" 버튼을 페이지에 추가
-                                const registerButton = document.createElement("button");
-                                registerButton.textContent = "하나원페이 등록";
-                                registerButton.id = "custom-register-button"; // ID 추가
-                                registerButton.addEventListener("click", registerSelectedCards);
-
-                                // "등록" 버튼을 페이지에 추가
-                                const buttonContainer = document.createElement("div");
-                                buttonContainer.appendChild(registerButton);
-                                cardDataContainer.appendChild(buttonContainer);
-                            }
-
-                            $('.dropdown-item').click(function () {
-                                const filterType = $(this).text();
-
-                                if (filterType === "전체카드조회") {
-                                    displayCards(cardDataFromSession);
-                                } else if (filterType === "하나카드조회") {
-                                    const hanaCards = cardDataFromSession.filter(card => card.cardCode === "hana");
-                                    displayCards(hanaCards);
-                                } else if (filterType === "다른카드조회") {
-                                    const otherCards = cardDataFromSession.filter(card => card.cardCode !== "hana");
-                                    displayCards(otherCards);
-                                }
-                            });
-
-                            // 초기 로드 시 전체 카드 목록 표시
-                            displayCards(cardDataFromSession);
-
-                            function registerSelectedCards() {
-                                // 모달 띄우기
-                                $('#exampleModal').modal('show');
-                            }
-
-                            // 모달의 "등록" 버튼 클릭 이벤트
-                            $('#confirmRegister').on('click', function () {
-                                const selectedCards = [];
-                                const cardDivs = document.querySelectorAll('.card-info');
-
-                                cardDivs.forEach((cardDiv, index) => {
-                                    const checkbox = cardDiv.querySelector('input[type="checkbox"]');
-                                    if (checkbox.checked) {
-                                        selectedCards.push(cardDataFromSession[index]);
-                                    }
-                                });
-                                console.log("Selected Cards:", selectedCards);
-
-                                document.getElementById('selectedCardsInput').value = JSON.stringify(selectedCards);
-                                document.getElementById('cardForm').submit();
-                            });
 
 
-                        } catch (error) {
-                            console.error("Error parsing JSON:", error);
-                        }
-                    });
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="/path/to/cdn/jquery.slim.min.js"></script>
 
-                    $(document).on('change', '.card-info input[type="checkbox"]', function () {
-                        const cardDiv = $(this).closest('.card-info');
-                        if (this.checked) {
-                            cardDiv.addClass('checked');
-                        } else {
-                            cardDiv.removeClass('checked');
-                        }
-                    });
+<script>
+    $(document).ready(function () {
+        try {
+            const selectCardCompanyFromSession = JSON.parse(sessionStorage.getItem('selectedCards') || "[]");
+            const cardDataFromSession = JSON.parse(sessionStorage.getItem('cardData') || "[]");
 
-                    $(document).ready(function () {
+            console.log(cardDataFromSession);
 
-                        const input_value = $("#password");
+            function maskCardNumber(cardNumber) {
+                // 카드 번호를 '-'로 분리
+                const parts = cardNumber.split('-');
 
-                        //disable input from typing
-                        $("#password").keypress(function () {
-                            return false;
-                        });
+                // 중간 2개의 부분을 '*'로 대체
+                if (parts.length === 4) {
+                    const maskedParts = [
+                        parts[0],
+                        '****',
+                        '****',
+                        parts[3].substr(-4) // 마지막 4자리는 그대로 유지
+                    ];
+                    return maskedParts.join('-');
+                }
 
-                        //add password
-                        $(".calc").click(function () {
-                            let value = $(this).val();
-                            field(value);
-                        });
+                return cardNumber; // 형식이 맞지 않는 경우 그대로 반환
+            }
 
-                        function field(value) {
-                            input_value.val(input_value.val() + value);
-                        }
+            function displayCards(cards) {
+                $('#count').text(cards.length);
+                $('#cardDataContainer').empty();
 
-                        $("#clear").click(function () {
-                            input_value.val("");
-                        });
+                cards.forEach((cardData) => {
+                    const cardDiv = document.createElement("div");
+                    cardDiv.classList.add("card-info");
 
-                        $("#enter").click(function () {
-                            alert("인증되었습니다.");
-                        });
+                    cardDiv.style.border = "1px solid #ccc";
+                    cardDiv.style.width = "900px";
+                    cardDiv.style.padding = "10px";
+                    cardDiv.style.marginBottom = "10px";
+                    cardDiv.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
+                    cardDiv.style.display = "flex";
+                    cardDiv.style.flexDirection = "row";
+                    cardDiv.style.alignItems = "center";
+                    cardDiv.style.borderRadius = "10px";
 
-                    });
+                    const imageUrl = "/img/" + cardData.cardName + ".png";
+                    let cardCompany = cardData.cardCode;
 
-                    document.addEventListener('DOMContentLoaded', function () {
-                        var enterButton = document.getElementById('enter');
+                    let cardLogoUrl;
+                    if (cardData.cardCode === "shinhan") {
+                        cardCompany = "신한카드";
+                        backgroundColor = "#3253BC";
+                        cardLogoUrl = "/img/bank/bankName=shinhan.png";
+                    } else if (cardData.cardCode === "KB") {
+                        cardCompany = "KB국민카드";
+                        backgroundColor = "#7C7268";
+                        cardLogoUrl = "/img/bank/bankName=KB.png";
+                    } else if (cardData.cardCode === "woori") {
+                        cardCompany = "우리카드";
+                        backgroundColor = "#0182cd";
+                        cardLogoUrl = "/img/bank/bankName=woori.png";
+                    } else if (cardData.cardCode === "hana") {
+                        cardCompany = "하나카드";
+                        backgroundColor = "#00857E";
+                        cardLogoUrl = "/img/hana_logo.png";
+                    }
 
-                        enterButton.addEventListener('click', function () {
-                            // 폼 제출
-                            document.getElementById('paymentForm').submit();
-                        });
-                    });
+                    cardDiv.innerHTML =
+                        '<img src="' + imageUrl + '" style="width: 200px; height: 130px; margin-right: 10px;">' +
+                        '<div style="flex: 1;">' +
+                        '<div class="card-code" style="text-align:center; width: 120px; height:34px; color: white; background-color: ' + backgroundColor + '; border-radius: 5px; padding: 5px; display: flex; align-items: center;">' +
+                        '<img src="' + cardLogoUrl + '" style="width: 20px; height: 20px; margin-right: 5px;">' + // 여기에 로고 이미지 추가
+                        cardCompany +
+                        '</div>' +
+                        cardData.cardName + '<br>' +
+                        maskCardNumber(cardData.cardNumber) + // 카드 번호 마스킹 적용
+                        '</div>' +
+                        '<input type="checkbox" style="margin-left: 20px;">';
 
-                    // 스크롤 이벤트 리스너 추가
-                    window.addEventListener("scroll", function () {
-                        const sidebar = document.querySelector(".flex-shrink-0");
-                        const offsetTop = window.scrollY; // 현재 스크롤 위치
+                    cardDataContainer.appendChild(cardDiv);
+                });
 
-                        // 원하는 스크롤 위치에 따라 사이드바를 조절
-                        if (offsetTop >= 200) {
-                            sidebar.style.position = "fixed";
-                            sidebar.style.top = "50px"; // 원하는 거리 설정
-                        } else {
-                            sidebar.style.position = "static";
-                        }
-                    });
+                // "등록" 버튼을 페이지에 추가
+                const registerButton = document.createElement("button");
+                registerButton.textContent = "하나원페이 등록";
+                registerButton.id = "custom-register-button"; // ID 추가
+                registerButton.addEventListener("click", registerSelectedCards);
+
+                // "등록" 버튼을 페이지에 추가
+                const buttonContainer = document.createElement("div");
+                buttonContainer.appendChild(registerButton);
+                cardDataContainer.appendChild(buttonContainer);
+            }
+
+            $('.dropdown-item').click(function () {
+                const filterType = $(this).text();
+
+                if (filterType === "전체카드조회") {
+                    displayCards(cardDataFromSession);
+                } else if (filterType === "하나카드조회") {
+                    const hanaCards = cardDataFromSession.filter(card => card.cardCode === "hana");
+                    displayCards(hanaCards);
+                } else if (filterType === "다른카드조회") {
+                    const otherCards = cardDataFromSession.filter(card => card.cardCode !== "hana");
+                    displayCards(otherCards);
+                }
+            });
+
+            // 초기 로드 시 전체 카드 목록 표시
+            displayCards(cardDataFromSession);
+
+            function registerSelectedCards() {
+                // 모달 띄우기
+                $('#exampleModal').modal('show');
+            }
+
+            // 모달의 "등록" 버튼 클릭 이벤트
+            $('#confirmRegister').on('click', function () {
+                const selectedCards = [];
+                const cardDivs = document.querySelectorAll('.card-info');
+
+                cardDivs.forEach((cardDiv, index) => {
+                    const checkbox = cardDiv.querySelector('input[type="checkbox"]');
+                    if (checkbox.checked) {
+                        selectedCards.push(cardDataFromSession[index]);
+                    }
+                });
+                console.log("Selected Cards:", selectedCards);
+
+                document.getElementById('selectedCardsInput').value = JSON.stringify(selectedCards);
+                document.getElementById('cardForm').submit();
+            });
 
 
-                </script>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-                <%@ include file="/WEB-INF/views/comm/footer.jsp" %>
+        } catch (error) {
+            console.error("Error parsing JSON:", error);
+        }
+    });
+
+    $(document).on('change', '.card-info input[type="checkbox"]', function () {
+        const cardDiv = $(this).closest('.card-info');
+        if (this.checked) {
+            cardDiv.addClass('checked');
+        } else {
+            cardDiv.removeClass('checked');
+        }
+    });
+
+    $(document).ready(function () {
+
+        const input_value = $("#password");
+
+        //disable input from typing
+        $("#password").keypress(function () {
+            return false;
+        });
+
+        //add password
+        $(".calc").click(function () {
+            let value = $(this).val();
+            field(value);
+        });
+
+        function field(value) {
+            input_value.val(input_value.val() + value);
+        }
+
+        $("#clear").click(function () {
+            input_value.val("");
+        });
+
+        $("#enter").click(function () {
+            alert("인증되었습니다.");
+        });
+
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var enterButton = document.getElementById('enter');
+
+        enterButton.addEventListener('click', function () {
+            // 폼 제출
+            document.getElementById('paymentForm').submit();
+        });
+    });
+
+    // // 스크롤 이벤트 리스너 추가
+    // window.addEventListener("scroll", function () {
+    //     const sidebar = document.querySelector(".flex-shrink-0");
+    //     const offsetTop = window.scrollY; // 현재 스크롤 위치
+    //
+    //     // 원하는 스크롤 위치에 따라 사이드바를 조절
+    //     if (offsetTop >= 200) {
+    //         sidebar.style.position = "fixed";
+    //         sidebar.style.top = "50px"; // 원하는 거리 설정
+    //     } else {
+    //         sidebar.style.position = "static";
+    //     }
+    // });
+
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

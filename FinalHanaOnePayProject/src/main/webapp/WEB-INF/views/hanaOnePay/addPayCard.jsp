@@ -164,7 +164,8 @@
                         <%--                    <label for="image">이미지 업로드</label>--%>
                         <!-- 이미지 표시 부분 -->
                         <div class="col-md-6">
-                            <img id="modalImage" style="max-width: 100%;">
+                            <img id="modalImage" style="max-width: 100%; display: none;">
+
                         </div>
 
                         <div class="row">
@@ -224,18 +225,21 @@
             </div>
         </div>
     </div>
-
+<br><br><br><br><br><br><br>
 
 </main>
 
 <!-- 푸터위치 -->
-<%@ include file="/WEB-INF/views/comm/footer.jsp" %>
+<img src="/img/footer.png" style="margin-left: -50px;">
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+
+
+
     function toggleCheckboxes() {
         const allAgreementCheckbox = document.getElementById("allAgreement");
         const otherCheckboxes = document.querySelectorAll("input[type='checkbox'][name^='hana']");
@@ -267,12 +271,20 @@
 
     // 첨부한 이미지 받아오기
     function previewImage(event) {
+        const file = event.target.files[0];
+
+        if (!file) {
+            document.getElementById('modalImage').style.display = 'none';  // 파일이 없으면 이미지를 숨깁니다.
+            return;
+        }
+
         const reader = new FileReader();
         reader.onload = function () {
             const output = document.getElementById('modalImage');
             output.src = reader.result;
+            output.style.display = 'block';  // 파일이 있으면 이미지를 보여줍니다.
         };
-        reader.readAsDataURL(event.target.files[0]);
+        reader.readAsDataURL(file);
     }
 
 

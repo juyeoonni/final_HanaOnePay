@@ -130,6 +130,65 @@
             padding: 5px;
             margin-bottom: 10px;
         }
+
+       .card-info {
+           border: 1px solid #ccc;
+           width: 900px;
+           padding: 10px;
+           margin-bottom: 10px;
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+           display: flex;
+           flex-direction: row;
+           align-items: center;
+           border-radius: 10px;
+       }
+
+       .card-logo {
+           text-align: center;
+           width: 120px;
+           height: 34px;
+           color: white;
+           border-radius: 5px;
+           padding: 5px;
+           display: flex;
+           align-items: center;
+       }
+
+       .card-logo img {
+           width: 20px;
+           height: 20px;
+           margin-right: 5px;
+       }
+
+       .shinhan-bg {
+           background-color: #3253BC;
+       }
+
+       .KB-bg {
+           background-color: #7C7268;
+       }
+
+       .woori-bg {
+           background-color: #0182cd;
+       }
+
+       .hana-bg {
+           background-color: #00857E;
+       }
+
+       .card-info:hover {
+           background-color: rgba(224, 221, 221, 0.41);
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+           transform: scale(1.03);
+           transition: all 0.2s ease;
+       }
+
+       .hanaCard:hover{
+           background-color: rgba(224, 221, 221, 0.41);
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+           transform: scale(1.03);
+           transition: all 0.2s ease;
+       }
     </style>
 
 </head>
@@ -220,16 +279,16 @@
         </div>
 
 
-        <div class="col-lg-8">
+        <div class="col-lg-8" >
 
-            <div class="mycardOnePay" style="margin: 0 auto">
+            <div class="mycardOnePay" style="margin-left: 20px;">
                 <div style="font-size:18px; text-align: center; color: #00857E;">마이카드</div>
                 <div style="font-size: 2em; text-align: center;">마이하나원페이</div>
             </div>
-            <div>
+            <div style="margin-left: 65px;">
 
-                <div class="d-flex justify-content-start align-items-center mb-2" style="margin-top: 50px;">
-                    <h3 class="mb-0 me-3" style="margin-left: 30px;">연동 카드 확인</h3>
+                <div class="d-flex justify-content-start align-items-center mb-2" style="margin-left: 60px; margin-top: 30px;">
+                    <h3 class="mb-0 me-3" style="margin-left: -30px;">연동 카드 확인</h3>
 
                     <!-- 드롭다운 시작 -->
                     <div class="dropdown" style="display: inline-block;">
@@ -255,43 +314,66 @@
                     String allCardsJson = new ObjectMapper().writeValueAsString(allCards); // Convert List to JSON String
                 %>
 
+                <div class="p-3 m-3 border border-3 rounded-3 shadow d-flex align-items-center hanaCard" style="width: 900px;">
+                    <img src="/img/하나 원큐 카드.png"  style="width: 200px; height: 130px; margin-right: 10px; flex-shrink: 0;"alt="">
+                    <div class="d-flex flex-column">
+                        <div class="card-name">
+                            <div style="display: flex;">
+                                <img src="/img/bank/bankName=hana.png" style="width: 25px; height: 25px; margin-right: 3px; margin-bottom: 2px;">
+                                <p style="color: #FFFFFF;">하나카드</p>
+                            </div>
+                        </div>
+                        <div>카드이름 : 하나 원큐 카드</div>
+                        <div>카드번호 : 6894- **** - **** -1029</div>
+                    </div>
+
+                </div>
+
                 <c:forEach var="card" items="${allCards}">
-                    <div class="p-3 m-3 border border-3 rounded-3 shadow d-flex align-items-center">
+                    <div class="card-info p-3 m-3 border border-3 rounded-3 shadow d-flex align-items-center">
                         <!-- 이미지는 왼쪽에 위치 -->
-                        <img src="/img/${card.cardName}.png"
-                             style="width: 200px; height: 130px; margin-right: 10px; flex-shrink: 0;">
+                        <img src="/img/${card.cardName}.png" style="width: 200px; height: 130px; margin-right: 10px; flex-shrink: 0;">
 
                         <div>
                             <c:choose>
-
-                            <c:when test="${card.cardCode eq 'KB'}">
-                                <span class="card-name">국민카드</span> <br>
-                            </c:when>
-
-                            <c:when test="${card.cardCode eq 'woori'}">
-                                <span class="card-name">우리카드</span> <br>
-                            </c:when>
-
-                            <c:when test="${card.cardCode eq 'shinhan'}">
-                                <span class="card-name">신한카드</span> <br>
-                            </c:when>
-                            <c:otherwise>
-                            <span class="card-name">하나카드 <br>
+                                <c:when test="${card.cardCode eq 'KB'}">
+                                    <div class="card-logo KB-bg">
+                                        <img src="/img/bank/bankName=KB.png" alt="KB Logo">
+                                        국민카드
+                                    </div>
+                                </c:when>
+                                <c:when test="${card.cardCode eq 'woori'}">
+                                    <div class="card-logo woori-bg">
+                                        <img src="/img/bank/bankName=woori.png" alt="Woori Logo">
+                                        우리카드
+                                    </div>
+                                </c:when>
+                                <c:when test="${card.cardCode eq 'shinhan'}">
+                                    <div class="card-logo shinhan-bg">
+                                        <img src="/img/bank/bankName=shinhan.png" alt="Shinhan Logo">
+                                        신한카드
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="card-logo hana-bg">
+                                        <img src=/img/bank/bankName=hana.png" alt="Hana Logo">
+                                        하나카드
+                                    </div>
                                 </c:otherwise>
                             </c:choose>
 
                             카드 이름 : ${card.cardName} <br>
-                                <!-- 카드 번호 중간 부분을 *로 대체 -->
-            <c:set var="cardParts" value="${fn:split(card.cardNumber, '-')}"/>
-            <c:set var="maskedPart1" value="****"/>
-            <c:set var="maskedPart2" value="****"/>
-            <c:set var="maskedCardNumber" value="${cardParts[0]}-${maskedPart1}-${maskedPart2}-${cardParts[3]}"/>
-            카드 번호: ${maskedCardNumber}
+                            <!-- 카드 번호 중간 부분을 *로 대체 -->
+                            <c:set var="cardParts" value="${fn:split(card.cardNumber, '-')}"/>
+                            <c:set var="maskedPart1" value="****"/>
+                            <c:set var="maskedPart2" value="****"/>
+                            <c:set var="maskedCardNumber" value="${cardParts[0]}-${maskedPart1}-${maskedPart2}-${cardParts[3]}"/>
+                            카드 번호: ${maskedCardNumber}
                         </div>
                     </div>
-
                 </c:forEach>
-                <%--                <div id="cardDataContainer" class="p-3 border border-3 rounded-3 shadow"></div>--%>
+
+            <%--                <div id="cardDataContainer" class="p-3 border border-3 rounded-3 shadow"></div>--%>
 
                 <a href="/hanaOnePay/addPayCard" class="add-button">페이카드 추가</a>
             </div>
@@ -321,7 +403,7 @@
 
     // 연동된 카드 개수 업데이트 함수
     function updateCardCount() {
-        let count = cards.length; // cards 배열의 길이를 가져와 연동된 카드 개수로 설정
+        let count = cards.length + 1; // cards 배열의 길이를 가져와 연동된 카드 개수로 설정
         document.getElementById('count').textContent = count; // span 업데이트
     }
 
@@ -329,36 +411,36 @@
     window.onload = function () {
         updateCardCount();
     }
-    //
-    // cards.forEach(card => {
-    //     const cardDiv = document.createElement("div");
-    //     cardDiv.classList.add("card-info");
-    //
-    //     const imageUrl = "/img/" + card.cardName + ".png";
-    //     let cardCompany = card.cardCode;
-    //
-    //     if (card.cardCode === "shinhan") {
-    //         cardCompany = "신한카드";
-    //     } else if (card.cardCode === "KB") {
-    //         cardCompany = "KB국민카드";
-    //     } else if (card.cardCode === "woori") {
-    //         cardCompany = "우리카드";
-    //     } else if (card.cardCode === "hana") {
-    //         cardCompany = "하나카드";
-    //     }
-    //
-    //     cardDiv.innerHTML =
-    //         '<img src="' + imageUrl + '" style="width: 200px; height: 130px; margin-right: 10px;">' +
-    //         '<div style="flex: 1;">' +
-    //         '<div class="card-code" style="width: 100px; color: white; background-color: #BCD9D3; border-radius: 5px; padding: 5px;">' +
-    //         cardCompany +
-    //         '</div>' +
-    //         '카드 이름: ' + card.cardName + '<br>' +
-    //         '카드 번호: ' + card.cardNumber +
-    //         '</div>';
-    //
-    //     document.getElementById('cardDataContainer').appendChild(cardDiv);
-    // });
+
+    cards.forEach(card => {
+        const cardDiv = document.createElement("div");
+        cardDiv.classList.add("card-info");
+
+        const imageUrl = "/img/" + card.cardName + ".png";
+        let cardCompany = card.cardCode;
+
+        if (card.cardCode === "shinhan") {
+            cardCompany = "신한카드";
+        } else if (card.cardCode === "KB") {
+            cardCompany = "KB국민카드";
+        } else if (card.cardCode === "woori") {
+            cardCompany = "우리카드";
+        } else if (card.cardCode === "hana") {
+            cardCompany = "하나카드";
+        }
+
+        cardDiv.innerHTML =
+            '<img src="' + imageUrl + '" style="width: 200px; height: 130px; margin-right: 10px;">' +
+            '<div style="flex: 1;">' +
+            '<div class="card-code" style="width: 100px; color: white; background-color: #BCD9D3; border-radius: 5px; padding: 5px;">' +
+            cardCompany +
+            '</div>' +
+            '카드 이름: ' + card.cardName + '<br>' +
+            '카드 번호: ' + card.cardNumber +
+            '</div>';
+
+        document.getElementById('cardDataContainer').appendChild(cardDiv);
+    });
 </script>
 
 
