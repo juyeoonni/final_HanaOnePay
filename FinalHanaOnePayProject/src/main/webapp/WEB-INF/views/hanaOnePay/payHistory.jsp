@@ -283,7 +283,7 @@
 
 
         <div>
-            ${sessionScope.name}님은 일반고객이십니다.냥
+            ${sessionScope.name}님은 일반고객이십니다.
         </div>
 
 

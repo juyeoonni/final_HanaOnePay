@@ -658,6 +658,18 @@
             margin-left: 46% !important;
         }
 
+        .goMain{
+            color: #FFFFFF !important;
+            background-color: #666666 !important;
+            text-align: center;
+            border-radius: 5px !important;
+            border: #666666 3px solid !important;
+            width: 130px !important;
+            height: 40px !important;
+            margin-left: 45% !important;
+            margin-top: 10px;
+        }
+
         .receipt {
             background-color: white;
             padding: 20px;
@@ -894,6 +906,10 @@
                 <button type="button" class="btn bill" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     영수증 확인
                 </button>
+                <button type="button" class="goMain" onclick="goToMain()">
+                    메인화면으로
+                </button>
+
                 <br><br><br><br><br><br><br><br><br>
             </div>
 
@@ -924,6 +940,7 @@
                                     <p>결제구분: 일시불</p>
                                     <p>승인번호: 521422</p>
                                     <p>승인일시: ${time}</p>
+                                    <p>적립금액: 5000</p>
                                     <p>--------------------------------------------------</p>
                                     <h5>총 결제 금액 <p style="color: #00857E">319,000원</p></h5>
 
@@ -949,6 +966,11 @@
     <img src="/img/footer.png" style="margin-left: -10px;">
 
     <script>
+        function goToMain() {
+            window.location.href = "/shop/shopMain";
+        }
+
+
         // input 요소에 값을 입력할 때 호출되는 함수
         function formatNumberInput() {
             const inputElement = document.getElementById('usePointInput');

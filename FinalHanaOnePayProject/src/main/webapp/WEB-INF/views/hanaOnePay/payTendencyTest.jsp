@@ -325,6 +325,8 @@
     <%@ include file="/WEB-INF/views/comm/header.jsp" %>
 
     <div class="flex-container">
+
+        <%--    사이드바시작--%>
         <div class="flex-shrink-0 p-3" style="width: 280px; margin-left: 90px;">
             <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
                 <svg class="bi pe-none me-2" width="30" height="24">
@@ -335,10 +337,11 @@
             <ul class="list-unstyled ps-0">
                 <li class="mb-1">
                     <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                            data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                            data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
                         하나원페이
                     </button>
-                    <div class="collapse show" id="home-collapse">
+
+                    <div class="collapse" id="home-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                             <%--                    <li><a href="/api/linkedAccount" class="link-body-emphasis d-inline-flex text-decoration-none rounded">연동카드조회</a></li>--%>
                             <%--                    <li><a href="/hanaOnePay/selectPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>--%>
@@ -353,54 +356,23 @@
                 <li class="mb-1">
                     <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                             data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-                        거래내역조회
+                        내 소비 분석
                     </button>
-                    <div class="collapse" id="dashboard-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <div class="collapse show" id="home-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                             <li><a href="/api/payments-by-month?month=09"
-                                   class="link-body-emphasis d-inline-flex text-decoration-none rounded">내 지출 조회</a></li>
-                            <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">명세서 조회</a></li>--%>
+                                   class="link-body-emphasis d-inline-flex text-decoration-none rounded">소비레포트</a></li>
+                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">소비성향테스트</a></li>
                             <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>--%>
                             <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>--%>
                         </ul>
                     </div>
                 </li>
-                <li class="mb-1">
-                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                            data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-                        내 소비분석
-                    </button>
-                    <div class="collapse" id="orders-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li><a href="/api/payments-by-month?month=09"
-                                   class="link-body-emphasis d-inline-flex text-decoration-none rounded">소비레포트</a></li>
-                            <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Processed</a></li>--%>
-                            <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Shipped</a></li>--%>
-                            <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Returned</a></li>--%>
-                        </ul>
-                    </div>
-                </li>
+
                 <li class="border-top my-3"></li>
-                <li class="mb-1">
-                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                            data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-                        Account
-                    </button>
-                    <div class="collapse" id="account-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New...</a>
-                            </li>
-                            <li><a href="#"
-                                   class="link-body-emphasis d-inline-flex text-decoration-none rounded">Profile</a></li>
-                            <li><a href="#"
-                                   class="link-body-emphasis d-inline-flex text-decoration-none rounded">Settings</a></li>
-                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign
-                                out</a></li>
-                        </ul>
-                    </div>
-                </li>
             </ul>
         </div>
+        <%--    사이드바끝--%>
 
         <div class="mypageMain">
 

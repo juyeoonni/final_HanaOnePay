@@ -212,9 +212,11 @@
             border-radius: 15px;
             width: 90%;
             height: 200px;
+            margin-top: 100px;
+            background-color: rgba(1, 85, 80, 0.18);
         }
 
-        .payTagDetail{
+        .payTagDetail {
             padding-top: 12px;
             padding-left: 20px;
             border: #BCD9D3 5px solid;
@@ -224,9 +226,18 @@
             height: 80px;
             margin-top: 25px;
             margin-right: 18px;
+            transition: box-shadow 0.3s ease, transform 0.3s ease; /* 부드러운 변환과 그림자 효과 */
+            background-color: #FFFFFF;
         }
+
+        .payTagDetail:hover {
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4); /* 그림자를 더 진하게 */
+            transform: scale(1.05); /* 스케일을 약간 키움 */
+        }
+
+
         .payTagDetails {
-            display: flex;  /* 두 payTagDetail을 수평으로 정렬 */
+            display: flex; /* 두 payTagDetail을 수평으로 정렬 */
             margin-right: 10px; /* 오른쪽 이미지와의 간격을 조절 */
         }
 
@@ -234,17 +245,17 @@
             height: 80px;
             display: flex;
             align-items: center; /* 중앙 정렬 */
-            margin-right: 10px;  /* 오른쪽에 간격 추가 */
+            margin-right: 10px; /* 오른쪽에 간격 추가 */
         }
 
         .payTagStar {
             margin-left: 50px;
             margin-bottom: 50px;
-            height: 200px;  /* 이미지의 높이. 필요에 따라 조절 가능 */
-            width: auto;  /* 이미지의 너비를 자동으로 설정 */
+            height: 200px; /* 이미지의 높이. 필요에 따라 조절 가능 */
+            width: auto; /* 이미지의 너비를 자동으로 설정 */
         }
 
-        .payTagMessage{
+        .payTagMessage {
             font-size: 17px;
             margin-right: 20px;
         }
@@ -301,7 +312,7 @@
             background-color: white;
         }
 
-        .monthlyChartDiv{
+        .monthlyChartDiv {
             font-size: 20px;
             width: 1000px;
             height: 500px;
@@ -309,7 +320,7 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             border-radius: 20px;
             text-align: center; /* 텍스트 중앙 정렬 */
-            margin-top: 70px;
+            margin-top: -10px;
         }
 
         .business-layout {
@@ -332,20 +343,36 @@
             text-align: right;
         }
 
-        .testdiv{
+        .testdiv {
             margin-right: 50px;
             margin-bottom: 100px;
             padding: 13px;
             font-size: 20px;
-            width: 450px;
+            width: 480px;
             height: 200px;
             background-color: white;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             border-radius: 20px;
-            text-align: center; /* 텍스트 중앙 정렬 */
-            margin-top: 100px;
+            /*text-align: center; !* 텍스트 중앙 정렬 *!*/
+            margin-top: 70px;
+
+            display: flex; /* flexbox를 활용하여 내부 아이템들을 가로로 배열합니다. */
+            align-items: center; /* 세로로 중앙 정렬을 위한 속성입니다. */
+            justify-content: space-between; /* 내부 아이템들 사이에 공간을 동일하게 분배합니다. */
+            padding: 16px;
+            transition: box-shadow 0.3s ease, transform 0.3s ease; /* 부드러운 변환과 그림자 효과 */
+            background-color: #FFFFFF;
         }
 
+
+        .testdiv:hover {
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4); /* 그림자를 더 진하게 */
+            transform: scale(1.05); /* 스케일을 약간 키움 */
+        }
+
+        .highlight {
+            color: #00857E;
+        }
 
     </style>
 
@@ -355,6 +382,7 @@
 <%@ include file="/WEB-INF/views/comm/header.jsp" %>
 
 <div class="flex-container">
+    <%--    사이드바시작--%>
     <div class="flex-shrink-0 p-3" style="width: 280px; margin-left: 90px;">
         <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
             <svg class="bi pe-none me-2" width="30" height="24">
@@ -365,10 +393,11 @@
         <ul class="list-unstyled ps-0">
             <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                        data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                        data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
                     하나원페이
                 </button>
-                <div class="collapse show" id="home-collapse">
+
+                <div class="collapse" id="home-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                         <%--                    <li><a href="/api/linkedAccount" class="link-body-emphasis d-inline-flex text-decoration-none rounded">연동카드조회</a></li>--%>
                         <%--                    <li><a href="/hanaOnePay/selectPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>--%>
@@ -383,54 +412,24 @@
             <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                         data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-                    거래내역조회
+                    내 소비 분석
                 </button>
-                <div class="collapse" id="dashboard-collapse">
-                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="/hanaOnePay/payHistory"
-                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">내 지출 조회</a></li>
-                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">명세서 조회</a></li>--%>
-                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>--%>
-                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>--%>
-                    </ul>
-                </div>
-            </li>
-            <li class="mb-1">
-                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                        data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-                    내 소비분석
-                </button>
-                <div class="collapse" id="orders-collapse">
-                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="/hanaOnePay/payReport"
+                <div class="collapse show" id="home-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li><a href="/api/payments-by-month?month=09"
                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">소비레포트</a></li>
-                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Processed</a></li>--%>
-                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Shipped</a></li>--%>
-                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Returned</a></li>--%>
-                    </ul>
-                </div>
-            </li>
-            <li class="border-top my-3"></li>
-            <li class="mb-1">
-                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                        data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-                    Account
-                </button>
-                <div class="collapse" id="account-collapse">
-                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New...</a>
+                        <li><a href="javascript:void(0);"
+                               onclick="goToTest();"
+                               class="link-body-emphasis d-inline-flex text-decoration-none rounded" >소비성향테스트</a>
                         </li>
-                        <li><a href="#"
-                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Profile</a></li>
-                        <li><a href="#"
-                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Settings</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign
-                            out</a></li>
                     </ul>
                 </div>
             </li>
+
+            <li class="border-top my-3"></li>
         </ul>
     </div>
+    <%--    사이드바끝--%>
 
 
     <div class="mypageMain">
@@ -471,10 +470,20 @@
             </div>
         </div>
 
+        <div class="monthlyChartDiv">
+            <div class="monthlyChartMent">
+                ${sessionScope.name}님의 1년간 소비 추이입니다.
+            </div>
+            <canvas id="myChart2" width="400" height="200"></canvas>
+            <%--            <img src="/img/starChracterPay.gif">--%>
+        </div>
+
         <div class="payTag">
             <div class="payTagMessage">
-            ${sessionScope.name}님, <br>
-                <span class="underlineText" style="font-size: 25px; color: #666666; display: inline-block; border-bottom: 4px solid #BCD9D3;">소비태그 2개</span>를 획득했어요!
+                ${sessionScope.name}님, <br>
+                <span class="underlineText"
+                      style="font-size: 25px; color: #666666; display: inline-block; border-bottom: 4px solid #BCD9D3;">소비태그 2개</span>를
+                획득했어요!
             </div>
             <div class="payTagUser">
                 <div class="payTagDetails">
@@ -489,27 +498,34 @@
             </div>
         </div>
 
-
-
-
-        <div class="monthlyChartDiv">
-            <div class="monthlyChartMent">
-                ${sessionScope.name}님의 1년간 소비 추이입니다.
-            </div>
-            <canvas id="myChart2" width="400" height="200"></canvas>
-<%--            <img src="/img/starChracterPay.gif">--%>
-        </div>
-
         <div class="pieChartContainer">
             <div class="testdiv">
-                나의 소비성향은?<br>
-                하나원페이 소비성향 테스트를 통해<br>
-                나만의 소비 유형을 확인해보세요!<br>
-                <button class="plusBtn" onclick="goToTest()">소비성향 테스트 GO!</button>
+                <div class="text-section" style="margin-left: 5px; font-size: 18px;">
+                    라이프 스타일로 알아보는<br>
+                    나만의 <span class="highlight" style="font-size:18px;">소비 성향 테스트</span> <br>
+                    <button class="plusBtn" onclick="goToTest()" style="margin-top: 7px;">소비 성향 테스트 GO!</button>
+                </div>
+
+                <img style="margin-right: 10px; width: 200px; height: 200px;" class="image-section"
+                     src="/img/Group 64.png" alt="대체 텍스트">
             </div>
 
-        </div>
+            <div class="testdiv">
+                <div class="text-section" style="margin-left: 5px; font-size: 18px;">
+                    하나원페이에서<br>
+                    <span class="highlight" style="font-size:18px;">마이페이</span>로 결제수단 연동하고<br>
+                    편리하게 결제하세요!<br>
+                    <button class="plusBtn" onclick="goToTest()"
+                            style="background-color:#BCD9D3; color: #666666; margin-top: 7px;">마이페이 연동 GO!
+                    </button>
+                </div>
 
+                <img style="margin-left:-550px; margin-top: 10px; width: 230px; height: 250px;" class="image-section"
+                     src="/img/myhanamodal.png" alt="대체 텍스트">
+            </div>
+
+
+        </div>
 
 
     </div>
@@ -756,7 +772,7 @@
         }
 
         var ctxPie = document.getElementById('myChart').getContext('2d');
-        pieChart  = new Chart(ctxPie, {
+        pieChart = new Chart(ctxPie, {
             type: 'pie',
             data: {
                 labels: labels,
@@ -832,27 +848,43 @@
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: month,  // businessCode 데이터
+            labels: month,
             datasets: [{
-                label: 'payAmount by month',
-                data: payAmount, // payAmount 데이터
-                backgroundColor: 'rgba(75, 192, 192, 1)',
-                borderColor: 'rgba(75, 192, 192, 1)',
+                label: '1년간 월별 지출 금액',
+                data: payAmount,
+                backgroundColor: 'rgba(50, 205, 50, 0.2)', // 진한 민트색, 20% 투명도
+                borderColor: 'rgba(50, 205, 50, 1)', // 진한 민트색, 불투명
+
                 borderWidth: 1
             }]
         },
         options: {
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    max: 3000000
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function (context) {
+                            return context[0].label + '월';
+                        },
+                        label: function (context) {
+                            return context.label + '월 총 지출 금액: ' + context.parsed.y.toLocaleString() + '원';
+                        }
+                    }
                 }
             }
         }
+
     });
+
 
     // 소비태그
     // 소비태그에 대한 매핑 객체
-    var payTagMapping  = {
+    var payTagMapping = {
         '1000': '# 쇼핑마스터',
         '2000': '# 맛집컬렉터',
         '2500': '# 카페인홀릭',
@@ -911,8 +943,6 @@
         }
 
     }
-
-
 
 
 </script>

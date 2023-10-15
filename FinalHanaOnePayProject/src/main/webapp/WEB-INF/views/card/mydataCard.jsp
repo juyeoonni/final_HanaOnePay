@@ -475,7 +475,7 @@
                         <div class="form-group">
                             <label for="phoneNumberCheck">인증확인</label>
                             <div class="input-wrapper">
-                                <input type="tel" id="phoneNumberCheck" name="phoneNumberCheck" placeholder="인증번호 4자리를 입력하세요" required maxlength="11" oninput="sanitizePhoneNumber()">
+                                <input type="tel" id="phoneNumberCheck" name="phoneNumberCheck" placeholder="인증번호 6자리를 입력하세요" required maxlength="11" oninput="sanitizePhoneNumber()">
                                 <button type="button" onclick="showConfirmationAlert(); displayConfirmationMessage()">인증</button>
                             </div>
                             <p id="confirmationMessage"></p>
@@ -488,7 +488,8 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="custom-button" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-dismiss="modal">확인</button>
+                <button type="button" class="custom-button" id="confirmButton" onclick="hideModal1AndShowModal2()">확인</button>
+<%--                <button type="button" class="custom-button" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-dismiss="modal">확인</button>--%>
 
             <%--                <button type="button" class="custom-button" onclick="hideModal1AndShowModal2()">확인</button>--%>
             </div>
@@ -547,6 +548,34 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <script>
+    // 하나원페이 마이데이터 서비스 신규 등록 알림 문자
+    document.getElementById('confirmButton').addEventListener('click', function() {
+        const requestData = {
+            recipientPhoneNumber: '01032649073',
+            content: `[하나원페이] 정하나 고객님께서 신청하신 마이데이터 지갑연동 동의가 신규 등록 되었습니다. `
+        };
+
+        fetch('/hanaOnePay/sms', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestData)
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                $('#exampleModal2').modal('show');
+            })
+            .catch(error => {
+                console.error('Error sending SMS request:', error);
+                alert('인증번호 전송 중 오류가 발생했습니다.');
+            });
+    });
+
+
+
+
     // 은행 링크 클릭 시 스크롤 방지
     $("#bankLink").click(function(e) {
         e.preventDefault(); // 기본 동작 중지
@@ -737,7 +766,7 @@
 
         const requestData = {
             recipientPhoneNumber: '01032649073',
-            content: `[하나원페이] 하나원페이 사용을 위해 인증번호 5235를 입력하세요.`
+            content: `[하나원페이] 하나원페이 사용을 위해 인증번호 452125 입력하세요.`
         };
 
         // 서버로 POST 요청을 보냅니다.

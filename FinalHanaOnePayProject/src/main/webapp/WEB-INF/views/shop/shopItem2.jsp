@@ -157,7 +157,7 @@
                 </div>
                 <div class="col-md-6">
 
-                    <div class="small mb-1">하나원페이로 결제 시 9월 5% 할인</div>
+                    <div class="small mb-1"><div class="small mb-1">하나원페이로 10만원 이상 결제 시 5000 하나머니 적립</div></div>
                     <h1 class="display-5 fw-bolder product-name"> Cocod'or Signature Diffuser</h1>
                     <div class="fs-5 mb-5">
                         <span class="text-decoration-line-through">29,900</span>

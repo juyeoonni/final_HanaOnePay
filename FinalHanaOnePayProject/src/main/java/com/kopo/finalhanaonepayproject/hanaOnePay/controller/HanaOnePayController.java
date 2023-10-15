@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kopo.finalhanaonepayproject.api.service.OpenAPIService;
 import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.*;
 import com.kopo.finalhanaonepayproject.hanaOnePay.service.HanaOnePayService;
+import com.kopo.finalhanaonepayproject.naverSMS.SmsService;
 import com.kopo.finalhanaonepayproject.shop.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,8 @@ public class HanaOnePayController {
     private HanaOnePayService hanaOnePayService;
     @Autowired
     private OpenAPIService openAPIService;
+    @Autowired
+    private SmsService smsService;
     private ShopService shopService;
 
     @PostMapping("/hanaOnePay/payCardList")
@@ -213,6 +216,11 @@ public class HanaOnePayController {
     @GetMapping("/hanaOnePay/payReport")
     public String payReport() {
         return "hanaOnePay/payReport";
+    }
+
+    @GetMapping("/hanaOnePay/event")
+    public String event() {
+        return "hanaOnePay/event";
     }
 
     // 타사카드거래내역
@@ -427,6 +435,14 @@ public class HanaOnePayController {
 
         return "hanaOnePay/payRequestFailforBalance"; // 결제 성공을 알리는 JSP 페이지를 반환합니다.
     }
+
+    @PostMapping("/hanaOnePay/sms")
+    public void sendAuthMessage() throws Exception {
+        String recipientPhoneNumber = "01032649073";
+        String content = "[하나원페이] 정하나 고객님께서 신청하신 마이데이터 지갑연동 동의가 신규 등록 되었습니다.";
+        smsService.sendSms(recipientPhoneNumber, content);
+    }
+
 
 
 }

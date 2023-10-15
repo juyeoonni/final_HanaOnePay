@@ -595,17 +595,6 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        /* 스크롤 시 우측에 고정되는 스타일*/
-        /*.scrolled-right {*/
-        /*    position: fixed;*/
-        /*    right: 0; !* 오른쪽에 고정 *!*/
-        /*    top: 340px; !* 위에 고정 *!*/
-        /*    width: 300px; !* 원하는 너비로 조절 *!*/
-        /*    background-color: #fff; !* 배경색을 설정하세요. *!*/
-        /*    padding: 10px;*/
-        /*    border: 1px solid #ddd;*/
-        /*}*/
-
         #scrolling-element {
             position: fixed;
             right: 0;
@@ -882,16 +871,14 @@
                             </li>
                             <li class="list-group-item d-flex justify-content-between lh-sm">
                                 <div>
-                                    <h6 class="my-0"><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">금액</font></font></h6>
+                                    <h6 class="my-0" style="width: 100px;">금액</h6>
                                 </div>
                                 <span id="realProductPriceDisplay" class="text right-aligned">${productPrice}</span>원
                             </li>
 
                             <li class="list-group-item d-flex justify-content-between">
                                 <div class="tex">
-                                    <h6 class="my-0"><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">포인트 사용</font></font></h6>
+                                    <h6 class="my-0" style="width: 100px;">포인트 사용</h6>
                                 </div>
                                 <span id="usePointDisplay" class="text right-aligned">0</span>원
                             </li>
@@ -1211,10 +1198,10 @@
                                                                 <!-- 체크박스 추가 -->
                                                                 <div class="hanaAccCheck">
                                                                     <input type="radio" id="account-${account.accNumber}" name="accountSelection" class="account-checkbox">
-                                                                    <label for="account-${account.accNumber}" class="account-label">
-                                                                        <span class="custom-checkbox"></span>
-                                                                    </label>
+                                                                    <label for="account-${account.accNumber}" class="account-label"></label>
+                                                                    <span class="custom-checkbox"></span>
                                                                 </div>
+
                                                                 <div class="hanaBankAccount">
                                                                     <img src="/img/bank/bankName=hana.png" alt="">
                                                                     하나은행 - ${account.accName}

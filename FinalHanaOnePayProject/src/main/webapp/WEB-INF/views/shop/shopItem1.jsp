@@ -172,8 +172,8 @@
                 <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="/img/shop/shopItem2.jpg" alt="...">
                 </div>
                 <div class="col-md-6">
-                    <div class="small mb-1">하나원페이로 결제 시 9월 5% 할인</div>
-                    <h1 class="display-5 fw-bolder product-name">Apple 애플워치 SE 2세대</h1>
+                    <div class="small mb-1">하나원페이로 10만원 이상 결제 시 5000 하나머니 적립</div>
+                    <h1 class="display-5 fw-bolder product-name">Apple Watch SE 2</h1>
                     <div class="fs-5 mb-5">
                         <span class="text-decoration-line-through">329,000</span>
                         <span>319,000원</span>
@@ -430,10 +430,10 @@
         // 로딩 모달을 표시
         $('#loadingModal').modal('show');
 
-        // 4초 후에 페이지 이동
+
         setTimeout(function () {
             window.location.href = "/shop/buyItem";  // 컨트롤러의 경로로 이동
-        }, 1800);
+        }, 5000);
 
         // 상품명과 가격 정보를 가져옴
         let productName = document.querySelector(".product-name").innerText;

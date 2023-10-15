@@ -376,8 +376,8 @@
 <body>
 <%@ include file="/WEB-INF/views/comm/header.jsp" %>
 
-<%--사이드바 시작--%>
 <div class="flex-container">
+    <%--    사이드바시작--%>
     <div class="flex-shrink-0 p-3" style="width: 280px; margin-left: 90px;">
         <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
             <svg class="bi pe-none me-2" width="30" height="24">
@@ -388,76 +388,42 @@
         <ul class="list-unstyled ps-0">
             <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                        data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                        data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
                     하나원페이
                 </button>
+
                 <div class="collapse show" id="home-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-<%--                        <li><a href="/api/linkedAccount"--%>
-<%--                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">연동카드조회</a></li>--%>
-    <li><a href="/hanaOnePay/selectPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>
-    <li><a href="/hanaOnePay/selectHanaPayAccount" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 계좌</a></li>
+                        <%--                    <li><a href="/api/linkedAccount" class="link-body-emphasis d-inline-flex text-decoration-none rounded">연동카드조회</a></li>--%>
+                        <%--                    <li><a href="/hanaOnePay/selectPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>--%>
+                        <li><a href="/hanaOnePay/selectHanaPayCard"
+                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>
+                            <li><a onclick="fetchAccountData()"
+                                   class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+                                   style="cursor: pointer;">간편결제 계좌</a></li>
                     </ul>
                 </div>
             </li>
             <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                         data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-                    거래내역조회
+                    내 소비 분석
                 </button>
                 <div class="collapse" id="dashboard-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">월사용금액
-                            조회</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">명세서 조회</a>
-                        </li>
-                        <li><a href="#"
-                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>
-                        <li><a href="#"
-                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>
+                        <li><a href="/api/payments-by-month?month=09"
+                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">소비레포트</a></li>
+                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">소비성향테스트</a></li>
+                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>--%>
+                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>--%>
                     </ul>
                 </div>
             </li>
-            <li class="mb-1">
-                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                        data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-                    내 소비분석
-                </button>
-                <div class="collapse" id="orders-collapse">
-                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New</a>
-                        </li>
-                        <li><a href="#"
-                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Processed</a></li>
-                        <li><a href="#"
-                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Shipped</a></li>
-                        <li><a href="#"
-                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Returned</a></li>
-                    </ul>
-                </div>
-            </li>
+
             <li class="border-top my-3"></li>
-            <li class="mb-1">
-                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                        data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-                    Account
-                </button>
-                <div class="collapse" id="account-collapse">
-                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New...</a>
-                        </li>
-                        <li><a href="#"
-                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Profile</a></li>
-                        <li><a href="#"
-                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Settings</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign
-                            out</a></li>
-                    </ul>
-                </div>
-            </li>
         </ul>
     </div>
-    <%--사이드바 끝--%>
+    <%--    사이드바끝--%>
 
     <%--간편결제 등록 카드 화면 조회--%>
     <div id="Accordion_wrap" class="AccAccordion">
@@ -529,14 +495,14 @@
                 <form id="auth-form">
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col">
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>통신사</option>
-                                    <option value="1">SKT</option>
-                                    <option value="2">KT</option>
-                                    <option value="3">LG U+</option>
-                                </select>
-                            </div>
+<%--                            <div class="col">--%>
+<%--                                <select class="form-select" aria-label="Default select example">--%>
+<%--                                    <option selected>통신사</option>--%>
+<%--                                    <option value="1">SKT</option>--%>
+<%--                                    <option value="2">KT</option>--%>
+<%--                                    <option value="3">LG U+</option>--%>
+<%--                                </select>--%>
+<%--                            </div>--%>
                             <div class="col">
                                 <select class="form-select" aria-label="Default select example" id="phone-prefix">
                                     <option selected>010</option>
@@ -597,6 +563,29 @@
         crossorigin="anonymous"></script>
 
 <script>
+    function fetchAccountData() {
+        fetch(`/api/account-data`, {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({"banks": ["woori", "shinhan", "KB"]})  //모든 은행의 계좌를 조회
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // 계좌 정보를 화면에 출력하는 코드
+                // 예: 계좌 정보를 테이블에 추가
+                sessionStorage.setItem('accountData', JSON.stringify(data));
+
+                // 계좌 조회가 성공적으로 완료되었으므로 해당 경로로 리디렉션
+                window.location.href = "/hanaOnePay/selectHanaPayAccount";
+            })
+            .catch(error => {
+                console.error("계좌 정보 조회 중 오류 발생:", error);
+            });
+    }
+
     $(".que").click(function () {
         $(this).next(".anw").stop().slideToggle(300);
         $(this).toggleClass('on').siblings().removeClass('on');

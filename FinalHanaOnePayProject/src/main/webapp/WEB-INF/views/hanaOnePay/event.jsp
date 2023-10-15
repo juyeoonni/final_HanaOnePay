@@ -357,6 +357,28 @@
             align-items: center;
             margin-left: 570px;
         }
+
+        /* Hover Effect for Event Block */
+        .eventBlock {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .eventBlock:hover {
+            transform: scale(1.05); /* Increase the size to 105% on hover */
+        }
+
+        /* Styling for eventName link */
+        .eventName a {
+            color: black; /* Your desired text color */
+            text-decoration: none; /* Removes underline */
+            display: block; /* Makes the a tag behave like a block element */
+        }
+
+        /* Change color on hover */
+        .eventName a:hover {
+            color: #ff4500; /* Your desired hover color */
+        }
+
     </style>
 
 </head>
@@ -365,209 +387,177 @@
 <%@ include file="/WEB-INF/views/comm/header.jsp" %>
 
 <div class="flex-container">
-<%--    사이드바시작--%>
+    <%--    사이드바시작--%>
     <div class="flex-shrink-0 p-3" style="width: 280px; margin-left: 90px;">
         <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
             <svg class="bi pe-none me-2" width="30" height="24">
                 <use xlink:href="#bootstrap"/>
             </svg>
-            <span class="fs-5 fw-semibold">마이하나</span>
+            <span class="fs-5 fw-semibold">이벤트</span>
         </a>
         <ul class="list-unstyled ps-0">
             <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                         data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
-                    하나원페이
+                    이벤트
                 </button>
 
                 <div class="collapse show" id="home-collapse">
-                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                         <%--                    <li><a href="/api/linkedAccount" class="link-body-emphasis d-inline-flex text-decoration-none rounded">연동카드조회</a></li>--%>
                         <%--                    <li><a href="/hanaOnePay/selectPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>--%>
                         <li><a href="/hanaOnePay/selectHanaPayCard"
-                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>
+                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">진행중인 이벤트</a></li>
                         <li><a onclick="fetchAccountData()"
                                class="link-body-emphasis d-inline-flex text-decoration-none rounded"
-                               style="cursor: pointer;">간편결제 계좌</a></li>
+                               style="cursor: pointer;">종료된 이벤트</a></li>
                     </ul>
                 </div>
             </li>
-            <li class="mb-1">
-                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                        data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-                    내 소비 분석
-                </button>
-                <div class="collapse" id="dashboard-collapse">
-                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="/api/payments-by-month?month=09"
-                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">소비레포트</a></li>
-                                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">소비성향테스트</a></li>
-                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>--%>
-                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>--%>
-                    </ul>
-                </div>
-            </li>
+
 
             <li class="border-top my-3"></li>
         </ul>
     </div>
-<%--    사이드바끝--%>
+    <%--    사이드바끝--%>
 
     <div class="mypageMain">
         <div class="mypageName">
-            <div style="font-size: 30px">마이하나페이지</div>
-            <div style="color: #959595">나만의 카드 생활</div>
+            <div style="font-size: 30px">진행중인이벤트</div>
+            <div style="color: #959595">하나원페이에서 이벤트 혜택을 누리세요</div>
         </div>
         <br>
-
-
-        <div>
-            ${sessionScope.name}님은 일반고객이십니다.
-        </div>
-
         <br>
 
-        <c:set var="card1" value="${cardInfos[0]}"/>
-        <c:set var="card2" value="${cardInfos[1]}"/>
-
-        <c:set var="cardPayLog1" value="${thisMonthTransData[card1.cardNumber]}"/>
-        <c:set var="cardPayLog2" value="${thisMonthTransData[card2.cardNumber]}"/>
-        <div class="flex-container">
-            <div class="myCardInfo">
-                <div class=" fs-3 mx-auto mt-2">대표카드</div>
-                <div class="dropdown" style="margin-left: 300px;">
-                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                        카드 선택
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" onclick="showCardInfo(0)">${card1.cardName}</a></li>
-                        <li><a class="dropdown-item" onclick="showCardInfo(1)">${card2.cardName}</a></li>
-                    </ul>
+        <%--        이벤트캐러셀--%>
+        <div id="carouselExampleRide" class="carousel slide" data-bs-ride="carousel" style="width: 90.3%">
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="1000">
+                    <img src="/img/shop/eventSlide1.png" class="d-block w-100" alt="...">
                 </div>
-                <div class="mainCard mt-4" style="font-size: 20px" id="cardInfoDiv">
-                    <img src="/img/${cardInfos[0].cardName}.png" class="d-block payCardImg" id="cardImage"
-                         alt="${cardInfos[0].cardName}">
-
-                    <br>
-
-                    <div class="flex-container custom-flex-container">
-                        <div id="cardName" style="color: #666666; font-size: 18px;">${card1.cardName}</div>
-                        <span id="monthlyUsageTitle" style="color: #666666; font-size: 18px;">이번달 사용금액</span> <br>
-                        <span id="monthlyUsage"
-                              style="font-size: 25px">${thisMonthTotalAmounts[card1.cardNumber]}원 ></span>
-
-                    </div>
-
+                <div class="carousel-item">
+                    <img src="/img/shop/eventSlide2.png" class="d-block w-100" alt="...">
                 </div>
-
-
-                <br><br>
-                <%--            <div class="btn-group" role="group" aria-label="Basic outlined example" style="border: none">--%>
-                <%--                <button type="button" class="btn btn-outline-primary" style="background-color: #00857E; color: white;">카드관리</button>--%>
-                <%--                <button type="button" class="btn btn-outline-primary" style="background-color: #00857E; color: white;">받은혜택</button>--%>
-                <%--                <button type="button" class="btn btn-outline-primary" style="background-color: #00857E; color: white;">한도조회</button>--%>
-                <%--            </div>--%>
-
-
-            </div>
-
-            <div class="monthlyCardInfo fs-3">
-                <p class="mt-2">내 정보 관리</p>
-                <img class="proImg" src="/img/myprofile.png" alt=""><br>
-
-                <div class="proInfo">
-                    연락처: <span id="phone">${sessionScope.phoneNumber}</span><br>
-                    이메일: ${sessionScope.email} <br>
-                </div>
-
-                <div class="withdralDate"
-                     style="text-align: left; margin-left: 11%; margin-top: 3%; margin-bottom: 3%; font-size: 18px">
-                    <div class="holicontainer">
-                        <div class="profile">
-                            <a href="/customer/customer_myPage">개인정보 변경</a>
-                        </div>
-                        <div class="profile">
-                            마케팅 수신동의 변경
-                        </div>
-                    </div>
+                <div class="carousel-item">
+                    <img src="/img/shop/eventSlide3.png" class="d-block w-100" alt="...">
                 </div>
             </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
+
+
 
         <br><br>
 
-        <div class="flex-container">
-            <div class="creditCardWithDraw" >
-                <div style="margin-top: 7px;">다가오는 결제일</div>
-                <div payCreditCardList style="margin-top: 13px;">
-                    <div class="flex-container" style="font-size: 15px; margin-left: 25px;">
-                        <p style="color: #959595; margin-right: 15px;">결제계좌 </p>
-                        <p id="cardNumber">하나은행 ${creditCards[0].cardNumber}</p>
-                    </div> <br>
 
-                    <div class="flex-container" style="font-size: 15px; margin-left: 25px; margin-top: -30px;">
-                        <p style="color: #959595; margin-right: 15px;">결제일 </p> 매월${creditCards[0].paymentDate}일</div><br>
-                    <div class="flex-container" style="font-size: 15px; margin-left: 25px; margin-top: -30px;">
-                        <p style="color: #959595; margin-right: 15px;">예상 결제금액 </p> <div id="totalSpentAmount">총 ${totalSpentAmount}원</div></div><br>
-                    <br>
-                </div>
-            </div>
-
-            <div class="myHanaMoney">
-                <div style="margin-top: 7px;"> 하나머니</div>
-                <div class="flex-container" style="margin-left: 90px; margin-top: 12px;">
-                        <img style="width: 50px; height: 50px;" src="/img/hanaMoney.png" alt="">
-                        <div id="hanaMoney" style="margin-top: 10px;">${hanaMoney} 원</div>
-                </div>
-                <div class="profile" style="margin-left: 90px; margin-top: 10px;">등록계좌 관리</div>
-            </div>
-        </div>
-
-
-        <a href="/api/payments-by-month?month=09" style="text-decoration: none; color: inherit;">
+        <a href="/shop/shopMain" style="text-decoration: none; color: inherit;">
             <div class="adPayTag">
-                <img src="/img/adpayTag.png" style="width: 37px; height: 37px;">
-                최근 내 지출 패턴을 확인하고 지금 ${sessionScope.name}님의 <span class="tagcolor"
-                                                                 style="color: #d14369; font-size: 20px; margin-left: 4px">소비태그</span>를
-                확인해보세요! >
+                <img src="/img/eventTag.png" style="width: 37px; height: 37px;">
+                <span class="tagcolor"
+                      style="color: #d14369; font-size: 20px; margin-left: 4px">하나원쇼핑</span>에서 쇼핑하고 하나머니 받아가세요 ! >
             </div>
         </a>
 
         <br>
-        <div class="recentCardUse">
-            <div class="using" style="font-size: 20px">최근 카드 이용내역
-                <button class="plusBtn">더보기 +</button>
 
-                <%--            토글버튼--%>
-                <div class="toggleContainer">
-                    잔액숨기기
-                    <input type="checkbox" id="toggle" hidden>
-                    <label for="toggle" class="toggleSwitch">
-                        <span class="toggleButton"></span>
-                    </label>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" style="width: 90.3%;">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" style="font-size: 18px;" >하나원페이</a>
+                        </li>
+
+                        <li class="nav-item dropdown" style="margin-left: -3px;">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                진행중인 이벤트
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">진행중인 이벤트</a></li>
+                                <li><a class="dropdown-item" href="#">종료된 이벤트</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">하나원쇼핑</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" aria-label="Search">
+                        <button style="width: 100px;" class="btn btn-outline-success" type="submit">조회</button>
+                    </form>
                 </div>
             </div>
+        </nav>
 
-            <div>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>결제일시</th>
-                        <th>거래처</th>
-                        <th>카드번호</th>
-                        <th>상태</th>
-                        <th>거래금액</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!-- 이 부분은 JavaScript에서 동적으로 채워집니다. -->
-                    </tbody>
-                </table>
-            </div>
+        <hr style="width: 90.3%; border-width: 4px;">
+        <div class="eventBlock" style="display: flex;">
+            <div class="eventImg" style="margin-left: 3%; "><img src="/img/event1.png" alt=""></div>
+            <div class="eventName" style="margin-left: 12%; margin-top: 40px;">가을엔 이런 혜택 어텀?</div>
+            <div class="eventperiod" style="margin-left: 30%; margin-top: 40px;">2023.10.01~2023.10.31</div>
         </div>
+        <hr style="width: 90.3%; border-width: 1px;">
+        <div class="eventBlock" style="display: flex;">
+            <div class="eventImg" style="margin-left: 3%; "><img src="/img/event2.png" alt=""></div>
+            <div class="eventName" style="margin-left: 12%; margin-top: 40px;">연말엔 나도 해외여행! 하나로 한번에 준비</div>
+            <div class="eventperiod" style="margin-left: 20%; margin-top: 40px;">2023.10.01~2023.12.31</div>
+        </div>
+        <hr style="width: 90.3%; border-width: 1px;">
+        <div class="eventBlock" style="display: flex;">
+            <div class="eventImg" style="margin-left: 3%; "><img src="/img/event3.png" alt=""></div>
+            <div class="eventName" style="margin-left: 12%; margin-top: 40px;">대학교 등록금 무이자 할부 혜택</div>
+            <div class="eventperiod" style="margin-left: 25.5%; margin-top: 40px;">2023.10.01~2023.10.31</div>
+        </div>
+        <hr style="width: 90.3%; border-width: 1px;">
+        <div class="eventBlock" style="display: flex;">
+            <div class="eventImg" style="margin-left: 3%; "><img src="/img/event4.png" alt=""></div>
+            <div class="eventName" style="margin-left:12%; margin-top: 40px;">하나원쇼핑 5만원 이상 구매시 하나머니 적립!</div>
+            <div class="eventperiod" style="margin-left: 18%; margin-top: 40px;">2023.10.01~2023.10.31</div>
+        </div>
+        <hr style="width: 90.3%; border-width: 1px;">
+        <div class="eventBlock" style="display: flex;">
+            <div class="eventImg" style="margin-left: 3%; "><img src="/img/event5.png" alt=""></div>
+            <div class="eventName" style="margin-left: 12%; margin-top: 40px;">이자율을 낮추는 꿀팁!</div>
+            <div class="eventperiod" style="margin-left: 31%; margin-top: 40px;">2023.10.01~2023.10.31</div>
+        </div>
+        <hr style="width: 90.3%; border-width: 1px;">
+        <nav aria-label="Page navigation example" style="margin-left: 28%;">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                <li class="page-item"><a class="page-link" href="#">6</a></li>
+                <li class="page-item"><a class="page-link" href="#">7</a></li>
+                <li class="page-item"><a class="page-link" href="#">8</a></li>
+                <li class="page-item"><a class="page-link" href="#">9</a></li>
+                <li class="page-item"><a class="page-link" href="#">10</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
 
-<br><br><br><br><br>
+        <br><br><br><br><br>
     </div>
 </div>
 

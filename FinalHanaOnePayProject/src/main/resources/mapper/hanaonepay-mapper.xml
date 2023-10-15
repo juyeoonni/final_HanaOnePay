@@ -87,6 +87,7 @@
         SELECT *
         FROM hana_card_payment_log
         WHERE cardNumber = #{cardNumber}
+        ORDER BY payDate DESC
     </select>
 
 <!--    하나계좌 거래내역 전체 조회-->

@@ -433,6 +433,7 @@
 <%@ include file="/WEB-INF/views/comm/header.jsp" %>
 
 <div class="flex-container">
+    <%--    사이드바시작--%>
     <div class="flex-shrink-0 p-3" style="width: 280px; margin-left: 90px;">
         <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
             <svg class="bi pe-none me-2" width="30" height="24">
@@ -443,9 +444,10 @@
         <ul class="list-unstyled ps-0">
             <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                        data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                        data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
                     하나원페이
                 </button>
+
                 <div class="collapse show" id="home-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                         <%--                    <li><a href="/api/linkedAccount" class="link-body-emphasis d-inline-flex text-decoration-none rounded">연동카드조회</a></li>--%>
@@ -461,54 +463,23 @@
             <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                         data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-                    거래내역조회
+                    내 소비 분석
                 </button>
                 <div class="collapse" id="dashboard-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                         <li><a href="/api/payments-by-month?month=09"
-                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">내 지출 조회</a></li>
-                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">명세서 조회</a></li>--%>
+                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">소비레포트</a></li>
+                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">소비성향테스트</a></li>
                         <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>--%>
                         <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>--%>
                     </ul>
                 </div>
             </li>
-            <li class="mb-1">
-                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                        data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-                    내 소비분석
-                </button>
-                <div class="collapse" id="orders-collapse">
-                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="/api/payments-by-month?month=09"
-                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">소비레포트</a></li>
-                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Processed</a></li>--%>
-                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Shipped</a></li>--%>
-                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Returned</a></li>--%>
-                    </ul>
-                </div>
-            </li>
+
             <li class="border-top my-3"></li>
-            <li class="mb-1">
-                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                        data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-                    Account
-                </button>
-                <div class="collapse" id="account-collapse">
-                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New...</a>
-                        </li>
-                        <li><a href="#"
-                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Profile</a></li>
-                        <li><a href="#"
-                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Settings</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign
-                            out</a></li>
-                    </ul>
-                </div>
-            </li>
         </ul>
     </div>
+    <%--    사이드바끝--%>
 
     <div class="mypageMain">
         <div class="mypageName">
@@ -524,6 +495,7 @@
             </div>
             <div class="cardDesc">
                 ${selectedCardName}<br>
+
                 <%--               [본인] ${selectedCardNumber.substring(0, 5)} **** - **** ${selectedCardNumber.substring(selectedCardNumber.length() - 5)}--%>
             </div>
             <button type="button" class="changeCardBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -610,33 +582,34 @@
         <%--            </div>--%>
         <%--        </c:forEach>--%>
 
-        <div id="transactionTable_wrapper" class="dataTables_wrapper no-footer">
-            <table id="transactionTable" class="display" style="width: 90.3%;">
-                <thead>
-                <tr>
-                    <th>거래 ID</th>
-                    <th>카드 번호</th>
-                    <th>결제 날짜</th>
-                    <th>결제 금액</th>
-                    <th>사업 코드</th>
-                    <th>상점</th>
-                    <th>결제 상태</th>
-                    <th>결제 유형</th>
-                </tr>
-                </thead>
-                <tbody>
+            <div id="transactionTable_wrapper" class="dataTables_wrapper no-footer">
+                <table id="transactionTable" class="display" style="width: 90.3%;">
+                    <thead>
+                    <tr>
+                        <th>승인번호</th>
+                        <th>카드번호</th>
+                        <th>승인일시</th>
+                        <th>결제금액</th>
+    <%--                    <th>사업코드</th>--%>
+                        <th>가맹점명</th>
+                        <th>승인상태</th>
+                        <th>결제방법</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-                </tbody>
-            </table>
-        </div>
+                    </tbody>
+                </table>
+            </div>
 
     </div>
 
 </div>
 
 </div>
-
-<%@ include file="/WEB-INF/views/comm/footer.jsp" %>
+<br><br><br><br>
+<img src="/img/footer.png" style="margin-left: 9%;">
+<%--<%@ include file="/WEB-INF/views/comm/footer.jsp" %>--%>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
@@ -832,15 +805,34 @@
         data: transactions,
         columns: [
             {data: 'payId'},
-            {data: 'cardNumber'},
+            {
+                data: 'cardNumber',
+                render: function (data, type, row) {
+                    // 카드번호 가운데를 *로 가리기
+                    if (data.length >= 8) {
+                        var firstDigits = data.substring(0, 4);  // 처음 4자리
+                        var lastDigits = data.substring(data.length - 4);  // 마지막 4자리
+                        var masked = firstDigits + '-****-' + '****-' + lastDigits;  // 중간을 *로 가리기
+                        return masked;
+                    }
+                    // 카드 번호가 기대한 형식이 아니면 원본 데이터 반환
+                    return data;
+                }
+            },
             {data: 'payDate'},
-            {data: 'payAmount'},
-            {data: 'businessCode'},
+            {
+                data: 'payAmount',
+                render: function(data, type, row) {
+                    // 정규식을 사용하여 숫자 세자리마다 콤마 추가
+                    return data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                }
+            },
             {data: 'businessMall'},
             {data: 'payStatus'},
             {data: 'payType'}
         ]
     });
+
 
     var selectedCardImage = document.querySelector('.selectCard .TransPageCardImg img');
     var selectedCardName = document.querySelector('.selectCard .cardDesc').textContent.trim();

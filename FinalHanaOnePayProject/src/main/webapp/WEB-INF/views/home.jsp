@@ -247,11 +247,11 @@
                 <div style="background-color: #00857E; width: 600px; height: 50px; margin-top: 22px; display: flex; justify-content: space-around; align-items: center; font-size: 15px;">
                     <a href="#" style="text-decoration: none; color: #FFFFFF;">하나원페이</a>
                     <span style="color: #FFFFFF;">|</span>
-                    <a href="#" style="text-decoration: none; color: #FFFFFF;">승인내역</a>
+                    <a href="/hanaOnePay/selectHanaPayCard" style="text-decoration: none; color: #FFFFFF;">결제수단조회</a>
                     <span style="color: #FFFFFF;">|</span>
                     <a href="#" style="text-decoration: none; color: #FFFFFF;">즉시결제</a>
                     <span style="color: #FFFFFF;">|</span>
-                    <a href="#" style="text-decoration: none; color: #FFFFFF;">한도확인</a>
+                    <a href="/hanaOnePay/event" style="text-decoration: none; color: #FFFFFF;">이벤트</a>
                 </div>
             </div>
 
