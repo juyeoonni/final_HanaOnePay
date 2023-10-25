@@ -18,40 +18,40 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #00857E; /* 배경색 설정 */
+    background-color: #00857E;
 }
 
 .customerInfo {
     width: 80%;
-    padding: 20px; /* 패딩 추가 */
-    background-color: #fff; /* 배경색 흰색으로 설정 */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* 그림자 효과 추가 */
-    border-radius: 10px; /* 모서리 둥글게 설정 */
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 10px;
 }
 
 .customerInfo h2 {
     text-align: center;
-    color: #333; /* 제목 색 설정 */
-    border-bottom: 2px solid #ddd; /* 제목 아래 경계선 추가 */
-    padding-bottom: 10px; /* 제목 아래 패딩 추가 */
-    margin-bottom: 20px; /* 제목 아래 마진 추가 */
+    color: #333;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .customerInfo p {
-    margin-bottom: 10px; /* 각 요소들 사이의 간격 설정 */
+    margin-bottom: 10px;
 }
 
 .customerInfo a {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #00857E; /* 버튼 배경색 설정 */
-    color: #fff; /* 텍스트 색 흰색으로 설정 */
-    border-radius: 5px; /* 버튼 모서리 둥글게 설정 */
-    text-decoration: none; /* 밑줄 제거 */
+    background-color: #00857E;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
 }
 
 .customerInfo a:hover {
-    background-color: #BCD9D3; /* 마우스 오버시 버튼 배경색 변경 */
+    background-color: #BCD9D3;
 }
 
 </style>

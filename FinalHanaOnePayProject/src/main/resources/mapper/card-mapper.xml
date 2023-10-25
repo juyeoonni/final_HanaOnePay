@@ -20,8 +20,6 @@
         </foreach>
     </select>
 
-
-
     <select id="selectCardByBankCode2" resultType="com.kopo.finalhanaonepayproject.card.model.DTO.CardDTO">
         SELECT *
         FROM card

@@ -85,7 +85,7 @@
     <img class="payFail" src="/img/payFail.png" alt="payFail">
     <br>
     <div class="payFailMsg">
-        결제 승인 거절! 안돼 돌아가.
+        결제 승인 거부
     </div>
 </div>
 

@@ -57,7 +57,6 @@ public class CardService {
                     tableCode = "KB";
                     break;
                 default:
-                    // Handle default case
                     break;
             }
 
@@ -70,7 +69,6 @@ public class CardService {
 
     // 간편 결제 계좌
     public String processAccountPayment(String accountNumber, String identityNumber, BigDecimal productPrice) {
-        // table 변수 값 설정
         String table = determineTableByAccountNumber(accountNumber);
 
         // 잔액 조회
@@ -143,10 +141,6 @@ public class CardService {
                     // 신용카드 한도에서 결제 금액만큼 차감
                     cardDAO.updateCreditCardLimitByCardNumberAndIdentityNumber(cardNumber, identityNumber, tableCode, productPrice);
 
-//                    // 결제 승인 후 미결제 금액 관리 테이블에 해당 금액을 기록하는 로직
-//                    String withdrawalDate = LocalDate.now().plusMonths(1).withDayOfMonth(13).toString(); // 다음 달 13일로 설정.
-//                    cardDAO.insertPendingPayment(cardNumber, productPrice, withdrawalDate, "Pending", tableCode);
-
                     // 신용카드 거래 내역 생성 및 저장
                     insertCardPaymentLog(cardNumber, productPrice, tableCode);
 
@@ -198,7 +192,6 @@ public class CardService {
                 cardDAO.updateAccountBalanceByCardNumber(tableCode, pendingPayment.getCardNumber(), newBalance);
                 cardDAO.updatePayStatusToApproval(tableCode, pendingPayment.getPendingId());
             } else {
-                // 잔액이 부족한 경우에 대한 처리 (예: 알림 전송 등)
             }
         }
     }
@@ -316,7 +309,6 @@ public class CardService {
     public List<MonthTransDTO> getAllOrgTranDatabyMonth() {
         List<MonthTransDTO> result = cardDAO.getAllOrgTranDatabyMonth();
 
-        // 로그로 결과 출력
         logger.info("Retrieved Data: " + result);
 
         return result;
@@ -344,8 +336,6 @@ public class CardService {
     public void deductAmountFromLinkedAccount(String cardNumber, BigDecimal totalSpentAmount, String tableCode) {
         cardDAO.deductAmountFromLinkedAccount(cardNumber, totalSpentAmount, tableCode);
     }
-
-
 
 
 }

@@ -18,7 +18,6 @@ import java.util.Map;
 public class NaverOcrController {
     @PostMapping("/authenticateAction")
     public ResponseEntity<Map<String, String>> authenticate(@RequestParam("image") MultipartFile imageFile) {
-        // 업로드된 파일을 임시 파일에 저장
         File tempFile = new File("temp.png");
         try (OutputStream os = new FileOutputStream(tempFile)) {
             os.write(imageFile.getBytes());
@@ -27,12 +26,9 @@ public class NaverOcrController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
 
-        // Clova OCR API 호출하여 response get
         Map<String, String> extractedData = ClovaOCRTemplate.extractText(tempFile.getAbsolutePath());
         System.out.println("Extracted Data: " + extractedData);
-        // Delete the temporary file
         tempFile.delete();
-
         return ResponseEntity.ok(extractedData);
     }
 

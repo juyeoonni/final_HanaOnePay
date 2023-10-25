@@ -5,11 +5,6 @@
 
 <mapper namespace="com.kopo.cardserver.model.DAO.CardDAO">
 
-<!--    <resultMap id="chartDTOResultMap" type="com.kopo.cardserver.model.DTO.ChartDTO">-->
-<!--        <result column="businessCode" property="businessCode" />-->
-<!--        <result column="payAmount" property="payAmount" />-->
-<!--    </resultMap>-->
-
     <!--    우리카드리스트-->
     <select id="getWooriCardPaymentsByMonth" resultType="com.kopo.cardserver.model.DTO.ChartDTO">
         SELECT businessCode, SUM(payAmount) as payAmount
@@ -86,8 +81,6 @@ SELECT TO_NUMBER(TO_CHAR(TO_DATE(payDate, 'YYYY-MM-DD HH24:MI:SS'), 'MM')) AS mo
         END
         ]]>
     </select>
-
-
 
 </mapper>
 

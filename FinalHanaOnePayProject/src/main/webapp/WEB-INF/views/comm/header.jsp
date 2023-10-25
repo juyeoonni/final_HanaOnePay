@@ -57,13 +57,9 @@
             <ul class="nav">
                 <li><a href="/home" class="nav-link px-2 link-secondary" onclick="return checkLogin();">Home</a></li>
 
-<%--                <li><a href="/card/selectCardList" class="nav-link px-2 link-secondary" onclick="return checkLogin();">카드</a></li>--%>
-
-<%--                <li><a href="/customer/selectAllCustomer" class="nav-link px-2" onclick="return checkLogin();">조회</a></li>--%>
                 <li><a href="/shop/shopMain" class="nav-link px-2" onclick="return checkLogin();">라이프</a></li>
 
                 <% if (name != null) { %>
-<%--                <li><a href="/customer/customer_myHana" class="nav-link px-2" >마이하나</a></li>--%>
                 <li><a href="/customer/customer_myHanaPage" class="nav-link px-2">마이페이</a></li>
                 <li><a href="/customer/customer_myHanaPage" class="nav-link px-2">마이하나</a></li>
                 <% } %>
@@ -78,7 +74,7 @@
         // 세션이 없을 경우 (로그인이 되어있지 않을 경우)
         if (!<c:out value="${sessionScope.name ne null}"/>) {
             alert("로그인이 필요합니다.");
-            return false; // 기본 액션(이동 등)을 막기 위해 false를 리턴
+            return false;
         }
         return true;
     }

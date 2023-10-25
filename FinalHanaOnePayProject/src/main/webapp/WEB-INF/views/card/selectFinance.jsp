@@ -32,11 +32,6 @@
         display: block;
         margin-top: 5px;
     }
-
-
-
-
-
     </style>
 
 </head>
@@ -111,7 +106,6 @@
 선택기관</br>
 <form id="selectedBankForm" action="/card/joinHanaOnePay" method="POST">
 
-
 <div id="selected-bank-container"></div>
 <div>
 <a href="/api/loadCardData">
@@ -133,50 +127,41 @@ function displaySelectedBank(imgSrc, bankNameText) {
 
     // 이미 추가된 은행인지 확인
     if (existingBankContainer) {
-        // 이미 선택된 은행 이미지라면 삭제
         selectedBankContainer.removeChild(existingBankContainer);
-        return; // 추가적인 동작을 수행하지 않기 위해 함수를 종료
+        return;
     }
 
-    // 아직 선택되지 않은 은행 이미지라면 추가
     let bankImg = document.createElement('img');
     bankImg.setAttribute('src', imgSrc);
     bankImg.style.width = '50px';
     bankImg.style.height = '50px';
 
-    // 은행 이름을 표시하는 엘리먼트 생성
     let bankNameElem = document.createElement('span');
     bankNameElem.innerText = bankNameText;
-    bankNameElem.classList.add('bank-name');  // 스타일을 적용하기 위한 클래스 추가
+    bankNameElem.classList.add('bank-name');
 
-    // 선택된 은행의 이미지와 이름을 함께 감싸는 컨테이너 생성
     let bankContainer = document.createElement('div');
     bankContainer.setAttribute('data-bank-name', bankNameText);
     bankContainer.style.display = 'inline-block';
     bankContainer.style.marginRight = '10px';
-    bankContainer.style.cursor = 'pointer';  // 커서를 포인터로 설정하여 클릭 가능하게 보이게 합니다.
-    bankContainer.style.textAlign = 'center';  // 컨테이너 내부의 이미지와 텍스트를 중앙 정렬
+    bankContainer.style.cursor = 'pointer';
+    bankContainer.style.textAlign = 'center';
 
-    // 선택된 이미지를 다시 클릭하면 컨테이너를 삭제하는 이벤트 리스너를 추가
     bankContainer.addEventListener('click', function() {
         selectedBankContainer.removeChild(bankContainer);
     });
 
-    // 컨테이너 안에 이미지와 이름 추가
     bankContainer.appendChild(bankImg);
     bankContainer.appendChild(bankNameElem);
 
-    // 최종적으로 컨테이너를 selectedBankContainer에 추가
     selectedBankContainer.appendChild(bankContainer);
 
-     // 이미지 및 은행 이름 추가 부분 아래에 hidden input 추가
         let hiddenInput = document.createElement('input');
             hiddenInput.setAttribute('type', 'hidden');
-            hiddenInput.setAttribute('name', 'selectedBankCodes'); // 이 부분이 중요합니다.
-            hiddenInput.setAttribute('value', bankNameText); // bankNameText는 실제 코드로 대체해야 할 수도 있습니다.
+            hiddenInput.setAttribute('name', 'selectedBankCodes');
+            hiddenInput.setAttribute('value', bankNameText);
             document.getElementById('selectedBankForm').appendChild(hiddenInput);
 }
-
 
 </script>
 

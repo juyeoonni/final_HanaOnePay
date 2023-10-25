@@ -223,22 +223,6 @@
         priceElement.textContent = formattedPrice + "원";
     }
 
-    // window.onload = function() {
-    //     let priceElement = document.getElementById("productPrice");
-    //     let rawPrice;
-    //
-    //     // sessionScope에서 productPrice 값을 확인
-    //     if (priceElement.textContent.trim() !== "") {
-    //         rawPrice = priceElement.textContent.trim();
-    //     } else {
-    //         // sessionScope의 productPrice 값이 존재하지 않는 경우, sessionStorage에서 가져옵니다.
-    //         rawPrice = sessionStorage.getItem("productPrice");
-    //     }
-    //
-    //     let formattedPrice = numberWithCommas(rawPrice);
-    //     priceElement.textContent = formattedPrice + "원";
-    // }
-
     document.getElementById('payStart').addEventListener('click', function() {
         window.location.href = "/shop/shopMain";
     });

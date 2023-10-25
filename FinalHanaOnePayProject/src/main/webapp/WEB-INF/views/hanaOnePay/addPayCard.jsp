@@ -55,7 +55,7 @@
         }
 
         .custom-input {
-            width: 350px !important; /* 원하는 너비로 조정하세요. 예: 100%, 300px 등 */
+            width: 350px !important;
         }
 
         .form-label{
@@ -161,11 +161,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <%--                    <label for="image">이미지 업로드</label>--%>
                         <!-- 이미지 표시 부분 -->
                         <div class="col-md-6">
                             <img id="modalImage" style="max-width: 100%; display: none;">
-
                         </div>
 
                         <div class="row">
@@ -191,8 +189,7 @@
                                 </div>
                             </div>
                             <div class="mb-3 row align-items-center">
-                                <!--<label for="cardNumber" class="form-label col-md-4">cardCode</label>-->
-                                <div class="col-md-4"></div> <!-- 라벨을 숨기기 위한 공간 -->
+                                <div class="col-md-4"></div>
                                 <div class="col-md-8">
                                     <input type="text" class="form-control custom-input" id="cardCode"
                                            placeholder="Enter Card cardCode">
@@ -214,7 +211,6 @@
                                 </div>
                             </div>
                         </div>
-
 
                     </div>
                 </div>
@@ -256,25 +252,21 @@
     }
 
     function maskCVC(input) {
-        // 입력된 값을 가져옵니다.
         const inputValue = input.value;
 
-        // '*'로 대체할 문자열을 생성합니다.
         const maskedValue = '*'.repeat(inputValue.length);
 
-        // 입력란에 '*'로 대체한 값을 설정합니다.
         input.value = maskedValue;
     }
 
 
-    let imageDataURL;  // 이미지의 data URL을 저장할 변수
+    let imageDataURL;
 
-    // 첨부한 이미지 받아오기
     function previewImage(event) {
         const file = event.target.files[0];
 
         if (!file) {
-            document.getElementById('modalImage').style.display = 'none';  // 파일이 없으면 이미지를 숨깁니다.
+            document.getElementById('modalImage').style.display = 'none';
             return;
         }
 
@@ -282,18 +274,16 @@
         reader.onload = function () {
             const output = document.getElementById('modalImage');
             output.src = reader.result;
-            output.style.display = 'block';  // 파일이 있으면 이미지를 보여줍니다.
+            output.style.display = 'block';
         };
         reader.readAsDataURL(file);
     }
 
 
-    // 모달이 보여질 때 이미지를 설정 (Bootstrap 5 이상 필요)
     document.getElementById("exampleModal").addEventListener('shown.bs.modal', function () {
         document.getElementById("modalImage").src = imageDataURL;
     });
 
-    // ocr 처리
     document.querySelector("#uploadButton").addEventListener("click", function (event) {
         event.preventDefault();
 
@@ -313,9 +303,9 @@
                 processData: false,
                 contentType: false,
                 success: function (data) {
-                    console.log(data); // 데이터의 형식 확인
+                    console.log(data);
 
-                    let cardNumber = data.cardNumber; // 예: JSON의 키가 cardNumber인 경우
+                    let cardNumber = data.cardNumber;
                     let cardCode = data.cardCode;
                     let userName = data.userName;
                     let validityPeriod = data.validityPeriod;
@@ -334,14 +324,10 @@
     });
 
     function showAlertAndRedirect() {
-        // 경고 메시지 표시
         alert("[하나원페이] 간편결제 카드가 등록되었습니다.");
-
-        // /home 페이지로 이동
         window.location.href = "/home";
     }
 
-    // '등록' 버튼 클릭 시 동작
     document.querySelector('#ocr-send').addEventListener('click', function () {
         const cardNumberParts = document.getElementById("cardNumber").value.split("-");
         console.log("cardNumberParts: ", cardNumberParts)
@@ -349,19 +335,13 @@
         document.getElementById("cardNumber2").value = cardNumberParts[1];
         document.getElementById("cardNumber3").value = cardNumberParts[2];
         document.getElementById("cardNumber4").value = cardNumberParts[3];
-        // document.getElementById("cvc").value = document.getElementById("cardCode").value;
         document.getElementById("expirationDate").value = document.getElementById("validityPeriod").value;
 
-        // 모달을 닫음
         var modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
         modal.hide();
     });
 
-
-
-
 </script>
-
 
 </body>
 </html>

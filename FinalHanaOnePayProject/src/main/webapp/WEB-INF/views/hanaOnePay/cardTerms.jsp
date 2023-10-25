@@ -47,7 +47,6 @@
       margin-top: 5px;
     }
 
-    /* 추가된 CSS 스타일 */
     table {
       width: 100%;
       border-collapse: collapse;
@@ -77,7 +76,6 @@
 
 <body>
 <div id="terms-content">
-<%--  <div style="background-color: #cfd8dd; border-radius: 7px; height: 50px;">하나카드</div>--%>
   <div class="modal-header" style="margin-top: 20px;">
     <img src="/img/hanaLogo.png" alt="하나원페이 로고" style="margin-right: 10px; width: 45px; height: 45px;">
     <h1 class="modal-title fs-5" id="exampleModalLabel"  style="font-weight: bold; margin-right: 460px; font-size: 22px !important;">하나카드</h1>
@@ -86,8 +84,6 @@
 
   <br>
   <h2 style="color: #00857E;">∎ 모두의 쇼핑 카드 ∎</h2>
-
-
   <div class="container">
     <h3>온라인 쇼핑 적립</h3>
 
@@ -210,7 +206,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
 <script>
   window.onload = function() {
-    // 이 부분에서 스크립트를 로드한 후에 convertToPDF 함수를 호출합니다.
     loadJSPDFLibrary().then(() => {
       convertToPDF();
     });
@@ -218,7 +213,6 @@
 
   function loadJSPDFLibrary() {
     return new Promise((resolve, reject) => {
-      // jsPDF 라이브러리 스크립트를 동적으로 로드합니다.
       const script = document.createElement('script');
       script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.min.js';
       script.onload = resolve;

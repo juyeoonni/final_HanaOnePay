@@ -97,28 +97,20 @@
             display: flex;
         }
 
-        .flex-shrink-0 {
-            /* 필요에 따라 여기에 추가 스타일을 설정하세요 */
-        }
-
         .mypageMain {
-            flex: 1;  /* 나머지 공간을 채우도록 설정 */
-            /* 필요에 따라 여기에 추가 스타일을 설정하세요 */
+            flex: 1;
         }
 
         .mypageMain {
             display: flex;
             flex-direction: column;
             margin-left: 30px;
-            /*align-items: center;*/
-            /*justify-content: center;*/
-            /*height: 100vh;  !* 높이를 화면 높이와 동일하게 설정. 필요에 따라 조정할 수 있습니다. *!*/
         }
 
         .mypageName {
             margin-right: 130px;
-            text-align: center;  /* 텍스트 중앙 정렬 */
-            width: 100%;         /* 너비를 100%로 설정하여 왼쪽 및 오른쪽 여백 없음 */
+            text-align: center;
+            width: 100%;
         }
 
         .mypageMain > .mypageName {
@@ -132,7 +124,7 @@
             background-color: whitesmoke;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             border-radius: 20px;
-            text-align: center;  /* 텍스트 중앙 정렬 */
+            text-align: center;
         }
 
         .monthlyCardInfo{
@@ -144,7 +136,7 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             border-radius: 20px;
             margin-right: 130px;
-            text-align: center;  /* 텍스트 중앙 정렬 */
+            text-align: center;
         }
 
         table {
@@ -174,8 +166,8 @@
         }
 
         .mainCard{
-            display: flex; /* flex를 사용하여 아이템들을 가로로 나열합니다 */
-            align-items: center; /* 아이템들을 수직 중앙에 배치합니다 */
+            display: flex;
+            align-items: center;
             text-align: left;
         }
 
@@ -196,13 +188,11 @@
             align-items: center;
             background-color: white;
             padding: 20px;
-            border-radius: 15px;  /* 둥근 모서리 */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* 그림자 효과 */
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 60%;
 
         }
-
-
 
     </style>
 
@@ -224,8 +214,6 @@
                 </button>
                 <div class="collapse show" id="home-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <%--                    <li><a href="/api/linkedAccount" class="link-body-emphasis d-inline-flex text-decoration-none rounded">연동카드조회</a></li>--%>
-                        <%--                    <li><a href="/hanaOnePay/selectPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>--%>
                         <li><a href="/hanaOnePay/selectHanaPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>
                         <li><a onclick="fetchAccountData()" class="link-body-emphasis d-inline-flex text-decoration-none rounded" style="cursor: pointer;">간편결제 계좌</a></li>
                     </ul>
@@ -238,9 +226,6 @@
                 <div class="collapse" id="dashboard-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                         <li><a href="/hanaOnePay/payHistory" class="link-body-emphasis d-inline-flex text-decoration-none rounded">내 지출 조회</a></li>
-                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">명세서 조회</a></li>--%>
-                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>--%>
-                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>--%>
                     </ul>
                 </div>
             </li>
@@ -281,18 +266,9 @@
         </div>
         <br>
 
-
         <div>
             ${sessionScope.name}님은 일반고객이십니다.
         </div>
-
-
-
-
-
-
-
-
 
     </div>
 </div>
@@ -301,25 +277,5 @@
 
 <%@ include file="/WEB-INF/views/comm/footer.jsp"%>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-
-<script>
-
-    /
-
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </body>
 </html>

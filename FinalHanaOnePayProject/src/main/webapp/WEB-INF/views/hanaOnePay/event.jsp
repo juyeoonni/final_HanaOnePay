@@ -103,28 +103,20 @@
             display: flex;
         }
 
-        .flex-shrink-0 {
-            /* 필요에 따라 여기에 추가 스타일을 설정하세요 */
-        }
-
         .mypageMain {
-            flex: 1; /* 나머지 공간을 채우도록 설정 */
-            /* 필요에 따라 여기에 추가 스타일을 설정하세요 */
+            flex: 1;
         }
 
         .mypageMain {
             display: flex;
             flex-direction: column;
             margin-left: 30px;
-            /*align-items: center;*/
-            /*justify-content: center;*/
-            /*height: 100vh;  !* 높이를 화면 높이와 동일하게 설정. 필요에 따라 조정할 수 있습니다. *!*/
         }
 
         .mypageName {
             margin-right: 130px;
-            text-align: center; /* 텍스트 중앙 정렬 */
-            width: 100%; /* 너비를 100%로 설정하여 왼쪽 및 오른쪽 여백 없음 */
+            text-align: center;
+            width: 100%;
         }
 
         .mypageMain > .mypageName {
@@ -138,7 +130,7 @@
             background-color: whitesmoke;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             border-radius: 20px;
-            text-align: center; /* 텍스트 중앙 정렬 */
+            text-align: center;
         }
 
         .monthlyCardInfo {
@@ -149,7 +141,7 @@
             background-color: whitesmoke;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             border-radius: 20px;
-            text-align: center; /* 텍스트 중앙 정렬 */
+            text-align: center;
         }
 
         .creditCardWithDraw {
@@ -162,7 +154,7 @@
             border-radius: 20px;
             margin-right: 130px;
             margin-bottom: 30px;
-            text-align: center; /* 텍스트 중앙 정렬 */
+            text-align: center;
         }
 
         .myHanaMoney {
@@ -173,9 +165,8 @@
             background-color: whitesmoke;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             border-radius: 20px;
-            /*margin-right: 130px;*/
             margin-bottom: 30px;
-            text-align: center; /* 텍스트 중앙 정렬 */
+            text-align: center;
         }
 
         table {
@@ -210,8 +201,8 @@
         }
 
         .mainCard {
-            display: flex; /* flex를 사용하여 아이템들을 가로로 나열합니다 */
-            align-items: center; /* 아이템들을 수직 중앙에 배치합니다 */
+            display: flex;
+            align-items: center;
             text-align: left;
         }
 
@@ -232,8 +223,8 @@
             align-items: center;
             background-color: white;
             padding: 20px;
-            border-radius: 15px; /* 둥근 모서리 */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 60%;
 
         }
@@ -257,12 +248,11 @@
             margin-right: 20px;
             width: 150px;
             height: 30px;
-            transition: background-color 0.3s ease; /* 부드러운 전환을 위한 트랜지션 설정 */
+            transition: background-color 0.3s ease;
         }
 
         .profile:hover {
-            /* 호버 상태에서의 스타일 */
-            background-color: #6C757D; /* 호버 시 배경색 변경 등을 설정합니다. */
+            background-color: #6C757D;
         }
 
 
@@ -282,12 +272,12 @@
         }
 
         .profile a {
-            text-decoration: none; /* 밑줄 제거 */
-            color: inherit; /* 부모 요소의 폰트색을 상속받음 */
+            text-decoration: none;
+            color: inherit;
         }
 
         .profile a:hover {
-            text-decoration: none; /* 마우스 호버 상태에서도 밑줄 제거 */
+            text-decoration: none;
         }
 
         .adPayTag {
@@ -297,9 +287,9 @@
         }
 
         .adPayTag {
-            display: flex; /* flexbox를 사용합니다. */
-            align-items: center; /* 수직으로 가운데 정렬합니다. */
-            justify-content: center; /* 수평으로 가운데 정합니다. */
+            display: flex;
+            align-items: center;
+            justify-content: center;
             height: 65px;
         }
 
@@ -342,14 +332,13 @@
 
         .toggleContainer {
             display: flex;
-            align-items: center; /* 항목들을 수직으로 중앙에 배치합니다. */
-            gap: 10px; /* 항목들 사이의 간격을 추가합니다. */
+            align-items: center;
+            gap: 10px;
         }
 
         .using {
             display: flex;
             align-items: center;
-            /*justify-content: space-between;*/
         }
 
         .toggleContainer {
@@ -358,25 +347,22 @@
             margin-left: 570px;
         }
 
-        /* Hover Effect for Event Block */
         .eventBlock {
             transition: transform 0.3s ease-in-out;
         }
 
         .eventBlock:hover {
-            transform: scale(1.05); /* Increase the size to 105% on hover */
+            transform: scale(1.05);
         }
 
-        /* Styling for eventName link */
         .eventName a {
-            color: black; /* Your desired text color */
-            text-decoration: none; /* Removes underline */
-            display: block; /* Makes the a tag behave like a block element */
+            color: black;
+            text-decoration: none;
+            display: block;
         }
 
-        /* Change color on hover */
         .eventName a:hover {
-            color: #ff4500; /* Your desired hover color */
+            color: #ff4500;
         }
 
     </style>
@@ -404,8 +390,6 @@
 
                 <div class="collapse show" id="home-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <%--                    <li><a href="/api/linkedAccount" class="link-body-emphasis d-inline-flex text-decoration-none rounded">연동카드조회</a></li>--%>
-                        <%--                    <li><a href="/hanaOnePay/selectPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>--%>
                         <li><a href="/hanaOnePay/selectHanaPayCard"
                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">진행중인 이벤트</a></li>
                         <li><a onclick="fetchAccountData()"
@@ -419,7 +403,6 @@
             <li class="border-top my-3"></li>
         </ul>
     </div>
-    <%--    사이드바끝--%>
 
     <div class="mypageMain">
         <div class="mypageName">
@@ -573,12 +556,12 @@
 <script>
 
     window.onload = function () {
-        console.log("Script is running"); // 로그 추가
+        console.log("Script is running");
 
         let phoneElement = document.getElementById("phone");
         let originalPhone = phoneElement.textContent.trim();
 
-        console.log("Original phone:", originalPhone); // 로그 추가
+        console.log("Original phone:", originalPhone);
 
         if (originalPhone) {
             let phoneParts = originalPhone.split('-');
@@ -591,7 +574,7 @@
 
         const targetAmount = parseInt('${thisMonthTotalAmounts[card1.cardNumber]}'.replace(/[^0-9]/g, ''));
         const displayElement = document.getElementById("monthlyUsage");
-        const duration = 500; // 애니메이션 시간 (2초)
+        const duration = 500;
         const stepTime = 10;
         let currentAmount = 0;
         const increment = targetAmount / (duration / stepTime);
@@ -629,7 +612,7 @@
         }
 
         let totalSpentAmountDiv = document.getElementById('totalSpentAmount');
-        let value = parseInt(totalSpentAmountDiv.textContent.replace(/[^0-9]/g, '')); // 숫자만 추출
+        let value = parseInt(totalSpentAmountDiv.textContent.replace(/[^0-9]/g, ''));
         totalSpentAmountDiv.textContent = "총 " + numberWithCommas(value) + "원";
     });
 
@@ -646,7 +629,6 @@
         '${card2.cardNumber}': '${thisMonthTransData[card2.cardNumber]}'
     };
     console.log(thisMonthTransData);
-
 
     function numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -685,7 +667,6 @@
         // tbody 내용 초기화
         tbody.innerHTML = '';
 
-        // cardTransData에서 해당 카드번호의 거래내역 문자열을 가져옵니다.
         var transListString = thisMonthTransData[cardNumber];
 
         // 문자열을 파싱하여 JSON 형식의 객체 배열로 변환
@@ -693,14 +674,12 @@
 
         console.log("transList:", transList);
 
-        // 거래내역 리스트를 순회하면서 테이블 row를 추가합니다.
         for (var i = 0; i < transList.length; i++) {
             var trans = transList[i];
             console.log("중8ㅑㄴ", trans);
 
-            // 새로운 row와 cells 생성
-            var newRow = tbody.insertRow();
 
+            var newRow = tbody.insertRow();
             var cell1 = newRow.insertCell(0); // 결제일시
             var cell2 = newRow.insertCell(1); // 거래처
             var cell3 = newRow.insertCell(2); // 카드 번호
@@ -744,11 +723,8 @@
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                // 계좌 정보를 화면에 출력하는 코드
-                // 예: 계좌 정보를 테이블에 추가
                 sessionStorage.setItem('accountData', JSON.stringify(data));
 
-                // 계좌 조회가 성공적으로 완료되었으므로 해당 경로로 리디렉션
                 window.location.href = "/hanaOnePay/selectHanaPayAccount";
             })
             .catch(error => {
@@ -757,31 +733,21 @@
     }
 
     function maskCardNumber(cardNumber) {
-        // 예: 카드번호가 "1234567890123456" 또는 "1234-5678-9012-3456"
-        var cardNumStr = cardNumber.toString(); // 숫자일 경우를 대비해 문자열로 변환
+        var cardNumStr = cardNumber.toString();
 
-        // 하이픈(-)이 포함된 경우와 포함되지 않은 경우에 대해 나누어 처리
         if (cardNumStr.includes('-')) {
-            // "1234-5678-9012-3456" -> "1234-****-****-3456"
             var parts = cardNumStr.split('-');
             return parts[0] + '-****-****-' + parts[3];
         } else {
-            // "1234567890123456" -> "1234********3456"
             return cardNumStr.substring(0, 4) + '********' + cardNumStr.substring(12);
         }
     }
 
     document.addEventListener('DOMContentLoaded', function () {
-        // cardNumber 요소를 참조합니다.
         var cardNumberElement = document.getElementById('cardNumber');
-
-        // 텍스트에서 실제 카드 번호 부분만 추출하여 마스크합니다.
-        // 예를 들어, "하나은행 1234-5678-9012-3456" -> "하나은행 1234-****-****-3456"
-        // 이 예에서는 카드번호가 항상 마지막에 있고, 공백으로 구분된다고 가정합니다.
         var parts = cardNumberElement.textContent.split(' ');
         var maskedNumber = maskCardNumber(parts[parts.length - 1]);
 
-        // 마스크된 번호로 텍스트를 변경합니다.
         cardNumberElement.textContent = parts.slice(0, -1).join(' ') + ' ' + maskedNumber;
     });
 

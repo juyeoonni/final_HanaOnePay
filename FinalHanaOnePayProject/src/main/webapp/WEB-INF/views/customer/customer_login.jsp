@@ -13,7 +13,7 @@
 </head>
 
 <body>
-<!-- 헤더위치 -->
+
 <%@ include file="/WEB-INF/views/comm/header.jsp"%>
 
 <div class="login-page">
@@ -23,7 +23,6 @@
       <img src="/img/hanaCharacter.png">
     </div>
 
-    <!-- 로그인 폼 -->
     <div class="login-content">
       <form id="loginForm" method="post">
         <img src="https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/avatar.svg">
@@ -72,7 +71,6 @@
       input.addEventListener("focus", addcl);
       input.addEventListener("blur", remcl);
     });
-    //Source :- https://github.com/sefyudem/Responsive-Login-Form/blob/master/img/avatar.svg
 
     <!-- 로그인 -->
     function loginFormFunc() {
@@ -93,14 +91,12 @@
                 },
                 success: function (response) {
                     if (response === "로그인 성공") {
-                        // 로그인 성공 시 처리
                         alert("로그인 성공");
                         console.error("로그인 성공");
                         var link = document.createElement("a");
                         link.href = "/home";
                         link.click();
                     } else {
-                        // 로그인 실패 시 처리
                         console.error("로그인 실패");
                     }
                 }

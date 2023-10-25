@@ -2,7 +2,7 @@
 
 .flex-card-container {
     display: flex;
-    flex-direction: row; /* Changed from column to row */
+    flex-direction: row;
     background-color: #C8D5DD;
     height: 400px;
     width: 1800px;
@@ -17,13 +17,13 @@
 
 .mainText {
     font-size: 70px;
-    color: 00857E;
+    color: #00857E;
     margin-left: 220px;
 }
 
 .subText {
     font-size: 25px;
-    color: 00857E;
+    color: #00857E;
     margin-left: 220px;
 }
 
@@ -35,7 +35,7 @@
 
 .flex-card-container2 {
     display: flex;
-    flex-direction: row; /* Changed from column to row */
+    flex-direction: row;
     background-color: #00857E;
     height: 600px;
     width: 1800px;
@@ -118,13 +118,13 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: space-between; /* 균등한 간격으로 카드 사이에 공간을 만들기 위해 추가했습니다. */
+    justify-content: space-between;
 }
 
 .card {
     box-sizing: border-box;
-    width: 300px; /* 가로 크기 지정 */
-    height: 200px; /* 세로 크기 지정 */
+    width: 300px;
+    height: 200px;
     padding: 20px;
     border: 1px solid #ccc;
     display: flex;
@@ -159,7 +159,6 @@
     margin-bottom: 20px;
 }
 
-/* Checkbox Styling */
 .custom-checkbox {
     display: flex;
     align-items: center;

@@ -1,11 +1,9 @@
 package com.kopo.finalhanaonepayproject.api.controller;
 
 import com.kopo.finalhanaonepayproject.api.service.OpenAPIService;
-import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.ChartDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -40,8 +38,6 @@ public class OpenAPIController {
 
         System.out.println("identityNumber: " + identityNumber);
 
-        // 계좌 조회에서 특정 기관을 선택하지 않기 때문에, 계좌 정보는 필요하지 않습니다.
-        // 따라서, `selectedAccounts` 변수와 관련된 처리를 제거하면 됩니다.
         return openAPIService.fetchAccountDataFromAPI(identityNumber);
     }
 
@@ -50,7 +46,6 @@ public class OpenAPIController {
     // 카드 조회 요청
     @PostMapping("/api/card-data")
     public String cardData(HttpSession session, HttpServletRequest request, @RequestBody Map<String, List<String>> cardData) {
-        // 여기서 "cards"로 키 값을 변경했습니다.
         List<String> selectedCards = cardData.get("cards");
 
         System.out.println("들어옴");
@@ -74,22 +69,6 @@ public class OpenAPIController {
         return openAPIService.fetchCardDataFromAPI(identityNumber, selectedCards);
     }
 
-//    // 결제 승인 요청
-//    @PostMapping("/api/payRequest")
-//    public String executePayment(HttpSession session, HttpServletRequest request, @RequestBody Map<String, String> paymentData) {
-//        String activeCard = paymentData.get("activeCard");
-//        String productName = paymentData.get("productName");
-//        String productPrice = paymentData.get("productPrice");
-//        String identityNumber = paymentData.get("identityNumber");
-//
-//        System.out.println("결제 컨트롤러 들어옴");
-//        System.out.println("결제카드정보: " + paymentData.get("activeCard"));
-//
-//        // 위의 값을 사용하여 결제 처리를 수행할 수 있습니다.
-//        // 예제에서는 OpenAPIService를 호출하는 부분을 작성해봤습니다.
-//        return openAPIService.executePayment(identityNumber, activeCard, productName, productPrice);
-//    }
-
     // 카드 결제 승인 요청
     @PostMapping("/api/payRequest")
     public ResponseEntity<String> executePayment(HttpSession session, HttpServletRequest request, @RequestBody Map<String, String> paymentData) {
@@ -111,7 +90,7 @@ public class OpenAPIController {
         }
     }
 
-    // 계좌 결제 승인 요청"/api/payRequest/account"
+    // 계좌 결제 승인 요청
     @PostMapping("/api/payRequest/account")
     public ResponseEntity<String> executeAccountPayment(HttpSession session, HttpServletRequest request, @RequestBody Map<String, String> paymentData) {
         String accountNumber = paymentData.get("accountNumber");
@@ -144,7 +123,7 @@ public class OpenAPIController {
             modelAndView.setViewName("hanaOnePay/payReport");
         } else {
             modelAndView.addObject("message", "Failed to fetch payments by month");
-            modelAndView.setViewName("errorPage"); // 에러 페이지를 보여주기 위한 JSP 파일 이름
+            modelAndView.setViewName("errorPage");
         }
 
         return modelAndView;
@@ -157,6 +136,5 @@ public class OpenAPIController {
         System.out.println("화살표로 월 전환 성공");
         return response;
     }
-
 
 }

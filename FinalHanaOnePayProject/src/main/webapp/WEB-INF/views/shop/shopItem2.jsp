@@ -18,22 +18,18 @@
             height: 700px !important;
         }
 
-
-        /* 기본 버튼 스타일 */
         .btn-outline-dark {
             color: #5E5555 !important;
             border-color: #BCD9D3 !important;
             background-color: #BCD9D3 !important;
         }
 
-        /* 마우스를 올렸을 때 버튼 스타일 */
         .btn-outline-dark:hover {
             color: #FFFFFF !important;
             border-color: #00857E !important;
             background-color: #00857E !important;
         }
 
-        /* 카드 기본 스타일 (섀도우와 크기 변화) */
         .col.mb-5 .card {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
@@ -45,7 +41,6 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
         }
 
-        /* 헤더 배경 이미지 설정 */
         .header-with-background {
             background-image: url('/img/shop/shopMain.png');
             background-size: cover;
@@ -202,22 +197,20 @@
                     <br>
                     </p>
                     <div class="d-flex">
-                        <%--                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem">--%>
                         <button class="btn btn-outline-dark flex-shrink-0" type="button">
                             <i class="bi-cart-fill me-1"></i>
                             카트담기
                         </button>
-
 
                         <!-- 로딩 모달 (초기에는 숨겨져 있음) -->
                         <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog"
                              aria-labelledby="loadingModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
-                                    <div class="modal-body text-center">  <!-- text-center를 사용하여 내용을 중앙 정렬합니다. -->
+                                    <div class="modal-body text-center">
                                         <span style="font-size: 20px;">주문서로 이동중입니다...</span><br>
                                         <img src="/img/loadingCheck.gif" alt="Loading"
-                                             style="width: 350px; height: 250px;">  <!-- 로딩 .gif 이미지 추가 -->
+                                             style="width: 350px; height: 250px;">
                                     </div>
                                 </div>
                             </div>
@@ -383,7 +376,6 @@
         return new Intl.NumberFormat('ko-KR').format(number);
     }
 
-    // 특정 요소에서 숫자를 가져와 포맷팅 적용 후 다시 설정
     const priceElement = document.querySelector('.product-price-value');
     const price = parseInt(priceElement.textContent);
     priceElement.textContent = formatNumber(price) + '원';
@@ -402,16 +394,6 @@
         quantityInput.value = currentValue + 1;
     }
 
-    // function purchaseItem() {
-    //     // 로딩 모달을 표시
-    //     $('#loadingModal').modal('show');
-    //
-    //     // 4초 후에 페이지 이동
-    //     setTimeout(function() {
-    //         window.location.href = "/shop/buyItem";  // 컨트롤러의 경로로 이동
-    //     }, 1800);
-    // }
-
     function purchaseItem() {
 
         // 로딩 모달을 표시
@@ -422,7 +404,6 @@
             window.location.href = "/shop/buyItem";  // 컨트롤러의 경로로 이동
         }, 3000);
 
-        // 상품명과 가격 정보를 가져옴
         let productName = document.querySelector(".product-name").innerText;
         let productPrice = document.querySelector(".product-price-value").innerText;
         productPrice = productPrice.replace('원', '');
@@ -434,7 +415,6 @@
         let encodedProductName = encodeURIComponent(productName);
         console.log(encodedProductName);
 
-        // 상품 정보를 JSON 형태로 직렬화
         let productData = {
             'productName': encodedProductName,
             'productPrice': productPrice
@@ -469,13 +449,11 @@
 
     }
 
-
     // 캐러셀 자동 재생 비활성화
     $('#carouselExample').carousel({
         interval: false
     });
 </script>
-
 
 </body>
 </html>

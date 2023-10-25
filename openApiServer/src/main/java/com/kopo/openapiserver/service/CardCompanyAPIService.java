@@ -2,8 +2,6 @@ package com.kopo.openapiserver.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -11,7 +9,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +24,7 @@ public class CardCompanyAPIService {
 
     // 계좌조회 서비스
     public String fetchAccountData(String identityNumber) {
-        URI uri = URI.create("http://localhost:8081/api/account-data");
+        URI uri = URI.create("http://52.79.68.69:8081/api/account-data");
 
         Map<String, Object> payload = new HashMap<>();
         payload.put("identityNumber", identityNumber);
@@ -48,8 +45,7 @@ public class CardCompanyAPIService {
 
     public String fetchCardData(String identityNumber, List<String> selectedCards) {
         // 카드사 API에 요청을 보내고 응답을 처리하는 로직
-        //URI uri = URI.create("http://3.36.156.150:8080/api/card-data"); // 실제 카드사 API URL
-        URI uri = URI.create("http://52.79.68.69:8081/api/card-data"); // 실제 카드사 API URL
+        URI uri = URI.create("http://52.79.68.69:8081/api/card-data");
 
         // POST 방식으로 보낼 요청 데이터 구성
         Map<String, Object> payload = new HashMap<>();
@@ -69,7 +65,7 @@ public class CardCompanyAPIService {
 
     // OpenAPIService에 추가
     public String sendPaymentRequestToCardCompany(String activeCard, String activeCardCode, String productName, String productPrice, String identityNumber) {
-        URI uri = URI.create("http://localhost:8081/api/payRequest"); // 카드사의 실제 결제 API URL을 설정해야 합니다.
+        URI uri = URI.create("http://52.79.68.69:8081/api/payRequest");
 
         Map<String, Object> payload = new HashMap<>();
         payload.put("activeCard", activeCard);
@@ -90,7 +86,7 @@ public class CardCompanyAPIService {
     }
 
     public String sendAccountPaymentRequestToCardCompany(String accountNumber, String productName, String productPrice, String identityNumber) {
-        URI uri = URI.create("http://localhost:8081/api/payRequest/account");
+        URI uri = URI.create("http://52.79.68.69:8081/api/payRequest/account");
 
         Map<String, Object> payload = new HashMap<>();
         payload.put("accountNumber", accountNumber);
@@ -111,7 +107,7 @@ public class CardCompanyAPIService {
 
     public String fetchMonthlyPaymentData(int month) {
         // 카드사 API URL
-        String baseUrl = "http://localhost:8081/api/monthly-payment-data";
+        String baseUrl = "http://52.79.68.69:8081/api/monthly-payment-data";
 
         URI uri = UriComponentsBuilder.fromHttpUrl(baseUrl)
                 .queryParam("month", month)
@@ -130,8 +126,7 @@ public class CardCompanyAPIService {
     }
 
     public String  fetchMonthlyPaymentData2() {
-        // 카드사 API URL
-        String baseUrl = "http://localhost:8081/api/monthly-payment-data2";
+        String baseUrl = "http://52.79.68.69:8081/api/monthly-payment-data2";
 
         URI uri = UriComponentsBuilder.fromHttpUrl(baseUrl)
                 .build()
@@ -149,8 +144,7 @@ public class CardCompanyAPIService {
     }
 
     public String fetchTransactionsByCard(String cardCode, String cardNumber) {
-        // 카드사 API에 요청을 보내고 응답을 처리하는 로직
-        URI uri = URI.create("http://localhost:8081/api/card-transactions"); // 실제 카드사 API URL을 설정해야 합니다.
+        URI uri = URI.create("http://52.79.68.69:8081/api/card-transactions");
 
         Map<String, Object> payload = new HashMap<>();
         payload.put("cardCode", cardCode);
@@ -168,8 +162,7 @@ public class CardCompanyAPIService {
     }
 
     public String fetchTransactionsByAccount(String cardCode, String accNumber) {
-        // 카드사 API에 요청을 보내고 응답을 처리하는 로직
-        URI uri = URI.create("http://localhost:8081/api/account-transactions"); // 실제 카드사 API URL을 설정해야 합니다.
+        URI uri = URI.create("http://52.79.68.69:8081/api/account-transactions");
 
         Map<String, Object> payload = new HashMap<>();
         payload.put("cardCode", cardCode);

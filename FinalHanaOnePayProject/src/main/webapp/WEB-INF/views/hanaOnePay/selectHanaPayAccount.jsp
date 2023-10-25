@@ -17,8 +17,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>joinHanaOnePay</title>
-    <%--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"--%>
-    <%--          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">--%>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="/css/card.css">
     <title>마이하나</title>
@@ -27,9 +25,6 @@
 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
-
-    <%--    <link href="/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet"--%>
-    <%--          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">--%>
 
     <style>
         body {
@@ -106,10 +101,6 @@
             display: flex;
         }
 
-        .flex-shrink-0 {
-            /* 필요에 따라 여기에 추가 스타일을 설정하세요 */
-        }
-
         /*아코디언 css*/
         * {
             box-sizing: border-box;
@@ -142,14 +133,13 @@
         }
 
         .anw {
-            /*display: flex; !* flex를 사용하여 아이템들을 가로로 나열합니다 *!*/
-            align-items: center; /* 아이템들을 수직 중앙에 배치합니다 */
+            align-items: center;
             overflow: hidden;
             font-size: 14px;
             background-color: #FFFFFF;
             padding: 30px 0;
-            align-items: center; /* 아이템을 수직으로 중앙에 배치 */
-            gap: 10px; /* 아이템 간의 간격 설정 (브라우저 지원 여부 확인 필요) */
+            align-items: center;
+            gap: 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.3);
             margin-bottom: 40px;
             padding: 10px;
@@ -159,10 +149,8 @@
             display: block;
         }
 
-
         .anw::before {
             display: inline-block;
-            /*content: 'A';*/
             font-size: 14px;
             font-weight: bold;
             color: #666;
@@ -207,7 +195,7 @@
             height: 100px;
         }
 
-        .anw span:nth-child(2) { /* 첫 번째 span (카드명)을 대상으로 설정 */
+        .anw span:nth-child(2) {
             display: block;
         }
 
@@ -224,13 +212,11 @@
             border-radius: 20px;
         }
 
-        /* 모두 동의 부분 */
         .agree-all-label {
             font-size: 1.5em;
             font-weight: bold;
         }
 
-        /* 안의 내용들이 담길 상자 */
         .inner-box {
             border: 1px solid #ccc;
             padding: 10px;
@@ -238,7 +224,6 @@
             border-radius: 10px;
         }
 
-        /* 선택 불가능한 항목에 대한 스타일 */
         .select_disable {
             color: grey;
         }
@@ -275,9 +260,9 @@
         .card-header {
             margin-top: 15px;
             display: flex;
-            align-items: center; /* 수직 중앙 정렬을 위해 추가 */
-            justify-content: center; /* 수평 중앙 정렬 */
-            padding: 10px; /* 필요에 따라 패딩을 조절 */
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
         }
 
         .cardInfo{
@@ -301,7 +286,7 @@
             border: none;
             font-size: 17px;
             padding: 2.5px;
-            text-decoration: none; /* 기본 링크 밑줄 제거 */
+            text-decoration: none;
         }
 
 
@@ -312,27 +297,25 @@
             padding-top: 10px;
             padding-bottom: 10px;
             width: 25%;
-            align-items: center; /* 수직 중앙 정렬을 위해 추가 */
-            justify-content: center; /* 수평 중앙 정렬 */
+            align-items: center;
+            justify-content: center;
             color: white;
             background-color: #00857E;
             border-radius: 5px;
             border: none;
             font-size: 17px;
-            cursor: pointer; /* 커서 모양 변경 (마우스 호버 시 손가락 모양으로 변경) */
-            text-decoration: none; /* 밑줄 제거 */
-            display: flex; /* 요소를 플렉스 컨테이너로 설정하여 수직, 수평 정렬을 활성화합니다. */
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
         }
 
-        /* 버튼 호버 시 스타일 변경 */
         .addPayCard:hover {
-            background-color: #006D64; /* 호버 시 배경색 변경 */
+            background-color: #006D64;
         }
 
-        /* 버튼 내부 링크 텍스트 숨김 */
         .addPayCard a {
-            color: inherit; /* 링크 텍스트 색상을 부모 요소로 상속합니다. */
-            text-decoration: none; /* 링크 텍스트의 밑줄 제거 */
+            color: inherit;
+            text-decoration: none;
         }
 
         .select-org {
@@ -355,19 +338,16 @@
 
         .custom-line {
             border: none;
-            height: 2px; /* 선의 높이 */
-            background-color: #404B57; /* 선의 색상 */
-            margin-top: 0px; /* 원하는 대로 상단 여백 조정 */
+            height: 2px;
+            background-color: #404B57;
+            margin-top: 0px;
         }
 
         .inner-flex {
             display: flex;
-            align-items: center; /* 요소들을 세로 중앙으로 정렬 */
-            gap: 20px; /* div 간의 간격 */
+            align-items: center;
+            gap: 20px;
         }
-
-
-
 
     </style>
 </head>
@@ -393,8 +373,6 @@
 
                 <div class="collapse show" id="home-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <%--                    <li><a href="/api/linkedAccount" class="link-body-emphasis d-inline-flex text-decoration-none rounded">연동카드조회</a></li>--%>
-                        <%--                    <li><a href="/hanaOnePay/selectPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>--%>
                         <li><a href="/hanaOnePay/selectHanaPayCard"
                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>
                         <li><a onclick="fetchAccountData()"
@@ -414,8 +392,6 @@
                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">소비레포트</a></li>
                         <li><a href="#"
                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">소비성향테스트</a></li>
-                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>--%>
-                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>--%>
                     </ul>
                 </div>
             </li>
@@ -455,8 +431,6 @@
                     </div>
                 </div>
             </div>
-
-
         </c:forEach>
     </div>
 
@@ -516,7 +490,6 @@
                                     <input type="checkbox" name="agree" value="3">
                                     <span>통신사 이용약관</span>
                                 </label>
-
                             </div>
                         </div>
 
@@ -548,16 +521,13 @@
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({"banks": ["woori", "shinhan", "KB"]})  //모든 은행의 계좌를 조회
+            body: JSON.stringify({"banks": ["woori", "shinhan", "KB"]})
         })
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                // 계좌 정보를 화면에 출력하는 코드
-                // 예: 계좌 정보를 테이블에 추가
                 sessionStorage.setItem('accountData', JSON.stringify(data));
 
-                // 계좌 조회가 성공적으로 완료되었으므로 해당 경로로 리디렉션
                 window.location.href = "/hanaOnePay/selectHanaPayAccount";
             })
             .catch(error => {
@@ -570,10 +540,9 @@
     });
 
     document.addEventListener("DOMContentLoaded", function() {
-        // 잔액 포맷팅
         const balances = document.querySelectorAll('.balance');
         balances.forEach(balance => {
-            const amount = balance.innerText.match(/\d+/)[0]; // 숫자만 가져오기
+            const amount = balance.innerText.match(/\d+/)[0];
             const formattedAmount = numberWithCommas(amount);
             balance.innerText = balance.innerText.replace(amount, formattedAmount);
         });
@@ -597,8 +566,6 @@
     }
 
 
-
-
     $(".que").click(function () {
         $(this).next(".anw").stop().slideToggle(300);
         $(this).toggleClass('on').siblings().removeClass('on');
@@ -612,13 +579,10 @@
 
     // 모달 내 인증요청 보내는 함수
     function sendSmsRequest() {
-        // select 요소의 선택된 옵션 값을 가져옵니다.
         var selectedPrefix = document.getElementById("phone-prefix").value;
 
-        // input 요소의 값을 가져옵니다.
         var enteredNumber = document.getElementById("phone-input").value;
 
-        // 선택한 값과 입력한 값을 합칩니다.
         var recipientPhoneNumber = selectedPrefix + enteredNumber;
 
         const randomSixDigitNumber = generateRandomSixDigitNumber();
@@ -630,7 +594,7 @@
             randomNumber: randomSixDigitNumber
         };
 
-        // 서버로 POST 요청을 보냅니다.
+        // 서버로 POST 요청
         fetch('/user/sms', {
             method: 'POST',
             headers: {
@@ -640,12 +604,9 @@
         })
             .then(response => response.json())
             .then(data => {
-                // 서버에서 받은 응답을 처리합니다.
                 console.log(data);
-                // 여기에서 원하는 동작을 수행할 수 있습니다.
             })
             .catch(error => {
-                // 오류가 발생한 경우 처리합니다.
                 console.error('Error sending SMS request:', error);
                 alert('인증번호 전송 중 오류가 발생했습니다.');
             });
@@ -670,51 +631,45 @@
         // AJAX 요청이 완료되면 처리할 코드
         xhr.onload = function () {
             if (xhr.status === 200 && xhr.responseText === 'Success') {
-                // 모달을 닫습니다.
+                // 모달 닫기
                 $('#myModal').modal('hide');
 
-                // 현재 클릭한 버튼을 포함하는 카드 아이템을 찾습니다.
                 var cardItem = $('.anw');
 
-                // 카드 번호와 유효기간을 나타내는 div 요소 및 숨겨진 div 요소를 찾습니다.
                 var cardNumberField = cardItem.find('.card-number-field');
                 var hiddenCardNumber = cardItem.find('.hidden-card-number');
                 var cardValidationField = cardItem.find('.card-validation-field');
                 var hiddenCardValidation = cardItem.find('.hidden-card-validation');
 
                 if (cardNumberField.is(':visible')) {
-                    // 카드 번호와 유효기간을 가려줍니다.
                     cardNumberField.hide();
                     hiddenCardNumber.show();
                     cardValidationField.hide();
                     hiddenCardValidation.show();
                 } else {
-                    // 카드 번호와 유효기간을 보여줍니다.
                     cardNumberField.show();
                     hiddenCardNumber.hide();
                     cardValidationField.show();
                     hiddenCardValidation.hide();
                 }
 
-                // 요청이 성공적으로 처리되었을 때 수행할 작업
                 alert("[하나원페이] 인증이 성공적으로 완료되었습니다.");
             } else {
-                // 요청이 실패했을 때 수행할 작업
                 alert("[하나원페이] 인증에 실패했습니다. 다시 시도해주세요.");
             }
         };
     }
 
     function generateRandomSixDigitNumber() {
-        // 100000에서 999999 사이의 랜덤한 정수를 생성합니다.
+        // 100000에서 999999 사이의 랜덤한 정수 생성
         const randomNumber = Math.floor(100000 + Math.random() * 900000);
 
-        // 생성된 숫자를 문자열로 변환하고 앞에 0을 추가합니다.
+        // 생성된 숫자를 문자열로 변환하고 앞에 0을 추가
         const sixDigitNumber = randomNumber.toString().padStart(6, '0');
 
         return sixDigitNumber;
     }
-    // 동의 모두선택 / 해제
+
     const agreeChkAll = document.querySelector('input[name=agree_all]');
     agreeChkAll.addEventListener('change', (e) => {
         let agreeChk = document.querySelectorAll('input[name=agree]');

@@ -2,8 +2,6 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-
-
 <mapper namespace="com.kopo.finalhanaonepayproject.customer.model.DAO.CustomerDAO">
     <!-- 전체회원조회 -->
     <select id="selectAllCustomerList" resultType="com.kopo.finalhanaonepayproject.customer.model.DTO.CustomerDTO">

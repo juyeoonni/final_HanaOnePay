@@ -28,13 +28,10 @@ public class CardController {
         this.hanaOnePayService = hanaOnePayService;
     }
 
-
-    // 네브바에서 마이카드 선택 요청시 오는 컨트롤러
     @GetMapping("/card/selectCardList")
     public String selectCardList(HttpServletRequest request) {
         List<CardDTO> list = cardService.selectCardList();
 
-        // 디버그용 출력 코드는 삭제하거나 주석 처리해도 좋습니다.
         for (CardDTO card : list) {
             System.out.println(card.getCardNumber());
             System.out.println(card.getCardId());
@@ -47,8 +44,7 @@ public class CardController {
             System.out.println(card.getCardImg());
         }
 
-        // 데이터를 JSP 페이지에 전달
-        request.setAttribute("cardList", list); // 'list' 대신 'cardList'를 사용하면 JSP에서 의미가 명확해집니다.
+        request.setAttribute("cardList", list);
 
         return "card/selectCardList";
     }
@@ -70,10 +66,9 @@ public class CardController {
     public String joinHanaOnePay(@RequestParam List<String> selectedBankCodes, HttpServletRequest request) {
         System.out.println("controller 시작");
 
-        // 첫 두 글자만 가져와서 새로운 리스트 생성
         List<String> modifiedBankCodes = selectedBankCodes.stream()
                 .map(code -> code.substring(0, 2))
-                .distinct() // 중복 제거
+                .distinct()
                 .collect(Collectors.toList());
 
         List<CardDTO> matchedCards = cardService.selectCardByBankCode(modifiedBankCodes);
@@ -110,14 +105,13 @@ public class CardController {
     public String mydataConnect(HttpSession session) {
         String identityNumber = (String) session.getAttribute("identityNumber");
 
-        if (identityNumber != null) { // 세션에서 주민번호가 null이 아닌 경우만 조회
+        if (identityNumber != null) {
             List<HanaOnePayCardDTO> registeredCards = hanaOnePayService.getRegisteredCards(identityNumber);
             session.setAttribute("registeredCards", registeredCards);
         }
 
         return "/card/connectMyData";
     }
-
 
 }
 

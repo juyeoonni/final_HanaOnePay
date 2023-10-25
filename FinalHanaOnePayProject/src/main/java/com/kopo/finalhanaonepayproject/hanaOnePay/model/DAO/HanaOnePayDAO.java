@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Param;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface HanaOnePayDAO {
@@ -64,13 +63,8 @@ public interface HanaOnePayDAO {
                               @Param("payAmount") BigDecimal payAmount,
                               @Param("tableCode") String tableCode);
 
-    // 여기까지 하나카드 결제
-
-    // 하나카드 스케줄러
-    // 각 은행의 신용카드 리스트를 가져오는 메서드
     List<CreditCardDTO> getCustomerCreditCards(String tableCode);
 
-    // 카드 번호와 전월의 사용 금액을 조회
     BigDecimal calculateTotalSpentAmountForPreviousMonth(@Param("cardNumber") String cardNumber, @Param("tableCode") String tableCode);
 
     void deductAmountFromLinkedAccount(@Param("cardNumber") String cardNumber, @Param("totalSpentAmount") BigDecimal totalSpentAmount, @Param("tableCode") String tableCode);

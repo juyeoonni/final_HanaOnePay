@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,24 +40,21 @@ public class CardInfoController {
         }
     }
 
-
-
-
     // 카드 데이터 조회
-    @PostMapping("/api/card-data")  // POST 방식으로 변경
+    @PostMapping("/api/card-data")
     public ResponseEntity<String> fetchCardData(
-            @RequestBody Map<String, Object> payload) {  // RequestBody를 사용
+            @RequestBody Map<String, Object> payload) {
 
         try {
             String identityNumber = (String) payload.get("identityNumber");
-            List<String> selectedCards = (List<String>) payload.get("selectedCards");  // "cards" 키로 받아옴
+            List<String> selectedCards = (List<String>) payload.get("selectedCards");
 
             // 로깅
             for (String cards: selectedCards) {
                 System.out.println("서버 :" + cards);
             }
 
-            // 실제 카드사 API로부터 데이터를 가져옵니다.
+            // 실제 카드사 API로부터 데이터를 가져오기
             String cardData = cardCompanyAPIService.fetchCardData(identityNumber, selectedCards);
 
             if (cardData != null) {
@@ -194,8 +190,5 @@ public class CardInfoController {
             return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-
-
 
 }

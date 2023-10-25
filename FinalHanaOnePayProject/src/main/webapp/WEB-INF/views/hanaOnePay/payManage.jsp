@@ -59,12 +59,10 @@
 
         .card-header {
             display: flex;
-            align-items: center; /* 수직 중앙 정렬을 위해 추가 */
-            justify-content: center; /* 수평 중앙 정렬 */
-            padding: 10px; /* 필요에 따라 패딩을 조절 */
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
         }
-
-
     </style>
 
 </head>
@@ -117,10 +115,6 @@
 
             </div>
 
-<%--            <div id="reader"></div>--%>
-<%--            <input type="file" id="qr-input-file" accept="image/*" capture>--%>
-
-
         </div>
 
     </div>
@@ -171,22 +165,7 @@
 <script src="${pageContext.request.contextPath}/vendors/scripts/jsQR.js"></script>
 
 
-
-
 <script>
-    // const html5QrCode = new Html5Qrcode("reader");
-    // const qrCodeSuccessCallback = (decodedText, decodedResult) => {
-    //     alert('아래의 주소로 이동합니다: \n' + decodedText);
-    //     document.getElementById("resultBtn").setAttribute('data-url', decodedText);
-    //     $('#payment-modal').modal('show');
-    // };
-    // const config = { fps: 10, qrbox: { width: 250, height: 250 } };
-    // html5QrCode.start({ facingMode: { exact: "environment"} }, config, qrCodeSuccessCallback);
-    //
-    // function clickTohref(e) {
-    //     location.href = $(e).attr('data-url');
-    // }
-
     // 스캔
     function startScan() {
         var video = document.createElement("video");
@@ -209,7 +188,7 @@
         // 카메라 사용시
         navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(function(stream) {
             video.srcObject = stream;
-            video.setAttribute("playsinline", true);      // iOS 사용시 전체 화면을 사용하지 않음을 전달
+            video.setAttribute("playsinline", true);
             video.play();
             requestAnimationFrame(tick);
         });
@@ -246,11 +225,6 @@
                     // QR코드 메시지 출력
                     outputData.innerHTML = code.data;
 
-                    // QR 코드의 결과값을 사용하여 URL로 리다이렉트
-                    // window.location.href = "/hanaOnePay/payRequest" + encodeURIComponent(code.data);
-                    // QR 코드의 결과값을 사용하여 URL로 리다이렉트
-                    //window.location.href = "/hanaOnePay/payRequest?qrData=" + encodeURIComponent(code.data);
-
                     // AJAX 요청을 사용하여 서버에 스캔된 결과 전송
                     $.post("/saveQrToSession", { qrData: code.data }, function(response) {
                         console.log("QR값 서버에 전송");
@@ -268,7 +242,7 @@
                         window.location.href = "/hanaOnePay/payRequest?qrData=" + encodeURIComponent(code.data);
                     });
 
-                    // return을 써서 함수를 빠져나가면 QR코드 프로그램이 종료된다.
+                    // return을 써서 함수를 빠져나가면 QR코드 프로그램이 종료됨
                     return;
                 }
                 // QR코드 인식에 실패한 경우
@@ -280,14 +254,12 @@
             requestAnimationFrame(tick);
         }
     }
-
     // 카메라 열기
     function openCamera() {
         startScan();
     }
 
 </script>
-
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>

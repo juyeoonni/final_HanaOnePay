@@ -9,6 +9,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ChartDTO {
-    private String businessCode;    // 상호명
-    private int payAmount;          // 결제금액
+    private String businessCode;
+    private int payAmount;
 }

@@ -36,13 +36,11 @@ public class Home {
         System.out.println("User's Hana Money: " + hanaMoney);
 
         List<HanaOnePayhanaCardDTO> cardInfos = hanaOnePayService.getMainHanaCardByIdentity(identityNumber);
-        //주민번호로 고객의 카드정보를 가져온다.
         System.out.println("하나 대표 카드 조회 성공!");
 
         Map<String, List<HanaOnePayTransDTO>> thisMonthTransData = hanaOnePayService.getThisMonthTransData(identityNumber);
         System.out.println("이번달 하나카드 거래내역 조회 성공!");
 
-        // Map을 생성하여 카드 번호별 이번달 사용 금액을 저장합니다.
         Map<String, Integer> thisMonthTotalAmounts = new HashMap<>();
 
         for (String cardNumber : thisMonthTransData.keySet()) {

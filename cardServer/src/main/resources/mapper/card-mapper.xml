@@ -5,7 +5,7 @@
 
 <mapper namespace="com.kopo.cardserver.model.DAO.CardDAO">
 
-<!--    고객 계좌 조회-->
+    <!--    고객 계좌 조회-->
     <select id="getCustomerAccounts" resultType="com.kopo.cardserver.model.DTO.AccountDTO">
         SELECT c.*
         FROM ${tableCode}_account c
@@ -13,7 +13,7 @@
         WHERE cu.identityNumber = #{identityNumber}
     </select>
 
-<!--    고객 카드 조회-->
+    <!--    고객 카드 조회-->
     <select id="getCustomerCards" resultType="com.kopo.cardserver.model.DTO.CardDTO">
         SELECT c.*
         FROM ${tableCode}_card c
@@ -29,7 +29,8 @@
                  JOIN ${tableCode}_card_item i ON c.cardItemId = i.cardItemId
                  JOIN ${tableCode}_account a ON c.accNumber = a.accNumber
                  JOIN ${tableCode}_customer cu ON a.identityNumber = cu.identityNumber
-        WHERE c.cardNumber = #{cardNumber} AND cu.identityNumber = #{identityNumber}
+        WHERE c.cardNumber = #{cardNumber}
+          AND cu.identityNumber = #{identityNumber}
     </select>
 
     <!-- 카드가 활성상태인지 확인하기 위해 조회 -->
@@ -39,7 +40,8 @@
                  JOIN ${tableCode}_card_item p ON c.cardItemId = p.cardItemId
                  JOIN ${tableCode}_account a ON c.accNumber = a.accNumber
                  JOIN ${tableCode}_customer cu ON a.identityNumber = cu.identityNumber
-        WHERE c.cardNumber = #{cardNumber} AND cu.identityNumber = #{identityNumber}
+        WHERE c.cardNumber = #{cardNumber}
+          AND cu.identityNumber = #{identityNumber}
     </select>
 
     <!-- 결제카드의 잔액을 조회 for 체크카드 -->
@@ -54,11 +56,9 @@
     <update id="updateAccountBalanceByCardNumber">
         UPDATE ${tableCode}_account a
         SET a.accbalance = a.accbalance - #{amount}
-        WHERE a.accNumber = (
-            SELECT c.accNumber
-            FROM ${tableCode}_card c
-            WHERE c.cardNumber = #{cardNumber}
-        )
+        WHERE a.accNumber = (SELECT c.accNumber
+                             FROM ${tableCode}_card c
+                             WHERE c.cardNumber = #{cardNumber})
     </update>
 
     <!--    신용카드 한도 조회-->
@@ -67,7 +67,8 @@
         FROM ${tableCode}_card c
                  JOIN ${tableCode}_account a ON c.accNumber = a.accNumber
                  JOIN ${tableCode}_customer cu ON a.identityNumber = cu.identityNumber
-        WHERE c.cardNumber = #{cardNumber} AND cu.identityNumber = #{identityNumber}
+        WHERE c.cardNumber = #{cardNumber}
+          AND cu.identityNumber = #{identityNumber}
     </select>
 
     <!--   결제 시 신용카드 한도 update-->
@@ -75,13 +76,11 @@
         UPDATE ${tableCode}_card c
         SET c.limit = c.limit - #{amount}
         WHERE c.cardNumber = #{cardNumber}
-          AND EXISTS (
-            SELECT 1
-            FROM ${tableCode}_account a
-                     JOIN ${tableCode}_customer cu ON a.identityNumber = cu.identityNumber
-            WHERE a.accNumber = c.accNumber
-              AND cu.identityNumber = #{identityNumber}
-        )
+          AND EXISTS (SELECT 1
+                      FROM ${tableCode}_account a
+                               JOIN ${tableCode}_customer cu ON a.identityNumber = cu.identityNumber
+                      WHERE a.accNumber = c.accNumber
+                        AND cu.identityNumber = #{identityNumber})
     </update>
 
     <!-- 결제 시 미결제 금액 관리(결제 보류) 테이블에 해당 정보 기록 -->
@@ -91,8 +90,10 @@
     </insert>
 
     <select id="getPendingPaymentsByDate" resultType="com.kopo.cardserver.model.DTO.PendingPaymentDTO">
-        SELECT * FROM ${tableCode}_card_pending_pay
-        WHERE withdrawalDate = #{withdrawalDate} AND payStatus = 'Pending'
+        SELECT *
+        FROM ${tableCode}_card_pending_pay
+        WHERE withdrawalDate = #{withdrawalDate}
+          AND payStatus = 'Pending'
     </select>
 
     <update id="updatePayStatusToApproval">
@@ -119,23 +120,15 @@
     <insert id="insertAccPaymentLog" parameterType="com.kopo.cardserver.model.DTO.AccPaymentLogDTO">
         INSERT INTO ${table}_acc_payment_log
             (payId, accNumber, payAmount)
-        VALUES
-            (payment_log_seq.NEXTVAL, #{accountNumber.accNumber}, #{accountNumber.payAmount})
+        VALUES (payment_log_seq.NEXTVAL, #{accountNumber.accNumber}, #{accountNumber.payAmount})
     </insert>
 
     <!-- 카드 거래내역에 인서트 -->
     <insert id="insertCardPaymentLog">
         INSERT INTO ${tableCode}_card_payment_log
             (payId, cardNumber, payAmount)
-        VALUES
-            (payment_log_seq.NEXTVAL, #{cardNumber}, #{payAmount})
+        VALUES (payment_log_seq.NEXTVAL, #{cardNumber}, #{payAmount})
     </insert>
-
-<!--    &lt;!&ndash;    차트 데이터 조회   &ndash;&gt;-->
-<!--    <select id="getPendingPaymentsByDate" resultType="com.kopo.cardserver.model.DTO.ChartDTO">-->
-<!--        SELECT * FROM ${tableCode}_card_pending_pay-->
-<!--        WHERE withdrawalDate = #{withdrawalDate} AND payStatus = 'Pending'-->
-<!--    </select>-->
 
     <select id="selectTransactionsByCard" resultType="com.kopo.cardserver.model.DTO.HanaOnePayTransDTO">
         select *
@@ -159,24 +152,21 @@
             AND TO_CHAR(LAST_DAY(ADD_MONTHS(SYSDATE, -1)), 'YYYY-MM-DD')
     </select>
 
-<!--    전월 거래내역에서 사용한 만큼 카드의 연동계좌에서 차감-->
+    <!--    전월 거래내역에서 사용한 만큼 카드의 연동계좌에서 차감-->
     <update id="deductAmountFromLinkedAccount">
         UPDATE ${tableCode}_account a
         SET accbalance = accbalance - #{totalSpentAmount}
-        WHERE a.accNumber = (
-            SELECT accNumber
-            FROM ${tableCode}_card
-            WHERE cardNumber = #{cardNumber}
-        )
+        WHERE a.accNumber = (SELECT accNumber
+                             FROM ${tableCode}_card
+                             WHERE cardNumber = #{cardNumber})
     </update>
 
-<!--    카드사별 계좌 거래내역 조회-->
+    <!--    카드사별 계좌 거래내역 조회-->
     <select id="selectTransactionsByAccount" resultType="com.kopo.cardserver.model.DTO.HanaOnePayAccTransDTO">
         select *
         from ${cardCode}_acc_payment_log
         where accNumber = #{accNumber}
     </select>
-
 
 </mapper>
 

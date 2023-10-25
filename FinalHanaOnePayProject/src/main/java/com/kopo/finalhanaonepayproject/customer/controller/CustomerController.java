@@ -3,7 +3,6 @@ package com.kopo.finalhanaonepayproject.customer.controller;
 
 import com.kopo.finalhanaonepayproject.customer.model.DTO.CustomerDTO;
 import com.kopo.finalhanaonepayproject.customer.service.CustomerService;
-import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayCardDTO;
 import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayTransDTO;
 import com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayhanaCardDTO;
 import com.kopo.finalhanaonepayproject.hanaOnePay.service.HanaOnePayService;
@@ -89,13 +88,11 @@ public class CustomerController {
         System.out.println("User's Hana Money: " + hanaMoney);
 
         List<HanaOnePayhanaCardDTO> cardInfos = hanaOnePayService.getMainHanaCardByIdentity(identityNumber);
-        //주민번호로 고객의 카드정보를 가져온다.
         System.out.println("하나 대표 카드 조회 성공!");
 
         Map<String, List<HanaOnePayTransDTO>> thisMonthTransData = hanaOnePayService.getThisMonthTransData(identityNumber);
         System.out.println("이번달 하나카드 거래내역 조회 성공!");
 
-        // Map을 생성하여 카드 번호별 이번달 사용 금액을 저장합니다.
         Map<String, Integer> thisMonthTotalAmounts = new HashMap<>();
 
         for (String cardNumber : thisMonthTransData.keySet()) {
@@ -169,17 +166,12 @@ public class CustomerController {
             session.setAttribute("email", loginMember.getEmail());
             session.setAttribute("phoneNumber", loginMember.getPhoneNumber());
 
-
-            // Set data in application scope
-            // context.setAttribute("identityNumber", loginMember.getIdentityNumber());
-
-            // Debug: Session attributes
             System.out.println("Session ID in CustomerController: " + request.getSession().getId());
 
             // 콘솔에 세션에 저장된 값 출력
             System.out.println("세션에 저장된 이름: " + session.getAttribute("name"));
             System.out.println("세션에 저장된 ID: " + session.getAttribute("id"));
-            System.out.println("세션에 저장된 주민등록번호: " + session.getAttribute("identityNumber"));
+            System.out.println("세션에 저장된 고객식별번호: " + session.getAttribute("identityNumber"));
             System.out.println("세션에 저장된 간편결제비밀번호: " + session.getAttribute("payPw"));
 
             return ResponseEntity.ok("로그인 성공");
@@ -187,23 +179,6 @@ public class CustomerController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("로그인 실패");
         }
     }
-
-
-//    @RequestMapping(value = "/logout")
-//    public ModelAndView deleteGuest(HttpSession session) {
-//        String id = (String) session.getAttribute("id");
-//        System.out.println(id);
-//        ModelAndView mav = new ModelAndView();
-//        session.invalidate();
-//        mav.addObject("msg", "로그아웃 성공");
-//        mav.addObject("loc", "../home");
-//        mav.setViewName("message");
-//        return mav;
-//    }
-
-    // @RequestMapping은 클라이언트의 요청 URL을 어떤 메서드가 처리할지를 맵핑하는 어노테이션
-    // /customer_myPage라는 URL로 요청오면 myPage 메서드 실행
-    // ModelAndView: Spring에서 데이터와 뷰를 동시에 설정할 수 있는 객체(즉, 컨트롤러에서 데이터를 설정하고 어떤 뷰(jsp)를 사용해서 응답할지 정할 수 있음
 
     @RequestMapping("/customer_myPage")
     public ModelAndView myPage(HttpSession session) {
@@ -215,7 +190,6 @@ public class CustomerController {
         mav.setViewName("customer/customer_myPage");
         return mav;
     }
-
 
     @RequestMapping("/customer_update")
     public ModelAndView customerUpdate(HttpServletRequest request) {

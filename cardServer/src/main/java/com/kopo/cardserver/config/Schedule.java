@@ -58,8 +58,6 @@ public class Schedule {
                 cardService.deductAmountFromLinkedAccount(selectedCard.getCardNumber(), totalSpentAmount, tableCode);
                 System.out.println("지정일에 사용금액만큼 자동 차감 성공");
 
-                // 각 카드사별로 차감된 금액만큼 거래내역 테이블에 기록
-
             }
         }
         // 처리된 카드 리스트를 출력

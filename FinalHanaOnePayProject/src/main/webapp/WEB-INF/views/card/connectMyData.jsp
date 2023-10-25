@@ -46,8 +46,8 @@
 
         .content-container {
             margin-top: 500px;
-            width: 600px; /* 이 값은 원하는 대로 조절할 수 있습니다. */
-            text-align: left; /* 이를 통해 "내 카드 불러오기"와 "연동된 카드 개수"를 왼쪽에 정렬합니다. */
+            width: 600px;
+            text-align: left;
         }
 
         .card-info.checked {
@@ -141,16 +141,12 @@
             align-items: center;
         }
 
-        .pinButton {
-            /*margin: 5px;*/
-        }
-
         .pinButton.calc {
-            transition: transform 0.3s ease; /* smooth transition effect */
+            transition: transform 0.3s ease;
         }
 
         .pinButton.calc:hover {
-            transform: scale(1.3); /* enlarges the button by 10% when hovered */
+            transform: scale(1.3);
         }
 
         .submitBtn {
@@ -237,13 +233,10 @@
             display: flex;
         }
 
-        .flex-shrink-0 {
-            /* 필요에 따라 여기에 추가 스타일을 설정하세요 */
-        }
+
 
         .mypageMain {
             flex: 1; /* 나머지 공간을 채우도록 설정 */
-            /* 필요에 따라 여기에 추가 스타일을 설정하세요 */
         }
 
         .mypageMain {
@@ -252,7 +245,6 @@
             margin-left: 30px;
         }
 
-        /* 우선순위를 높이기 위해 ID를 사용하여 덮어쓰는 스타일 */
         #custom-register-button {
             background-color: #00857E !important; /* 배경색 */
             color: #fff !important; /* 텍스트 색상 */
@@ -265,18 +257,15 @@
             width: 300px;
         }
 
-        /* 호버 효과 덮어쓰기 */
         #custom-register-button:hover {
             background-color: #015550 !important; /* 호버 시 배경색 변경 */
         }
 
-        /*자연스러운 사이드바 이동*/
         .flex-shrink-0 {
             width: 280px;
             margin-left: 90px;
             transition: all 0.3s ease; /* 부드러운 이동 효과 */
         }
-
     </style>
 
 </head>
@@ -298,8 +287,6 @@
             </button>
             <div class="collapse show" id="home-collapse">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <%--                    <li><a href="/api/linkedAccount" class="link-body-emphasis d-inline-flex text-decoration-none rounded">연동카드조회</a></li>--%>
-                    <%--                    <li><a href="/hanaOnePay/selectPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>--%>
                     <li><a href="/hanaOnePay/selectHanaPayCard"
                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">마이하나원페이 연동</a></li>
                     <li><a onclick="fetchAccountData()"
@@ -314,9 +301,6 @@
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li><a href="/api/payments-by-month?month=09"
                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">내 지출 조회</a></li>
-                    <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">명세서 조회</a></li>--%>
-                    <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>--%>
-                    <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>--%>
                 </ul>
             </div>
         </li>
@@ -326,9 +310,6 @@
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li><a href="/api/payments-by-month?month=09"
                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">소비레포트</a></li>
-                    <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Processed</a></li>--%>
-                    <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Shipped</a></li>--%>
-                    <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Returned</a></li>--%>
                 </ul>
             </div>
         </li>
@@ -436,9 +417,6 @@
 
             </div>
 
-
-
-
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script src="/path/to/cdn/jquery.slim.min.js"></script>
 
@@ -516,7 +494,7 @@
                         cardCompany +
                         '</div>' +
                         cardData.cardName + '<br>' +
-                        maskCardNumber(cardData.cardNumber) + // 카드 번호 마스킹 적용
+                        maskCardNumber(cardData.cardNumber) +
                         '</div>' +
                         '<input type="checkbox" style="margin-left: 20px;">';
 
@@ -526,7 +504,7 @@
                 // "등록" 버튼을 페이지에 추가
                 const registerButton = document.createElement("button");
                 registerButton.textContent = "하나원페이 등록";
-                registerButton.id = "custom-register-button"; // ID 추가
+                registerButton.id = "custom-register-button";
                 registerButton.addEventListener("click", registerSelectedCards);
 
                 // "등록" 버튼을 페이지에 추가
@@ -593,12 +571,10 @@
 
         const input_value = $("#password");
 
-        //disable input from typing
         $("#password").keypress(function () {
             return false;
         });
 
-        //add password
         $(".calc").click(function () {
             let value = $(this).val();
             field(value);
@@ -622,26 +598,9 @@
         var enterButton = document.getElementById('enter');
 
         enterButton.addEventListener('click', function () {
-            // 폼 제출
             document.getElementById('paymentForm').submit();
         });
     });
-
-    // // 스크롤 이벤트 리스너 추가
-    // window.addEventListener("scroll", function () {
-    //     const sidebar = document.querySelector(".flex-shrink-0");
-    //     const offsetTop = window.scrollY; // 현재 스크롤 위치
-    //
-    //     // 원하는 스크롤 위치에 따라 사이드바를 조절
-    //     if (offsetTop >= 200) {
-    //         sidebar.style.position = "fixed";
-    //         sidebar.style.top = "50px"; // 원하는 거리 설정
-    //     } else {
-    //         sidebar.style.position = "static";
-    //     }
-    // });
-
-
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>

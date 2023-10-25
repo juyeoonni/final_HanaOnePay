@@ -69,7 +69,6 @@ public class HanaOnePayController {
             request.setAttribute("hanaOnePayCardList", allCards); // 모든 카드 정보를 request에 추가
             System.out.println("페이카드 조회 성공!");
         } catch (Exception e) {
-            // 예외 처리 로직
             e.printStackTrace();
         }
         return "/hanaOnePay/payManage";
@@ -78,7 +77,6 @@ public class HanaOnePayController {
 
     @GetMapping("/hanaOnePay/addPayCard")
     public String addPayCard() {
-        // 로직 추가 (예: 카드 추가 페이지에 필요한 데이터를 Model을 통해 전달)
         return "hanaOnePay/addPayCard";
     }
 
@@ -93,10 +91,8 @@ public class HanaOnePayController {
         System.out.println("결제 페이지 하나카드 조회 성공!");
         modelAndView.addObject("cardInfos", cardInfos);
 
-        // QR 코드 데이터 처리 로직
-        // 예: QR 데이터를 사용하여 결제 요청을 처리하고 결과 페이지로 이동
-        modelAndView.setViewName("hanaOnePay/payRequest"); // 예를 들어 paymentResult.jsp로 결과 페이지를 보여준다고 가정
-        modelAndView.addObject("qrData", qrData); // jsp에서 qrData 사용 가능
+        modelAndView.setViewName("hanaOnePay/payRequest");
+        modelAndView.addObject("qrData", qrData);
 
         try {
             List<HanaOnePayCardDTO> allCards = hanaOnePayService.getAllCards();
@@ -108,20 +104,12 @@ public class HanaOnePayController {
             String productName = jsonNode.get("productName").asText();
             String productPrice = jsonNode.get("productPrice").asText();
 
-//            // 모델에 productName과 productPrice를 추가하여 jsp에서 사용할 수 있도록 합니다.
-//            modelAndView.addObject("productName", productName);
-//            modelAndView.addObject("productPrice", productPrice);
-
-            // QR 코드 스캔 결과를 세션에 저장
-//            HttpSession session = request.getSession();
             session.setAttribute("productName", productName);
             session.setAttribute("productPrice", productPrice);
 
             session.setAttribute("qrData", qrData);
-            //request.setAttribute("hanaOnePayCardList", allCards); // 모든 카드 정보를 request에 추가
             System.out.println("페이카드 조회 성공!");
         } catch (Exception e) {
-            // 예외 처리 로직
             e.printStackTrace();
         }
 
@@ -130,28 +118,20 @@ public class HanaOnePayController {
 
     @GetMapping("/hanaOnePay/payRequestSuccess")
     public String payRequestSuccess(Model model) {
-        // 현재 시간을 가져옵니다.
         String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
-        // 현재 시간을 모델에 추가하여 JSP 페이지로 전달합니다.
         model.addAttribute("time", currentTime);
 
-        return "hanaOnePay/payRequestSuccess"; // 결제 성공을 알리는 JSP 페이지를 반환합니다.
+        return "hanaOnePay/payRequestSuccess";
     }
 
     @GetMapping("/hanaOnePay/payRequestFail")
     public String payRequestFail(Model model) {
-        // 현재 시간을 가져옵니다.
         String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
-//        String identityNumber = ...; // 적절한 방법으로 값을 가져옵니다.
-//        int usedPoint = ...; // 적절한 방법으로 값을 가져옵니다.
-//        shopService.deductHanaMoney(identityNumber, usedPoint);
-
-        // 현재 시간을 모델에 추가하여 JSP 페이지로 전달합니다.
         model.addAttribute("time", currentTime);
 
-        return "hanaOnePay/payRequestFail"; // 결제 성공을 알리는 JSP 페이지를 반환합니다.
+        return "hanaOnePay/payRequestFail";
     }
 
 
@@ -159,9 +139,7 @@ public class HanaOnePayController {
     public ModelAndView selectPayCard() {
         ModelAndView modelAndView = new ModelAndView();
 
-        // QR 코드 데이터 처리 로직
-        // 예: QR 데이터를 사용하여 결제 요청을 처리하고 결과 페이지로 이동
-        modelAndView.setViewName("hanaOnePay/selectPayCard"); // 예를 들어 paymentResult.jsp로 결과 페이지를 보여준다고 가정
+        modelAndView.setViewName("hanaOnePay/selectPayCard");
 
         try {
             List<HanaOnePayCardDTO> allCards = hanaOnePayService.getAllCards();
@@ -169,10 +147,8 @@ public class HanaOnePayController {
 
             System.out.println("페이카드 조회 성공!");
         } catch (Exception e) {
-            // 예외 처리 로직
             e.printStackTrace();
         }
-
         return modelAndView;
     }
 
@@ -262,7 +238,6 @@ public class HanaOnePayController {
                 try {
                     if ("6894-3339-3359-1029".equals(cardNumber) || "1903-3930-5959-1233".equals(cardNumber)) {
                         System.out.println("if문 들어옴");
-                        // 자은행 계좌 거래내역 조회 로직 호출
                         List<HanaOnePayTransDTO> transactions = hanaOnePayService.hanaTransactionsByCard(cardNumber);
                         System.out.println("transaction.size(): " + transactions.size());
                         List<HanaOnePayhanaCardDTO> allHanaCards = hanaOnePayService.getMainHanaCardByIdentity("980602-2000000");
@@ -275,7 +250,7 @@ public class HanaOnePayController {
                         modelAndView.addObject("transactions", transactions);
                         modelAndView.addObject("allHanaCards", allHanaCards);
                         modelAndView.setViewName("hanaOnePay/selectHanaCardTransList");
-                    }// 여기서 else 구문을 닫아줘야 합니다
+                    }
                     else {
                         System.out.println("else문 들어옴");
                     }
@@ -287,7 +262,6 @@ public class HanaOnePayController {
             System.out.println("거래내역 조회 성공!");
         } catch (Exception e) {
             System.out.println("오류");
-            // 예외 처리 로직
             e.printStackTrace();
         }
         return modelAndView;
@@ -337,9 +311,6 @@ public class HanaOnePayController {
                             System.out.println("transaction: " + transaction);
 
                         }
-                        //모델에 담아놓고 왜 js로 가?
-                        //바로 jsp로 갈 수 있잖아
-
                         modelAndView.addObject("transactions", transactions);
                         modelAndView.setViewName("hanaOnePay/selectAccountTransList");
                     }// 여기서 else 구문을 닫아줘야 합니다
@@ -354,7 +325,6 @@ public class HanaOnePayController {
             System.out.println("거래내역 조회 성공!");
         } catch (Exception e) {
             System.out.println("오류");
-            // 예외 처리 로직
             e.printStackTrace();
         }
         return modelAndView;
@@ -390,13 +360,11 @@ public class HanaOnePayController {
     @GetMapping("/hanaOnePay/payRequestSuccessPC")
     public String payRequestSuccessPC(Model model) {
 
-        // 현재 시간을 가져옵니다.
         String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
-        // 현재 시간을 모델에 추가하여 JSP 페이지로 전달합니다.
         model.addAttribute("time", currentTime);
 
-        return "hanaOnePay/payRequestSuccessPC"; // 결제 성공을 알리는 JSP 페이지를 반환합니다.
+        return "hanaOnePay/payRequestSuccessPC";
     }
 
     // 하나카드 결제 로직
@@ -415,25 +383,22 @@ public class HanaOnePayController {
     // 신용카드 한도초과로 결제 실패시
     @GetMapping("/hanaOnePay/payRequestFailforLimit")
     public String payRequestFailforLimit(Model model) {
-        // 현재 시간을 가져옵니다.
+
         String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
-        // 현재 시간을 모델에 추가하여 JSP 페이지로 전달합니다.
         model.addAttribute("time", currentTime);
 
-        return "hanaOnePay/payRequestFailforLimit"; // 결제 성공을 알리는 JSP 페이지를 반환합니다.
+        return "hanaOnePay/payRequestFailforLimit";
     }
 
     // 체크카드 잔액부족으로 결제 실패시
     @GetMapping("/hanaOnePay/payRequestFailforBalance")
     public String payRequestFailforBalance(Model model) {
-        // 현재 시간을 가져옵니다.
         String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
-        // 현재 시간을 모델에 추가하여 JSP 페이지로 전달합니다.
         model.addAttribute("time", currentTime);
 
-        return "hanaOnePay/payRequestFailforBalance"; // 결제 성공을 알리는 JSP 페이지를 반환합니다.
+        return "hanaOnePay/payRequestFailforBalance";
     }
 
     @PostMapping("/hanaOnePay/sms")
@@ -442,7 +407,4 @@ public class HanaOnePayController {
         String content = "[하나원페이] 정하나 고객님께서 신청하신 마이데이터 지갑연동 동의가 신규 등록 되었습니다.";
         smsService.sendSms(recipientPhoneNumber, content);
     }
-
-
-
 }

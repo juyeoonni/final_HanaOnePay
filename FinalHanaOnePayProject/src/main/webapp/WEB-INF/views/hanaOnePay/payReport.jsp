@@ -105,28 +105,20 @@
             display: flex;
         }
 
-        .flex-shrink-0 {
-            /* 필요에 따라 여기에 추가 스타일을 설정하세요 */
-        }
-
         .mypageMain {
-            flex: 1; /* 나머지 공간을 채우도록 설정 */
-            /* 필요에 따라 여기에 추가 스타일을 설정하세요 */
+            flex: 1;
         }
 
         .mypageMain {
             display: flex;
             flex-direction: column;
             margin-left: 30px;
-            /*align-items: center;*/
-            /*justify-content: center;*/
-            /*height: 100vh;  !* 높이를 화면 높이와 동일하게 설정. 필요에 따라 조정할 수 있습니다. *!*/
         }
 
         .mypageName {
             margin-right: 130px;
-            text-align: center; /* 텍스트 중앙 정렬 */
-            width: 100%; /* 너비를 100%로 설정하여 왼쪽 및 오른쪽 여백 없음 */
+            text-align: center;
+            width: 100%;
         }
 
         .mypageMain > .mypageName {
@@ -140,7 +132,7 @@
             background-color: whitesmoke;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             border-radius: 20px;
-            text-align: center; /* 텍스트 중앙 정렬 */
+            text-align: center;
         }
 
         .monthlyCardInfo {
@@ -152,7 +144,7 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             border-radius: 20px;
             margin-right: 130px;
-            text-align: center; /* 텍스트 중앙 정렬 */
+            text-align: center;
         }
 
         table {
@@ -186,8 +178,8 @@
         }
 
         .mainCard {
-            display: flex; /* flex를 사용하여 아이템들을 가로로 나열합니다 */
-            align-items: center; /* 아이템들을 수직 중앙에 배치합니다 */
+            display: flex;
+            align-items: center;
             text-align: left;
         }
 
@@ -226,33 +218,33 @@
             height: 80px;
             margin-top: 25px;
             margin-right: 18px;
-            transition: box-shadow 0.3s ease, transform 0.3s ease; /* 부드러운 변환과 그림자 효과 */
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
             background-color: #FFFFFF;
         }
 
         .payTagDetail:hover {
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4); /* 그림자를 더 진하게 */
-            transform: scale(1.05); /* 스케일을 약간 키움 */
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+            transform: scale(1.05);
         }
 
 
         .payTagDetails {
-            display: flex; /* 두 payTagDetail을 수평으로 정렬 */
-            margin-right: 10px; /* 오른쪽 이미지와의 간격을 조절 */
+            display: flex;
+            margin-right: 10px;
         }
 
         .payTagUser {
             height: 80px;
             display: flex;
-            align-items: center; /* 중앙 정렬 */
-            margin-right: 10px; /* 오른쪽에 간격 추가 */
+            align-items: center;
+            margin-right: 10px;
         }
 
         .payTagStar {
             margin-left: 50px;
             margin-bottom: 50px;
-            height: 200px; /* 이미지의 높이. 필요에 따라 조절 가능 */
-            width: auto; /* 이미지의 너비를 자동으로 설정 */
+            height: 200px;
+            width: auto;
         }
 
         .payTagMessage {
@@ -281,7 +273,7 @@
             background-color: white;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             border-radius: 20px;
-            text-align: center; /* 텍스트 중앙 정렬 */
+            text-align: center;
             margin-top: 1px;
         }
 
@@ -296,7 +288,6 @@
             border-radius: 15px;
         }
 
-        /*슬라이드 css*/
         #slider-container {
             display: flex;
             align-items: center;
@@ -319,7 +310,7 @@
             background-color: white;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             border-radius: 20px;
-            text-align: center; /* 텍스트 중앙 정렬 */
+            text-align: center;
             margin-top: -10px;
         }
 
@@ -334,7 +325,7 @@
         }
 
         .business-percentage {
-            margin-left: 8px; /* or any space you want between the name and the percentage */
+            margin-left: 8px;
             flex: 0;
         }
 
@@ -353,27 +344,25 @@
             background-color: white;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             border-radius: 20px;
-            /*text-align: center; !* 텍스트 중앙 정렬 *!*/
             margin-top: 70px;
 
-            display: flex; /* flexbox를 활용하여 내부 아이템들을 가로로 배열합니다. */
-            align-items: center; /* 세로로 중앙 정렬을 위한 속성입니다. */
-            justify-content: space-between; /* 내부 아이템들 사이에 공간을 동일하게 분배합니다. */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             padding: 16px;
-            transition: box-shadow 0.3s ease, transform 0.3s ease; /* 부드러운 변환과 그림자 효과 */
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
             background-color: #FFFFFF;
         }
 
 
         .testdiv:hover {
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4); /* 그림자를 더 진하게 */
-            transform: scale(1.05); /* 스케일을 약간 키움 */
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+            transform: scale(1.05);
         }
 
         .highlight {
             color: #00857E;
         }
-
     </style>
 
 </head>
@@ -399,8 +388,6 @@
 
                 <div class="collapse" id="home-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <%--                    <li><a href="/api/linkedAccount" class="link-body-emphasis d-inline-flex text-decoration-none rounded">연동카드조회</a></li>--%>
-                        <%--                    <li><a href="/hanaOnePay/selectPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>--%>
                         <li><a href="/hanaOnePay/selectHanaPayCard"
                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>
                         <li><a onclick="fetchAccountData()"
@@ -444,10 +431,6 @@
             ${sessionScope.name}님의 월간 소비 분포입니다.
         </div>
 
-        <%--        월 나타내기 슬라이드--%>
-
-        <%--        슬라이드끝--%>
-
         <div class="pieChartContainer">
             <div class="pieChart">
                 <div id="slider-container">
@@ -475,7 +458,6 @@
                 ${sessionScope.name}님의 1년간 소비 추이입니다.
             </div>
             <canvas id="myChart2" width="400" height="200"></canvas>
-            <%--            <img src="/img/starChracterPay.gif">--%>
         </div>
 
         <div class="payTag">
@@ -568,7 +550,6 @@
         document.getElementById('month-text').textContent = months[currentMonth] + '월 지출 리포트';
     }
 
-    // Initial setup
     updateMonth();
 
     function getImageUrlForBusinessCode(businessCode) {
@@ -576,35 +557,29 @@
     }
 
     function updateTop5Businesses(dataFromServer) {
-        // 서버로부터 받은 데이터를 payAmount 기준으로 내림차순 정렬합니다.
         var sortedData = dataFromServer.sort((a, b) => b.payAmount - a.payAmount);
 
-        // 전체 지출 금액을 계산합니다.
         var totalAmount = dataFromServer.reduce((sum, data) => sum + data.payAmount, 0);
 
-        // 상위 5개 데이터만 선택합니다.
         var top5Data = sortedData.slice(0, 5);
 
-        // 각 데이터를 순서대로 해당 div에 표시합니다.
         for (var i = 0; i < top5Data.length; i++) {
             var businessName = getBusinessName(top5Data[i].businessCode);
 
-            // 각 항목의 payAmount 값이 전체 지출 중 얼마의 비율을 차지하는지 계산합니다.
             var percentage = ((top5Data[i].payAmount / totalAmount) * 100).toFixed(1);  // 소수점 두 번째 자리까지 표시
 
             var divId = "top" + (i + 1);
             var divElement = document.getElementById(divId);
             if (divElement) {
-                divElement.textContent = ""; // Clear the content
+                divElement.textContent = "";
                 divElement.classList.add("business-layout");
 
-                // 이미지 요소를 생성합니다.
+                // 이미지 요소 생성
                 var imgElement = document.createElement("img");
                 imgElement.src = getImageUrlForBusinessCode(top5Data[i].businessCode);
                 imgElement.alt = businessName + " 이미지";
                 imgElement.classList.add("business-image");
 
-                // 이미지 요소를 divElement에 추가합니다.
                 divElement.appendChild(imgElement);
 
                 let nameElement = document.createElement("div");
@@ -619,7 +594,6 @@
                 percentageElement.textContent = percentage + "%";
                 percentageElement.classList.add("business-percentage");
 
-                // 기존과 같이 나머지 요소들을 divElement에 추가합니다.
                 divElement.appendChild(nameElement);
                 divElement.appendChild(percentageElement);
                 divElement.appendChild(amountElement);
@@ -641,7 +615,6 @@
                 updateChartData(data);
                 updateTop5Businesses(data);
                 updatePayTag(data);
-                // alert("월별 차트 조회 성공");
             },
             error: function (request, status, error) {
                 alert("월별 차트 조회 실패");
@@ -649,8 +622,6 @@
         });
     }
 
-
-    // 서버로부터 받은 데이터를 JavaScript 객체로 파싱
     var dataFromServer = ${response};
     var labels = [];
     var dataset = [];
@@ -729,8 +700,8 @@
                 legend: {
                     position: 'bottom',
                     labels: {
-                        usePointStyle: true,    // 이 옵션을 true로 설정
-                        boxWidth: 1000            // 이 값을 조절하여 원하는 간격을 설정
+                        usePointStyle: true,
+                        boxWidth: 1000
                     }
                 },
                 title: {
@@ -754,11 +725,11 @@
             labels.push(businessName);
             dataset.push(dataFromServer[i].payAmount);
 
-            // 여기서 totalBusiness 객체에 각 업종별 지출 금액을 합산합니다.
+            // 여기서 totalBusiness 객체에 각 업종별 지출 금액을 합산
             totalBusiness[dataFromServer[i].businessCode] = (totalBusiness[dataFromServer[i].businessCode] || 0) + dataFromServer[i].payAmount;
         }
 
-        // 여기서 각 업종별 지출 금액을 해당 <div>에 표시합니다.
+        // 여기서 각 업종별 지출 금액을 해당 <div>에 표시
         for (var code in totalBusiness) {
             var divId = "business_" + code;
             var divElement = document.getElementById(divId);
@@ -767,7 +738,7 @@
             }
         }
 
-        if (pieChart) {  // 기존 차트가 존재하면 차트를 파괴
+        if (pieChart) {
             pieChart.destroy();
         }
 
@@ -818,8 +789,8 @@
                     legend: {
                         position: 'bottom',
                         labels: {
-                            usePointStyle: true,    // 이 옵션을 true로 설정
-                            boxWidth: 1000            // 이 값을 조절하여 원하는 간격을 설정
+                            usePointStyle: true,
+                            boxWidth: 1000
                         }
                     },
                     title: {
@@ -836,7 +807,7 @@
     var barChart = JSON.parse('${response2}');
     console.log(barChart);
 
-    // businessCode와 payAmount 데이터를 분리합니다.
+    // businessCode와 payAmount 데이터를 분리
     var month = [];
     var payAmount = [];
     for (var i = 0; i < barChart.length; i++) {
@@ -852,8 +823,8 @@
             datasets: [{
                 label: '1년간 월별 지출 금액',
                 data: payAmount,
-                backgroundColor: 'rgba(50, 205, 50, 0.2)', // 진한 민트색, 20% 투명도
-                borderColor: 'rgba(50, 205, 50, 1)', // 진한 민트색, 불투명
+                backgroundColor: 'rgba(50, 205, 50, 0.2)',
+                borderColor: 'rgba(50, 205, 50, 1)',
 
                 borderWidth: 1
             }]
@@ -930,20 +901,18 @@
             var subtitle = payTagSubtitles[top2Data[i].businessCode];  // 부제목 가져오기
 
             if (tag) {
-                payTagElements[i].innerHTML = tag;  // innerHTML을 사용하여 태그 내용 갱신
+                payTagElements[i].innerHTML = tag;
 
                 if (subtitle) {
-                    // 부제목을 추가하기 위한 div 생성
                     var subtitleDiv = document.createElement('div');
                     subtitleDiv.textContent = subtitle;
-                    subtitleDiv.classList.add('payTagSubtitle');  // CSS 스타일을 위한 클래스 추가
-                    payTagElements[i].appendChild(subtitleDiv);  // payTagDetail 내에 부제목 div 추가
+                    subtitleDiv.classList.add('payTagSubtitle');
+                    payTagElements[i].appendChild(subtitleDiv);
                 }
             }
         }
 
     }
-
 
 </script>
 </body>

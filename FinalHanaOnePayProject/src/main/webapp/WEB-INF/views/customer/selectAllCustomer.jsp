@@ -41,7 +41,7 @@
             <th>Email</th>
             <th>Address</th>
             <th>Join Date</th>
-            <th>회원수정</th> <!-- Add this for the actions column -->
+            <th>회원수정</th>
         </tr>
     </thead>
     <tbody>

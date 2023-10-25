@@ -17,21 +17,18 @@
         height: 300px;
     }
 
-    /* 기본 버튼 스타일 */
         .btn-outline-dark {
             color: #5E5555 !important;
             border-color: #BCD9D3 !important;
             background-color: #BCD9D3 !important;
         }
 
-        /* 마우스를 올렸을 때 버튼 스타일 */
         .btn-outline-dark:hover {
             color: #FFFFFF !important;
             border-color: #00857E !important;
             background-color: #00857E !important;
         }
 
-        /* 카드 기본 스타일 (섀도우와 크기 변화) */
             .col.mb-5 .card {
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
                 transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
@@ -42,7 +39,7 @@
                 transition: transform 0.2s ease-in-out;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             }
-         /* 헤더 배경 이미지 설정 */
+
             .header-with-background {
                 background-image: url('/img/shop/shopMain.png');
                 background-size: cover;
@@ -50,7 +47,7 @@
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             }
     body {
-        font-family: 'Hana2CM', sans-serif !important; /* sans-serif는 폰트가 로드되지 않을 때 사용될 대체 폰트입니다. */
+        font-family: 'Hana2CM', sans-serif !important;
     }
     #apple-watch{
         padding-top: 5%;
@@ -119,31 +116,6 @@
                 </div>
             </div>
         </header>
-
-
-<%--        <!-- Carousel 코드 -->--%>
-<%--        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3000">--%>
-<%--            <div class="carousel-inner">--%>
-<%--                <div class="carousel-item active">--%>
-<%--                    <img src="/img/shop/shopMainPage.jpg" class="d-block w-75 h-50 mx-auto p-3 carousel-slide" alt="...">--%>
-<%--                </div>--%>
-<%--                <div class="carousel-item">--%>
-<%--                    <img src="/img/shop/shopMainPage1.png" class="d-block w-75 h-50 mx-auto p-3 carousel-slide" alt="...">--%>
-<%--                </div>--%>
-<%--                <div class="carousel-item">--%>
-<%--                    <img src="/img/shop/shopMainPage3.jpg" class="d-block w-75 h-50 mx-auto p-3 carousel-slide" alt="...">--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">--%>
-<%--                <span class="carousel-control-prev-icon" aria-hidden="true"></span>--%>
-<%--                <span class="visually-hidden">Previous</span>--%>
-<%--            </button>--%>
-<%--            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">--%>
-<%--                <span class="carousel-control-next-icon" aria-hidden="true"></span>--%>
-<%--                <span class="visually-hidden">Next</span>--%>
-<%--            </button>--%>
-<%--        </div>--%>
-
 
         <!-- Section-->
         <section class="py-5">
@@ -357,10 +329,6 @@
 
 
 </body>
-
-
-
-
 </main>
 
 <!-- 푸터위치 -->

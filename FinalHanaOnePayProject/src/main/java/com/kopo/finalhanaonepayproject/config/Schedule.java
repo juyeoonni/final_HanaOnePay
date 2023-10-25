@@ -24,10 +24,8 @@ public class Schedule {
     @Autowired
     private SmsService smsService;
 
-    // 카드 리스트를 하나 초기화해놓고
     List<CreditCardDTO> creditCardList = new ArrayList<>();
 
-    // 테이블코드 담은 리스트도 하나 만들고
     List<String> tableCodes = List.of("hana");
 
     //@Scheduled(fixedRate = 30000) // 테스트 30초마다 실행되게
@@ -43,7 +41,7 @@ public class Schedule {
                 pdfAttachmentPath
         );
 
-        // 테이블 코드 담은 리스트 사이즈만큼 for문 돌려
+        // 테이블 코드 담은 리스트 사이즈만큼 for문
         for (int i = 0; i < tableCodes.size(); i++) {
             String tableCode = tableCodes.get(i);
 

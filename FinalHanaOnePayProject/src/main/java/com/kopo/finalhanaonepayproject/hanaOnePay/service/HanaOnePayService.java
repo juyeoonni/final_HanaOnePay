@@ -65,7 +65,7 @@ public class HanaOnePayService {
         List<HanaOnePayCardDTO> paycardList = objectMapper.readValue(selectedCardsJson, new TypeReference<List<HanaOnePayCardDTO>>(){});
 
         for(HanaOnePayCardDTO paycard : paycardList) {
-            paycard.setIdentityNumber(identityNumber); // 주민번호 설정
+            paycard.setIdentityNumber(identityNumber);
             hanaOnePayDAO.insertCard(paycard);
         }
     }
@@ -75,29 +75,19 @@ public class HanaOnePayService {
         return hanaOnePayDAO.getAllCards();
     }
 
-//    // 거래내역 데이터 select
-//    public List<HanaOnePayTransDTO> getHanaCardTransData(){
-//        return hanaOnePayDAO.getHanaCardTransData();
-//    }
-
     // 이번달 거래내역 데이터 select
     public Map<String, List<HanaOnePayTransDTO>> getThisMonthTransData(String identityNumber){
-        //주민번호로 고객의 카드정보를 가져온다.
         List<HanaOnePayhanaCardDTO> cardList = hanaOnePayDAO.getOnlyHanaCardDetailsByIdentity(identityNumber);
         System.out.println("고객의 카드정보: " + cardList);
-        //카드정보로 거래내역을 가져온다. return Type은 <카드번호, 거래내역 리스트>
         Map<String,List<HanaOnePayTransDTO>> resultMap = new HashMap<>();
-        //갖고 있는 카드들을 하나씩 뽑아서 거래내역을 가져온다.
         for(HanaOnePayhanaCardDTO card : cardList){
             System.out.println("고객의 카드정보: " + card.getCardNumber());
-            //거래내역 조회는 카드번호별로 해야함
             List<HanaOnePayTransDTO> transList = hanaOnePayDAO.getThisMonthTransData(card.getCardNumber());
             resultMap.put(card.getCardNumber(),transList);
         }
         return resultMap;
     }
 
-    // 고고
     public List<HanaOnePayTransDTO> getThisMonthTransDataByCard(String cardNumber){
         return hanaOnePayDAO.getThisMonthTransData(cardNumber);
     }
@@ -156,10 +146,6 @@ public class HanaOnePayService {
 
                     // 신용카드 한도에서 결제 금액만큼 차감
                     hanaOnePayDAO.updateCreditCardLimitByCardNumberAndIdentityNumber(cardNumber, identityNumber, tableCode, productPrice);
-
-//                    // 결제 승인 후 미결제 금액 관리 테이블에 해당 금액을 기록하는 로직
-//                    String withdrawalDate = LocalDate.now().plusMonths(1).withDayOfMonth(13).toString(); // 다음 달 13일로 설정.
-//                    cardDAO.insertPendingPayment(cardNumber, productPrice, withdrawalDate, "Pending", tableCode);
 
                     // 신용카드 거래 내역 생성 및 저장
                     insertCardPaymentLog(cardNumber, productPrice, tableCode);

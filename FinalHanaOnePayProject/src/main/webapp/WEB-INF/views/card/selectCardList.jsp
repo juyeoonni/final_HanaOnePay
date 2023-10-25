@@ -50,11 +50,9 @@
             </div>
             <div class="myCardCount">정주연 고객님 총 <c:out value="${fn:length(cardList)}"/>개의 카드를 보유중입니다.</div>
 
-            <!--
             <c:forEach items="${cardList}" var="card">
                 ${card.cardName}
             </c:forEach>
-            -->
 
             <div id="carouselExampleIndicators" class="carousel slide">
                 <div class="carousel-indicators">
@@ -71,10 +69,6 @@
                        </div>
                    </c:forEach>
                </div>
-
-
-
-
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
@@ -99,16 +93,12 @@
 
 <script>
     $(document).ready(function() {
-        // 초기 로드 시 첫 번째 아이템의 카드 이름 설정
         const firstCardName = $('#carouselExampleIndicators .carousel-item').eq(0).find('img').attr('alt');
         $('.myCardName').text(firstCardName);
 
-        // Carousel의 이벤트 리스너를 추가
         $('#carouselExampleIndicators').on('slid.bs.carousel', function () {
-            // 현재 active 상태의 슬라이드의 인덱스를 가져옵니다.
             const currentIndex = $('#carouselExampleIndicators .carousel-item.active').index();
 
-            // 현재 인덱스에 해당하는 카드 정보를 가져와서 myCardName의 텍스트를 업데이트합니다.
             const cardName = $('#carouselExampleIndicators .carousel-item').eq(currentIndex).find('img').attr('alt');
             $('.myCardName').text(cardName);
         });

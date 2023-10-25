@@ -108,28 +108,20 @@
                 display: flex;
             }
 
-            .flex-shrink-0 {
-                /* 필요에 따라 여기에 추가 스타일을 설정하세요 */
-            }
-
             .mypageMain {
-                flex: 1; /* 나머지 공간을 채우도록 설정 */
-                /* 필요에 따라 여기에 추가 스타일을 설정하세요 */
+                flex: 1;
             }
 
             .mypageMain {
                 display: flex;
                 flex-direction: column;
                 margin-left: 30px;
-                /*align-items: center;*/
-                /*justify-content: center;*/
-                /*height: 100vh;  !* 높이를 화면 높이와 동일하게 설정. 필요에 따라 조정할 수 있습니다. *!*/
             }
 
             .mypageName {
                 margin-right: 130px;
-                text-align: center; /* 텍스트 중앙 정렬 */
-                width: 100%; /* 너비를 100%로 설정하여 왼쪽 및 오른쪽 여백 없음 */
+                text-align: center;
+                width: 100%;
             }
 
 
@@ -168,9 +160,9 @@
             }
 
             #unique_startButton:hover {
-                background-color: #005a53; /* 호버 시 배경색 변경 */
-                transform: scale(1.1); /* 호버 시 약간 커지는 효과 */
-                cursor: pointer; /* 호버 시 커서 모양 변경 (선택사항) */
+                background-color: #005a53;
+                transform: scale(1.1);
+                cursor: pointer;
             }
 
             .custom-underline {
@@ -225,20 +217,19 @@
                 cursor: pointer;
                 transition: background-color 0.3s, color 0.3s;
                 background-color: white;
-                z-index: 2; /* Ensure steps are above the connecting line */
+                z-index: 2;
                 font-weight: bold;
                 box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
             }
 
             .stepper:before {
-                content: "";
                 position: absolute;
                 height: 2px;
                 background-color: #00857E;
                 top: 50%;
                 width: calc(100% - 100px);
-                left: 30px;  /* Half of one step's width */
-                z-index: 1; /* Make sure this is below the actual steps */
+                left: 30px;
+                z-index: 1;
             }
 
             .step.active {
@@ -253,7 +244,6 @@
                 align-items: center;
                 width: 90.3%;
                 height: 450px;
-                /*justify-content: space-between;*/
             }
 
             .question_content {
@@ -301,9 +291,9 @@
             }
 
             #resultButton:hover {
-                background-color: #005a53; /* 호버 시 배경색 변경 */
-                transform: scale(1.1); /* 호버 시 약간 커지는 효과 */
-                cursor: pointer; /* 호버 시 커서 모양 변경 (선택사항) */
+                background-color: #005a53;
+                transform: scale(1.1);
+                cursor: pointer;
             }
 
             .modal-body {
@@ -311,11 +301,8 @@
                 justify-content: center;
                 align-items: center;
                 flex-direction: column;
-                height: 100%; /* 높이를 100%로 설정하여 전체 높이를 차지하게 만듭니다. */
+                height: 100%;
             }
-
-
-
 
         </style>
 
@@ -343,8 +330,6 @@
 
                     <div class="collapse" id="home-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <%--                    <li><a href="/api/linkedAccount" class="link-body-emphasis d-inline-flex text-decoration-none rounded">연동카드조회</a></li>--%>
-                            <%--                    <li><a href="/hanaOnePay/selectPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>--%>
                             <li><a href="/hanaOnePay/selectHanaPayCard"
                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>
                             <li><a onclick="fetchAccountData()"
@@ -363,8 +348,6 @@
                             <li><a href="/api/payments-by-month?month=09"
                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">소비레포트</a></li>
                             <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">소비성향테스트</a></li>
-                            <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>--%>
-                            <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>--%>
                         </ul>
                     </div>
                 </li>
@@ -481,8 +464,6 @@
                             <img src="/img/loadingCheck.gif" alt="" style="width: 300px; height: 200px;">
                         </div>
                         <div class="modal-footer">
-<%--                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>--%>
-<%--                            <button type="button" class="btn btn-primary">Save changes</button>--%>
                         </div>
                     </div>
                 </div>
@@ -500,7 +481,7 @@
 
     <script>
 
-        let currentQuestion = 0;  // 현재 질문 번호
+        let currentQuestion = 0;
         let userAnswers = {};
 
         function startTest() {
@@ -512,17 +493,13 @@
         }
 
         function selectAnswer(questionNumber, choice) {
-            // 선택을 객체에 저장
             userAnswers[questionNumber] = choice;
 
-            // 모든 버튼에서 clicked 클래스 제거
             let buttons = document.querySelectorAll('.unique_choice');
             buttons.forEach(button => button.classList.remove('clicked'));
 
-            // 현재 클릭된 버튼에 clicked 클래스 추가
             event.target.classList.add('clicked');
 
-            // 마지막 문항일 때 결과보기 버튼 표시
             if (questionNumber === 5) {
                 document.querySelector("#resultButton").style.display = "block";
             }
@@ -546,16 +523,16 @@
                 resultMessage = "영화 한 편, 책 한 권. 주말, 문화의 품격으로 채워보세요!";
             }
 
-            // 결과 메시지를 로컬 스토리지에 저장
+            // 결과 메시지를 로컬에 저장
             localStorage.setItem('resultMessage', resultMessage);
 
             // 로딩 모달 표시
-            var bootstrapModal = new bootstrap.Modal(exampleModal); // Bootstrap 5 이상을 사용하는 경우 이렇게 모달 인스턴스를 생성
+            var bootstrapModal = new bootstrap.Modal(exampleModal);
             bootstrapModal.show();
 
             exampleModal.addEventListener('shown.bs.modal', function (event) {
                 setTimeout(function() {
-                    window.location.href = "/hanaOnePay/payTendencyTestResult"; // 다음 페이지의 URL로 변경해주세요.
+                    window.location.href = "/hanaOnePay/payTendencyTestResult";
                 }, 2000); // 2초 후에 리디렉션
             });
         }

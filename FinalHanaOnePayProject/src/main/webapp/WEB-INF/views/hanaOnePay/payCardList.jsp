@@ -31,9 +31,8 @@
             text-decoration: none;
         }
 
-        /* 호버 효과 덮어쓰기 */
        .add-button:hover {
-            background-color: #015550 !important; /* 호버 시 배경색 변경 */
+            background-color: #015550 !important;
         }
 
         /*사이드바*/
@@ -102,10 +101,8 @@
             display: flex;
         }
 
-
         .mypageMain {
-            flex: 1; /* 나머지 공간을 채우도록 설정 */
-            /* 필요에 따라 여기에 추가 스타일을 설정하세요 */
+            flex: 1;
         }
 
         .mypageMain {
@@ -199,7 +196,6 @@
 
 <main>
     <%--사이드바시작--%>
-    <%--<div style="display: flex">--%>
     <div class="row">
         <div class="col-lg-3 flex-shrink-0 p-3" style="width: 280px; margin-left: 90px;">
             <a href="/"
@@ -217,8 +213,6 @@
                     </button>
                     <div class="collapse show" id="home-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <%--                    <li><a href="/api/linkedAccount" class="link-body-emphasis d-inline-flex text-decoration-none rounded">연동카드조회</a></li>--%>
-                            <%--                    <li><a href="/hanaOnePay/selectPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>--%>
                             <li><a href="/hanaOnePay/selectHanaPayCard"
                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">마이하나원페이 연동</a>
                             </li>
@@ -238,9 +232,6 @@
                             <li><a href="/api/payments-by-month?month=09"
                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">내 지출 조회</a>
                             </li>
-                            <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">명세서 조회</a></li>--%>
-                            <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>--%>
-                            <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>--%>
                         </ul>
                     </div>
                 </li>
@@ -250,9 +241,6 @@
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                             <li><a href="/api/payments-by-month?month=09"
                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">소비레포트</a></li>
-                            <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Processed</a></li>--%>
-                            <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Shipped</a></li>--%>
-                            <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Returned</a></li>--%>
                         </ul>
                     </div>
                 </li>
@@ -311,7 +299,7 @@
                 <%
                     String selectedCards = (String) session.getAttribute("selectedCards");
                     List<HanaOnePayCardDTO> allCards = (List<HanaOnePayCardDTO>) request.getAttribute("allCards");
-                    String allCardsJson = new ObjectMapper().writeValueAsString(allCards); // Convert List to JSON String
+                    String allCardsJson = new ObjectMapper().writeValueAsString(allCards);
                 %>
 
                 <div class="p-3 m-3 border border-3 rounded-3 shadow d-flex align-items-center hanaCard" style="width: 900px;">
@@ -331,7 +319,6 @@
 
                 <c:forEach var="card" items="${allCards}">
                     <div class="card-info p-3 m-3 border border-3 rounded-3 shadow d-flex align-items-center">
-                        <!-- 이미지는 왼쪽에 위치 -->
                         <img src="/img/${card.cardName}.png" style="width: 200px; height: 130px; margin-right: 10px; flex-shrink: 0;">
 
                         <div>
@@ -363,7 +350,6 @@
                             </c:choose>
 
                             카드 이름 : ${card.cardName} <br>
-                            <!-- 카드 번호 중간 부분을 *로 대체 -->
                             <c:set var="cardParts" value="${fn:split(card.cardNumber, '-')}"/>
                             <c:set var="maskedPart1" value="****"/>
                             <c:set var="maskedPart2" value="****"/>
@@ -372,9 +358,6 @@
                         </div>
                     </div>
                 </c:forEach>
-
-            <%--                <div id="cardDataContainer" class="p-3 border border-3 rounded-3 shadow"></div>--%>
-
                 <a href="/hanaOnePay/addPayCard" class="add-button">페이카드 추가</a>
             </div>
 
@@ -391,20 +374,15 @@
 
 
 <script>
-    <%--let cards = <%= selectedCards %>;--%>
     let cards = <%= allCardsJson %>;
 
-    // cards 변수에 할당된 카드 정보 출력
     console.log(cards);
 
-    function maskCardNumber(cardNumber) {
-        // Same masking function as in connectMyData.jsp
-    }
 
     // 연동된 카드 개수 업데이트 함수
     function updateCardCount() {
         let count = cards.length + 1; // cards 배열의 길이를 가져와 연동된 카드 개수로 설정
-        document.getElementById('count').textContent = count; // span 업데이트
+        document.getElementById('count').textContent = count;
     }
 
     // 페이지 로드 시 연동된 카드 개수 업데이트 호출
@@ -442,7 +420,6 @@
         document.getElementById('cardDataContainer').appendChild(cardDiv);
     });
 </script>
-
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"

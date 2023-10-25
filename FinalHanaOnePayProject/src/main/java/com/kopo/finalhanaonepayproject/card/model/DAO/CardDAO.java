@@ -14,7 +14,6 @@ public interface CardDAO {
 
     public CardDTO selectCardDetailByCardNumber(@Param("cardNumber")String cardNumber);
 
-    // DAO interface에 추가
     public List<CardDTO> selectCardByBankCode(List<String> modifiedBankCodes);
 
 }

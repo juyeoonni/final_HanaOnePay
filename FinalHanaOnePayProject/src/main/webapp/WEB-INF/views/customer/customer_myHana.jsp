@@ -13,10 +13,9 @@
 
     <style>
         .accordion {
-            margin-left: 100px !important; /* 사이드바와 간격 조절 */
+            margin-left: 100px !important;
             width: 800px;
         }
-
     </style>
 </head>
 

@@ -65,13 +65,6 @@
         SELECT * FROM payCard
     </select>
 
-<!--    &lt;!&ndash;    하나카드 이번달 사용금액 조회 &ndash;&gt;-->
-<!--    <select id="" resultType="com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayCardDTO">-->
-<!--        SELECT SUM(payAmount) AS 이번달_총_사용금액-->
-<!--        FROM hana_card_payment_log-->
-<!--        WHERE SUBSTR(payDate, 1, 7) = TO_CHAR(SYSDATE, 'YYYY-MM')-->
-<!--    </select>-->
-
     <!--   한 회원이 갖고 있는 하나카드 정보 조회 -->
     <select id="getOnlyHanaCardDetailsByIdentity" resultType="com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayhanaCardDTO">
         select c.cardNumber
@@ -113,8 +106,6 @@
         WHERE SUBSTR(payDate, 1, 7) = TO_CHAR(SYSDATE, 'YYYY-MM')
         AND cardNumber = #{cardNumber}
     </select>
-
-
 
     <select id="">
         select distinct l.cardNumber

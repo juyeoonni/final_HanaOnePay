@@ -78,7 +78,6 @@ public class ClovaOCRTemplate {
     private static void writeMultiPart(OutputStream out, String jsonMessage, File file, String boundary) throws IOException {
         PrintWriter writer = new PrintWriter(new OutputStreamWriter(out, "UTF-8"), true);
 
-        // Send normal param.
         writer.append("--" + boundary).append("\r\n");
         writer.append("Content-Disposition: form-data; name=\"message\"").append("\r\n");
         writer.append("Content-Type: text/plain; charset=UTF-8").append("\r\n");
@@ -86,7 +85,6 @@ public class ClovaOCRTemplate {
         writer.append(jsonMessage).append("\r\n");
         writer.flush();
 
-        // Send binary file.
         writer.append("--" + boundary).append("\r\n");
         writer.append("Content-Disposition: form-data; name=\"file\"; filename=\"" + file.getName() + "\"").append("\r\n");
         writer.append("Content-Type: " + URLConnection.guessContentTypeFromName(file.getName())).append("\r\n");
@@ -101,18 +99,16 @@ public class ClovaOCRTemplate {
             for (int length = 0; (length = input.read(buffer)) > 0;) {
                 out.write(buffer, 0, length);
             }
-            out.flush(); // Important before continuing with writer!
+            out.flush();
             writer.append("\r\n");
             writer.flush();
         } finally {
             if (input != null) try { input.close(); } catch (IOException logOrIgnore) {}
         }
 
-        // End of multipart/form-data.
         writer.append("--" + boundary + "--").append("\r\n");
         writer.flush();
     }
-
 
     private static Map<String, String> processResponse(String response) {
         System.out.println("Response: " + response);
@@ -138,6 +134,4 @@ public class ClovaOCRTemplate {
 
         return extractedData;
     }
-
-
 }

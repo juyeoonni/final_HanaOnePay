@@ -2,7 +2,6 @@ package com.kopo.finalhanaonepayproject.naverSMS;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kopo.finalhanaonepayproject.naverSMS.Request;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
@@ -43,7 +42,7 @@ public class SmsController {
             // JSON 데이터에서 인증번호 추출
             String inputNumber = rootNode.path("authNumber").asText();
             System.out.println("인증번호 입력: " + inputNumber);
-            // 여기서 필요한 작업을 수행합니다.
+
             int authNumber = (int)session.getAttribute("randomNumber");
             //authNumber를 string으로 변환
             String authNumberString = Integer.toString(authNumber);
@@ -56,7 +55,7 @@ public class SmsController {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return "Error"; // 에러 응답
+            return "Error";
         }
     }
 }

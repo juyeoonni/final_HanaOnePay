@@ -195,7 +195,6 @@
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                         <li><a href="/api/linkedAccount" class="link-body-emphasis d-inline-flex text-decoration-none rounded">연동카드조회</a></li>
                         <li><a href="/hanaOnePay/selectPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">하나원페이카드 조회</a></li>
-                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">하나머니</a></li>--%>
                     </ul>
                 </div>
             </li>

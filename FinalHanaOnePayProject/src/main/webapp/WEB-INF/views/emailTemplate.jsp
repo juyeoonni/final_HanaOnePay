@@ -209,7 +209,6 @@
 
     function loadJSPDFLibrary() {
         return new Promise((resolve, reject) => {
-            // jsPDF 라이브러리 스크립트를 동적으로 로드합니다.
             const script = document.createElement('script');
             script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.min.js';
             script.onload = resolve;

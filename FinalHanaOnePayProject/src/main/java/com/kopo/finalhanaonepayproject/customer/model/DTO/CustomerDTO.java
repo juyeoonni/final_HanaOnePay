@@ -19,7 +19,6 @@ public class CustomerDTO {
     private String joinDate;
     private int payPw;
 
-    // 기본생성자
     public CustomerDTO() {
     }
 }

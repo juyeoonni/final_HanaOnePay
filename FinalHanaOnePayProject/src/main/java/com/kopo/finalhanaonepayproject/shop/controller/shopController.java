@@ -32,7 +32,6 @@ public class ShopController {
         this.hanaOnePayService = hanaOnePayService;
     }
 
-
     @GetMapping("/shop/shopMain")
     public String showShopMain() {
         return "shop/shopMain";
@@ -48,22 +47,18 @@ public class ShopController {
         return "shop/shopItem2";
     }
 
-    //    세션에서 고객 주민번호 받아서 고객 주민번호를 기반으로 고객이 갖고 있는 페이카드 조회
     @GetMapping("/shop/buyItem")
     public ModelAndView buyItem(HttpServletRequest request,
                                 @RequestParam("productName") String productName,
                                 @RequestParam("productPrice") int productPrice,
                                 @RequestParam("productDataJSON") String productDataJSON) {
 
-        // productName 디코딩
         try {
             productName = URLDecoder.decode(productName, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-            // 적절한 오류 처리를 여기에 추가할 수 있습니다.
         }
 
-        // 콘솔에 JSON 문자열 출력
         System.out.println("Received JSON: " + productDataJSON);
 
         HttpSession session = request.getSession();
@@ -110,8 +105,5 @@ public class ShopController {
         int finalPrice = productPrice - usedPoint;
         return ResponseEntity.ok(finalPrice);
     }
-
-
-
 
 }

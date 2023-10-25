@@ -104,10 +104,6 @@
             display: flex;
         }
 
-        .flex-shrink-0 {
-            /* 필요에 따라 여기에 추가 스타일을 설정하세요 */
-        }
-
         /*아코디언 css*/
         * {
             box-sizing: border-box;
@@ -128,7 +124,6 @@
 
         .que::before {
             display: inline-block;
-            /*content: 'Q';*/
             font-size: 14px;
             color: #006633;
             margin: 0 5px;
@@ -140,14 +135,14 @@
         }
 
         .anw {
-            display: flex; /* flex를 사용하여 아이템들을 가로로 나열합니다 */
-            align-items: center; /* 아이템들을 수직 중앙에 배치합니다 */
+            display: flex;
+            align-items: center;
             overflow: hidden;
             font-size: 14px;
             background-color: #F5F5F5;
             padding: 30px 0;
-            align-items: center; /* 아이템을 수직으로 중앙에 배치 */
-            gap: 10px; /* 아이템 간의 간격 설정 (브라우저 지원 여부 확인 필요) */
+            align-items: center;
+            gap: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
@@ -155,10 +150,8 @@
             display: block;
         }
 
-
         .anw::before {
             display: inline-block;
-            /*content: 'A';*/
             font-size: 14px;
             font-weight: bold;
             color: #666;
@@ -203,7 +196,7 @@
             height: 100px;
         }
 
-        .anw span:nth-child(2) { /* 첫 번째 span (카드명)을 대상으로 설정 */
+        .anw span:nth-child(2) {
             display: block;
         }
 
@@ -220,13 +213,11 @@
             border-radius: 20px;
         }
 
-        /* 모두 동의 부분 */
         .agree-all-label {
             font-size: 1.5em;
             font-weight: bold;
         }
 
-        /* 안의 내용들이 담길 상자 */
         .inner-box {
             border: 1px solid #ccc;
             padding: 10px;
@@ -234,7 +225,6 @@
             border-radius: 10px;
         }
 
-        /* 선택 불가능한 항목에 대한 스타일 */
         .select_disable {
             color: grey;
         }
@@ -271,9 +261,9 @@
         .card-header {
             margin-top: 15px;
             display: flex;
-            align-items: center; /* 수직 중앙 정렬을 위해 추가 */
-            justify-content: center; /* 수평 중앙 정렬 */
-            padding: 10px; /* 필요에 따라 패딩을 조절 */
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
         }
 
         .cardInfo {
@@ -295,27 +285,25 @@
             padding-top: 10px;
             padding-bottom: 10px;
             width: 25%;
-            align-items: center; /* 수직 중앙 정렬을 위해 추가 */
-            justify-content: center; /* 수평 중앙 정렬 */
+            align-items: center;
+            justify-content: center;
             color: white;
             background-color: #00857E;
             border-radius: 5px;
             border: none;
             font-size: 17px;
-            cursor: pointer; /* 커서 모양 변경 (마우스 호버 시 손가락 모양으로 변경) */
-            text-decoration: none; /* 밑줄 제거 */
-            display: flex; /* 요소를 플렉스 컨테이너로 설정하여 수직, 수평 정렬을 활성화합니다. */
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
         }
 
-        /* 버튼 호버 시 스타일 변경 */
         .addPayCard:hover {
-            background-color: #006D64; /* 호버 시 배경색 변경 */
+            background-color: #006D64;
         }
 
-        /* 버튼 내부 링크 텍스트 숨김 */
         .addPayCard a {
-            color: inherit; /* 링크 텍스트 색상을 부모 요소로 상속합니다. */
-            text-decoration: none; /* 링크 텍스트의 밑줄 제거 */
+            color: inherit;
+            text-decoration: none;
         }
 
         .account {
@@ -346,11 +334,10 @@
 
         .custom-line {
             border: none;
-            height: 2px; /* 선의 높이 */
-            background-color: #404B57; /* 선의 색상 */
-            margin-top: 0px; /* 원하는 대로 상단 여백 조정 */
+            height: 2px;
+            background-color: #404B57;
+            margin-top: 0px;
         }
-
 
     </style>
 </head>
@@ -375,8 +362,6 @@
 
                 <div class="collapse show" id="home-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <%--                    <li><a href="/api/linkedAccount" class="link-body-emphasis d-inline-flex text-decoration-none rounded">연동카드조회</a></li>--%>
-                        <%--                    <li><a href="/hanaOnePay/selectPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>--%>
                         <li><a href="/hanaOnePay/selectHanaPayCard"
                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>
                         <li><a onclick="fetchAccountData()"
@@ -396,8 +381,6 @@
                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">소비레포트</a></li>
                         <li><a href="#"
                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">소비성향테스트</a></li>
-                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>--%>
-                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>--%>
                     </ul>
                 </div>
             </li>
@@ -405,9 +388,6 @@
             <li class="border-top my-3"></li>
         </ul>
     </div>
-    <%--    사이드바끝--%>
-
-    <%--간편결제 등록 카드 화면 조회--%>
     <div id="Accordion_wrap" class="AccAccordion">
         <h2>간편결제 등록 계좌 조회</h2>
         <br>
@@ -432,11 +412,7 @@
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                // 계좌 정보를 화면에 출력하는 코드
-                // 예: 계좌 정보를 테이블에 추가
                 sessionStorage.setItem('accountData', JSON.stringify(data));
-
-                // 계좌 조회가 성공적으로 완료되었으므로 해당 경로로 리디렉션
                 window.location.href = "/hanaOnePay/selectHanaPayAccount";
             })
             .catch(error => {
@@ -476,7 +452,6 @@
 
         for (const bankName in groupedAccounts) {
 
-
             // 은행 이름 표시
             const bankDiv = document.createElement('div');
             bankDiv.className = 'bank';
@@ -487,10 +462,10 @@
             groupedAccounts[bankName].forEach(account => {
                 const accountDiv = document.createElement('div');
                 accountDiv.className = 'account';
-                accountDiv.style.display = "flex"; // flex 설정
-                accountDiv.style.justifyContent = "space-between"; // 왼쪽과 오른쪽으로 내용을 분리
+                accountDiv.style.display = "flex";
+                accountDiv.style.justifyContent = "space-between";
 
-                const accountInfoDiv = document.createElement('div'); // 계좌 정보를 담는 컨테이너
+                const accountInfoDiv = document.createElement('div');
 
                 // 계좌 번호에서 마지막 6자리를 '*'로 대체한 문자열 생성
                 const accountNumber = account.accNumber;
@@ -499,15 +474,13 @@
                 accountInfoDiv.innerHTML =
                     '<h5>' + account.accName + ' (' + account.accNickName + ')</h5>' +
                     '<p>계좌 번호: ' + maskedAccountNumber + '</p>';
-                //'<p>계좌 상태: ' + account.accStatus + '</p>';
 
-                const balanceDiv = document.createElement('div'); // 잔액 정보를 담는 컨테이너
+                const balanceDiv = document.createElement('div');
 
-                // 잔액을 포맷팅하여 컴마로 구분된 문자열로 변환
                 const formattedBalance = new Intl.NumberFormat().format(account.accBalance);
 
                 balanceDiv.innerHTML = '<p>잔액: ' + formattedBalance + '</p>';
-                balanceDiv.style.textAlign = "right"; // 잔액을 오른쪽으로 정렬
+                balanceDiv.style.textAlign = "right";
                 balanceDiv.style.marginRight = "150px";
 
 
@@ -522,7 +495,6 @@
                     window.location.href = "/hanaOnePay/selectAccountTransList?accNumber=" + accNumber;
                 });
 
-                // 스타일 적용
                 checkButton.style.color = "white";
                 checkButton.style.backgroundColor = "#666666";
                 checkButton.style.borderRadius = "5px";
@@ -531,18 +503,14 @@
                 checkButton.style.width = "100px";
 
 
-                balanceDiv.appendChild(checkButton); // balanceDiv 내에 버튼 추가
-
+                balanceDiv.appendChild(checkButton);
                 accountDiv.appendChild(accountInfoDiv);
                 accountDiv.appendChild(balanceDiv);
-
                 accountContainer.appendChild(accountDiv);
             });
         }
     }
 
-
-    // 페이지 로드 시 함수 실행
     window.onload = displayAccounts;
 </script>
 

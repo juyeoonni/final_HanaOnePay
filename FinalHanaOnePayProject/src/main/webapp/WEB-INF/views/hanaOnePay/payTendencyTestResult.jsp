@@ -18,7 +18,6 @@
           integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<%--    pdf --%>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.0.0-rc.7/html2canvas.min.js"></script>
 
@@ -114,28 +113,20 @@
             display: flex;
         }
 
-        .flex-shrink-0 {
-            /* 필요에 따라 여기에 추가 스타일을 설정하세요 */
-        }
-
         .mypageMain {
-            flex: 1; /* 나머지 공간을 채우도록 설정 */
-            /* 필요에 따라 여기에 추가 스타일을 설정하세요 */
+            flex: 1;
         }
 
         .mypageMain {
             display: flex;
             flex-direction: column;
             margin-left: 30px;
-            /*align-items: center;*/
-            /*justify-content: center;*/
-            /*height: 100vh;  !* 높이를 화면 높이와 동일하게 설정. 필요에 따라 조정할 수 있습니다. *!*/
         }
 
         .mypageName {
             margin-right: 130px;
-            text-align: center; /* 텍스트 중앙 정렬 */
-            width: 100%; /* 너비를 100%로 설정하여 왼쪽 및 오른쪽 여백 없음 */
+            text-align: center;
+            width: 100%;
         }
 
 
@@ -144,7 +135,7 @@
         }
 
         .payTag {
-            display: flex; /* Flexbox 레이아웃 사용 */
+            display: flex;
         }
 
         #tag1, #tag2 {
@@ -167,32 +158,27 @@
 
         .resultContainer {
             display: flex;
-            align-items: center; /* 컨텐츠를 중앙에 수직 정렬 */
+            align-items: center;
         }
 
         .textContent {
-            flex: 1; /* 텍스트가 가능한 많은 공간을 차지하게 함 */
-            margin-right: 10px; /* 이미지와의 간격을 조절 */
-        }
-
-        .resultImage {
-            /* 필요한 스타일 (예: width, height 등) */
+            flex: 1;
+            margin-right: 10px;
         }
 
         .card-container {
-            display: flex; /* card-item들을 수평으로 정렬하기 위해 flexbox를 사용합니다. */
-            gap: 20px; /* card-item들 사이의 간격을 지정합니다. */
+            display: flex;
+            gap: 20px;
         }
 
         .card-item {
-            display: flex; /* card-item 내부의 아이템들을 수직으로 정렬하기 위해 flexbox를 사용합니다. */
-            flex-direction: column; /* 수직 정렬을 위해 flex의 방향을 column으로 지정합니다. */
-            align-items: center; /* card-item 내부의 아이템들을 가로 중앙에 위치시킵니다. */
-
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             animation-name: fadeIn;
             animation-duration: 1s;
             animation-fill-mode: forwards;
-            opacity: 0; /* 시작 시 숨겨져 있어야 함 */
+            opacity: 0;
         }
 
         @keyframes fadeIn {
@@ -214,7 +200,7 @@
         }
 
         .card-item {
-            position: relative; /* 상대 위치 설정 */
+            position: relative;
         }
 
         .card-detail {
@@ -226,14 +212,14 @@
             background-color: #00907F;
             border-radius: 10px;
             color: white;
-            visibility: hidden;  /* 초기에 숨김 */
-            justify-content: center;  /* 내용을 중앙으로 정렬 */
+            visibility: hidden;
+            justify-content: center;
             align-items: center;
             text-align: center;
             z-index: 10;
-            opacity: 0;  /* 초기에는 완전히 투명하게 설정 */
-            transform: translateY(20px); /* 초기 상태에서 아래로 조금 내려감 */
-            transition: opacity 0.3s, transform 0.5s;  /* opacity와 transform이 0.3초 동안 변하도록 설정 */
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s, transform 0.5s;
         }
 
         .btn-detail {
@@ -266,7 +252,6 @@
             transition: background-color 0.3s ease-in-out;
         }
 
-        /*아코디언*/
         *{
             box-sizing: border-box;
         }
@@ -333,9 +318,6 @@
             display: block;
         }
 
-
-
-
     </style>
 
 </head>
@@ -362,8 +344,6 @@
 
                 <div class="collapse" id="home-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <%--                    <li><a href="/api/linkedAccount" class="link-body-emphasis d-inline-flex text-decoration-none rounded">연동카드조회</a></li>--%>
-                        <%--                    <li><a href="/hanaOnePay/selectPayCard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>--%>
                         <li><a href="/hanaOnePay/selectHanaPayCard"
                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">간편결제 카드</a></li>
                         <li><a onclick="fetchAccountData()"
@@ -383,8 +363,6 @@
                         <li><a href="/api/payments-by-month?month=09"
                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">소비레포트</a></li>
                         <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">소비성향테스트</a></li>
-                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>--%>
-                        <%--                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>--%>
                     </ul>
                 </div>
             </li>
@@ -409,7 +387,6 @@
                 <div class="resultMessage" id="resultMessage"></div>
                 는 스타일로 나타났습니다!
             </div>
-            <%--                <img class="resultImage" src="/img/resultShopping.png" alt="">--%>
         </div>
 
         <div class="recommandCard">
@@ -456,20 +433,13 @@
                                 </div>
                                 <div>${card.cardName}</div>
                                 <div style="color: #959595; font-size: 15px;">${card.cardDesc}</div>
-
                                 <br><br>
                             </div>
                         </c:forEach>
-
-
-
-
                     </div>
                 </div>
-
             </div>
         </div>
-
 
     </div>
 
@@ -485,7 +455,7 @@
     $(".que").click(function() {
         $(this).next(".anw").stop().slideToggle(300);
         $(this).toggleClass('on').siblings().removeClass('on');
-        $(this).next(".anw").siblings(".anw").slideUp(300); // 1개씩 펼치기
+        $(this).next(".anw").siblings(".anw").slideUp(300);
     });
 
     window.onload = function () {
@@ -513,19 +483,18 @@
                 var cardDetail = this.querySelector('.card-detail');
                 cardDetail.style.opacity = '1';
                 cardDetail.style.visibility = 'visible';
-                cardDetail.style.transform = 'translateY(0)'; // 원래 위치로 돌아감
+                cardDetail.style.transform = 'translateY(0)';
             });
 
             cardItem.addEventListener('mouseout', function() {
                 var cardDetail = this.querySelector('.card-detail');
                 cardDetail.style.opacity = '0';
-                cardDetail.style.transform = 'translateY(20px)'; // 아래로 조금 내려감
-                // opacity 애니메이션 완료 후에 visibility를 hidden으로 설정
+                cardDetail.style.transform = 'translateY(20px)';
                 setTimeout(function() {
                     if(cardDetail.style.opacity === '0') {
                         cardDetail.style.visibility = 'hidden';
                     }
-                }, 500);  // CSS에서 설정한 transition 시간과 일치해야 함
+                }, 500);
             });
         });
     });
@@ -541,15 +510,6 @@
             pdf.save('상품약관.pdf');
         });
     }
-
-
-
-
-
-
-
-
-
 </script>
 
 </body>

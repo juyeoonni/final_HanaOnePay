@@ -28,39 +28,28 @@
                 margin-top: 150px;
             }
             .cardInfo .card-detail {
-                /* 테두리 스타일: 너비, 스타일, 색상 */
                 border: 2px solid #cccccc;
 
-                /* 테두리를 둥글게 만들기 (예: 10px의 radius를 적용) */
                 border-radius: 10px;
 
-                /* 내부 여백 (패딩) */
                 padding: 10px;
 
-                /* 박스간의 마진 */
                 margin: 10px 0;
 
-                /* 박스의 배경색 */
                 background-color: #f9f9f9;
             }
 
             .cardInfo .card-detail-center {
-                /* 테두리 스타일: 너비, 스타일, 색상 */
                     border: 1px ;
 
-                    /* 테두리를 둥글게 만들기 (예: 10px의 radius를 적용) */
                     border-radius: 10px;
 
-                    /* 내부 여백 (패딩) */
                     padding: 10px;
 
-                    /* 박스간의 마진 */
                     margin: 10px 0;
 
-                    /* 박스의 배경색 */
                     background-color: #BCD9D3;
 
-                    /* 텍스트를 div의 정중앙에 배치하기 위한 스타일 */
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -69,18 +58,11 @@
             }
 
             .cardInfo .card-detail-center:hover {
-                /* 마우스 호버 시의 배경색 */
                 background-color: #00857E;
-
-
             }
 
-            /* 거래내역조회와 하나원페이 등록 div에만 특별한 스타일을 적용 */
             .cardInfo .cardHistory {
-                /* 배경색 */
                 background-color: #BCD9D3;
-
-                /* 마우스 호버 시의 배경색 */
                 cursor: pointer;
             }
     </style>
@@ -91,10 +73,8 @@
 <%@ include file="/WEB-INF/views/comm/header.jsp"%>
 
 <main>
-    <!-- 사이드바와 컨텐츠를 감싸는 flex container -->
     <div class="flex-card-container">
 
-        <!-- 사이드바 -->
         <div class="d-flex flex-column flex-shrink-0 p-3 sidebar" style="width: 280px;">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
               <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
@@ -102,7 +82,6 @@
             </a>
             <hr>
 
-            <!-- 카드조회 사이드바 내용 -->
             <div class="button-container">
               <button class="card-button active" id="card1">
                 <svg class="icon" width="16" height="16"></svg>
@@ -122,21 +101,6 @@
             </div>
 
             <hr>
-            <!--
-            <div class="dropdown">
-              <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                <strong>mdo</strong>
-              </a>
-              <ul class="dropdown-menu text-small shadow">
-                <li><a class="dropdown-item" href="#">New project...</a></li>
-                <li><a class="dropdown-item" href="#">Settings</a></li>
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Sign out</a></li>
-              </ul>
-            </div>
-            -->
         </div>
 
 
@@ -186,11 +150,6 @@
             </a>
 
     </div>
-
-
-
-
-
     </div>
 
 </main>
@@ -199,10 +158,6 @@
 <%@ include file="/WEB-INF/views/comm/footer.jsp"%>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-
-
-
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 </html>

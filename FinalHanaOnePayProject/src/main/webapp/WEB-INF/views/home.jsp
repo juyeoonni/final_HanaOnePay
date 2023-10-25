@@ -18,7 +18,6 @@
             opacity: 0 !important;
         }
 
-        /* 전체 상자 */
         .outer-box {
             border: 2px solid #E2E6E9;
             padding: 20px;
@@ -28,13 +27,11 @@
             border-radius: 20px;
         }
 
-        /* 모두 동의 부분 */
         .agree-all-label {
             font-size: 1.5em;
             font-weight: bold;
         }
 
-        /* 안의 내용들이 담길 상자 */
         .inner-box {
             border: 1px solid #ccc;
             padding: 10px;
@@ -42,7 +39,6 @@
             border-radius: 10px;
         }
 
-        /* 선택 불가능한 항목에 대한 스타일 */
         .select_disable {
             color: grey;
         }
@@ -95,7 +91,6 @@
             margin-top: 8%;
         }
 
-
     </style>
 </head>
 <body>
@@ -103,59 +98,6 @@
 <%@ include file="/WEB-INF/views/comm/header.jsp" %>
 
 <main>
-
-    <!-- 캐러셀 슬라이드 -->
-    <%--    <div id="carouselExampleRide" class="carousel slide" data-bs-ride="true">--%>
-    <%--        <div class="carousel-inner">--%>
-    <%--            <div class="carousel-item active" data-bs-interval="3000">--%>
-    <%--                <div class="flex-card-container">--%>
-    <%--                    <div class="mainOnePay">--%>
-    <%--                        <div class="mainText animate__animated animate__fadeInUp" style="font-size: 36px;">--%>
-    <%--                            하나로 연결된 </br>--%>
-    <%--                            모두의 원페이--%>
-    <%--                        </div>--%>
-
-    <%--                        <div class="subText animate__animated animate__fadeInUp" style="margin-top: 30px">--%>
-    <%--                            한번의 카드 등록으로--%>
-    <%--                            편리하게 즐기는 모두의 결제 생활!--%>
-    <%--                        </div>--%>
-    <%--                    </div>--%>
-    <%--                    <img class="mainCardImage animate__animated animate__fadeInUp" src="/img/mainCard.png">--%>
-    <%--                </div>--%>
-
-    <%--            </div>--%>
-    <%--            <div class="carousel-item" data-bs-interval="3000">--%>
-    <%--                <div class="flex-card-container2">--%>
-    <%--                    <div class="mainOnePay2">--%>
-    <%--                        <div class="mainText2 animate__animated animate__fadeIn">--%>
-    <%--                            여행도 </br>--%>
-    <%--                            하나로 원페이--%>
-    <%--                        </div>--%>
-    <%--                        <div class="subText2 animate__animated animate__fadeIn">--%>
-    <%--                            해외여행도--%>
-    <%--                            하나카드 하나면 돼!--%>
-    <%--                        </div>--%>
-    <%--                    </div>--%>
-    <%--                    <img class="mainCardImage2 animate__animated animate__fadeIn" src="/img/mainCard.png">--%>
-
-    <%--                </div>--%>
-    <%--            </div>--%>
-
-    <%--            <div class="carousel-item" data-bs-interval="3000">--%>
-    <%--                <img src="/img/hanaMain2.png" class="d-block w-100" alt="...">--%>
-    <%--            </div>--%>
-    <%--        </div>--%>
-    <%--        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">--%>
-    <%--            <span class="carousel-control-prev-icon" aria-hidden="true"></span>--%>
-    <%--            <span class="visually-hidden">Previous</span>--%>
-    <%--        </button>--%>
-    <%--        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="next">--%>
-    <%--            <span class="carousel-control-next-icon" aria-hidden="true"></span>--%>
-    <%--            <span class="visually-hidden">Next</span>--%>
-    <%--        </button>--%>
-    <%--    </div>--%>
-
-    <%--    <img src="/img/mainPageImg.jpg" style="margin-left: 7.5%;"></img>--%>
 
     <div id="carouselExampleIndicators" class="carousel slide">
         <div class="carousel-indicators">
@@ -201,14 +143,9 @@
 
                     <div style="display: flex;">
                         <div style="color:#666666; width: 230px; height: 150px;  margin-left: 10%; margin-top: 2%; border-radius: 8px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); transition: all 0.3s;">
-                            <%--                        <p style="margin-left: 5%; margin-top: 5%;">보유카드</p>--%>
                             <div class="creditCardWithDraw" style="padding: 8px; ">
                                 <div style="margin-top: 15px; margin-left: 10px;">다가오는 결제</div>
                                 <div payCreditCardList>
-                                    <%--                                <div class="flex-container" style="font-size: 15px; margin-left: 25px;">--%>
-                                    <%--                                    <p style="color: #959595; margin-right: 15px;">결제계좌 </p>--%>
-                                    <%--                                    하나은행 ${creditCards[0].cardNumber}--%>
-                                    <%--                                </div>--%>
                                     <br>
 
                                     <div class="flex-container"
@@ -243,7 +180,6 @@
                     </div>
                 </div>
 
-                <!-- New div positioned right below the original div -->
                 <div style="background-color: #00857E; width: 600px; height: 50px; margin-top: 22px; display: flex; justify-content: space-around; align-items: center; font-size: 15px;">
                     <a href="#" style="text-decoration: none; color: #FFFFFF;">하나원페이</a>
                     <span style="color: #FFFFFF;">|</span>
@@ -255,7 +191,6 @@
                 </div>
             </div>
 
-            <!-- Carousel items below -->
             <div class="carousel-item active">
                 <img src="/img/mainPageImg.jpg" class="d-block w-100" alt="..." style="height: 470px;">
             </div>
@@ -333,30 +268,23 @@
             <!-- Trigger element -->
             <a data-href="/card/mydataCard" class="menu-item">
                 <div class="menu-content" style="font-size: 20px;">
-                    <%--                    <img src="/img/menu1.png" alt="하나원페이">--%>
                     마이페이
                 </div>
             </a>
-            <%--            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmModal">--%>
-            <%--                Launch demo modal--%>
-            <%--            </button>--%>
 
             <a href="/customer/customer_myHanaPage" class="menu-item">
                 <div class="menu-content" style="font-size: 20px;">
-                    <%--                    <img src="/img/menu2.png" alt="하나머니조회">--%>
                     마이하나
                 </div>
             </a>
             <a href="/hanaOnePay/payManage" class="menu-item">
                 <div class="menu-content" style="font-size: 20px;">
-                    <%--                    <img src="/img/menu3.png" alt="카드조회">--%>
                     즉시결제
                 </div>
             </a>
 
             <a href="/shop/shopMain" class="menu-item">
                 <div class="menu-content" style="font-size: 19px;">
-                    <%--                    <img src="/img/menu4.png" alt="라이프">--%>
                     하나원쇼핑
                 </div>
             </a>
@@ -364,36 +292,6 @@
         </div>
     </div>
 
-
-    <!-- 혜택 디브
-    <div class="card-container">
-        <div class="card">
-            <div class="card-content-detail">
-                <div class="card-text">Content 1</div>
-                <img class="card-image" src="path-to-image1.jpg" alt="Image 1">
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-content-detail">
-                <div class="card-text">Content 2</div>
-                <img class="card-image" src="path-to-image2.jpg" alt="Image 2">
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-content-detail">
-                <div class="card-text">Content 3</div>
-                <img class="card-image" src="path-to-image3.jpg" alt="Image 3">
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-content-detail">
-                <div class="card-text">Content 4</div>
-                <img class="card-image" src="path-to-image4.jpg" alt="Image 4">
-            </div>
-        </div>
-    </div>
-
-    -->
     <!-- Modal -->
     <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true" style="z-index: 10;">
@@ -406,10 +304,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Your modal content here -->
                     <h4 style="background-color: #00857E; color: #FFFFFF;">[하나원페이 약관동의서]</h4>
 
-                    <%--                        <img class="hanaCharacter" src="/img/myWallet.png">--%>
                     <br>
                     <h6>마이하나원페이는 통합 결제수단 관리에 특화된 마이데이터 서비스 입니다.</h6>
                     <h6>지갑 연결 진행을 위해 약관에 동의해 주세요.</h6> <br>
@@ -557,9 +453,7 @@
                                 </div>
                             </div>
 
-
                         </div>
-
 
                     </div>
 
@@ -597,7 +491,6 @@
                         </div>
                     </div>
                 </div>
-
 
                 <div class="modal-footer">
                     <a href="/home">
@@ -639,7 +532,6 @@
         });
     });
 
-    // 동의 모두선택 / 해제
     const agreeChkAll = document.querySelector('input[name=agree_all]');
     agreeChkAll.addEventListener('change', (e) => {
         let agreeChk = document.querySelectorAll('input[name=agree]');
@@ -667,7 +559,7 @@
 
         const targetAmount = parseInt('${thisMonthTotalAmounts[card1.cardNumber]}'.replace(/[^0-9]/g, ''));
         const displayElement = document.getElementById("monthlyUsage");
-        const duration = 500; // 애니메이션 시간 (2초)
+        const duration = 500;
         const stepTime = 10;
         let currentAmount = 0;
         const increment = targetAmount / (duration / stepTime);
@@ -699,7 +591,6 @@
     }
 
     window.addEventListener('DOMContentLoaded', (event) => {
-        // 숫자에 세 자리마다 콤마 추가하는 함수
         function numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
@@ -712,7 +603,6 @@
     function numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
-
 
     var cardNames = ['${card1.cardName}', '${card2.cardName}'];
     var cardImages = ['/img/${card1.cardName}.png', '/img/${card2.cardName}.png'];
@@ -755,26 +645,20 @@
     }
 
     function showTransData(cardNumber) {
-        // tbody 참조
         var tbody = document.querySelector('.recentCardUse tbody');
 
-        // tbody 내용 초기화
         tbody.innerHTML = '';
 
-        // cardTransData에서 해당 카드번호의 거래내역 문자열을 가져옵니다.
         var transListString = thisMonthTransData[cardNumber];
 
-        // 문자열을 파싱하여 JSON 형식의 객체 배열로 변환
         var transList = parseTransList(transListString);
 
         console.log("transList:", transList);
 
-        // 거래내역 리스트를 순회하면서 테이블 row를 추가합니다.
         for (var i = 0; i < transList.length; i++) {
             var trans = transList[i];
             console.log("중8ㅑㄴ", trans);
 
-            // 새로운 row와 cells 생성
             var newRow = tbody.insertRow();
 
             var cell1 = newRow.insertCell(0); // 결제일시
@@ -820,8 +704,6 @@
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                // 계좌 정보를 화면에 출력하는 코드
-                // 예: 계좌 정보를 테이블에 추가
                 sessionStorage.setItem('accountData', JSON.stringify(data));
 
                 // 계좌 조회가 성공적으로 완료되었으므로 해당 경로로 리디렉션
@@ -831,7 +713,6 @@
                 console.error("계좌 정보 조회 중 오류 발생:", error);
             });
     }
-
 
 </script>
 </body>

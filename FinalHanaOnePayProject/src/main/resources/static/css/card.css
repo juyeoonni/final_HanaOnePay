@@ -1,6 +1,6 @@
 .flex-card-container {
     display: flex;
-    flex-direction: row; /* Changed from column to row */
+    flex-direction: row;
 }
 
 .sidebar {
@@ -72,10 +72,10 @@
 
 .content-container {
     width: 400px !important;
-    flex: 1; /* Added this */
+    flex: 1;
     display: flex;
     flex-direction: column;
-    margin-left: 50px; /* Add spacing between sidebar and content */
+    margin-left: 50px;
     position: relative;
 }
 
@@ -109,11 +109,11 @@
 }
 
 .carousel-indicators button {
-    background-color: #00857E !important; /* 비활성 상태의 배경 색상 */
+    background-color: #00857E !important;
 }
 
 .carousel-indicators button.active {
-    background-color: blue; /* 활성 상태의 배경 색상 */
+    background-color: blue;
 }
 
 
@@ -121,14 +121,13 @@
 .myCardName {
   color: #5E5555;
   font-size: 28px;
-   font-weight: bold; /* 폰트를 굵게 설정 */
-   position: absolute; /* 위치를 절대적으로 설정 */
-   bottom: -30px;      /* 하단에서 10px 위에 위치하게 설정 */
-   left: 40%;         /* 부모 요소의 가운데에 위치하게 설정 */
-   transform: translateX(-40%); /* 정확하게 중앙에 오도록 조정 */
+   font-weight: bold;
+   position: absolute;
+   bottom: -30px;
+   left: 40%;
+   transform: translateX(-40%);
 }
 
-/* 이미지에 호버 효과를 주기 위한 스타일 */
 .carousel-item {
   position: relative;
   overflow: hidden;
@@ -139,24 +138,23 @@
 }
 
 .carousel-item:hover img {
-  transform: scale(0.95); /* 이미지를 확대하여 호버 효과 제공 */
+  transform: scale(0.95);
 }
 
 
 <!-- 여기서부터 카드 디테일 페이지 -->
 
 
-/* 아코디언의 너비를 조절하고 간격을 늘립니다 */
 .accordion {
-    margin-left: 500px !important; /* 사이드바와 간격 조절 */
+    margin-left: 500px !important;
 }
 
 .main-container {
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;  /* viewport height를 이용하여 화면의 높이를 채웁니다. */
-        background-color: #f6f6f6; /* 배경색 */
+        height: 100vh;
+        background-color: #f6f6f6;
         padding: 20px;
     }
 
@@ -164,10 +162,10 @@
 
         background-color: white;
         padding: 20px;
-        border-radius: 15px;  /* 둥근 모서리 */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* 그림자 효과 */
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         width: 100%;
-        max-width: 1000px;  /* 최대 가로 너비 */
+        max-width: 1000px;
     }
 
 .dropdown {
@@ -193,24 +191,24 @@
 .centered-button {
     background-color: #BCD9D3;
     display: flex;
-        flex-direction: column; /* 세로 방향으로 항목들을 정렬합니다. */
-        align-items: center; /* 중앙 정렬을 위한 스타일 */
+        flex-direction: column;
+        align-items: center;
 }
 
 .card-item {
-    display: flex;     /* 수평으로 배열 */
-    align-items: center;  /* 중앙 정렬 */
-    margin-bottom: 20px;  /* 카드 아이템 간의 간격 */
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
 }
 .cardBank{
     margin-right: 20px;
 }
 
 .card-image {
-    width: 300px;      /* 이미지의 너비 */
-    height: 180px;      /* 이미지의 높이 */
-    object-fit: cover;  /* 이미지의 비율 유지 */
-    margin-right: 20px;  /* 이미지와 텍스트 정보 간의 간격 */
+    width: 300px;
+    height: 180px;
+    object-fit: cover;
+    margin-right: 20px;
 }
 
 

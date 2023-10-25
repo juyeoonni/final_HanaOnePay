@@ -14,7 +14,6 @@ public class CardService {
     @Autowired
     CardDAO cardDAO;
 
-
     public List<CardDTO> selectCardList() {
         return  cardDAO.selectCardList();
     }

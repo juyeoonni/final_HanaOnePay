@@ -16,20 +16,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.client.RestTemplate;
-
-
-
 @Service
 public class OpenAPIService {
-    private final RestTemplate restTemplate; // 이 부분을 클래스 멤버 변수로 선언합니다.
+    private final RestTemplate restTemplate;
 
     private static final Logger logger = LoggerFactory.getLogger(OpenAPIService.class);
 
     public OpenAPIService() {
-        this.restTemplate = new RestTemplate(); // 생성자에서 초기화합니다.
+        this.restTemplate = new RestTemplate();
     }
 
     // 계좌조회 서비스
@@ -44,7 +38,7 @@ public class OpenAPIService {
 
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, headers);
 
-        ResponseEntity<String> response = restTemplate.postForEntity("http://localhost:8082/api/account-data", entity, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity("http://3.34.185.18:8080/api/account-data", entity, String.class);
 
         if (response.getStatusCode().is2xxSuccessful()) {
             logger.info("Received Response: {}", response.getBody());
@@ -64,7 +58,6 @@ public class OpenAPIService {
         body.put("identityNumber", identityNumber);
         body.put("selectedCards", selectedCards);
 
-        // HttpHeaders 객체 생성 및 Content-Type 설정
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -72,7 +65,6 @@ public class OpenAPIService {
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, headers);
 
         // POST 요청 보내기
-        //ResponseEntity<String> response = restTemplate.postForEntity("http://43.201.67.24:8080/api/card-data", entity, String.class);
         ResponseEntity<String> response = restTemplate.postForEntity("http://3.34.185.18:8080/api/card-data", entity, String.class);
 
         // 응답 처리
@@ -102,7 +94,7 @@ public class OpenAPIService {
 
         System.out.println("결제 서비스까지 들어오는거 확인");
 
-        ResponseEntity<String> response = restTemplate.postForEntity("http://localhost:8082/api/payRequest", entity, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity("http://3.34.185.18:8080/api/payRequest", entity, String.class);
 
         if (response.getStatusCode().is2xxSuccessful()) {
             logger.info("Payment Result: {}", response.getBody());
@@ -129,7 +121,7 @@ public class OpenAPIService {
 
         System.out.println("계좌 결제 서비스까지 들어오는거 확인");
 
-        ResponseEntity<String> response = restTemplate.postForEntity("http://localhost:8082/api/payRequest/account", entity, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity("http://3.34.185.18:8080/api/payRequest/account", entity, String.class);
 
         if (response.getStatusCode().is2xxSuccessful()) {
             logger.info("Account Payment Result: {}", response.getBody());
@@ -143,8 +135,7 @@ public class OpenAPIService {
     public String fetchPaymentsByMonthFromAPI(String month) {
         System.out.println("월별 결제 내역 조회 서비스까지 들어오는거 확인");
 
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8082/api/monthly-payment-data")
-//                .queryParam("identityNumber", identityNumber)
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://3.34.185.18:8080/api/monthly-payment-data")
                 .queryParam("month", month);
 
         URI uri = builder.build().encode().toUri();
@@ -164,7 +155,7 @@ public class OpenAPIService {
     public String fetchPaymentsByMonthFromAPI2() {
         System.out.println("월별 결제 내역 조회 서비스까지 들어오는거 확인");
 
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8082/api/monthly-payment-data2");
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://3.34.185.18:8080/api/monthly-payment-data2");
 
         URI uri = builder.build().encode().toUri();
 
@@ -184,7 +175,7 @@ public class OpenAPIService {
         System.out.println("특정 카드의 거래내역 조회 서비스 요청 시작");
 
         // URL 설정
-        String url = "http://localhost:8082/api/card-transactions";
+        String url = "http://3.34.185.18:8080/api/card-transactions";
 
         // POST 요청에 보낼 데이터 설정
         Map<String, Object> payload = new HashMap<>();
@@ -213,7 +204,7 @@ public class OpenAPIService {
         System.out.println("특정 계좌의 거래내역 조회 서비스 요청 시작");
 
         // URL 설정
-        String url = "http://localhost:8082/api/account-transactions";
+        String url = "http://3.34.185.18:8080/api/account-transactions";
 
         // POST 요청에 보낼 데이터 설정
         Map<String, Object> payload = new HashMap<>();
@@ -236,7 +227,5 @@ public class OpenAPIService {
             return Collections.emptyList();
         }
     }
-
-
 
 }

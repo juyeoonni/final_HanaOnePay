@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: JuYeon
-  Date: 2023-09-13
-  Time: 오후 2:57
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page import="com.kopo.finalhanaonepayproject.hanaOnePay.model.DTO.HanaOnePayCardDTO" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.fasterxml.jackson.databind.ObjectMapper" %>
@@ -30,7 +23,7 @@
         }
 
         body {
-            font-family: 'Hana2CM', sans-serif !important; /* sans-serif는 폰트가 로드되지 않을 때 사용될 대체 폰트입니다. */
+            font-family: 'Hana2CM', sans-serif !important;
             background-color: #f7f7f8;
         }
 
@@ -93,9 +86,9 @@
 
         .card-header {
             display: flex;
-            align-items: center; /* 수직 중앙 정렬을 위해 추가 */
-            justify-content: center; /* 수평 중앙 정렬 */
-            padding: 10px; /* 필요에 따라 패딩을 조절 */
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
         }
 
         .password-panel {
@@ -170,7 +163,6 @@
     <div class="headername">하나원페이</div>
 </div>
 <div class="itemDesc">
-    <%--    <div class="itemName">[기획] 르바인 차렷이불 3종세트</div> <br>--%>
     <div class="productName">${sessionScope.productName}</div>
     <br>
     <div class="productPrice" data-price="${sessionScope.productPrice}">${sessionScope.productPrice}원</div>
@@ -231,7 +223,6 @@
     </div>
 </div>
 
-<%--<a href="/hanaOnePay/addPayCard" class="add-button">새 페이카드 등록</a>--%>
 <br><br>
 
 <div class="payMsg">
@@ -290,19 +281,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 
-    // document.addEventListener("DOMContentLoaded", function () {
-    //     const cardNumbers = document.querySelectorAll('.card--number');
-    //
-    //     cardNumbers.forEach(cardNumber => {
-    //         const originalCardNumber = cardNumber.getAttribute('data-cardnumber');
-    //
-    //         // 문자열 처리: 2번째, 3번째 네자리를 *로 변환
-    //         const maskedCardNumber = originalCardNumber.replace(/(\d{4})-(\d{4})-(\d{4})-(\d{4})/, "$1-****-****-$4");
-    //         cardNumber.textContent = maskedCardNumber;
-    //     });
-    // });
-
-
     // 금액을 3자리마다 콤마로 구분하여 표시하는 함수
     function formatNumberWithCommas(number) {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -323,7 +301,7 @@
     $(document).ready(function () {
 
         var businessCode = sessionStorage.getItem('businessCode');
-        console.log(businessCode); // businessCode 값을 로그에 출력해보세요.
+        console.log(businessCode); // businessCode 값을 로그에 출력
 
         var passwordInput = $('#paymentPassword');
         var dots = $('.dot');
@@ -361,7 +339,7 @@
             paymentModal.show();
         });
 
-        // 캐러셀에서 슬라이드가 변경될 때마다 이벤트를 실행
+        // 캐러셀에서 슬라이드가 변경될 때마다 이벤트 실행
         $('#carouselExampleIndicators').on('slid.bs.carousel', function (e) {
             var activeCardNumber = $(e.relatedTarget).find(".text-center").eq(1).text();
             var activeCardCode = $(e.relatedTarget).find(".text-center").eq(2).text();  // 활성화된 슬라이드의 카드 코드 가져오기
@@ -371,7 +349,6 @@
             sessionStorage.setItem('activeCardCode', activeCardCode);  // 세션에 활성화된 카드 코드 저장
         });
 
-        //끝
 
         $("#confirmPayment").click(function () {
 
@@ -380,7 +357,6 @@
 
             var sessionPassword = '<%= session.getAttribute("payPw") %>';
 
-            // 세션 스토리지에서 activeCardNumber 가져오기
             var storedActiveCardNumber = sessionStorage.getItem('activeCardNumber');
             var storedActiveCardCode = sessionStorage.getItem('activeCardCode');
             var productName = "${sessionScope.productName}";
@@ -397,9 +373,7 @@
             console.log("Stored Product Price:", productPrice);
             console.log("Stored Identity Number:", identityNumber);
 
-            // 하나카드 결제 로직. 예를 들어, 카드 코드가 "HANA"인 경우
             var isHanaCard = storedActiveCardCode === "hana";
-            // 하나카드일 경우 "/hanaOnePay/card-payRequest" 엔드포인트 사용, 그렇지 않은 경우 기존 엔드포인트 사용
             var endpoint = isHanaCard ? "/hanaOnePay/card-payRequest" : "/api/payRequest";
 
             if (enteredPassword === sessionPassword) {
@@ -419,30 +393,29 @@
                 // 타 카드사 결제 로직
                 $.ajax({
                     type: "POST",
-                    url: endpoint, // 여기서 해당 컨트롤러의 endpoint를 설정해줍니다.
+                    url: endpoint,
                     data: JSON.stringify(requestData),
                     contentType: "application/json; charset=utf-8",
                     success: function (response) {
                         console.log(response);
                         if (response === "Payment Approved") {
-                            window.location.href = "/hanaOnePay/payRequestSuccess"; // 결제 성공 페이지로 리디렉션
+                            window.location.href = "/hanaOnePay/payRequestSuccess";
                         } else if (response === "Insufficient Credit Limit") {
-                            window.location.href = "/hanaOnePay/payRequestFailforLimit"; // 신용카드 한도 초과 페이지로 리디렉션
+                            window.location.href = "/hanaOnePay/payRequestFailforLimit";
                         } else if (response === "Insufficient Balance") {
-                            window.location.href = "/hanaOnePay/payRequestFailforBalance"; // 체크카드 잔액 부족 페이지로 리디렉션
+                            window.location.href = "/hanaOnePay/payRequestFailforBalance";
                         } else {
-                            alert('결제 실패: ' + response); // 서버에서 오류 메시지를 반환
-                            window.location.href = "/hanaOnePay/payRequestFail"; // 결제 실패 페이지로 리디렉션
+                            alert('결제 실패: ' + response);
+                            window.location.href = "/hanaOnePay/payRequestFail";
                         }
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
-                        console.log("AJAX Error Status:", jqXHR.status); // HTTP 상태 코드 출력 (예: 404, 500)
-                        console.log("Text Status:", textStatus);        // 텍스트 상태 출력 (예: "error", "timeout", "abort", "parsererror")
-                        console.log("Error Thrown:", errorThrown);      // 발생한 예외 정보 출력
+                        console.log("AJAX Error Status:", jqXHR.status);
+                        console.log("Text Status:", textStatus);
+                        console.log("Error Thrown:", errorThrown);
                     }
 
                 });
-
 
             } else {
                 alert("[하나원페이]\n비밀번호가 일치하지 않습니다. \n다시 입력해주세요.");
@@ -450,7 +423,6 @@
         });
 
     });
-
 
 </script>
 
