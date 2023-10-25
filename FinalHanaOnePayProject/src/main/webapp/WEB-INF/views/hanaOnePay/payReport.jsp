@@ -441,7 +441,7 @@
 
 
         <div>
-            ${sessionScope.name}님의 이번달 소비 분포입니다.
+            ${sessionScope.name}님의 월간 소비 분포입니다.
         </div>
 
         <%--        월 나타내기 슬라이드--%>
@@ -459,7 +459,7 @@
             </div>
             <div class="pieChartsideDiv">
                 <!-- 다른 div의 내용 -->
-                <p>이번달 지출 TOP 5</p>
+                <p>월간 지출 TOP 5</p>
 
                 <div class="businessCode" id="top1"></div>
                 <div class="businessCode" id="top2"></div>
@@ -691,34 +691,34 @@
                 label: '지출',
                 data: dataset,
                 backgroundColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
-                    'rgba(201, 203, 207, 1)',
-                    'rgba(131, 117, 224, 1)',
-                    'rgba(85, 239, 196, 1)',
-                    'rgba(129, 236, 236, 1)',
-                    'rgba(250, 177, 160, 1)',
-                    'rgba(253, 121, 168, 1)',
-                    'rgba(178, 190, 195, 1)',
+                    'rgba(255, 182, 193, 1)',  // Light Pink
+                    'rgba(173, 216, 230, 1)',  // Light Blue
+                    'rgba(240, 230, 140, 1)',  // Khaki
+                    'rgba(152, 251, 152, 1)',  // Pale Green
+                    'rgba(221, 160, 221, 1)',  // Plum
+                    'rgba(244, 164, 96, 1)',   // Sandy Brown
+                    'rgba(135, 206, 235, 1)',  // Sky Blue
+                    'rgba(255, 192, 203, 1)',  // Pink
+                    'rgba(255, 218, 185, 1)',  // Peach Puff
+                    'rgba(176, 224, 230, 1)',  // Powder Blue
+                    'rgba(255, 240, 245, 1)',  // Lavender Blush
+                    'rgba(250, 250, 210, 1)',  // Light Goldenrod Yellow
+                    'rgba(245, 245, 220, 1)'   // Beige
                 ],
                 borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
-                    'rgba(201, 203, 207, 1)',
-                    'rgba(131, 117, 224, 1)',
-                    'rgba(85, 239, 196, 1)',
-                    'rgba(129, 236, 236, 1)',
-                    'rgba(250, 177, 160, 1)',
-                    'rgba(253, 121, 168, 1)',
-                    'rgba(178, 190, 195, 1)',
+                    'rgba(255, 182, 193, 1)',  // Light Pink
+                    'rgba(173, 216, 230, 1)',  // Light Blue
+                    'rgba(240, 230, 140, 1)',  // Khaki
+                    'rgba(152, 251, 152, 1)',  // Pale Green
+                    'rgba(221, 160, 221, 1)',  // Plum
+                    'rgba(244, 164, 96, 1)',   // Sandy Brown
+                    'rgba(135, 206, 235, 1)',  // Sky Blue
+                    'rgba(255, 192, 203, 1)',  // Pink
+                    'rgba(255, 218, 185, 1)',  // Peach Puff
+                    'rgba(176, 224, 230, 1)',  // Powder Blue
+                    'rgba(255, 240, 245, 1)',  // Lavender Blush
+                    'rgba(250, 250, 210, 1)',  // Light Goldenrod Yellow
+                    'rgba(245, 245, 220, 1)'   // Beige
                 ],
                 borderWidth: 1
             }]
@@ -780,34 +780,34 @@
                     label: '지출',
                     data: dataset,
                     backgroundColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)',
-                        'rgba(201, 203, 207, 1)',
-                        'rgba(131, 117, 224, 1)',
-                        'rgba(85, 239, 196, 1)',
-                        'rgba(129, 236, 236, 1)',
-                        'rgba(250, 177, 160, 1)',
-                        'rgba(253, 121, 168, 1)',
-                        'rgba(178, 190, 195, 1)',
+                        'rgba(255, 182, 193, 1)',  // Light Pink
+                        'rgba(173, 216, 230, 1)',  // Light Blue
+                        'rgba(240, 230, 140, 1)',  // Khaki
+                        'rgba(152, 251, 152, 1)',  // Pale Green
+                        'rgba(221, 160, 221, 1)',  // Plum
+                        'rgba(244, 164, 96, 1)',   // Sandy Brown
+                        'rgba(135, 206, 235, 1)',  // Sky Blue
+                        'rgba(255, 192, 203, 1)',  // Pink
+                        'rgba(255, 218, 185, 1)',  // Peach Puff
+                        'rgba(176, 224, 230, 1)',  // Powder Blue
+                        'rgba(255, 240, 245, 1)',  // Lavender Blush
+                        'rgba(250, 250, 210, 1)',  // Light Goldenrod Yellow
+                        'rgba(245, 245, 220, 1)'   // Beige
                     ],
                     borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)',
-                        'rgba(201, 203, 207, 1)',
-                        'rgba(131, 117, 224, 1)',
-                        'rgba(85, 239, 196, 1)',
-                        'rgba(129, 236, 236, 1)',
-                        'rgba(250, 177, 160, 1)',
-                        'rgba(253, 121, 168, 1)',
-                        'rgba(178, 190, 195, 1)',
+                        'rgba(255, 182, 193, 1)',  // Light Pink
+                        'rgba(173, 216, 230, 1)',  // Light Blue
+                        'rgba(240, 230, 140, 1)',  // Khaki
+                        'rgba(152, 251, 152, 1)',  // Pale Green
+                        'rgba(221, 160, 221, 1)',  // Plum
+                        'rgba(244, 164, 96, 1)',   // Sandy Brown
+                        'rgba(135, 206, 235, 1)',  // Sky Blue
+                        'rgba(255, 192, 203, 1)',  // Pink
+                        'rgba(255, 218, 185, 1)',  // Peach Puff
+                        'rgba(176, 224, 230, 1)',  // Powder Blue
+                        'rgba(255, 240, 245, 1)',  // Lavender Blush
+                        'rgba(250, 250, 210, 1)',  // Light Goldenrod Yellow
+                        'rgba(245, 245, 220, 1)'   // Beige
                     ],
                     borderWidth: 1
                 }]

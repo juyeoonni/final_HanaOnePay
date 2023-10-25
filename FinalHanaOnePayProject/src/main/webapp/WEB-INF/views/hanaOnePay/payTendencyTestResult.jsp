@@ -266,6 +266,72 @@
             transition: background-color 0.3s ease-in-out;
         }
 
+        /*아코디언*/
+        *{
+            box-sizing: border-box;
+        }
+
+        .que:first-child{
+            border-top: 1px solid black;
+        }
+
+        .que{
+            position: relative;
+            padding: 17px 0;
+            cursor: pointer;
+            font-size: 14px;
+            border-bottom: 1px solid #dddddd;
+
+        }
+
+        .que::before{
+            display: inline-block;
+            content: 'Q';
+            font-size: 14px;
+            color: #006633;
+            margin: 0 5px;
+        }
+
+        .que.on>span{
+            font-weight: bold;
+            color: #006633;
+        }
+
+        .anw {
+            display: none;
+            overflow: hidden;
+            font-size: 14px;
+            background-color: #f4f4f2;
+            padding: 27px 0;
+        }
+
+        .anw::before {
+            display: inline-block;
+            content: 'A';
+            font-size: 14px;
+            font-weight: bold;
+            color: #666;
+            margin: 0 5px;
+        }
+
+        .arrow-wrap {
+            position: absolute;
+            top:50%; right: 10px;
+            transform: translate(0, -50%);
+        }
+
+        .que .arrow-top {
+            display: none;
+        }
+        .que .arrow-bottom {
+            display: block;
+        }
+        .que.on .arrow-bottom {
+            display: none;
+        }
+        .que.on .arrow-top {
+            display: block;
+        }
 
 
 
@@ -366,6 +432,7 @@
                                             </ul>
                                             <a href="https://www.hanacard.co.kr/OPI41000000D.web?schID=pcd&mID=PI41011881P&CD_PD_SEQ=11881&" class="btn-detail">상세보기</a><br>
                                             <button class="openTerms" onclick="openTermsPage()">상품약관보기</button>
+
                                         </c:when>
                                         <c:when test="${card.cardName eq 'MULTI On 모바일카드'}">
                                             <ul>
@@ -389,6 +456,8 @@
                                 </div>
                                 <div>${card.cardName}</div>
                                 <div style="color: #959595; font-size: 15px;">${card.cardDesc}</div>
+
+                                <br><br>
                             </div>
                         </c:forEach>
 
@@ -413,6 +482,12 @@
         crossorigin="anonymous"></script>
 
 <script>
+    $(".que").click(function() {
+        $(this).next(".anw").stop().slideToggle(300);
+        $(this).toggleClass('on').siblings().removeClass('on');
+        $(this).next(".anw").siblings(".anw").slideUp(300); // 1개씩 펼치기
+    });
+
     window.onload = function () {
         var message = localStorage.getItem('resultMessage');
         if (message) {

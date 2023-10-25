@@ -23,35 +23,6 @@ public class QrController {
         this.qrCodeService = qrCodeService;
     }
 
-//    @GetMapping("/QR/api/generateQRCode")
-//    public ResponseEntity<String> generateQRCode(HttpServletRequest request) {
-//        HttpSession session = request.getSession();
-//        String productDataJSON = (String) session.getAttribute("productDataJSON");
-//
-//        // JSON 문자열을 파싱하여 productName 값을 가져옵니다.
-//        JSONObject json = new JSONObject(productDataJSON);
-//        String encodedProductName = json.getString("productName");
-//
-//        // productName 값을 디코딩합니다.
-//        String decodedProductName = URLDecoder.decode(encodedProductName, "UTF-8");
-//
-//        // 디코딩된 productName을 다시 JSON 객체에 설정합니다.
-//        json.put("productName", decodedProductName);
-//        productDataJSON = json.toString();
-//
-//        if (productDataJSON == null) {
-//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//        }
-//
-//        try {
-//            byte[] qrCode = qrCodeService.generateQRCodeImage(productDataJSON);
-//            // byte[]를 Base64로 인코딩
-//            String base64Encoded = Base64.getEncoder().encodeToString(qrCode);
-//            return new ResponseEntity<>(base64Encoded, HttpStatus.OK);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
 @GetMapping("/QR/api/generateQRCode")
 public ResponseEntity<String> generateQRCode(HttpServletRequest request) {
     HttpSession session = request.getSession();
